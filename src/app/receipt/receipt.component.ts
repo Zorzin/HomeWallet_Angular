@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {ReceiptService} from "../receipt.service";
-import {Receipt} from "../receipt";
+import {Receipt} from "../Models/receipt";
 
 @Component({
   selector: 'app-receipt',
@@ -10,6 +10,7 @@ import {Receipt} from "../receipt";
 })
 export class ReceiptComponent implements OnInit {
 
+  receiptsStrings: any;
   receipts: Receipt[];
 
   constructor(private receiptService: ReceiptService, private router: Router) { }
@@ -19,7 +20,7 @@ export class ReceiptComponent implements OnInit {
   }
 
   getReceipts(): void {
-      this.receiptService.getReceiptsByDaysFromNow(5).then(receipts=>this.receipts = receipts);
+      this.receiptService.getReceipts().then(receipts=>this.receipts = receipts);
   }
 
 }
