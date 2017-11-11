@@ -6,6 +6,7 @@ import { ReceiptComponent } from './receipt/receipt.component';
 import {AppRoutingModule} from "./app-routing/app-routing.module";
 import {HttpModule} from "@angular/http";
 import {ReceiptService} from "./receipt.service";
+import {ShopService} from "./shop.service";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import {ReceiptService} from "./receipt.service";
     BrowserModule,
     HttpModule,
   ],
-  providers: [ReceiptService],
+  providers: [ReceiptService, ShopService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

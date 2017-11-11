@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {Headers,Http} from "@angular/http";
-import {Receipt} from "./Models/receipt";
-import {log} from "util";
+import {Http} from "@angular/http";
 
 @Injectable()
-export class ReceiptService {
-
-  private apiUrl = 'http://localhost:54044/api/receipts/1';  // URL to web api
+export class ShopService {
+  private apiUrl = 'http://localhost:54044/api/shops/1';  // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
+  private userId : string;
+
+  private response : any;
 
   constructor(private http: Http) { }
 
@@ -16,17 +16,11 @@ export class ReceiptService {
     return Promise.reject(error.message || error);
   }
 
-  getReceipts() {
-    return this.http.get(this.apiUrl)
+  getShop(id:number) {
+    return this.http.get(this.apiUrl + "/"+id)
       .toPromise()
       .then(response=> response.json())
       .catch(this.handleError);
   }
 
-  getReceipt(id:number) {
-    return this.http.get(this.apiUrl+"/1")
-      .toPromise()
-      .then(response=> response)
-      .catch(this.handleError);
-  }
 }

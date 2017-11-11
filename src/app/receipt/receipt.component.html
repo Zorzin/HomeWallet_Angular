@@ -1,3 +1,39 @@
 <div>
-  <p *ngFor="let receipt of receipts">{{receipt.purchaseDate}} {{receipt.id}}</p>
+  <p ></p>
+</div>
+
+
+<div *ngFor="let date of dates" class="container">
+  <div class="row dayheader">
+    <div class="col-xs-6 col-md-8 datetextfield">
+      <label class="datefield"></label>
+    </div>
+    <div class="col-xs-6 col-md-4 summarybutton">
+      <a class="btn btn-default" >Summary</a>
+    </div>
+  </div>
+  <hr />
+
+    <a *ngFor="let receipt of date">
+
+      <div class="col-md-3 col-xs-6 receiptsummary">
+        <div class="shoptextfield">
+          <h1>{{receipt.purchaseDate}} </h1>
+        </div>
+        <div class="pricetextfield">
+          <h3>{{receipt.shopName}}</h3>
+        </div>
+      </div>
+    </a>
+
+  <a>
+    <div class="col-md-3 col-xs-6 receiptsummary">
+      <div class="shoptextfield">
+        <h1>Add</h1>
+      </div>
+      <div class="pricetextfield">
+        <h3>new</h3>
+      </div>
+    </div>
+  </a>
 </div>

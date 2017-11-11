@@ -1,0 +1,538 @@
+body {
+  background-color: rgba(0, 0, 0, .7);
+  color: white;
+  padding-bottom: 20px;
+  padding-top: 50px;
+}
+
+/* Wrapping element */
+
+/* Set some basic padding to keep content from hitting the edges */
+
+.body-content {
+  padding-top: 50px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+
+input,
+select,
+textarea { max-width: 280px; }
+
+/* Carousel */
+
+.carousel-caption p {
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+/* buttons and links extension to use brackets: [ click me ] */
+
+.btn-bracketed::before {
+  content: "[";
+  display: inline-block;
+  padding-right: 0.5em;
+}
+
+.btn-bracketed::after {
+  content: "]";
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+
+.carousel-inner .item img[src$=".svg"] { width: 100%; }
+
+/* Hide/rearrange for smaller screens */
+
+@media screen and (max-width: 767px) {
+  /* Hide captions */
+  .carousel-caption { display: none; }
+}
+
+
+/*Home index css*/
+
+.dayheader {
+  height: 50px;
+  margin-top: 30px;
+}
+
+.datetextfield {
+  font-size: 30px;
+  line-height: 50px;
+}
+
+.summarybutton { height: 100%; }
+
+.summarybutton a {
+  float: right;
+  margin-top: 8px;
+}
+
+.receiptsummary {
+  background-color: rgba(0, 0, 0, .5);
+  border: 1px solid white;
+  height: 300px;
+  margin: 20px;
+  text-align: center;
+  width: 180px;
+}
+
+.receiptsummary:hover { background-color: rgba(0, 0, 0, .8); }
+
+.shoptextfield {
+  color: white;
+  width: 100%;
+}
+
+.shoptextfield h1 {
+  height: 100%;
+  margin-top: 50%;
+}
+
+.pricetextfield { color: white; }
+
+.showmorebutton { width: 300px; }
+
+.morebuttondiv { text-align: center; }
+
+.receiptcreate {
+  background-color: rgba(0, 0, 0, .5);
+  border: 1px solid white;
+  display: table;
+  margin: auto;
+  min-height: 50vh;
+  padding: 30px;
+  text-align: center;
+}
+
+.tableheaders { width: 100%; }
+
+
+.receiptproducts { width: 100%; }
+
+
+.totalhr { width: 100%; }
+
+
+.receiptshop {
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+
+.receiptshopbutton { display: inline-table; }
+
+.receiptshoplabel {
+  display: inline-table;
+  width: 20%;
+}
+
+.receiptshopselect {
+  display: inline-table;
+  width: 60%;
+}
+
+.receiptshop select { display: inline-block; }
+
+.receiptdate {
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}
+
+.receiptdate input { display: inline-block; }
+
+.loading {
+  font-size: 100px;
+  text-align: center;
+}
+
+.noreceipts {
+  font-size: 30px;
+  text-align: center;
+}
+
+.maintitle {
+  color: white;
+  font-size: 60px;
+}
+
+.maintext { color: white; }
+
+.mainheader {
+  padding: 50px;
+;
+}
+
+.mainphoto {
+  /*background: url(../images/mainpage.jpg) no-repeat center center fixed;*/
+  height: auto;
+  left: 0;
+  min-height: 100%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.registerbutton { text-align: right; }
+
+.loginbutton { text-align: left; }
+
+@media (max-width: 992px) {
+  .registerbutton {
+    margin: 20px;
+    text-align: center;
+  }
+
+  .loginbutton {
+    margin: 20px;
+    text-align: center;
+  }
+}
+
+.registerbutton a { font-size: 20px; }
+
+.loginbutton a { font-size: 20px; }
+
+
+.dailysummarydate {
+  font-size: 70px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.dailysummarychart {
+  font-size: 30px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.dailysummarytext {
+  font-size: 30px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+
+.dailysummarybuttons { text-align: center; }
+
+.dailysummarybuttons a {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+}
+
+/*PLAN*/
+
+.planviewheader {
+  font-size: 50px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.planviewbig {
+  font-size: 50px;
+  text-align: center;
+}
+
+.planviewtext {
+  font-size: 30px;
+  text-align: center;
+}
+
+.planviewtextchart {
+  height: 400px;
+  line-height: 410px;
+  text-align: center;
+}
+
+.planviewtextchart p {
+  line-height: 50px;
+  display: inline-block;
+  font-size: 30px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.planviewtextnochart {
+  height: 200px;
+  line-height: 210px;
+  text-align: center;
+}
+
+.planviewtextnochart p {
+  line-height: 50px;
+  display: inline-block;
+  font-size: 30px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.planhr {
+  border: 1px solid white;
+  width: 100%;
+}
+
+
+.incremental-counter, .incremental-counteraverage {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.incremental-counter .num, .incremental-counteraverage .num {
+  background: #f8f8f8 none repeat scroll 0 0;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  color: black;
+  display: inline-block;
+  height: 104px;
+  line-height: 102px;
+  margin: 0 4.5px;
+  position: relative;
+  text-align: center;
+  top: -1px;
+  width: 90px;
+  font-size: 95px;
+  font-size: 5.72625em;
+  font-weight: 700;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+.incremental-counter .num::before, .incremental-counteraverage .num::before {
+  background: black;
+  content: "";
+  display: block;
+  height: 1px;
+  left: -1px;
+  margin: -0.5px 0 0;
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  width: auto;
+}
+
+#removeproductbutton {
+}
+
+.receiptdetails {
+  background-color: rgba(0, 0, 0, .5);
+  border: 1px solid white;
+  display: table;
+  margin: auto;
+  min-height: 50vh;
+  padding: 30px;
+  text-align: center;
+  max-width: 60vh;
+}
+
+.receiptshopdetails, .receiptdatedetails {
+  text-align: right;
+  display: inline-table;
+  width: 60%;
+}
+
+.receiptdatelabeldetails, .receiptshoplabeldetails {
+  text-align: left;
+  display: inline-table;
+  width: 30%;
+}
+
+.priceproductcreate, .producttotalcreate {
+  padding-left: 25px;
+  text-align: left;
+  padding-right: 0;
+  padding-bottom: 10px;
+}
+.nameproductcreate {
+  padding-left: 28px;
+  text-align: left;
+  padding-right: 0;
+  padding-bottom: 10px;
+}
+.amountproductcreate {
+  padding-left: 32px;
+  text-align: left;
+  padding-right: 0;
+  padding-bottom: 10px;
+}
+.buttonproductcreate {
+  padding-left: 25px;
+  padding-right: 0;
+  padding-bottom: 0;
+}
+.productslinecreate {
+  margin-left: -30px;
+  margin-right: 0;
+  padding-bottom: 10px;
+}
+
+.listproduct {
+  padding-top: 20px;
+}
+
+.receiptaddproduct {
+  margin-bottom: 30px;
+}
+
+.productstotal {
+  text-align: right;
+}
+
+#totallabel {
+  padding-right: 3px;
+}
+#total {
+  padding-left: 5px;
+}
+
+.searchbox {
+  display: inline;
+}
+
+/* DIALOG MAIN CONTAINER */
+.ui-dialog.ui-widget-content {
+  border: none;
+  background-color: rgba(0,0,0,0.9) !important;
+}
+/* STYLE AROUND THE CLOSE (X) BUTTON */
+.ui-dialog-titlebar-close.ui-state-default,
+.ui-dialog-titlebar-close.ui-state-hover {
+  outline: none;
+  background: none;
+  border: none;
+}
+/* DIALOG TITLE BAR */
+.ui-dialog .ui-widget-header {
+  border: 0;
+  background: none
+}
+
+.ui-dialog {
+  z-index: 1060 !important;
+}
+
+
+.ui-widget-content {
+
+  background: none !important;
+  border: none !important;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  float: none;
+  position: absolute;
+}
+
+.ui-dialog-buttonpane .ui-dialog-buttonset {
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#productdialog, #shopdialog {
+  position: relative;
+}
+
+#addproductform, #addshopform {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#addproductform p, #addshopform p {
+  color: white;
+  padding-top: 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+#addproductform label, #addshopform label {
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.checkbox label {
+  font-size: 15px !important;
+}
+.forminput {
+  width: 250px;
+  display: table;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  vertical-align: middle;
+  border: none;
+  padding-left: 10px;
+  font-size: 1.2em !important;
+}
+
+.chosen-container {
+  display: table !important;
+}
+
+.chosen-container-multi .chosen-choices {
+  border-radius: 5px;
+}
+
+.editcategories {
+  width: 100% !important;
+}
+
+.detailstab a {
+  color: white;
+}
+
+.listpanel {
+  height: 200px;
+  width: 200px;
+  text-align: center;
+  line-height: 200px;
+  font-size: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.listpanel span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  padding-bottom: 30px;
+  color: white;
+}
+
+.listpanel:hover {
+  background-color: rgba(0, 0, 0,1);
+}
+
+.panelmaindiv {
+  margin-top: 20px;
+}
+
+#detailsdiv {
+  margin-bottom: 50px;
+}
+
+.detailsbuttonsdiv a{
+  width: 50%;
+  margin: auto;
+  display: block;
+}
+
+.detailsviewnochart {
+  text-align: center;
+  height: 200px;
+  line-height: 200px;
+  font-size: 30px;
+}
+
+.detailsviewchart {
+  text-align: center;
+  height: 400px;
+  line-height: 400px;
+  font-size: 30px;
+}
