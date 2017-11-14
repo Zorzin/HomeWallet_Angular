@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {ReceiptService} from "../receipt.service";
-import {ShopService} from "../shop.service";
+import {ReceiptService} from "../Services/receipt.service";
+import {ShopService} from "../Services/shop.service";
 import {Receipt} from "../Models/receipt";
 import {log} from "util";
 
@@ -22,7 +22,13 @@ export class ReceiptComponent implements OnInit {
   }
 
   getReceipts(): void {
-      this.receiptService.getReceipts().then((receipts)=>{this.receipts = receipts ; this.setShopNames(); this.getDates();});
+      this.receiptService.getReceipts().then((receipts)=>{
+        this.receipts = receipts;
+        this.getReceiptDate();
+        this.setShopNames();
+        this.getDates();
+        this.getTotalValue();
+      });
   }
 
   private setShopNames() {
@@ -47,5 +53,25 @@ export class ReceiptComponent implements OnInit {
       }
       this.dates[datesCounter].push(receipt);
     }
+  }
+
+  private getTotalValue()
+  {
+      for(let receipt of this.receipts)
+      {
+        this.receiptService.getReceiptTotalValue(receipt.id).then(value => receipt.totalValue = value.toString());
+      }
+  }
+
+  private getReceiptDate() {
+    for(let receipt of this.receipts)
+    {
+      receipt.purchaseDate = new Date(receipt.purchaseDate).toLocaleDateString();
+    }
+  }
+
+  private onSelect(receipt:Receipt)
+  {
+    this.router.navigate(['/receipt-detail',receipt.id]);
   }
 }

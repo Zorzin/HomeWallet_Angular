@@ -6,7 +6,7 @@
 <div *ngFor="let date of dates" class="container">
   <div class="row dayheader">
     <div class="col-xs-6 col-md-8 datetextfield">
-      <label class="datefield"></label>
+      <label class="datefield">{{date[0].purchaseDate}}</label>
     </div>
     <div class="col-xs-6 col-md-4 summarybutton">
       <a class="btn btn-default" >Summary</a>
@@ -14,14 +14,14 @@
   </div>
   <hr />
 
-    <a *ngFor="let receipt of date">
+    <a *ngFor="let receipt of date" (click)="onSelect(receipt)">
 
       <div class="col-md-3 col-xs-6 receiptsummary">
         <div class="shoptextfield">
-          <h1>{{receipt.purchaseDate}} </h1>
+          <h1>{{receipt.shopName}}</h1>
         </div>
         <div class="pricetextfield">
-          <h3>{{receipt.shopName}}</h3>
+          <h3>{{receipt.totalValue}}</h3>
         </div>
       </div>
     </a>

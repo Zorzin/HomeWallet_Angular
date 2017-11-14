@@ -3,4 +3,5 @@ export class Receipt {
   purchaseDate : Date;
   shopId : number;
   shopName: string;
+  receiptProducts : any;
 }

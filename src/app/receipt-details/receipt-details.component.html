@@ -1,0 +1,65 @@
+<div *ngIf="isDataLoaded">
+  <h4>Receipt</h4>
+  <hr />
+  <div class="receiptdetails">
+    <div class="receiptdate">
+      <div class="receiptdatelabeldetails">
+        PurchaseDate
+      </div>
+      <div class="receiptdatedetails">
+        {{receipt.purchaseDate}}
+      </div>
+    </div>
+    <div class="receiptshop">
+      <div class="receiptshoplabeldetails">
+        Shop
+      </div>
+      <div class="receiptshopdetails">
+        {{receipt.shopName}}
+      </div>
+    </div>
+    <hr />
+    <div class="tableheaders">
+      <div class="col-md-4">
+        <label>Name</label>
+      </div>
+      <div class="col-md-3">
+        <label>Amount</label>
+      </div>
+      <div class="col-md-2">
+        <label>Price</label>
+      </div>
+      <div class="col-md-2">
+        <label>Total</label>
+      </div>
+    </div>
+    <div class="receiptproducts">
+
+      <div *ngFor="let product of receipt.receiptProducts">
+
+        <div class="col-md-4">
+          {{product.product}}
+        </div>
+        <div class="col-md-3">
+          {{product.amount}}
+        </div>
+        <div class="col-md-2">
+          {{product.price}}
+        </div>
+        <div class="col-md-2 producttotal">
+          {{product.totalValue}}
+        </div>
+      </div>
+
+    </div>
+    <hr class="totalhr">
+    <div class="productstotal">
+      <label>Total:</label>
+      <label id="total">{{receipt.totalValue}}</label>
+    </div>
+  </div>
+</div>
+<div>
+  <a>Edit</a>
+  <a (click)="goBack()">Back to List</a>
+</div>
