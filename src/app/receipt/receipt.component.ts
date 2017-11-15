@@ -74,4 +74,9 @@ export class ReceiptComponent implements OnInit {
   {
     this.router.navigate(['/receipt-detail',receipt.id]);
   }
+
+  private onCreate()
+  {
+    this.router.navigate(['/receipt-create']);
+  }
 }

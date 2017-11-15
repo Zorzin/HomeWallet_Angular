@@ -1,0 +1,115 @@
+<div class="receiptcreate">
+  <div class="receiptdate">
+    <div class="col-md-2">
+      <label>Date</label>
+    </div>
+    <div class="col-md-10">
+      <input type="date" class="form-control" placeholder="Date" #date/>
+    </div>
+    <span class="text-danger"></span>
+  </div>
+  <div class="receiptshop">
+    <div class="receiptshoplabel">
+      <label>Shop</label>
+    </div>
+    <div class="receiptshopselect">
+      <select  id="selectshop" data-placeholder="Select shop" class="form-control chosen-single-select" #shop>
+        <option *ngFor="let shop of shops" [value] = "shop.id">
+          {{shop.name}}
+        </option>
+      </select>
+    </div>
+    <div class="receiptshopbutton">
+      <button mat-raised-button type="button" id="addshopbutton" class="btn btn-success" (click)="openShopDialog()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    </div>
+  </div>
+  <hr/>
+  <div class="tableheaders">
+    <div class="col-md-4 col-md-offset-1">
+      <label>Name</label>
+    </div>
+    <div class="col-md-3">
+      <label>Amount</label>
+    </div>
+    <div class="col-md-2">
+      <label>Price</label>
+    </div>
+    <div class="col-md-2">
+      <label>Total</label>
+    </div>
+  </div>
+  <div class="receiptproducts">
+    <div class="productslinecreate" *ngFor="let product of products">
+      <div class="col-md-2 buttonproductcreate">
+        <button class="btn btn-danger btn-xs" type="button" id="removeproductbutton"><small><span class="glyphicon glyphicon-remove"></span></small></button>
+      </div>
+      <div class="col-md-3 nameproductcreate">
+        {{product.Name}}
+      </div>
+      <div class="col-md-3 amountproductcreate">
+        {{product.Amount}}
+      </div>
+      <div class="col-md-2 priceproductcreate">
+        {{product.Price}}
+      </div>
+      <div class="col-md-2 producttotalcreate">
+        {{product.TotalValue}}
+      </div>
+    </div>
+  </div>
+  <hr class="totalhr">
+  <div class="productstotal">
+    <label id="totallabel">Total:</label>
+    <label id="total">0</label>
+  </div>
+  <div class="receiptaddproduct">
+    <button type="button" id="opendialogbutton" class="btn btn-success">Add product</button>
+  </div>
+
+
+  <div class="receiptbuttons">
+    <a class="btn btn-danger">Cancel</a>
+    <input type="submit" class="btn btn-success" value="Save" (click)="save()"/>
+  </div>
+
+  <button type="text" (click)="showDialog()" pButton icon="fa-external-link-square" label="Show"></button>
+</div>
+
+<p-dialog header="Title" [(visible)]="display" [width]="300">
+  <div class="createproductproduct">
+    <label>Product:</label>
+    <select id="selectproduct"
+            data-placeholder="Select product"
+            asp-for="ProductID"
+            class="forminput chosen-single-select"
+            asp-items="ViewBag.Products"></select>
+  </div>
+  <div class="checkbox">
+    <label><input id="newproductcheckbox" type="checkbox" asp-for="isNew"/> New product</label>
+  </div>
+  <div id="newproduct">
+    <div class="createproductname">
+      <label>Name:</label>
+      <input asp-for="Name" class="forminput" placeholder="Name" />
+
+    </div>
+    <div class="createproductcategories">
+      <label>Categories:</label>
+      <select data-placeholder="Select categories"
+              asp-for="Categories"
+              class="forminput chosen-group-select"
+              multiple="multiple"
+              asp-items="ViewBag.Categories"></select>
+    </div>
+  </div>
+  <div class="createproductamount">
+    <label>Amount:</label>
+    <input type="number" asp-for="Amount" class="forminput" placeholder="Amount" />
+  </div>
+  <div class="createproductprice">
+    <label>Price per unit:</label>
+    <input type="number" asp-for="Price" class="forminput" placeholder="Price per unit" />
+  </div>
+</p-dialog>
