@@ -20,7 +20,7 @@
       </select>
     </div>
     <div class="receiptshopbutton">
-      <button mat-raised-button type="button" id="addshopbutton" class="btn btn-success" (click)="openShopDialog()">
+      <button mat-raised-button type="button" id="addshopbutton" class="btn btn-success" (click)="showShopDialog()">
         <span class="glyphicon glyphicon-plus"></span>
       </button>
     </div>
@@ -41,7 +41,7 @@
     </div>
   </div>
   <div class="receiptproducts">
-    <div class="productslinecreate" *ngFor="let product of products">
+    <div class="productslinecreate" *ngFor="let product of newProducts">
       <div class="col-md-2 buttonproductcreate">
         <button class="btn btn-danger btn-xs" type="button" id="removeproductbutton"><small><span class="glyphicon glyphicon-remove"></span></small></button>
       </div>
@@ -65,51 +65,59 @@
     <label id="total">0</label>
   </div>
   <div class="receiptaddproduct">
-    <button type="button" id="opendialogbutton" class="btn btn-success">Add product</button>
+    <button type="button" id="opendialogbutton" (click)="showProductDialog()" class="btn btn-success">Add product</button>
   </div>
-
 
   <div class="receiptbuttons">
     <a class="btn btn-danger">Cancel</a>
     <input type="submit" class="btn btn-success" value="Save" (click)="save()"/>
   </div>
-
-  <button type="text" (click)="showDialog()" pButton icon="fa-external-link-square" label="Show"></button>
 </div>
 
-<p-dialog header="Title" [(visible)]="display" [width]="300">
-  <div class="createproductproduct">
+<p-dialog header="Add product" [(visible)]="productDialogDisplay" [width]="300">
+  <div class="createproductproduct" *ngIf="!newProduct">
     <label>Product:</label>
-    <select id="selectproduct"
-            data-placeholder="Select product"
-            asp-for="ProductID"
-            class="forminput chosen-single-select"
-            asp-items="ViewBag.Products"></select>
+    <select data-placeholder="Select product" class="forminput chosen-single-select"  [(ngModel)]="newProductId">
+      <option *ngFor="let product of products" [value] = "product.id" >
+        {{product.name}}
+      </option>
+    </select>
   </div>
   <div class="checkbox">
-    <label><input id="newproductcheckbox" type="checkbox" asp-for="isNew"/> New product</label>
+    <label><input id="newproductcheckbox" type="checkbox" (change)="newProduct = !newProduct"/> New product</label>
   </div>
-  <div id="newproduct">
+  <div id="newproduct" *ngIf="newProduct">
     <div class="createproductname">
       <label>Name:</label>
-      <input asp-for="Name" class="forminput" placeholder="Name" />
-
+      <input class="forminput" placeholder="Name" [(ngModel)]="newProductName" />
     </div>
     <div class="createproductcategories">
       <label>Categories:</label>
-      <select data-placeholder="Select categories"
-              asp-for="Categories"
-              class="forminput chosen-group-select"
-              multiple="multiple"
-              asp-items="ViewBag.Categories"></select>
+      <select data-placeholder="Select categories" class="forminput chosen-group-select" multiple="multiple">
+
+      </select>
     </div>
   </div>
   <div class="createproductamount">
     <label>Amount:</label>
-    <input type="number" asp-for="Amount" class="forminput" placeholder="Amount" />
+    <input type="number" class="forminput" placeholder="Amount" [(ngModel)]="newProductAmount"/>
   </div>
   <div class="createproductprice">
     <label>Price per unit:</label>
-    <input type="number" asp-for="Price" class="forminput" placeholder="Price per unit" />
+    <input type="number" class="forminput" placeholder="Price per unit" [(ngModel)]="newProductPrice"/>
   </div>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="addProduct()" label="Add"></button>
+    <button type="button" pButton icon="fa-close" (click)="productDialogDisplay=false" label="Cancel"></button>
+  </p-footer>
+</p-dialog>
+
+
+<p-dialog header="Add shop" [(visible)]="shopDialogDisplay" [width]="300">
+  <label>Name:</label>
+  <input type="text" #newShopName class="form-control" placeholder="Name"/>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="addShop(newShopName)" label="Add"></button>
+    <button type="button" pButton icon="fa-close" (click)="shopDialogDisplay=false" label="Cancel"></button>
+  </p-footer>
 </p-dialog>

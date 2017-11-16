@@ -13,6 +13,8 @@ import { ReceiptCreateComponent } from './receipt-create/receipt-create.componen
 import {HttpClientModule} from "@angular/common/http";
 import {DialogModule} from 'primeng/primeng';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ButtonModule} from 'primeng/primeng';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     BrowserModule,
     HttpClientModule,
     DialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ButtonModule,
+    FormsModule
   ],
   providers: [ReceiptService, ShopService, ReceiptproductService, ProductService],
   bootstrap: [AppComponent]

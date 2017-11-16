@@ -29,4 +29,9 @@ export class ShopService {
       .catch(this.handleError);
   }
 
+  createShop(shopName: string){
+    return this.http.post(this.apiUrl,"\""+shopName+"\"",{headers:this.headers,responseType: 'text' })
+      .subscribe();
+  }
+
 }

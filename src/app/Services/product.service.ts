@@ -24,4 +24,11 @@ export class ProductService {
       .catch(this.handleError);
   }
 
+  getProducts()
+  {
+    return this.http.get(this.apiUrl)
+      .toPromise()
+      .catch(this.handleError);
+  }
+
 }
