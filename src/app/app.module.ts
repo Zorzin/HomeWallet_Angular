@@ -15,6 +15,9 @@ import {DialogModule} from 'primeng/primeng';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ButtonModule} from 'primeng/primeng';
 import {FormsModule} from "@angular/forms";
+import {CategoryService} from "./Services/category.service";
+import {CalendarModule} from 'primeng/primeng';
+import {MultiSelectModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,11 @@ import {FormsModule} from "@angular/forms";
     DialogModule,
     BrowserAnimationsModule,
     ButtonModule,
-    FormsModule
+    FormsModule,
+    CalendarModule,
+    MultiSelectModule
   ],
-  providers: [ReceiptService, ShopService, ReceiptproductService, ProductService],
+  providers: [ReceiptService, ShopService, ReceiptproductService, ProductService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

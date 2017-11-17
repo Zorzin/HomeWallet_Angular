@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http} from "@angular/http";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {log} from "util";
 
 @Injectable()
 export class ProductService {
@@ -29,6 +30,16 @@ export class ProductService {
     return this.http.get(this.apiUrl)
       .toPromise()
       .catch(this.handleError);
+  }
+
+  createProduct(name: string, categories: number[])
+  {
+    let body = "{" +
+      "\"name\":\"" + name + "\","+
+      "\"categories\":[" + categories.toString() + "]"+
+      "}"
+    return this.http.post(this.apiUrl,body,{headers:this.headers,responseType: 'text' })
+      .toPromise();
   }
 
 }
