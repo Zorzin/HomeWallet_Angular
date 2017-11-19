@@ -8,6 +8,8 @@ import {ReceiptProduct} from "../Models/receipt-product";
 import {log} from "util";
 import {CategoryService} from "../Services/category.service"
 import {SelectItem} from "primeng/primeng";
+import {ReceiptCreate} from "../Models/receipt-create";
+import {ReceiptProductPost} from "../Models/receipt-product-post";
 
 @Component({
   selector: 'app-receipt-create',
@@ -97,6 +99,19 @@ export class ReceiptCreateComponent implements OnInit {
 
   save()
   {
+    let receipt = new ReceiptCreate();
+    receipt.ShopId = this.receiptShop;
+    receipt.Date = this.receiptDate.toLocaleDateString();
+    receipt.Products = [];
+    for(let product of this.newProducts)
+    {
+      let receiptProduct= new ReceiptProductPost();
+      receiptProduct.Amount = product.Amount;
+      receiptProduct.Price = product.Price;
+      receiptProduct.ProductId = product.ID;
+      receipt.Products.push(receiptProduct);
+    }
+    this.receiptService.createReceipt(receipt);
   }
 
 

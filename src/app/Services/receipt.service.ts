@@ -3,6 +3,7 @@ import {Headers,Http} from "@angular/http";
 import {Receipt} from "../Models/receipt";
 import {log} from "util";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {ReceiptCreate} from "../Models/receipt-create";
 
 @Injectable()
 export class ReceiptService {
@@ -33,5 +34,13 @@ export class ReceiptService {
     return this.http.get(this.apiUrl+"/"+id)
       .toPromise()
       .catch(this.handleError);
+  }
+
+  createReceipt(receipt: ReceiptCreate)
+  {
+    let body = JSON.stringify(receipt);
+    log(body);
+    return this.http.post(this.apiUrl,body,{headers:this.headers,responseType: 'text' })
+      .subscribe();
   }
 }
