@@ -2,6 +2,10 @@
 @import "../node_modules/primeng/resources/themes/omega/theme.css";
 @import "../node_modules/primeng/resources/primeng.min.css";
 
+a :hover{
+  cursor: pointer;
+}
+
 body {
   background-color: rgba(0, 0, 0, .7);
   color: white;

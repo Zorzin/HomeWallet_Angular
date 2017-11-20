@@ -4,6 +4,7 @@ import {ReceiptService} from "../Services/receipt.service";
 import {ShopService} from "../Services/shop.service";
 import {Receipt} from "../Models/receipt";
 import {log} from "util";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-receipt',
@@ -15,10 +16,17 @@ export class ReceiptComponent implements OnInit {
   dates: Array<Array<any>>;
   receipts: any;
 
-  constructor(private receiptService: ReceiptService,private shopService: ShopService, private router: Router) { }
+  constructor(private receiptService: ReceiptService,
+              private shopService: ShopService,
+              private router: Router,
+              private location: Location) { }
 
   ngOnInit() {
     this.getReceipts();
+    this.location.subscribe((x) => {
+      this.getReceipts();
+    });
+
   }
 
   getReceipts(): void {
@@ -59,7 +67,7 @@ export class ReceiptComponent implements OnInit {
   {
       for(let receipt of this.receipts)
       {
-        this.receiptService.getReceiptTotalValue(receipt.id).then(value => receipt.totalValue = value.toString());
+        this.receiptService.getReceiptTotalValue(receipt.id).then(value => receipt.totalValue = value);
       }
   }
 

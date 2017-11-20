@@ -60,6 +60,17 @@
   </div>
 </div>
 <div>
-  <a>Edit</a>
+  <a (click)="onDelete()">Remove</a>
+  <a (click)="goEdit()">Edit</a>
   <a (click)="goBack()">Back to List</a>
 </div>
+
+
+
+<p-dialog header="Remove?" [(visible)]="removeDialogDisplay" [width]="300">
+  <label>Remove this receipt?</label>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="onRemoveConfirm()" label="Remove"></button>
+    <button type="button" pButton icon="fa-close" (click)="removeDialogDisplay=false" label="Cancel"></button>
+  </p-footer>
+</p-dialog>

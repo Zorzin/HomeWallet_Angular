@@ -18,6 +18,7 @@ import {FormsModule} from "@angular/forms";
 import {CategoryService} from "./Services/category.service";
 import {CalendarModule} from 'primeng/primeng';
 import {MultiSelectModule} from 'primeng/primeng';
+import { ReceiptCyclicalComponent } from './receipt-cyclical/receipt-cyclical.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import {MultiSelectModule} from 'primeng/primeng';
     ReceiptComponent,
     ReceiptDetailsComponent,
     ReceiptCreateComponent,
+    ReceiptCyclicalComponent,
   ],
   imports: [
     AppRoutingModule,

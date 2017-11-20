@@ -1,0 +1,7 @@
+.nav li :hover{
+  cursor: pointer;
+}
+
+.navbar-header :hover{
+  cursor: pointer;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ReceiptService} from "../Services/receipt.service";
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
@@ -17,6 +17,7 @@ export class ReceiptDetailsComponent implements OnInit {
 
   private isDataLoaded: boolean;
   private receipt: any;
+  removeDialogDisplay:boolean =false;
 
   constructor(
     private productService: ProductService,
@@ -24,7 +25,8 @@ export class ReceiptDetailsComponent implements OnInit {
     private shopService: ShopService,
     private receiptService: ReceiptService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   ngOnInit(): void{
@@ -76,5 +78,19 @@ export class ReceiptDetailsComponent implements OnInit {
 
   private getTotalValue() {
     this.receiptService.getReceiptTotalValue(this.receipt.id).then(responce=>this.receipt.totalValue = responce);
+  }
+
+  private goEdit() {
+    this.router.navigate(['/receipt-edit', this.receipt.id]);
+  }
+
+  private onDelete() {
+    this.removeDialogDisplay = true;
+  }
+
+  onRemoveConfirm()
+  {
+    this.receiptService.removeReceipt(this.receipt.id);
+    this.location.back();
   }
 }
