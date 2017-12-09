@@ -1,0 +1,16 @@
+<div class="form-horizontal">
+  <h4>Plan</h4>
+  <hr />
+  <p>I want to spend no more than</p>
+  <input type="number" min="0" class="form-control" [(ngModel)]="amount" />
+  <p>starting from </p>
+  <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="startDate"></p-calendar>
+  <p>to</p>
+  <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="endDate"></p-calendar>
+
+  <input type="submit" value="Create" class="btn btn-success" (click)="create()" />
+</div>
+
+<div>
+  <a class="btn btn-info"  >Back to List</a>
+</div>

@@ -19,6 +19,8 @@ import {CategoryService} from "./Services/category.service";
 import {CalendarModule} from 'primeng/primeng';
 import {MultiSelectModule} from 'primeng/primeng';
 import { ReceiptCyclicalComponent } from './receipt-cyclical/receipt-cyclical.component';
+import { PlanCreateComponent } from './plan-create/plan-create.component';
+import {PlanService} from "./Services/plan.service";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { ReceiptCyclicalComponent } from './receipt-cyclical/receipt-cyclical.co
     ReceiptDetailsComponent,
     ReceiptCreateComponent,
     ReceiptCyclicalComponent,
+    PlanCreateComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -39,7 +42,7 @@ import { ReceiptCyclicalComponent } from './receipt-cyclical/receipt-cyclical.co
     CalendarModule,
     MultiSelectModule
   ],
-  providers: [ReceiptService, ShopService, ReceiptproductService, ProductService, CategoryService],
+  providers: [ReceiptService, ShopService, ReceiptproductService, ProductService, CategoryService, PlanService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
