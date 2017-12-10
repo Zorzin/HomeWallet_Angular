@@ -21,6 +21,9 @@ import {MultiSelectModule} from 'primeng/primeng';
 import { ReceiptCyclicalComponent } from './receipt-cyclical/receipt-cyclical.component';
 import { PlanCreateComponent } from './plan-create/plan-create.component';
 import {PlanService} from "./Services/plan.service";
+import { PlanDetailsComponent } from './plan-details/plan-details.component';
+import { ShopsComponent } from './shops/shops.component';
+import { ShopDetailsComponent } from './shop-details/shop-details.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import {PlanService} from "./Services/plan.service";
     ReceiptCreateComponent,
     ReceiptCyclicalComponent,
     PlanCreateComponent,
+    PlanDetailsComponent,
+    ShopsComponent,
+    ShopDetailsComponent,
   ],
   imports: [
     AppRoutingModule,

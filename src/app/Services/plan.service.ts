@@ -28,4 +28,9 @@ export class PlanService {
       .toPromise();
   }
 
+  getStatusPlanForToday()
+  {
+    return this.http.get(this.apiUrl+"/"+ new Date().toLocaleDateString());
+  }
+
 }

@@ -5,6 +5,7 @@ import {ReceiptDetailsComponent} from "../receipt-details/receipt-details.compon
 import {ReceiptCreateComponent} from "../receipt-create/receipt-create.component";
 import {ReceiptCyclicalComponent} from "../receipt-cyclical/receipt-cyclical.component";
 import {PlanCreateComponent} from "../plan-create/plan-create.component";
+import {PlanDetailsComponent} from "../plan-details/plan-details.component";
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path:"receipt-detail/:id", component: ReceiptDetailsComponent },
   { path:"receipt-create", component: ReceiptCreateComponent },
   { path:"plan-create", component: PlanCreateComponent },
+  { path:"plan", component: PlanDetailsComponent},
   { path:"receipt-cyclical", component: ReceiptCyclicalComponent }
   ]
 
