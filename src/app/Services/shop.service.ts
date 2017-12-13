@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 @Injectable()
 export class ShopService {
   private apiUrl = 'http://localhost:54044/api/shops/1';  // URL to web api
+  private apiProductsUrl = 'http://localhost:54044/api/shops/products/1';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private userId : string;
 
@@ -23,6 +24,12 @@ export class ShopService {
       .catch(this.handleError);
   }
 
+  getShopProducts(id:number) {
+    return this.http.get(this.apiProductsUrl + "/"+id)
+      .toPromise()
+      .catch(this.handleError);
+  }
+
   getShops() {
     return this.http.get(this.apiUrl)
       .toPromise()
@@ -34,4 +41,13 @@ export class ShopService {
       .subscribe();
   }
 
+  deleteShop(id:number) {
+    return this.http.delete(this.apiUrl+"/"+id,{headers:this.headers,responseType: 'text' })
+      .subscribe();
+  }
+
+  editShop(id:number,newName: string) {
+    return this.http.put(this.apiUrl+"/"+id+"/"+newName,{headers:this.headers,responseType: 'text' })
+      .subscribe();
+  }
 }

@@ -1,3 +1,66 @@
-<p>
-  shop-details works!
-</p>
+<div *ngIf="isDataLoaded">
+  <br/>
+  <ul class="nav nav-tabs detailstab">
+    <li role="presentation" [ngClass]="details ? 'active' : ''" ><a id="detailstab" (click)="SetDetails()">Details</a></li>
+    <li role="presentation" [ngClass]="details ? '' : 'active'"><a id="statisticstab" (click)="SetStatistics()">Statistics</a></li>
+  </ul>
+  <br />
+  <div id="statisticsdiv" *ngIf="!details">
+    Statistics
+  </div>
+  <div class="col-md-12" id="detailsdiv" *ngIf="details">
+    <div class="col-md-6">
+      <div>
+        <h2>{{shop.name}}</h2>
+      </div>
+
+      <div *ngIf="hasProducts">
+        Products bought in this shop:
+      </div>
+      <div *ngIf="!hasProducts">
+        No products were found bought in this shop.
+      </div>
+
+      <div *ngIf="hasProducts" class="col-md-offset-2" >
+        <li *ngFor="let product of products">
+          <a (click)="ProductDetails(product)" >
+            {{product.name}}
+          </a>
+        </li>
+        <br />
+
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="detailsbuttonsdiv">
+        <a class="btn btn-default" (click)="GoBack()">Back to List</a><br/>
+        <a class="btn btn-warning" (click)="Edit()">Edit</a><br />
+        <a class="btn btn-danger" (click)="Delete()">Delete</a><br />
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+  </div>
+
+
+  <p-dialog header="Edit name" [(visible)]="editDialogDisplay" [width]="300">
+
+    <label>Type new shop name:</label>
+    <input type="text" [(ngModel)]="shop.name">
+    <p-footer>
+      <button type="button" pButton icon="fa-check" (click)="ConfirmEdit()" label="Save"></button>
+      <button type="button" pButton icon="fa-close" (click)="CancelEdit()" label="Cancel"></button>
+    </p-footer>
+  </p-dialog>
+
+  <p-dialog header="Remove shop" [(visible)]="removeDialogDisplay" [width]="300">
+
+    <label>Are you sure you want to delete this shop? This will delete all receipts from this shop.</label>
+    <p-footer>
+      <button type="button" pButton icon="fa-check" (click)="ConfirmDelete()" label="Delete"></button>
+      <button type="button" pButton icon="fa-close" (click)="CancelDelete()" label="Cancel"></button>
+    </p-footer>
+  </p-dialog>
+</div>
+
+

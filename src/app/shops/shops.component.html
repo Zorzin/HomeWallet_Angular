@@ -1,3 +1,25 @@
-<p>
-  shops works!
-</p>
+  <p>
+    <a class="btn btn-success" (click)="Create()">Create New</a>
+  </p>
+
+  <div class="col-md-12">
+    <div *ngFor="let shop of shops" class="col-md-3 panelmaindiv">
+      <div  class="panel panel-default listpanel">
+        <a (click)="goToDetails(shop)">
+          <div>
+            <span>{{shop.name}}</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <p-dialog header="Create shop" [(visible)]="displayCreateDialog" [width]="300">
+
+    <label>Type new shop name:</label>
+    <input type="text" [(ngModel)]="newShopName">
+    <p-footer>
+      <button type="button" pButton icon="fa-check" (click)="ConfirmCreate()" label="Create"></button>
+      <button type="button" pButton icon="fa-close" (click)="Cancel()" label="Cancel"></button>
+    </p-footer>
+  </p-dialog>

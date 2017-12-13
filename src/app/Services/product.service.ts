@@ -7,6 +7,7 @@ import {log} from "util";
 export class ProductService {
 
   private apiUrl = 'http://localhost:54044/api/products/1';  // URL to web api
+  private apiCategoriesUrl = 'http://localhost:54044/api/products/categories/1';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private userId : string;
 
@@ -42,4 +43,15 @@ export class ProductService {
       .toPromise();
   }
 
+  getCategories(id:number) {
+    return this.http.get(this.apiCategoriesUrl+"/"+id)
+      .toPromise()
+      .catch(this.handleError);
+  }
+
+  deleteProduct(id:number) {
+    return this.http.delete(this.apiUrl+"/"+id)
+      .toPromise()
+      .catch(this.handleError);
+  }
 }

@@ -24,6 +24,10 @@ import {PlanService} from "./Services/plan.service";
 import { PlanDetailsComponent } from './plan-details/plan-details.component';
 import { ShopsComponent } from './shops/shops.component';
 import { ShopDetailsComponent } from './shop-details/shop-details.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ShopEditComponent } from './shop-edit/shop-edit.component';
+import { CategoryDetailsComponent } from './category-details/category-details.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,10 @@ import { ShopDetailsComponent } from './shop-details/shop-details.component';
     PlanDetailsComponent,
     ShopsComponent,
     ShopDetailsComponent,
+    ProductDetailsComponent,
+    ShopEditComponent,
+    CategoryDetailsComponent,
+    ProductsComponent,
   ],
   imports: [
     AppRoutingModule,
