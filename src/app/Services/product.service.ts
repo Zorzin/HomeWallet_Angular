@@ -54,4 +54,14 @@ export class ProductService {
       .toPromise()
       .catch(this.handleError);
   }
+
+  updateProduct(id:number,name: string, categories: number[]) {
+
+    let body = "{" +
+      "\"name\":\"" + name + "\","+
+      "\"categories\":[" + categories.toString() + "]"+
+      "}"
+    return this.http.put(this.apiUrl+"/"+id,body,{headers:this.headers,responseType: 'text' })
+      .toPromise();
+  }
 }

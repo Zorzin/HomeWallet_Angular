@@ -1,0 +1,28 @@
+<p>
+  <a class="btn btn-success" (click)="Create()">Create New</a>
+</p>
+
+<div class="col-md-12">
+  <div *ngFor="let category of categories" class="col-md-3 panelmaindiv">
+    <div  class="panel panel-default listpanel">
+      <a (click)="goToDetails(category)">
+        <div>
+          <span>{{category.name}}</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<p-dialog header="Create category" [(visible)]="displayCreateDialog" [width]="300">
+  <div id="newproduct">
+    <div class="createproductname">
+      <label>Name:</label>
+      <input class="forminput" placeholder="Name" [(ngModel)]="newCategoryName" />
+    </div>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="ConfirmCreate()" label="Create"></button>
+    <button type="button" pButton icon="fa-close" (click)="Cancel()" label="Cancel"></button>
+  </p-footer>
+</p-dialog>

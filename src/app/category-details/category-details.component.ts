@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {ProductService} from "../Services/product.service";
+import {CategoryService} from "../Services/category.service";
 
 @Component({
   selector: 'app-category-details',
@@ -7,9 +10,89 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryDetailsComponent implements OnInit {
 
-  constructor() { }
+  private details: boolean;
+  private isDataLoaded: boolean;
+  private hasProducts: boolean;
+  private removeDialogDisplay: boolean;
+  private editDialogDisplay: boolean;
+
+  category:any;
+  products : any;
+
+  constructor(
+    private router : Router,
+    private productService: ProductService,
+    private route: ActivatedRoute,
+    private categoryService: CategoryService) { }
 
   ngOnInit() {
+    this.route.paramMap
+      .switchMap((params: ParamMap) => this.categoryService.getCategory(+params.get('id')))
+      .subscribe((result) => {
+        this.details = true;
+        this.category = result;
+        this.GetProducts();
+        this.isDataLoaded = true;
+      });
   }
 
+  SetStatistics() {
+    this.details = false;
+  }
+
+  SetDetails() {
+    this.details = true;
+  }
+
+  private GetProducts() {
+    this.categoryService.getProducts(this.category.id).then((response)=>{
+      if(response.toString())
+      {
+        this.hasProducts = true;
+        this.products = response;
+      }
+    });
+  }
+
+  ProductDetails(product:any)
+  {
+    this.router.navigate(['/product-detail',product.id]);
+  }
+
+  GoBack()
+  {
+    this.router.navigate(['/categories']);
+  }
+
+  Edit() {
+    this.editDialogDisplay = true;
+  }
+
+  Delete()
+  {
+    this.removeDialogDisplay = true;
+  }
+
+  CancelDelete()
+  {
+    this.removeDialogDisplay = false;
+  }
+
+  ConfirmDelete()
+  {
+    this.categoryService.deleteCategory(this.category.id).add(()=>{
+      this.GoBack();
+    });
+  }
+
+  ConfirmEdit() {
+    this.categoryService.updateCategory(this.category.id,this.category.name).add(()=>{
+      this.GetProducts();
+      this.editDialogDisplay=false;
+    });
+  }
+
+  CancelEdit() {
+    this.editDialogDisplay = false;
+  }
 }

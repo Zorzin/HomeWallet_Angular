@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 export class CategoryService {
 
   private apiUrl = 'http://localhost:54044/api/categories/1';  // URL to web api
+  private apiProductsUrl = 'http://localhost:54044/api/categories/products/1';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private userId : string;
 
@@ -32,7 +33,26 @@ export class CategoryService {
 
   createCategory(name: string)
   {
-    return this.http.post(this.apiUrl,"\""+name+"\"",{headers:this.headers,responseType: 'text' })
+    return this.http.post(this.apiUrl+"/"+name,{headers:this.headers,responseType: 'text' })
+      .subscribe();
+  }
+
+  getProducts(id:number) {
+
+    return this.http.get(this.apiProductsUrl+"/"+id)
+      .toPromise()
+      .catch(this.handleError);
+  }
+
+  deleteCategory(id:number) {
+
+    return this.http.delete(this.apiUrl+"/"+id,{headers:this.headers,responseType: 'text' })
+      .subscribe();
+  }
+
+  updateCategory(id, name) {
+
+    return this.http.put(this.apiUrl+"/"+id+"/"+name,{headers:this.headers,responseType: 'text' })
       .subscribe();
   }
 }

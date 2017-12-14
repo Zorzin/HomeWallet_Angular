@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ProductService} from "../Services/product.service";
+import {SelectItem} from "primeng/primeng";
+import {CategoryService} from "../Services/category.service";
 
 @Component({
   selector: 'app-product-details',
@@ -18,19 +20,26 @@ export class ProductDetailsComponent implements OnInit {
   product:any;
   categories : any;
 
+  multiSelectCategories: SelectItem[];
+  currentCategories: any;
+
   constructor(
     private router : Router,
     private productService: ProductService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private categoryService: CategoryService) { }
 
   ngOnInit() {
+    this.currentCategories = [];
+    this.multiSelectCategories = [];
     this.route.paramMap
       .switchMap((params: ParamMap) => this.productService.getProduct(+params.get('id')))
       .subscribe((product) => {
-          this.details = true;
-          this.product = product;
-          this.isDataLoaded = true;
-          this.GetCategories();
+        this.details = true;
+        this.product = product;
+        this.GetCategories();
+        this.getAllCategories();
+        this.isDataLoaded = true;
       });
   }
 
@@ -44,12 +53,30 @@ export class ProductDetailsComponent implements OnInit {
 
   private GetCategories() {
     this.productService.getCategories(this.product.id).then((response)=>{
-      if(response!=null)
+      if(response.toString())
       {
         this.hasCategories = true;
         this.categories = response;
+        for(let category of this.categories) {
+          this.currentCategories.push(category.id);
+        }
       }
     });
+  }
+
+  getAllCategories()
+  {
+    this.categoryService.getCategories().then((response)=>{
+      this.categories= response;
+      for (let category of this.categories)
+      {
+        let item:any = {};
+        item.value = category.id;
+        item.label = category.name;
+        this.multiSelectCategories.push(item);
+      }
+    });
+
   }
 
   CategoryDetails(category:any)
@@ -84,6 +111,10 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ConfirmEdit() {
+    this.productService.updateProduct(this.product.id,this.product.name,this.currentCategories).then(()=>{
+      this.GetCategories();
+      this.editDialogDisplay=false;
+    });
   }
 
   CancelEdit() {

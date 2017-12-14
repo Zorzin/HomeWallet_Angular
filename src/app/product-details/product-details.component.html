@@ -124,6 +124,12 @@
   <p-dialog header="Edit product" [(visible)]="editDialogDisplay" [width]="300">
 
     <label>EditProduct</label>
+    <div>
+      <input type="text" [(ngModel)]="product.name">
+      <p-multiSelect [options] = "multiSelectCategories" data-placeholder="Select categories" class="forminput chosen-group-select" multiple="multiple" [(ngModel)]="currentCategories">
+
+      </p-multiSelect>
+    </div>
     <p-footer>
       <button type="button" pButton icon="fa-check" (click)="ConfirmEdit()" label="Save"></button>
       <button type="button" pButton icon="fa-close" (click)="CancelEdit()" label="Cancel"></button>

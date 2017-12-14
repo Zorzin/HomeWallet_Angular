@@ -12,6 +12,7 @@ import {ProductDetailsComponent} from "../product-details/product-details.compon
 import {ShopEditComponent} from "../shop-edit/shop-edit.component";
 import {CategoryDetailsComponent} from "../category-details/category-details.component";
 import {ProductsComponent} from "../products/products.component";
+import {CategoriesComponent} from "../categories/categories.component";
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path:"receipt-cyclical", component: ReceiptCyclicalComponent },
   { path:"shops", component: ShopsComponent },
   { path:"products", component: ProductsComponent },
+  { path:"categories", component: CategoriesComponent },
   { path:"shop-detail/:id", component: ShopDetailsComponent },
   { path:"shop-edit/:id", component: ShopEditComponent },
   { path:"product-detail/:id", component: ProductDetailsComponent },

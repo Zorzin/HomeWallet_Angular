@@ -28,6 +28,7 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ShopEditComponent } from './shop-edit/shop-edit.component';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { ProductsComponent } from './products/products.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ProductsComponent } from './products/products.component';
     ShopEditComponent,
     CategoryDetailsComponent,
     ProductsComponent,
+    CategoriesComponent,
   ],
   imports: [
     AppRoutingModule,

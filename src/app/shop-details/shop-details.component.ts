@@ -37,7 +37,7 @@ export class ShopDetailsComponent implements OnInit {
 
   private GetProducts() {
     this.shopService.getShopProducts(this.shop.id).then((result)=>{
-      if(result!=null)
+      if(result.toString())
       {
         this.products = result;
         this.hasProducts = true;
