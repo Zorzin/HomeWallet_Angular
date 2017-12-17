@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 import {log} from "util";
 import {ShopService} from "../Services/shop.service";
-import {ReceiptproductService} from "../Services/receiptproduct.service";
+import {ReceiptProductService} from "../Services/receiptproduct.service";
 import {ProductService} from "../Services/product.service";
 
 @Component({
@@ -21,7 +21,7 @@ export class ReceiptDetailsComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private receiptProductService: ReceiptproductService,
+    private receiptProductService: ReceiptProductService,
     private shopService: ShopService,
     private receiptService: ReceiptService,
     private route: ActivatedRoute,

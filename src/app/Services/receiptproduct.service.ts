@@ -3,7 +3,7 @@ import {Http} from "@angular/http";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Injectable()
-export class ReceiptproductService {
+export class ReceiptProductService {
 
   private apiUrl = 'http://localhost:54044/api/receiptproducts';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});

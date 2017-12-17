@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ShopService} from "../Services/shop.service";
 import {ReceiptService} from '../Services/receipt.service';
 import {ProductService} from "../Services/product.service";
-import {ReceiptproductService} from "../Services/receiptproduct.service";
+import {ReceiptProductService} from "../Services/receiptproduct.service";
 import {CategoryService} from "../Services/category.service";
 import {Receipt} from "../Models/receipt";
 import {ReceiptProduct} from '../Models/receipt-product';
@@ -22,7 +22,7 @@ export class ReceiptCyclicalComponent implements OnInit {
     private shopService: ShopService,
     private productService: ProductService,
     private receiptService: ReceiptService,
-    private receiptProductService: ReceiptproductService,
+    private receiptProductService: ReceiptProductService,
     private categoryService: CategoryService) { }
 
 

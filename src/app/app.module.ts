@@ -6,7 +6,7 @@ import { ReceiptComponent } from './receipt/receipt.component';
 import {AppRoutingModule} from "./app-routing/app-routing.module";
 import {ReceiptService} from "./Services/receipt.service";
 import {ShopService} from "./Services/shop.service";
-import {ReceiptproductService} from "./Services/receiptproduct.service";
+import {ReceiptProductService} from "./Services/receiptproduct.service";
 import { ReceiptDetailsComponent } from './receipt-details/receipt-details.component';
 import {ProductService} from "./Services/product.service";
 import { ReceiptCreateComponent } from './receipt-create/receipt-create.component';
@@ -17,6 +17,7 @@ import {ButtonModule} from 'primeng/primeng';
 import {FormsModule} from "@angular/forms";
 import {CategoryService} from "./Services/category.service";
 import {CalendarModule} from 'primeng/primeng';
+import {DropdownModule} from 'primeng/primeng';
 import {MultiSelectModule} from 'primeng/primeng';
 import { ReceiptCyclicalComponent } from './receipt-cyclical/receipt-cyclical.component';
 import { PlanCreateComponent } from './plan-create/plan-create.component';
@@ -29,6 +30,7 @@ import { ShopEditComponent } from './shop-edit/shop-edit.component';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { ProductsComponent } from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { ReceiptEditComponent } from './receipt-edit/receipt-edit.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { CategoriesComponent } from './categories/categories.component';
     CategoryDetailsComponent,
     ProductsComponent,
     CategoriesComponent,
+    ReceiptEditComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -56,9 +59,10 @@ import { CategoriesComponent } from './categories/categories.component';
     ButtonModule,
     FormsModule,
     CalendarModule,
-    MultiSelectModule
+    MultiSelectModule,
+    DropdownModule
   ],
-  providers: [ReceiptService, ShopService, ReceiptproductService, ProductService, CategoryService, PlanService],
+  providers: [ReceiptService, ShopService, ReceiptProductService, ProductService, CategoryService, PlanService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

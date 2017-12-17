@@ -13,12 +13,14 @@ import {ShopEditComponent} from "../shop-edit/shop-edit.component";
 import {CategoryDetailsComponent} from "../category-details/category-details.component";
 import {ProductsComponent} from "../products/products.component";
 import {CategoriesComponent} from "../categories/categories.component";
+import {ReceiptEditComponent} from "../receipt-edit/receipt-edit.component";
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'receipt', pathMatch: 'full' },
-  { path: 'receipt',  component: ReceiptComponent },
+  { path: '', redirectTo: 'receipts', pathMatch: 'full' },
+  { path: 'receipts',  component: ReceiptComponent },
   { path:"receipt-detail/:id", component: ReceiptDetailsComponent },
+  { path:"receipt-edit/:id", component: ReceiptEditComponent },
   { path:"receipt-create", component: ReceiptCreateComponent },
   { path:"plan-create", component: PlanCreateComponent },
   { path:"plan", component: PlanDetailsComponent},

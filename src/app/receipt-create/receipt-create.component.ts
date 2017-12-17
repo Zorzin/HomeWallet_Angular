@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ShopService} from "../Services/shop.service";
 import {ProductService} from "../Services/product.service";
 import {ReceiptService} from "../Services/receipt.service";
-import {ReceiptproductService} from "../Services/receiptproduct.service";
+import {ReceiptProductService} from "../Services/receiptproduct.service";
 import {Receipt} from "../Models/receipt";
 import {ReceiptProduct} from "../Models/receipt-product";
 import {log} from "util";
@@ -22,7 +22,7 @@ export class ReceiptCreateComponent implements OnInit {
     private shopService: ShopService,
     private productService: ProductService,
     private receiptService: ReceiptService,
-    private receiptProductService: ReceiptproductService,
+    private receiptProductService: ReceiptProductService,
     private categoryService: CategoryService) { }
 
 

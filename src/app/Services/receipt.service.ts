@@ -5,6 +5,8 @@ import {log} from "util";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ReceiptCreate} from "../Models/receipt-create";
 import {ReceiptCyclicalCreate} from "../Models/receipt-cyclical-create";
+import {ReceiptProductEdit} from "../Models/receipt-product-edit";
+import {ReceiptEdit} from "../Models/receipt-edit";
 
 @Injectable()
 export class ReceiptService {
@@ -59,5 +61,22 @@ export class ReceiptService {
   {
     return this.http.delete(this.apiUrl+"/"+id)
       .subscribe();
+  }
+
+  updateReceipt(receipt: any, receiptProducts: ReceiptProductEdit[])
+  {
+    let body = this.getReceiptJSON(receipt,receiptProducts);
+    return this.http.put(this.apiUrl+"/"+receipt.id,body,{headers:this.headers,responseType: 'text' })
+      .subscribe();
+  }
+
+  private getReceiptJSON(receipt: any, receiptProducts: ReceiptProductEdit[]) {
+      let receiptEdit = new ReceiptEdit();
+      console.log(receipt.purchaseDate);
+      receiptEdit.Date = receipt.purchaseDate.toLocaleDateString();
+      receiptEdit.ShopId = receipt.shopID;
+      receiptEdit.Products = receiptProducts;
+      receiptEdit.ReceiptId = receipt.id;
+      return JSON.stringify(receiptEdit);
   }
 }

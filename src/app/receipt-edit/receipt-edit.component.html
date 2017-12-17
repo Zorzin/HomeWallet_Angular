@@ -1,0 +1,126 @@
+<div *ngIf="isDataLoaded">
+  <h4>Receipt</h4>
+  <hr />
+  <div class="receiptdetails">
+    <div class="receiptdate">
+      <div class="receiptdatelabeldetails">
+        PurchaseDate
+      </div>
+      <div class="receiptdatedetails">
+        <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="receipt.purchaseDate"></p-calendar>
+      </div>
+    </div>
+    <div class="receiptshop">
+      <div class="receiptshoplabeldetails">
+        Shop
+      </div>
+      <div class="receiptshopdetails">
+        <select class="form-control chosen-single-select" [(ngModel)]="receipt.shopID">
+          <option *ngFor="let shop of shops" [value] = "shop.id">
+            {{shop.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <hr />
+    <div class="tableheaders">
+      <div class="col-md-4">
+        <label>Name</label>
+      </div>
+      <div class="col-md-3">
+        <label>Amount</label>
+      </div>
+      <div class="col-md-2">
+        <label>Price</label>
+      </div>
+      <div class="col-md-2">
+        <label>Total</label>
+      </div>
+    </div>
+    <div class="receiptproducts">
+
+      <div class="productslinecreate" *ngFor="let product of receiptProducts; let i = index" [attr.data-index]="i">
+        <div class="col-md-2 buttonproductdelete">
+          <button class="btn btn-danger btn-xs"  type="button" (click)="deleteProduct(i)"><small><span class="glyphicon glyphicon-remove"></span></small></button>
+        </div>
+        <div class="productname">
+          {{product.productName}}
+        </div>
+        <div class="productamount">
+          <input pInputText  type="number" [(ngModel)]="product.amount" (keyup)="updateProductValues(product)" (change)="updateProductValues(product)">
+        </div>
+        <div class="productprice">
+          <input pInputText  type="number" [(ngModel)]="product.price" (keyup)="updateProductValues(product)"  (change)="updateProductValues(product)">
+        </div>
+        <div class="producttotal">
+          {{product.total}}
+        </div>
+      </div>
+
+    </div>
+    <hr class="totalhr">
+    <div class="productstotal">
+      <label>Total:</label>
+      <label id="total">{{receipt.totalValue}}</label>
+    </div>
+    <div class="receiptaddproduct">
+      <button type="button" id="opendialogbutton" (click)="showProductDialog()" class="btn btn-success">Add product</button>
+    </div>
+    <div>
+      <button type="button" (click)="save()" class="btn btn-success">Save</button>
+    </div>
+  </div>
+</div>
+<div>
+  <a (click)="onDelete()">Remove</a>
+  <a (click)="goEdit()">Edit</a>
+  <a (click)="goBack()">Back to List</a>
+</div>
+
+<p-dialog header="Add product" [(visible)]="productDialogDisplay" [width]="300">
+  <div class="createproductproduct" *ngIf="!newProduct">
+    <label>Product:</label>
+    <select data-placeholder="Select product" class="forminput chosen-single-select"  [(ngModel)]="currentNewProduct.productId">
+      <option *ngFor="let product of products" [value] = "product.id" >
+        {{product.name}}
+      </option>
+    </select>
+  </div>
+  <div class="checkbox">
+    <label><input id="newproductcheckbox" type="checkbox" (change)="newProduct = !newProduct"/> New product</label>
+  </div>
+  <div id="newproduct" *ngIf="newProduct">
+    <div class="createproductname">
+      <label>Name:</label>
+      <input class="forminput" placeholder="Name" [(ngModel)]="currentNewProduct.productName" />
+    </div>
+    <div class="createproductcategories">
+      <label>Categories:</label>
+      <p-multiSelect [options] = "multiSelectCategories" data-placeholder="Select categories" class="forminput chosen-group-select" multiple="multiple" [(ngModel)]="newProductCategories">
+
+      </p-multiSelect>
+    </div>
+  </div>
+  <div class="createproductamount">
+    <label>Amount:</label>
+    <input type="number" class="forminput" placeholder="Amount" [(ngModel)]="currentNewProduct.amount"/>
+  </div>
+  <div class="createproductprice">
+    <label>Price per unit:</label>
+    <input type="number" class="forminput" placeholder="Price per unit" [(ngModel)]="currentNewProduct.price"/>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="addProduct()" label="Add"></button>
+    <button type="button" pButton icon="fa-close" (click)="productDialogDisplay=false" label="Cancel"></button>
+  </p-footer>
+</p-dialog>
+
+
+<p-dialog header="Add shop" [(visible)]="shopDialogDisplay" [width]="300">
+  <label>Name:</label>
+  <input type="text" #newShopName class="form-control" placeholder="Name"/>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="addShop(newShopName)" label="Add"></button>
+    <button type="button" pButton icon="fa-close" (click)="shopDialogDisplay=false" label="Cancel"></button>
+  </p-footer>
+</p-dialog>
