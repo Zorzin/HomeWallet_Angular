@@ -14,4 +14,8 @@ export class AppComponent {
   goToHome() {
     this.router.navigate(['/receipts']);
   }
+
+  goToOptions() {
+    this.router.navigate(['/options']);
+  }
 }

@@ -1,0 +1,21 @@
+<div *ngIf="isDataLoaded">
+  <div *ngIf="!canEdit">
+    <h1>Sorry, you can edit only current plans.</h1>
+  </div>
+  <div *ngIf="canEdit">
+    <p>I want to spend no more than</p>
+    <input [(ngModel)]="plan.amount" type="number" min="0" class="form-control" />
+    <p>starting from </p>
+    <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="plan.startDate"></p-calendar>
+    <p>to</p>
+    <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="plan.endDate"></p-calendar>
+    <br>
+    <input type="submit" value="Save" class="btn btn-success" (click)="onSave()" />
+  </div>
+</div>
+
+<div>
+  <a (click)="goToDetails()">Back to Details</a>
+</div>
+
+

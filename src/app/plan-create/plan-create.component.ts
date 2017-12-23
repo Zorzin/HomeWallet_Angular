@@ -14,7 +14,8 @@ export class PlanCreateComponent implements OnInit {
   amount : number;
   startDate: Date;
   endDate: Date;
-  private responseFromService: Object;
+  private responseFromService: object;
+  private canCreate: boolean;
 
   constructor(
     private planService: PlanService,
@@ -41,16 +42,21 @@ export class PlanCreateComponent implements OnInit {
   }
 
   private checkIfThereIsPlanAlready() {
-    this.planService.getStatusPlanForToday().subscribe((response)=>{
+    this.planService.getPlan().subscribe((response)=>{
       this.responseFromService = response;
       if(this.responseFromService)
       {
-        this.router.navigate(['/plan']);
+        this.canCreate = false;
+      }
+      else
+      {
+        this.canCreate = true;
       }
     });
+  }
 
-
-
-
+  private goToList()
+  {
+    this.router.navigate(['/plans']);
   }
 }

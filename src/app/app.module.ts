@@ -31,6 +31,9 @@ import { CategoryDetailsComponent } from './category-details/category-details.co
 import { ProductsComponent } from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ReceiptEditComponent } from './receipt-edit/receipt-edit.component';
+import { OptionsComponent } from './options/options.component';
+import { PlanEditComponent } from './plan-edit/plan-edit.component';
+import { PlansComponent } from './plans/plans.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,9 @@ import { ReceiptEditComponent } from './receipt-edit/receipt-edit.component';
     ProductsComponent,
     CategoriesComponent,
     ReceiptEditComponent,
+    OptionsComponent,
+    PlanEditComponent,
+    PlansComponent,
   ],
   imports: [
     AppRoutingModule,

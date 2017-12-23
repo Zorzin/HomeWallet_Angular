@@ -14,25 +14,31 @@ import {CategoryDetailsComponent} from "../category-details/category-details.com
 import {ProductsComponent} from "../products/products.component";
 import {CategoriesComponent} from "../categories/categories.component";
 import {ReceiptEditComponent} from "../receipt-edit/receipt-edit.component";
+import {OptionsComponent} from "../options/options.component";
+import {PlanEditComponent} from '../plan-edit/plan-edit.component';
+import {PlansComponent} from "../plans/plans.component";
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'receipts', pathMatch: 'full' },
   { path: 'receipts',  component: ReceiptComponent },
-  { path:"receipt-detail/:id", component: ReceiptDetailsComponent },
-  { path:"receipt-edit/:id", component: ReceiptEditComponent },
+  { path: 'options',  component: OptionsComponent},
   { path:"receipt-create", component: ReceiptCreateComponent },
   { path:"plan-create", component: PlanCreateComponent },
-  { path:"plan", component: PlanDetailsComponent},
   { path:"receipt-cyclical", component: ReceiptCyclicalComponent },
   { path:"shops", component: ShopsComponent },
+  { path:"plans", component: PlansComponent },
   { path:"products", component: ProductsComponent },
   { path:"categories", component: CategoriesComponent },
   { path:"shop-detail/:id", component: ShopDetailsComponent },
   { path:"shop-edit/:id", component: ShopEditComponent },
   { path:"product-detail/:id", component: ProductDetailsComponent },
-  { path:"category-detail/:id", component: CategoryDetailsComponent }
-  ]
+  { path:"category-detail/:id", component: CategoryDetailsComponent },
+  { path:"receipt-detail/:id", component: ReceiptDetailsComponent },
+  { path:"receipt-edit/:id", component: ReceiptEditComponent },
+  { path:"plan-edit/:id", component: PlanEditComponent },
+  { path:"plan-details/:id", component: PlanDetailsComponent},
+  ];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes),RouterModule.forChild([
