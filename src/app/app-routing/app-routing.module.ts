@@ -17,6 +17,8 @@ import {ReceiptEditComponent} from "../receipt-edit/receipt-edit.component";
 import {OptionsComponent} from "../options/options.component";
 import {PlanEditComponent} from '../plan-edit/plan-edit.component';
 import {PlansComponent} from "../plans/plans.component";
+import {RegisterComponent} from "../register/register.component";
+import {LoginComponent} from "../login/login.component";
 
 
 const routes: Routes = [
@@ -38,6 +40,8 @@ const routes: Routes = [
   { path:"receipt-edit/:id", component: ReceiptEditComponent },
   { path:"plan-edit/:id", component: PlanEditComponent },
   { path:"plan-details/:id", component: PlanDetailsComponent},
+  { path:"register", component: RegisterComponent},
+  { path:"login", component: LoginComponent},
   ];
 
 @NgModule({

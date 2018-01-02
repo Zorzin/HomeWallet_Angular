@@ -1,0 +1,45 @@
+<h4>Create a new account.</h4>
+<hr />
+<div class="text-danger"></div>
+<div class="form-group">
+  <label  class="col-md-2 control-label">Email</label>
+  <div class="col-md-10">
+    <input [(ngModel)]="user.email" class="form-control" />
+    <span class="text-danger"></span>
+  </div>
+</div>
+<div class="form-group">
+  <label  class="col-md-2 control-label">Login</label>
+  <div class="col-md-10">
+    <input [(ngModel)]="user.login" class="form-control" />
+    <span class="text-danger"></span>
+  </div>
+</div>
+<div class="form-group">
+  <label  class="col-md-2 control-label">Password</label>
+  <div class="col-md-10">
+    <input [(ngModel)]="user.password" class="form-control" />
+    <span class="text-danger"></span>
+  </div>
+</div>
+
+<div class="form-group">
+  <label  class="col-md-2 control-label">Retype Password</label>
+  <div class="col-md-10">
+    <input [(ngModel)]="user.repassword" class="form-control" />
+    <span class="text-danger"></span>
+  </div>
+</div>
+
+<div class="form-group">
+  <label  class="col-md-2 control-label">Currency</label>
+  <div class="col-md-10">
+    <input [(ngModel)]="user.currency" data-placeholder="Select currency" class="form-control chosen-single-select"/>
+    <span  class="text-danger"></span>
+  </div>
+</div>
+<div class="form-group">
+  <div class="col-md-offset-2 col-md-10">
+    <button (click)="onRegister()" type="submit" class="btn btn-default">Register</button>
+  </div>
+</div>

@@ -34,6 +34,12 @@ import { ReceiptEditComponent } from './receipt-edit/receipt-edit.component';
 import { OptionsComponent } from './options/options.component';
 import { PlanEditComponent } from './plan-edit/plan-edit.component';
 import { PlansComponent } from './plans/plans.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import {LoginService} from "./Services/login.service";
+import {RegisterService} from "./Services/register.service";
+import {UserIdService} from "./Services/user-id.service";
+import {CheckboxModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -55,6 +61,8 @@ import { PlansComponent } from './plans/plans.component';
     OptionsComponent,
     PlanEditComponent,
     PlansComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -66,9 +74,9 @@ import { PlansComponent } from './plans/plans.component';
     FormsModule,
     CalendarModule,
     MultiSelectModule,
-    DropdownModule
+    CheckboxModule
   ],
-  providers: [ReceiptService, ShopService, ReceiptProductService, ProductService, CategoryService, PlanService],
+  providers: [ReceiptService, ShopService, ReceiptProductService, ProductService, CategoryService, LoginService, RegisterService, UserIdService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

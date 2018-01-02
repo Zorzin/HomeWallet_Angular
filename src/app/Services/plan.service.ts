@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Plan} from "../Models/plan";
+import {UserIdService} from "./user-id.service";
 
 @Injectable()
 export class PlanService {
 
-  private apiUrl = 'http://localhost:54044/api/plans/1';  // URL to web
-  private apiUrlId = 'http://localhost:54044/api/plans/id/1';  // URL to web api
-  private apiDetailsUrl = 'http://localhost:54044/api/plans/details/1';  // URL to web api
+  private apiUrl = 'http://localhost:54044/api/plans/';  // URL to web
+  private apiUrlId = 'http://localhost:54044/api/plans/id/';  // URL to web api
+  private apiDetailsUrl = 'http://localhost:54044/api/plans/details/';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private userId : string;
 
   private response : any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private userService: UserIdService) { }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
@@ -32,27 +34,27 @@ export class PlanService {
 
   getPlanById(id:number)
   {
-    return this.http.get(this.apiUrlId+"/"+ id);
+    return this.http.get(this.apiUrlId+this.userService.getUserId()+ "/"+ id);
   }
 
   getPlan()
   {
-    return this.http.get(this.apiUrl+"/"+ new Date().toLocaleDateString());
+    return this.http.get(this.apiUrl+this.userService.getUserId()+ "/"+ new Date().toLocaleDateString());
   }
 
   getPlanWithDetails(id:number) {
-    return this.http.get(this.apiDetailsUrl+"/"+ id);
+    return this.http.get(this.apiDetailsUrl+this.userService.getUserId()+ "/"+ id);
   }
 
   editPlan(plan: any) {
-    return this.http.put(this.apiUrl+"/"+plan.id,plan);
+    return this.http.put(this.apiUrl+this.userService.getUserId()+ "/"+plan.id,plan);
   }
 
   getPlans() {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.apiUrl+this.userService.getUserId());
   }
 
   removePlan(id:number) {
-    return this.http.delete(this.apiUrl+"/"+id);
+    return this.http.delete(this.apiUrl+this.userService.getUserId()+ "/"+id);
   }
 }
