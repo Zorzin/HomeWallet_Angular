@@ -1,39 +1,67 @@
-<div>
-  <p ></p>
-</div>
-
-
-<div *ngFor="let date of dates" class="container">
-  <div class="row dayheader">
-    <div class="col-xs-6 col-md-8 datetextfield">
-      <label class="datefield">{{date[0].purchaseDate}}</label>
+<div *ngIf="dataLoaded">
+  <div *ngIf="!login">
+    <p >Login to start using HomeWallet</p>
+  </div>
+  <div *ngIf="login">
+    <div *ngIf="!dates">
+      <p >Add your first receipt.</p>
     </div>
-    <div class="col-xs-6 col-md-4 summarybutton">
-      <a class="btn btn-default" >Summary</a>
+
+    <div *ngIf="addToday || !dates" class="container">
+      <div class="row dayheader">
+        <div class="col-xs-6 col-md-8 datetextfield">
+          <label class="datefield">{{todayString}}</label>
+        </div>
+      </div>
+      <hr />
+      <a (click)="onCreate()">
+        <div class="col-md-3 col-xs-6 receiptsummary">
+          <div class="shoptextfield">
+            <h1>Add</h1>
+          </div>
+          <div class="pricetextfield">
+            <h3>new</h3>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div *ngIf="dates" >
+      <div *ngFor="let date of dates" class="container">
+        <div class="row dayheader">
+          <div class="col-xs-6 col-md-8 datetextfield">
+            <label class="datefield">{{date[0].purchaseDate}}</label>
+          </div>
+          <div class="col-xs-6 col-md-4 summarybutton">
+            <a class="btn btn-default" >Summary</a>
+          </div>
+        </div>
+        <hr />
+
+        <a *ngFor="let receipt of date" (click)="onSelect(receipt)">
+
+          <div class="col-md-3 col-xs-6 receiptsummary">
+            <div class="shoptextfield">
+              <h1>{{receipt.shopName}}</h1>
+            </div>
+            <div class="pricetextfield">
+              <h3>{{receipt.totalValue}}</h3>
+            </div>
+          </div>
+        </a>
+
+        <a (click)="onCreate()">
+          <div class="col-md-3 col-xs-6 receiptsummary">
+            <div class="shoptextfield">
+              <h1>Add</h1>
+            </div>
+            <div class="pricetextfield">
+              <h3>new</h3>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
-  <hr />
-
-    <a *ngFor="let receipt of date" (click)="onSelect(receipt)">
-
-      <div class="col-md-3 col-xs-6 receiptsummary">
-        <div class="shoptextfield">
-          <h1>{{receipt.shopName}}</h1>
-        </div>
-        <div class="pricetextfield">
-          <h3>{{receipt.totalValue}}</h3>
-        </div>
-      </div>
-    </a>
-
-  <a (click)="onCreate()">
-    <div class="col-md-3 col-xs-6 receiptsummary">
-      <div class="shoptextfield">
-        <h1>Add</h1>
-      </div>
-      <div class="pricetextfield">
-        <h3>new</h3>
-      </div>
-    </div>
-  </a>
 </div>
+

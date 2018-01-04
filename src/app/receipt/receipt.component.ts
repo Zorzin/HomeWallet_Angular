@@ -5,6 +5,7 @@ import {ShopService} from "../Services/shop.service";
 import {Receipt} from "../Models/receipt";
 import {log} from "util";
 import {Location} from "@angular/common";
+import {UserIdService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-receipt',
@@ -15,18 +16,25 @@ export class ReceiptComponent implements OnInit {
 
   dates: Array<Array<any>>;
   receipts: any;
+  private login:boolean;
+  private addToday:boolean
+  private todayString:string;
+  private dataLoaded:boolean;
 
   constructor(private receiptService: ReceiptService,
               private shopService: ShopService,
               private router: Router,
-              private location: Location) { }
+              private location: Location,
+              private userService: UserIdService) { }
 
   ngOnInit() {
+    this.dataLoaded = false;
+    this.todayString = new Date().toLocaleDateString();
+    this.getUserId();
     this.getReceipts();
     this.location.subscribe((x) => {
       this.getReceipts();
     });
-
   }
 
   getReceipts(): void {
@@ -36,6 +44,15 @@ export class ReceiptComponent implements OnInit {
         this.setShopNames();
         this.getDates();
         this.getTotalValue();
+        if(!this.checkToday())
+        {
+          this.addToday = true;
+        }
+        else
+        {
+          this.addToday = false;
+        }
+        this.dataLoaded = true;
       });
   }
 
@@ -49,17 +66,20 @@ export class ReceiptComponent implements OnInit {
   private getDates() {
     let datesCounter = 0;
     let dateCounter =0;
-    let date = this.receipts[0].purchaseDate;
-    this.dates = [[]];
-    for(let receipt of this.receipts)
+    if(this.receipts.length>0)
     {
-      if(receipt.purchaseDate != date)
+      let date = this.receipts[0].purchaseDate;
+      this.dates = [[]];
+      for(let receipt of this.receipts)
       {
-        datesCounter++;
-        this.dates[datesCounter] = [];
-        date = receipt.purchaseDate;
+        if(receipt.purchaseDate != date)
+        {
+          datesCounter++;
+          this.dates[datesCounter] = [];
+          date = receipt.purchaseDate;
+        }
+        this.dates[datesCounter].push(receipt);
       }
-      this.dates[datesCounter].push(receipt);
     }
   }
 
@@ -86,5 +106,29 @@ export class ReceiptComponent implements OnInit {
   private onCreate()
   {
     this.router.navigate(['/receipt-create']);
+  }
+
+  private getUserId() {
+    if(this.userService.getUserId()=='-1' || this.userService.getUserId().length == 0)
+    {
+      this.login = false;
+    }
+    else {
+      this.login = true;
+    }
+  }
+
+  private checkToday() :boolean {
+    if(this.dates)
+    {
+      for(let date of this.dates)
+      {
+        if(date[0].purchaseDate == new Date().toLocaleDateString())
+        {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

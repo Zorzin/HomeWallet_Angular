@@ -10,6 +10,7 @@ import {CategoryService} from "../Services/category.service"
 import {SelectItem} from "primeng/primeng";
 import {ReceiptCreate} from "../Models/receipt-create";
 import {ReceiptProductPost} from "../Models/receipt-product-post";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-receipt-create',
@@ -19,6 +20,7 @@ import {ReceiptProductPost} from "../Models/receipt-product-post";
 export class ReceiptCreateComponent implements OnInit {
 
   constructor(
+    private router: Router,
     private shopService: ShopService,
     private productService: ProductService,
     private receiptService: ReceiptService,
@@ -111,7 +113,7 @@ export class ReceiptCreateComponent implements OnInit {
       receiptProduct.ProductId = product.ID;
       receipt.Products.push(receiptProduct);
     }
-    this.receiptService.createReceipt(receipt);
+    this.receiptService.createReceipt(receipt).add(this.goMainpage());
   }
 
 
@@ -161,6 +163,11 @@ export class ReceiptCreateComponent implements OnInit {
       total += (product.Price * product.Amount);
     }
     this.receiptTotal = total;
+  }
+
+  private goMainpage() {
+    setTimeout(()=>{this.router.navigate(['/receipts']);},500);
+
   }
 }
 

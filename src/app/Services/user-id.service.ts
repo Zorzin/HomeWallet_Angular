@@ -1,20 +1,25 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Observable} from "rxjs/Observable";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class UserIdService {
 
-  private id: number;
+  private loginAnnouncedSource = new Subject<number>();
 
-  constructor() { }
+  loginAnnounced$ = this.loginAnnouncedSource.asObservable();
+
+  constructor() {}
 
   setUserId(id:number)
   {
-    this.id = id;
+    localStorage.setItem('userId',id.toString());
+    this.loginAnnouncedSource.next(id);
   }
 
-  getUserId()
+  getUserId() :string
   {
-    return this.id;
+    return localStorage.getItem('userId');
   }
 
 }

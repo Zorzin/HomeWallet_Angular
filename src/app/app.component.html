@@ -15,8 +15,10 @@
         <li><a (click)="goToOptions()">Options</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a>Register</a></li>
-        <li><a>Log in</a></li>
+        <li *ngIf="!login"><a (click)="onRegister()">Register</a></li>
+        <li *ngIf="!login"><a (click)="onLogin()">Log in</a></li>
+        <li *ngIf="login"><a (click)="onAccount()">Account</a></li>
+        <li *ngIf="login"><a (click)="onLogOut()">Logout</a></li>
       </ul>
     </div>
   </div>
