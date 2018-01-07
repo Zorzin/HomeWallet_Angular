@@ -11,6 +11,8 @@ import {UserInfoService} from "../Services/user-id.service";
 })
 export class ShopDetailsComponent implements OnInit {
 
+  private width:number;
+  private height:number;
   private isDataLoaded: boolean;
   private shop: any;
   private details: boolean;
@@ -27,6 +29,7 @@ export class ShopDetailsComponent implements OnInit {
     private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.getWidthAndHeight();
     this.checkUser();
     this.route.paramMap
       .switchMap((params: ParamMap) => this.shopService.getShop(+params.get('id')))
@@ -103,5 +106,10 @@ export class ShopDetailsComponent implements OnInit {
 
   CancelEdit() {
     this.editDialogDisplay = false;
+  }
+
+  private getWidthAndHeight() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
   }
 }

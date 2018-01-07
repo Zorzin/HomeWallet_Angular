@@ -18,6 +18,9 @@ import {UserInfoService} from "../Services/user-id.service";
 })
 export class ReceiptEditComponent implements OnInit {
 
+  private currency:string;
+  private width: number;
+  private height:number;
   private isDataLoaded: boolean;
   private receipt: any;
   private shops:any;
@@ -63,6 +66,8 @@ export class ReceiptEditComponent implements OnInit {
         this.getReceiptProducts();
         this.getTotalValue();
         this.getShops();
+        this.getUserCurrency();
+        this.getWidthAndHeight();
         this.isDataLoaded = true;
       });
   }
@@ -193,6 +198,26 @@ export class ReceiptEditComponent implements OnInit {
 
   private save()
   {
-    this.receiptService.updateReceipt(this.receipt,this.receiptProducts);
+    this.receiptService.updateReceipt(this.receipt,this.receiptProducts).add(this.goMainpage());
+  }
+
+  private getUserCurrency() {
+    this.userService.getUserCurrency().then((response)=>{
+      this.currency = JSON.parse(response);
+    });
+  }
+
+  onCancel()
+  {
+    this.router.navigate(['/receipts']);
+  }
+
+  private getWidthAndHeight() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
+  }
+
+  private goMainpage() {
+    setTimeout(()=>{this.router.navigate(['/receipts']);},500);
   }
 }

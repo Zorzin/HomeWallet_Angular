@@ -16,6 +16,9 @@ import {UserInfoService} from "../Services/user-id.service";
 })
 export class ReceiptDetailsComponent implements OnInit {
 
+  private currency:string;
+  private width: number;
+  private height:number;
   private isDataLoaded: boolean;
   private receipt: any;
   removeDialogDisplay:boolean =false;
@@ -41,6 +44,8 @@ export class ReceiptDetailsComponent implements OnInit {
         this.getShopName();
         this.getReceiptProducts();
         this.getTotalValue();
+        this.getUSerCurrency();
+        this.getWidthAndHeight();
         this.isDataLoaded = true;
     });
   }
@@ -103,5 +108,21 @@ export class ReceiptDetailsComponent implements OnInit {
   {
     this.receiptService.removeReceipt(this.receipt.id);
     this.location.back();
+  }
+
+  private getUSerCurrency() {
+    this.userService.getUserCurrency().then((response)=>{
+      this.currency = JSON.parse(response);
+    });
+  }
+
+  onCancel()
+  {
+    this.router.navigate(['/receipts']);
+  }
+
+  private getWidthAndHeight() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
   }
 }

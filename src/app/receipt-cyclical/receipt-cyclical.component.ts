@@ -135,7 +135,7 @@ export class ReceiptCyclicalComponent implements OnInit {
       receiptProduct.ProductId = product.ID;
       receipt.Products.push(receiptProduct);
     }
-    this.receiptService.createReceiptCyclical(receipt);
+    this.receiptService.createReceiptCyclical(receipt).add(this.goMainpage());;
   }
 
 
@@ -201,6 +201,10 @@ export class ReceiptCyclicalComponent implements OnInit {
   private getWidthAndHeight() {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+  }
+
+  private goMainpage() {
+    setTimeout(()=>{this.router.navigate(['/receipts']);},500);
   }
 
 }

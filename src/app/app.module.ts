@@ -42,6 +42,8 @@ import {UserInfoService} from "./Services/user-id.service";
 import {CheckboxModule} from 'primeng/primeng';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AccountComponent } from './account/account.component';
+import { DailySummaryComponent } from './daily-summary/daily-summary.component';
+import {SummaryService} from "./Services/summary.service";
 
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import { AccountComponent } from './account/account.component';
     LoginComponent,
     WelcomeComponent,
     AccountComponent,
+    DailySummaryComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -80,7 +83,7 @@ import { AccountComponent } from './account/account.component';
     MultiSelectModule,
     CheckboxModule
   ],
-  providers: [ReceiptService, ShopService, ReceiptProductService, ProductService, CategoryService, LoginService, RegisterService, UserInfoService,PlanService],
+  providers: [ReceiptService, ShopService, ReceiptProductService, ProductService, CategoryService, LoginService, RegisterService, UserInfoService,PlanService, SummaryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

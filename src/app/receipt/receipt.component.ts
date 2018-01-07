@@ -148,4 +148,8 @@ export class ReceiptComponent implements OnInit {
       this.currency = JSON.parse(response);
     });
   }
+
+  onSummary(purchaseDate: string) {
+      this.router.navigate(['/daily-summary',purchaseDate.toString()]);
+  }
 }

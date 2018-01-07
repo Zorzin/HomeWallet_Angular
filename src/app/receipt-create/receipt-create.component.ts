@@ -30,6 +30,7 @@ export class ReceiptCreateComponent implements OnInit {
     private userService: UserInfoService) { }
 
 
+  private currency:string;
   private width: number;
   private height:number;
   private receipt: Receipt;
@@ -52,7 +53,6 @@ export class ReceiptCreateComponent implements OnInit {
   receiptShop: number;
   receiptDate: Date;
 
-  private currency:string;
 
   ngOnInit() {
     this.checkUser();
@@ -184,7 +184,6 @@ export class ReceiptCreateComponent implements OnInit {
 
   private goMainpage() {
     setTimeout(()=>{this.router.navigate(['/receipts']);},500);
-
   }
 
   private getUSerCurrency() {

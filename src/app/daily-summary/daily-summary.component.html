@@ -1,0 +1,40 @@
+<div *ngIf="dataLoaded">
+
+  <div class="col-md-12 col-sm-12 dailysummarydate">
+    <p>Date: {{summary.date}}</p>
+  </div>
+  <div class="col-md-12 col-sm-12">
+    <div class="col-md-6 col-sm-12">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p>You spend</p>
+        <p>{{summary.totalCost}} {{currency}}</p>
+        <p>that day</p>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+      <div *ngIf="summary.percentPlan !=-1" class="col-md-12 col-sm-12 dailysummarytext">
+        <p>That's {{summary.percentPlan}}% of your plan</p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="col-md-12 col-sm-12 dailysummarytext">
+    <p>Check other summaries</p>
+  </div>
+
+  <div class="col-md-12 col-sm-12 dailysummarybuttons">
+    <div class="col-md-4 col-sm-12">
+      <a class="btn btn-default">Plan</a>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <a class="btn btn-default">Monthly</a>
+    </div>
+    <div class="col-md-4 col-sm-12">
+      <a class="btn btn-default">XXX</a>
+    </div>
+  </div>
+
+</div>

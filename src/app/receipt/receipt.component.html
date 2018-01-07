@@ -33,7 +33,7 @@
             <label class="datefield">{{date[0].purchaseDate}}</label>
           </div>
           <div class="col-xs-6 col-md-4 summarybutton">
-            <a class="btn btn-default" >Summary</a>
+            <a class="btn btn-default" (click)="onSummary(date[0].purchaseDate)" >Summary</a>
           </div>
         </div>
         <hr />
