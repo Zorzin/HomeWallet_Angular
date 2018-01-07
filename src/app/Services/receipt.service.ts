@@ -7,7 +7,7 @@ import {ReceiptCreate} from "../Models/receipt-create";
 import {ReceiptCyclicalCreate} from "../Models/receipt-cyclical-create";
 import {ReceiptProductEdit} from "../Models/receipt-product-edit";
 import {ReceiptEdit} from "../Models/receipt-edit";
-import {UserIdService} from "./user-id.service";
+import {UserInfoService} from "./user-id.service";
 
 @Injectable()
 export class ReceiptService {
@@ -18,7 +18,7 @@ export class ReceiptService {
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient,
-              private userService: UserIdService) { }
+              private userService: UserInfoService) { }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

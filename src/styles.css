@@ -111,14 +111,72 @@ textarea { max-width: 280px; }
 .receiptcreate {
   background-color: rgba(0, 0, 0, .5);
   border: 1px solid white;
-  display: table;
   margin: auto;
   min-height: 50vh;
-  padding: 30px;
-  text-align: center;
+  padding-top: 30px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 30px;
 }
 
-.tableheaders { width: 100%; }
+.receiptbuttons{
+  text-align: center;
+}
+.receiptcreate label{
+  line-height: 30px;
+}
+
+.ui-calendar{
+  width: 100%;
+  max-width: none;
+  padding-right: 30px;
+}
+
+.ui-inputtext{
+  width: 100%;
+  max-width: none;
+  padding-right: 30px;
+}
+
+.date-div{
+  height: 35px;
+}
+
+.shop-div{
+  height: 35px;
+}
+
+.receiptcreate select{
+  width: 100%;
+  max-width: none;
+}
+
+.cycleInput{
+  max-width: none;
+}
+
+.vertical-line{
+  border-left:1px solid #FFF;
+  height:85px;
+  margin-top: -30px;
+  margin-bottom: -20px;
+  margin-left: 25px;
+}
+
+.vertical-line-big
+{
+  border-left:1px solid #FFF;
+  height:120px;
+  margin-top: -30px;
+  margin-bottom: -20px;
+  margin-left: 25px;
+}
+
+.tableheaders {
+  width: 100%;
+  margin-top: -15px;
+  margin-bottom: -15px;
+}
 
 
 .receiptproducts {
@@ -134,36 +192,25 @@ textarea { max-width: 280px; }
 }
 
 
-.totalhr { width: 100%; }
+.hrDiv{
+  padding-right: 0;
+  padding-left: 0;
+}
 
-
-.receiptshop {
-  margin: auto;
-  text-align: center;
+.hrH {
   width: 100%;
+}
+
+.hrTotal {
+  border: 0;
+  border-bottom: 2px dashed #8c8b8b;
+  background-color: rgba(0, 0, 0, .5);
+  width: 25%;
+  float: right;
 }
 
 .receiptshopbutton { display: inline-table; }
 
-.receiptshoplabel {
-  display: inline-table;
-  width: 20%;
-}
-
-.receiptshopselect {
-  display: inline-table;
-  width: 60%;
-}
-
-.receiptshop select { display: inline-block; }
-
-.receiptdate {
-  margin: auto;
-  text-align: center;
-  width: 100%;
-}
-
-.receiptdate input { display: inline-block; }
 
 .loading {
   font-size: 100px;
@@ -188,7 +235,7 @@ textarea { max-width: 280px; }
 }
 
 .mainphoto {
-  /*background: url(../images/mainpage.jpg) no-repeat center center fixed;*/
+  background: url(assets/images/mainpage.jpg) no-repeat center center fixed;
   height: auto;
   left: 0;
   min-height: 100%;
@@ -386,10 +433,7 @@ textarea { max-width: 280px; }
   padding-bottom: 0;
 }
 .productslinecreate {
-  margin-left: -30px;
-  margin-right: 0;
-  padding-bottom: 10px;
-  display: table;
+  height: 30px;
 }
 
 .productname{
@@ -422,18 +466,12 @@ textarea { max-width: 280px; }
 }
 
 .receiptaddproduct {
+  text-align: center;
   margin-bottom: 30px;
 }
 
 .productstotal {
-  text-align: right;
-}
-
-#totallabel {
-  padding-right: 3px;
-}
-#total {
-  padding-left: 5px;
+  text-align: left;
 }
 
 .searchbox {
@@ -441,44 +479,63 @@ textarea { max-width: 280px; }
 }
 
 /*!* DIALOG MAIN CONTAINER *!*/
-/*.ui-dialog.ui-widget-content {*/
-  /*border: none;*/
-  /*background-color: rgba(0,0,0,0.9) !important;*/
-/*}*/
-/*!* STYLE AROUND THE CLOSE (X) BUTTON *!*/
-/*.ui-dialog-titlebar-close.ui-state-default,*/
-/*.ui-dialog-titlebar-close.ui-state-hover {*/
-  /*outline: none;*/
-  /*background: none;*/
-  /*border: none;*/
-/*}*/
-/*!* DIALOG TITLE BAR *!*/
-/*.ui-dialog .ui-widget-header {*/
-  /*border: 0;*/
-  /*background: none*/
-/*}*/
+.ui-dialog.ui-widget-content {
+  border: none;
+  background-color: rgba(0,0,0,0.9) !important;
+}
+/* STYLE AROUND THE CLOSE (X) BUTTON */
+.ui-dialog-titlebar-close.ui-state-default,
+.ui-dialog-titlebar-close.ui-state-hover {
+  outline: none;
+  background: none;
+  border: none;
+}
+/* DIALOG TITLE BAR */
+.ui-dialog .ui-widget-header {
+  border: 0;
+  background: none
+}
 
-/*.ui-dialog {*/
-  /*z-index: 1060 !important;*/
-/*}*/
+.ui-dialog {
+  z-index: 1060 !important;
+}
 
+.ui.dialog.ui-widget, .ui-dialog-content{
 
-/*.ui-widget-content {*/
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-  /*background: none !important;*/
-  /*border: none !important;*/
-/*}*/
+p-footer{
 
-/*.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {*/
-  /*float: none;*/
-  /*position: absolute;*/
-/*}*/
+  position: absolute !important;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
-/*.ui-dialog-buttonpane .ui-dialog-buttonset {*/
-  /*top: 90%;*/
-  /*left: 50%;*/
-  /*transform: translate(-50%, -50%);*/
-/*}*/
+.ui-dialog-content label{
+  color: white;
+}
+
+.ui-widget-content {
+
+  background: none !important;
+  border: none !important;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  float: none;
+  position: absolute;
+}
+
+.ui-dialog-buttonpane .ui-dialog-buttonset {
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 #productdialog, #shopdialog {
   position: relative;
@@ -489,6 +546,7 @@ textarea { max-width: 280px; }
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+  height: 100%;
 }
 #addproductform p, #addshopform p {
   color: white;
@@ -579,4 +637,219 @@ textarea { max-width: 280px; }
   height: 400px;
   line-height: 400px;
   font-size: 30px;
+}
+
+.login {
+  font-family: "proxima-nova";
+  padding: 0;
+  margin: 0;
+}
+
+.login * {
+  box-sizing: border-box;
+  font-family: "proxima-nova", helvetica;
+}
+
+.login br.only-mobile {
+  display: none;
+}
+
+.login .logo {
+  display: block;
+  height: 75px;
+  padding-top: 40px;
+  margin: 0 auto 30px;
+}
+
+.login .logo.registration-message {
+  margin-bottom: 0;
+}
+
+.login a, .login a:visited {
+  text-decoration: underline;
+  color: inherit;
+}
+
+.login ul.notice {
+  margin: 0;
+  border: 0;
+  width: 100%;
+  text-align: center;
+  list-style-position: inside;
+  list-style: none;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 10px;
+}
+
+.login ul.notice.errors {
+  background-color: #EDE04D;
+  color: #212200;
+}
+
+.login ul.notice.success {
+  background-color: #15CD72;
+  color: white;
+}
+
+.login ul.notice li {
+  padding: 5px 0;
+}
+
+.login p.registration-message {
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 400;
+  text-align: center;
+  color: white;
+  margin: 15px 0 40px;
+}
+
+.login .vertical-form {
+  margin: 0 auto;
+  width: 470px;
+  padding: 40px;
+  border-radius: 3px;
+  background: white;
+}
+
+.login .vertical-form legend {
+  text-align: center;
+  font-weight: 300;
+  color: #444;
+  margin: 0 auto 45px;
+  font-size: 35px;
+  line-height: 38px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.login .vertical-form legend:after {
+  display: none;
+}
+
+.login .vertical-form ::-webkit-input-placeholder {
+  color: #afafaf;
+  font-size: 17px;
+}
+
+.login .vertical-form input[type='text'], .login .vertical-form input[type='email'], .login .vertical-form input[type='password'], .login .vertical-form input[type='number'], .login .vertical-form input[type='submit'] {
+  background: #fcfcfc;
+  border: 2px solid #e7e7e7;
+  margin: 20px auto;
+  padding: 15px;
+  width: 100%;
+  display: block;
+  border-radius: 3px;
+  font-size: 18px;
+  transition: opacity 0.4s;
+  text-align: left;
+  height: auto;
+  -webkit-appearance: none;
+}
+
+.login .vertical-form input[type='text']:focus, .login .vertical-form input[type='email']:focus, .login .vertical-form input[type='password']:focus, .login .vertical-form input[type='number']:focus, .login .vertical-form input[type='submit']:focus {
+  border-color: #E7E7E7;
+  box-shadow: none;
+}
+
+.login .vertical-form input[type='submit'] {
+  color: white;
+  background: #15CD72;
+  border: 0;
+  font-weight: 600;
+  font-size: 17px;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 0;
+  height: auto;
+  -webkit-appearance: none;
+}
+
+.login .vertical-form input:hover[type='submit'] {
+  background-color: #0CB863;
+  -webkit-transition: background 0.1s;
+  -moz-transition: background 0.1s;
+  -o-transition: background 0.1s;
+  transition: background 0.1s;
+}
+
+.login .vertical-form p {
+  font-size: 17px;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+  margin-top: 10px;
+  color: #666;
+}
+
+.login .vertical-form p a {
+  color: #0069ff;
+  text-decoration: none;
+}
+
+.login .vertical-form.sign-in, .login .vertical-form.register {
+  padding-bottom: 20px;
+}
+
+.login .vertical-form.sign-in p, .login .vertical-form.register p {
+  padding-top: 8px;
+}
+
+.login .vertical-form.tfa-form legend, .login .vertical-form.verify-form legend {
+  margin-bottom: 15px;
+}
+
+.login .vertical-form.tfa-form + .footer p, .login .vertical-form.verify-form + .footer p {
+  margin-bottom: 5px;
+}
+
+.login .footer {
+  text-align: center;
+  color: white;
+  margin: 20px auto;
+}
+
+.login .footer a {
+  font-weight: 600;
+  border: 0;
+  padding: 0;
+}
+
+.login .footer a:hover {
+  color: #E7F1F9;
+}
+
+.login .footer p {
+  margin-bottom: 40px;
+}
+
+.login input{
+  color: black;
+}
+
+@media screen and (max-width: 550px) {
+
+  .login .logo {
+    height: 65px;
+    padding-top: 30px;
+  }
+
+  .login p.oauth {
+    margin: 15px 0 25px;
+    font-size: 17px;
+    line-height: 21px;
+    font-weight: 600;
+  }
+
+  .login .vertical-form {
+    width: 100%;
+    border-radius: 0;
+    padding: 40px 20px;
+  }
+}
+@media screen and (max-width: 350px) {
+  .login br.only-mobile {
+    display: inline;
+  }
 }

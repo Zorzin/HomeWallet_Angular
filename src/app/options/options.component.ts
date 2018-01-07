@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-options',
@@ -8,9 +9,19 @@ import {Router} from "@angular/router";
 })
 export class OptionsComponent implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router,
+              private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.checkUser();
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   goShops()
@@ -41,16 +52,6 @@ export class OptionsComponent implements OnInit {
   goPlan()
   {
     this.router.navigate(['/plans']);
-  }
-
-  goSettings()
-  {
-
-  }
-
-  goAccount()
-  {
-
   }
 
 }

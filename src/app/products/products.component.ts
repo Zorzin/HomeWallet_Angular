@@ -3,6 +3,7 @@ import {ProductService} from "../Services/product.service";
 import {Router} from "@angular/router";
 import {CategoryService} from "../Services/category.service";
 import {SelectItem} from "primeng/primeng";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-products',
@@ -21,13 +22,23 @@ export class ProductsComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private router: Router,
-              private categoryService: CategoryService) { }
+              private categoryService: CategoryService,
+              private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.checkUser();
     this.multiSelectCategories = [];
     this.newProductCategories = [];
     this.getCategories();
     this.GetProducts();
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   private GetProducts() {

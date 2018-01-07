@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ShopService} from "../Services/shop.service";
 import {Shop} from "../Models/shop";
 import {Router} from "@angular/router";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-shops',
@@ -15,10 +16,20 @@ export class ShopsComponent implements OnInit {
   private newShopName: string;
 
   constructor(private shopService: ShopService,
-              private router: Router) { }
+              private router: Router,
+              private userService:UserInfoService) { }
 
   ngOnInit() {
+    this.checkUser();
     this.GetShops();
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   private GetShops() {

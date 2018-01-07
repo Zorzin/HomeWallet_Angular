@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Plan} from "../Models/plan";
-import {UserIdService} from "./user-id.service";
+import {UserInfoService} from "./user-id.service";
 
 @Injectable()
 export class PlanService {
@@ -15,7 +15,7 @@ export class PlanService {
   private response : any;
 
   constructor(private http: HttpClient,
-              private userService: UserIdService) { }
+              private userService: UserInfoService) { }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {CategoryService} from "../Services/category.service";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-categories',
@@ -16,10 +17,20 @@ export class CategoriesComponent implements OnInit {
   private displayCreateDialog: boolean;
 
   constructor(private router: Router,
-              private categoryService: CategoryService) { }
+              private categoryService: CategoryService,
+              private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.checkUser();
     this.getCategories();
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   getCategories()

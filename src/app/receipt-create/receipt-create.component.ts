@@ -11,6 +11,7 @@ import {SelectItem} from "primeng/primeng";
 import {ReceiptCreate} from "../Models/receipt-create";
 import {ReceiptProductPost} from "../Models/receipt-product-post";
 import {Router} from "@angular/router";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-receipt-create',
@@ -25,9 +26,12 @@ export class ReceiptCreateComponent implements OnInit {
     private productService: ProductService,
     private receiptService: ReceiptService,
     private receiptProductService: ReceiptProductService,
-    private categoryService: CategoryService) { }
+    private categoryService: CategoryService,
+    private userService: UserInfoService) { }
 
 
+  private width: number;
+  private height:number;
   private receipt: Receipt;
   private shops: any;
   private newProducts: ReceiptProduct[];
@@ -48,16 +52,29 @@ export class ReceiptCreateComponent implements OnInit {
   receiptShop: number;
   receiptDate: Date;
 
+  private currency:string;
+
   ngOnInit() {
+    this.checkUser();
+    this.getWidthAndHeight();
     this.currentProduct = new ReceiptProduct();
     this.newProducts = [];
     this.multiSelectCategories = [];
     this.newProductCategories = [];
     this.receiptDate = new Date();
+    this.getUSerCurrency();
     this.getShops();
     this.getProducts();
     this.getCategories();
     this.updateTotal();
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   removeProduct(id: number)
@@ -168,6 +185,22 @@ export class ReceiptCreateComponent implements OnInit {
   private goMainpage() {
     setTimeout(()=>{this.router.navigate(['/receipts']);},500);
 
+  }
+
+  private getUSerCurrency() {
+    this.userService.getUserCurrency().then((response)=>{
+      this.currency = JSON.parse(response);
+    });
+  }
+
+  onCancel()
+  {
+    this.router.navigate(['/receipts']);
+  }
+
+  private getWidthAndHeight() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
   }
 }
 

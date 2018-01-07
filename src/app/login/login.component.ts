@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../Services/login.service";
 import {UserLogin} from "../Models/user-login";
-import {UserIdService} from "../Services/user-id.service";
+import {UserInfoService} from "../Services/user-id.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   private user : UserLogin;
 
   constructor(private loginService:LoginService,
-              private userIdService: UserIdService,
+              private userIdService: UserInfoService,
               private router: Router) { }
 
   ngOnInit(){
@@ -27,6 +27,11 @@ export class LoginComponent implements OnInit {
       this.userIdService.setUserId(parseInt(response,10));
       this.router.navigate(['/receipts']);
     })
+  }
+
+  onRegister()
+  {
+    this.router.navigate(['/register']);
   }
 
 }

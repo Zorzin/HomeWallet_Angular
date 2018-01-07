@@ -10,6 +10,8 @@ import {SelectItem} from 'primeng/components/common/selectitem';
 import {ReceiptCreate} from "../Models/receipt-create";
 import {ReceiptProductPost} from "../Models/receipt-product-post";
 import {ReceiptCyclicalCreate} from "../Models/receipt-cyclical-create";
+import {UserInfoService} from "../Services/user-id.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-receipt-cyclical',
@@ -23,12 +25,17 @@ export class ReceiptCyclicalComponent implements OnInit {
     private productService: ProductService,
     private receiptService: ReceiptService,
     private receiptProductService: ReceiptProductService,
-    private categoryService: CategoryService) { }
+    private categoryService: CategoryService,
+    private userService: UserInfoService,
+    private router: Router) { }
 
 
+  private width: number;
+  private height:number;
   private receipt: Receipt;
   private shops: any;
   private newProducts: ReceiptProduct[];
+  private currency: string;
 
   private products: any;
   private categories: any;
@@ -49,16 +56,28 @@ export class ReceiptCyclicalComponent implements OnInit {
   receiptCycle: number;
 
   ngOnInit() {
+    this.checkUser();
     this.currentProduct = new ReceiptProduct();
     this.newProducts = [];
     this.multiSelectCategories = [];
     this.newProductCategories = [];
     this.receiptStartDate = new Date();
     this.receiptEndDate = new Date();
+    this.receiptEndDate.setMonth(this.receiptStartDate.getMonth()+1);
+    this.getWidthAndHeight();
     this.getShops();
     this.getProducts();
     this.getCategories();
+    this.getUSerCurrency();
     this.updateTotal();
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   removeProduct(id: number)
@@ -166,6 +185,22 @@ export class ReceiptCyclicalComponent implements OnInit {
       total += (product.Price * product.Amount);
     }
     this.receiptTotal = total;
+  }
+
+  private getUSerCurrency() {
+    this.userService.getUserCurrency().then((response)=>{
+      this.currency = JSON.parse(response);
+    });
+  }
+
+  onCancel()
+  {
+    this.router.navigate(['/receipts']);
+  }
+
+  private getWidthAndHeight() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
   }
 
 }

@@ -38,8 +38,10 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import {LoginService} from "./Services/login.service";
 import {RegisterService} from "./Services/register.service";
-import {UserIdService} from "./Services/user-id.service";
+import {UserInfoService} from "./Services/user-id.service";
 import {CheckboxModule} from 'primeng/primeng';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import {CheckboxModule} from 'primeng/primeng';
     PlansComponent,
     RegisterComponent,
     LoginComponent,
+    WelcomeComponent,
+    AccountComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -76,7 +80,7 @@ import {CheckboxModule} from 'primeng/primeng';
     MultiSelectModule,
     CheckboxModule
   ],
-  providers: [ReceiptService, ShopService, ReceiptProductService, ProductService, CategoryService, LoginService, RegisterService, UserIdService],
+  providers: [ReceiptService, ShopService, ReceiptProductService, ProductService, CategoryService, LoginService, RegisterService, UserInfoService,PlanService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

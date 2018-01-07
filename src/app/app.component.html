@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav *ngIf="login" class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -11,24 +11,22 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a (click)="goToHome()">Home</a></li>
         <li><a (click)="goToOptions()">Options</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li *ngIf="!login"><a (click)="onRegister()">Register</a></li>
-        <li *ngIf="!login"><a (click)="onLogin()">Log in</a></li>
-        <li *ngIf="login"><a (click)="onAccount()">Account</a></li>
-        <li *ngIf="login"><a (click)="onLogOut()">Logout</a></li>
+        <li><a (click)="onAccount()">Account</a></li>
+        <li><a (click)="onLogOut()">Logout</a></li>
       </ul>
     </div>
   </div>
 </nav>
 <div class="container body-content">
   <router-outlet></router-outlet>
-  <hr />
-  <footer>
+  <hr *ngIf="login"/>
+  <footer *ngIf="login">
     <p>&copy; 2017 - HomeWallet</p>
   </footer>
 </div>
+
 
 

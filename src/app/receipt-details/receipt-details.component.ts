@@ -7,6 +7,7 @@ import {log} from "util";
 import {ShopService} from "../Services/shop.service";
 import {ReceiptProductService} from "../Services/receiptproduct.service";
 import {ProductService} from "../Services/product.service";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-receipt-details',
@@ -26,10 +27,12 @@ export class ReceiptDetailsComponent implements OnInit {
     private receiptService: ReceiptService,
     private route: ActivatedRoute,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private userService:UserInfoService
   ) {}
 
   ngOnInit(): void{
+    this.checkUser();
     this.route.paramMap
       .switchMap((params: ParamMap) => this.receiptService.getReceipt(+params.get('id')))
       .subscribe((receipt) => {
@@ -40,6 +43,14 @@ export class ReceiptDetailsComponent implements OnInit {
         this.getTotalValue();
         this.isDataLoaded = true;
     });
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   goBack(): void {

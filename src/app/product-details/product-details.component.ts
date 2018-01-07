@@ -3,6 +3,7 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ProductService} from "../Services/product.service";
 import {SelectItem} from "primeng/primeng";
 import {CategoryService} from "../Services/category.service";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-product-details',
@@ -27,9 +28,11 @@ export class ProductDetailsComponent implements OnInit {
     private router : Router,
     private productService: ProductService,
     private route: ActivatedRoute,
-    private categoryService: CategoryService) { }
+    private categoryService: CategoryService,
+    private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.checkUser();
     this.currentCategories = [];
     this.multiSelectCategories = [];
     this.route.paramMap
@@ -41,6 +44,14 @@ export class ProductDetailsComponent implements OnInit {
         this.getAllCategories();
         this.isDataLoaded = true;
       });
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   SetStatistics() {

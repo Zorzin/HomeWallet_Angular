@@ -3,6 +3,7 @@ import {PlanService} from "../Services/plan.service";
 import {Plan} from "../Models/plan";
 import {Router} from "@angular/router";
 import {isUndefined} from "util";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-plan-create',
@@ -19,16 +20,26 @@ export class PlanCreateComponent implements OnInit {
 
   constructor(
     private planService: PlanService,
-    private router: Router) { }
+    private router: Router,
+    private userService: UserInfoService) { }
 
   ngOnInit() {
 
+    this.checkUser();
     this.checkIfThereIsPlanAlready();
 
     this.amount = 0;
     this.startDate = new Date();
     this.endDate = new Date();
     this.endDate.setDate(this.endDate.getDate()+30);
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   create()

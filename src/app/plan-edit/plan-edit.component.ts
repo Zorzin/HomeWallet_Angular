@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PlanService} from "../Services/plan.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-plan-edit',
@@ -19,9 +20,11 @@ export class PlanEditComponent implements OnInit {
     private planService: PlanService,
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location) { }
+    private location: Location,
+    private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.checkUser();
     this.route.paramMap
     .switchMap((params: ParamMap) => this.planService.getPlanById(+params.get('id')))
     .subscribe((plan) => {
@@ -44,6 +47,14 @@ export class PlanEditComponent implements OnInit {
         }
       });
     });
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   goToDetails() {

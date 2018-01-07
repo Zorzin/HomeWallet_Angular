@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ProductService} from "../Services/product.service";
 import {CategoryService} from "../Services/category.service";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-category-details',
@@ -23,9 +24,11 @@ export class CategoryDetailsComponent implements OnInit {
     private router : Router,
     private productService: ProductService,
     private route: ActivatedRoute,
-    private categoryService: CategoryService) { }
+    private categoryService: CategoryService,
+    private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.checkUser();
     this.route.paramMap
       .switchMap((params: ParamMap) => this.categoryService.getCategory(+params.get('id')))
       .subscribe((result) => {
@@ -34,6 +37,14 @@ export class CategoryDetailsComponent implements OnInit {
         this.GetProducts();
         this.isDataLoaded = true;
       });
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   SetStatistics() {

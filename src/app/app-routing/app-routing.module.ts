@@ -19,10 +19,13 @@ import {PlanEditComponent} from '../plan-edit/plan-edit.component';
 import {PlansComponent} from "../plans/plans.component";
 import {RegisterComponent} from "../register/register.component";
 import {LoginComponent} from "../login/login.component";
+import {WelcomeComponent} from "../welcome/welcome.component";
+import {AccountComponent} from "../account/account.component";
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'receipts', pathMatch: 'full' },
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
+  { path: 'main', component: WelcomeComponent},
   { path: 'receipts',  component: ReceiptComponent },
   { path: 'options',  component: OptionsComponent},
   { path:"receipt-create", component: ReceiptCreateComponent },
@@ -42,7 +45,9 @@ const routes: Routes = [
   { path:"plan-details/:id", component: PlanDetailsComponent},
   { path:"register", component: RegisterComponent},
   { path:"login", component: LoginComponent},
-  ];
+  { path:"account", component: AccountComponent},
+
+];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes),RouterModule.forChild([

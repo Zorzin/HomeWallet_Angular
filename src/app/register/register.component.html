@@ -1,45 +1,20 @@
-<h4>Create a new account.</h4>
-<hr />
-<div class="text-danger"></div>
-<div class="form-group">
-  <label  class="col-md-2 control-label">Email</label>
-  <div class="col-md-10">
-    <input [(ngModel)]="user.email" class="form-control" />
-    <span class="text-danger"></span>
-  </div>
-</div>
-<div class="form-group">
-  <label  class="col-md-2 control-label">Login</label>
-  <div class="col-md-10">
-    <input [(ngModel)]="user.login" class="form-control" />
-    <span class="text-danger"></span>
-  </div>
-</div>
-<div class="form-group">
-  <label  class="col-md-2 control-label">Password</label>
-  <div class="col-md-10">
-    <input type="password" [(ngModel)]="user.password" class="form-control" />
-    <span class="text-danger"></span>
-  </div>
-</div>
+<div class="login">
 
-<div class="form-group">
-  <label  class="col-md-2 control-label">Retype Password</label>
-  <div class="col-md-10">
-    <input type="password" [(ngModel)]="user.repassword" class="form-control" />
-    <span class="text-danger"></span>
+  <div class="vertical-form sign-in" >
+    <legend>
+      Register
+    </legend>
+    <input [(ngModel)]="user.email"  type="email" placeholder="Email" label="false" spellcheck="false" class="is-sensitive" value="" />
+    <input [(ngModel)]="user.login"  type="text" placeholder="Login" label="false" spellcheck="false" class="is-sensitive" value="" />
+    <input [(ngModel)]="user.password" placeholder="Password" label="false" autocomplete="off" class="is-sensitive" type="password"/>
+    <input [(ngModel)]="user.repassword" placeholder="Type password again" label="false" autocomplete="off" class="is-sensitive" type="password"/>
+    <input [(ngModel)]="user.currency"  type="text" placeholder="Currency" label="false" spellcheck="false" class="is-sensitive" value="" />
+    <input type="submit" name="commit" value="Register" (click)="onRegister()"/>
   </div>
-</div>
-
-<div class="form-group">
-  <label  class="col-md-2 control-label">Currency</label>
-  <div class="col-md-10">
-    <input [(ngModel)]="user.currency" data-placeholder="Select currency" class="form-control chosen-single-select"/>
-    <span  class="text-danger"></span>
-  </div>
-</div>
-<div class="form-group">
-  <div class="col-md-offset-2 col-md-10">
-    <button (click)="onRegister()" type="submit" class="btn btn-default">Register</button>
+  <div class='footer'>
+    <p>
+      Already have an account?
+      <a (click)="onLogin()">Log In</a>
+    </p>
   </div>
 </div>

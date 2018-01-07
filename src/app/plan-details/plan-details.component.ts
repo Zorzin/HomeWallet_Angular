@@ -3,6 +3,7 @@ import {PlanDetails} from '../Models/plan-details';
 import {PlanService} from "../Services/plan.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {Location} from "@angular/common";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-plan-details',
@@ -21,10 +22,12 @@ export class PlanDetailsComponent implements OnInit {
     private planService: PlanService,
     private router: Router,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private userService: UserInfoService
   ) { }
 
   ngOnInit() {
+    this.checkUser();
     this.route.paramMap
       .switchMap((params: ParamMap) => this.planService.getPlanWithDetails(+params.get('id')))
       .subscribe((plan) => {
@@ -34,6 +37,14 @@ export class PlanDetailsComponent implements OnInit {
         this.planDetails.endDate = new Date(this.planDetails.endDate);
         this.isDataLoaded = true;
       });
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   private checkIfThereIsPlanAlready() {

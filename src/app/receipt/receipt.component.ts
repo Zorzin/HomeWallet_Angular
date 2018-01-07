@@ -5,7 +5,7 @@ import {ShopService} from "../Services/shop.service";
 import {Receipt} from "../Models/receipt";
 import {log} from "util";
 import {Location} from "@angular/common";
-import {UserIdService} from "../Services/user-id.service";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-receipt',
@@ -20,14 +20,16 @@ export class ReceiptComponent implements OnInit {
   private addToday:boolean
   private todayString:string;
   private dataLoaded:boolean;
+  private currency:string;
 
   constructor(private receiptService: ReceiptService,
               private shopService: ShopService,
               private router: Router,
               private location: Location,
-              private userService: UserIdService) { }
+              private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.checkUser();
     this.dataLoaded = false;
     this.todayString = new Date().toLocaleDateString();
     this.getUserId();
@@ -37,6 +39,14 @@ export class ReceiptComponent implements OnInit {
     });
   }
 
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
+  }
+
   getReceipts(): void {
       this.receiptService.getReceipts().then((receipts)=>{
         this.receipts = receipts;
@@ -44,6 +54,7 @@ export class ReceiptComponent implements OnInit {
         this.setShopNames();
         this.getDates();
         this.getTotalValue();
+        this.getUSerCurrency();
         if(!this.checkToday())
         {
           this.addToday = true;
@@ -130,5 +141,11 @@ export class ReceiptComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  private getUSerCurrency() {
+    this.userService.getUserCurrency().then((response)=>{
+      this.currency = JSON.parse(response);
+    });
   }
 }

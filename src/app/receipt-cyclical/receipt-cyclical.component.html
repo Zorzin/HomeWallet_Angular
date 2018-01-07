@@ -1,54 +1,59 @@
 <div class="receiptcreate">
-  <div class="receiptdate">
-    <div class="col-md-4">
+
+  <div class=" col-md-5 col-sm-12 col-xs-12">
+    <div class="col-md-3 col-sm-12 col-xs-12">
       <label>Start Date</label>
     </div>
-    <div class="col-md-8">
-      <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="receiptStartDate"></p-calendar>
+    <div class="col-md-9 col-sm-12 col-xs-12 date-div">
+      <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="receiptStartDate" [showIcon]="true"></p-calendar>
     </div>
-    <span class="text-danger"></span>
-  </div>
-  <div class="receiptdate">
-    <div class="col-md-4">
+
+    <div class="col-md-3 col-sm-12 col-xs-12">
       <label>End Date</label>
     </div>
-    <div class="col-md-8">
-      <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="receiptEndDate"></p-calendar>
+    <div class="col-md-9 col-sm-12 col-xs-12 date-div">
+      <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="receiptEndDate" [showIcon]="true"></p-calendar>
     </div>
-    <span class="text-danger"></span>
   </div>
-  <div class="receiptdate">
-    <div class="col-md-4">
-      <label>Cycle(days)</label>
-    </div>
-    <div class="col-md-8">
-      <input type="number" [(ngModel)]="receiptCycle"/>
-    </div>
-    <span class="text-danger"></span>
+
+  <div class="col-md-1 col-sm-0 col-xs-0">
+    <div class="vertical-line-big"></div>
   </div>
-  <div class="receiptshop">
-    <div class="receiptshoplabel">
+
+  <div class=" col-md-6 col-sm-12 col-xs-12">
+    <div class=" col-md-2 col-sm-12 col-xs-12">
       <label>Shop</label>
     </div>
-    <div class="receiptshopselect">
+    <div class=" col-md-8 col-sm-8 col-xs-8 shop-div">
       <select  id="selectshop" data-placeholder="Select shop" class="form-control chosen-single-select" [(ngModel)]="receiptShop">
         <option *ngFor="let shop of shops" [value] = "shop.id">
           {{shop.name}}
         </option>
       </select>
     </div>
-    <div class="receiptshopbutton">
+    <div class=" col-md-2 col-sm-4 col-xs-4 shop-div">
       <button mat-raised-button type="button" id="addshopbutton" class="btn btn-success" (click)="showShopDialog()">
         <span class="glyphicon glyphicon-plus"></span>
       </button>
     </div>
+
+    <div class=" col-md-2 col-sm-12 col-xs-12">
+      <label>Cycle</label>
+    </div>
+    <div class=" col-md-8 col-sm-8 col-xs-8">
+      <input min="0" type="number" data-placeholder="Select shop" class="form-control chosen-single-select cycleInput" [(ngModel)]="receiptCycle"/>
+    </div>
   </div>
-  <hr/>
-  <div class="tableheaders">
-    <div class="col-md-4 col-md-offset-1">
+
+  <div class="col-md-12 col-sm-12 col-xs-12 hrDiv">
+    <hr class="hrH">
+  </div>
+
+  <div class="tableheaders col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-5 col-md-offset-1">
       <label>Name</label>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <label>Amount</label>
     </div>
     <div class="col-md-2">
@@ -58,41 +63,56 @@
       <label>Total</label>
     </div>
   </div>
-  <div class="receiptproducts">
+
+  <div class="col-md-12 col-sm-12 col-xs-12 hrDiv">
+    <hr class="hrH">
+  </div>
+
+
+  <div class="receiptproducts col-md-12">
     <div class="productslinecreate" *ngFor="let product of newProducts">
-      <div class="col-md-2 buttonproductcreate">
+      <div class="col-md-1 buttonproductcreate">
         <button (click)="removeProduct(product.ID)" class="btn btn-danger btn-xs" type="button" id="removeproductbutton"><small><span class="glyphicon glyphicon-remove"></span></small></button>
       </div>
-      <div class="col-md-3 nameproductcreate">
-        {{product.Name}}
+      <div class="col-md-5 col-sm-3">
+        {{product.Name.substring(0,60)}}
       </div>
-      <div class="col-md-3 amountproductcreate">
+      <div class="col-md-2 col-sm-3">
         {{product.Amount}}
       </div>
-      <div class="col-md-2 priceproductcreate">
-        {{product.Price}}
+      <div class="col-md-2 col-sm-2">
+        {{product.Price}} {{currency}}
       </div>
-      <div class="col-md-2 producttotalcreate">
-        {{product.TotalValue}}
+      <div class="col-md-2 col-sm-2">
+        {{product.TotalValue}} {{currency}}
       </div>
     </div>
   </div>
-  <hr class="totalhr">
-  <div class="productstotal">
-    <label id="totallabel">Total:</label>
-    <label id="total">{{receiptTotal}}</label>
+
+  <div class="col-md-12 col-sm-12 hrDiv">
+    <hr class="hrTotal">
   </div>
-  <div class="receiptaddproduct">
+
+  <div class="productstotal col-md-12 col-sm-12">
+    <div class="col-md-offset-9 col-md-1">
+      <label>Total:</label>
+    </div>
+    <div class="col-md-2">
+      <label>{{receiptTotal}} {{currency}}</label>
+    </div>
+  </div>
+
+  <div class="receiptaddproduct col-md-12 col-sm-12">
     <button type="button" id="opendialogbutton" (click)="showProductDialog()" class="btn btn-success">Add product</button>
   </div>
 
-  <div class="receiptbuttons">
-    <a class="btn btn-danger">Cancel</a>
-    <input type="submit" class="btn btn-success" value="Save" (click)="save()"/>
+  <div class="receiptbuttons col-md-12 col-sm-12">
+    <a class="btn btn-danger" (click)="onCancel()">Cancel</a>
+    <a class="btn btn-success" (click)="save()">Save</a>
   </div>
 </div>
 
-<p-dialog header="Add product" [(visible)]="productDialogDisplay" [width]="300">
+<p-dialog modal="true" header="Add product" [(visible)]="productDialogDisplay" [width]="width" [height]="height">
   <div class="createproductproduct" *ngIf="!newProduct">
     <label>Product:</label>
     <select data-placeholder="Select product" class="forminput chosen-single-select"  [(ngModel)]="currentProduct.ID">
@@ -131,7 +151,7 @@
 </p-dialog>
 
 
-<p-dialog header="Add shop" [(visible)]="shopDialogDisplay" [width]="300">
+<p-dialog modal="true" header="Add shop" [(visible)]="shopDialogDisplay" [width]="width" [height]="height">
   <label>Name:</label>
   <input type="text" #newShopName class="form-control" placeholder="Name"/>
   <p-footer>

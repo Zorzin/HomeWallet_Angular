@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {PlanService} from "../Services/plan.service";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-plans',
@@ -17,9 +18,11 @@ export class PlansComponent implements OnInit {
   constructor(
     private planService: PlanService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.checkUser();
     this.planService.getPlans().subscribe((response)=>{
       this.checkIfThereIsPlanAlready();
       this.plans = response;
@@ -30,6 +33,14 @@ export class PlansComponent implements OnInit {
       }
       this.isDataLoaded = true;
     })
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   private checkIfThereIsPlanAlready() {

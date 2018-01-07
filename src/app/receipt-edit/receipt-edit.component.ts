@@ -9,6 +9,7 @@ import {ReceiptProduct} from "../Models/receipt-product";
 import {SelectItem} from "primeng/primeng";
 import {CategoryService} from "../Services/category.service";
 import {ReceiptProductEdit} from "../Models/receipt-product-edit";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-receipt-edit',
@@ -41,10 +42,12 @@ export class ReceiptEditComponent implements OnInit {
     private receiptService: ReceiptService,
     private route: ActivatedRoute,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private userService: UserInfoService
   ) {}
 
   ngOnInit(): void{
+    this.checkUser();
     this.receiptProducts = [];
     this.currentNewProduct = new ReceiptProductEdit();
     this.multiSelectCategories = [];
@@ -62,6 +65,14 @@ export class ReceiptEditComponent implements OnInit {
         this.getShops();
         this.isDataLoaded = true;
       });
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   private getReceiptDate() {

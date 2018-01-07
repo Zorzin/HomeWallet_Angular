@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ShopService} from "../Services/shop.service";
 import {Location} from "@angular/common";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-shop-details',
@@ -22,9 +23,11 @@ export class ShopDetailsComponent implements OnInit {
     private location: Location,
     private router: Router,
     private shopService: ShopService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.checkUser();
     this.route.paramMap
       .switchMap((params: ParamMap) => this.shopService.getShop(+params.get('id')))
       .subscribe((shop) => {
@@ -33,6 +36,14 @@ export class ShopDetailsComponent implements OnInit {
         this.isDataLoaded = true;
         this.GetProducts();
       });
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/main']);
+    }
   }
 
   private GetProducts() {

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {UserIdService} from "./Services/user-id.service";
+import {UserInfoService} from "./Services/user-id.service";
 
 @Component({
   selector: 'app-root',
@@ -9,33 +9,31 @@ import {UserIdService} from "./Services/user-id.service";
 })
 export class AppComponent implements OnInit{
 
-  title = 'app';
 
   private login:boolean;
 
   constructor(private router:Router,
-              private userService: UserIdService){
+              private userService: UserInfoService){
     userService.loginAnnounced$.subscribe(
-      id => {if(id==-1)
-      {
-        this.login = false;
-      }
-      else
-      {
-        this.login = true;
-      }
+      id => {
+        this.checkUser();
       });
   }
 
   ngOnInit(): void {
+    this.checkUser();
 
-    if(this.userService.getUserId().length == 0 || this.userService.getUserId() == '-1')
+  }
+
+  checkUser()
+  {
+    if(!this.userService.isUserLogIn())
     {
       this.login = false;
     }
-    else
-    {
+    else{
       this.login = true;
+      this.router.navigate(['/receipts']);
     }
   }
 
