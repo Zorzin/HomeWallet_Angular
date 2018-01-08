@@ -12,6 +12,8 @@ import {UserInfoService} from "../Services/user-id.service";
 })
 export class PlanDetailsComponent implements OnInit {
 
+  private width:number;
+  private height:number;
   private planDetails: any;
   private isDataLoaded: boolean;
   private canEdit: boolean;
@@ -27,6 +29,7 @@ export class PlanDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getWidthAndHeight();
     this.checkUser();
     this.route.paramMap
       .switchMap((params: ParamMap) => this.planService.getPlanWithDetails(+params.get('id')))
@@ -88,5 +91,10 @@ export class PlanDetailsComponent implements OnInit {
   private CancelDelete()
   {
     this.showRemoveDialog = false;
+  }
+
+  private getWidthAndHeight() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
   }
 }

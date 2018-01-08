@@ -85,7 +85,7 @@
 
 
 
-<p-dialog header="Remove?" [(visible)]="removeDialogDisplay" [width]="width" [height]="height">
+<p-dialog header="Remove?" [(visible)]="removeDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
   <label>Remove this receipt?</label>
   <p-footer>
     <button type="button" pButton icon="fa-check" (click)="onRemoveConfirm()" label="Remove"></button>

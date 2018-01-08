@@ -12,6 +12,8 @@ import {UserInfoService} from "../Services/user-id.service";
 })
 export class ProductDetailsComponent implements OnInit {
 
+  private width:number;
+  private height:number;
   private details: boolean;
   private isDataLoaded: boolean;
   private hasCategories: boolean;
@@ -32,6 +34,7 @@ export class ProductDetailsComponent implements OnInit {
     private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.getWidthAndHeight();
     this.checkUser();
     this.currentCategories = [];
     this.multiSelectCategories = [];
@@ -130,5 +133,10 @@ export class ProductDetailsComponent implements OnInit {
 
   CancelEdit() {
     this.editDialogDisplay = false;
+  }
+
+  private getWidthAndHeight() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
   }
 }

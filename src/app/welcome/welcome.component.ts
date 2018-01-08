@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {UserInfoService} from "../Services/user-id.service";
 
 @Component({
   selector: 'app-welcome',
@@ -8,11 +9,20 @@ import {Router} from "@angular/router";
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(private router : Router) { }
+  constructor(private router : Router,
+              private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.checkUser();
   }
 
+  checkUser()
+  {
+    if(this.userService.isUserLogIn())
+    {
+      this.router.navigate(['/receipts']);
+    }
+  }
   onRegister()
   {
     this.router.navigate(['/register']);

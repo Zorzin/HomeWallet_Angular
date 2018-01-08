@@ -43,17 +43,19 @@
   </div>
 
 
-  <p-dialog header="Edit name" [(visible)]="editDialogDisplay" [width]="width" [height]="height">
+  <p-dialog header="Edit name" [(visible)]="editDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
 
-    <label>Type new shop name:</label>
-    <input type="text" [(ngModel)]="shop.name">
+    <div class="shopmodal">
+      <label>Type new shop name:</label>
+      <input type="text" [(ngModel)]="shop.name">
+    </div>
     <p-footer>
       <button type="button" pButton icon="fa-check" (click)="ConfirmEdit()" label="Save"></button>
       <button type="button" pButton icon="fa-close" (click)="CancelEdit()" label="Cancel"></button>
     </p-footer>
   </p-dialog>
 
-  <p-dialog header="Remove shop" [(visible)]="removeDialogDisplay" [width]="width" [height]="height">
+  <p-dialog header="Remove shop" [(visible)]="removeDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
 
     <label>Are you sure you want to delete this shop? This will delete all receipts from this shop.</label>
     <p-footer>

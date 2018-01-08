@@ -3,6 +3,7 @@ import {RegisterService} from "../Services/register.service";
 import {UserInfoService} from "../Services/user-id.service";
 import {UserRegister} from "../Models/user-register";
 import {Router} from "@angular/router";
+import {SelectItem} from "primeng/primeng";
 
 @Component({
   selector: 'app-register',
@@ -11,6 +12,7 @@ import {Router} from "@angular/router";
 })
 export class RegisterComponent implements OnInit {
 
+  currencies: SelectItem[];
   private user : UserRegister;
 
   constructor(private registerService: RegisterService,
@@ -18,6 +20,7 @@ export class RegisterComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.getCurrencies();
     this.user = new UserRegister();
   }
 
@@ -32,6 +35,14 @@ export class RegisterComponent implements OnInit {
   onLogin()
   {
     this.router.navigate(['/login']);
+  }
+
+
+  private getCurrencies() {
+    this.currencies = [
+      {label:'PLN', value:"zł"},
+      {label:'USD', value:"$"},
+    ];
   }
 
 }

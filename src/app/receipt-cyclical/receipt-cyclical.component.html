@@ -112,7 +112,7 @@
   </div>
 </div>
 
-<p-dialog modal="true" header="Add product" [(visible)]="productDialogDisplay" [width]="width" [height]="height">
+<p-dialog modal="true" header="Add product" [(visible)]="productDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
   <div class="createproductproduct" *ngIf="!newProduct">
     <label>Product:</label>
     <select data-placeholder="Select product" class="forminput chosen-single-select"  [(ngModel)]="currentProduct.ID">
@@ -151,7 +151,7 @@
 </p-dialog>
 
 
-<p-dialog modal="true" header="Add shop" [(visible)]="shopDialogDisplay" [width]="width" [height]="height">
+<p-dialog modal="true" header="Add shop" [(visible)]="shopDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
   <label>Name:</label>
   <input type="text" #newShopName class="form-control" placeholder="Name"/>
   <p-footer>

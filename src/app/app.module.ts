@@ -17,7 +17,7 @@ import {ButtonModule} from 'primeng/primeng';
 import {FormsModule} from "@angular/forms";
 import {CategoryService} from "./Services/category.service";
 import {CalendarModule} from 'primeng/primeng';
-import {DropdownModule} from 'primeng/primeng';
+import {InputSwitchModule} from 'primeng/primeng';
 import {MultiSelectModule} from 'primeng/primeng';
 import { ReceiptCyclicalComponent } from './receipt-cyclical/receipt-cyclical.component';
 import { PlanCreateComponent } from './plan-create/plan-create.component';
@@ -26,7 +26,6 @@ import { PlanDetailsComponent } from './plan-details/plan-details.component';
 import { ShopsComponent } from './shops/shops.component';
 import { ShopDetailsComponent } from './shop-details/shop-details.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
-import { ShopEditComponent } from './shop-edit/shop-edit.component';
 import { CategoryDetailsComponent } from './category-details/category-details.component';
 import { ProductsComponent } from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
@@ -44,6 +43,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AccountComponent } from './account/account.component';
 import { DailySummaryComponent } from './daily-summary/daily-summary.component';
 import {SummaryService} from "./Services/summary.service";
+import {DropdownModule} from 'primeng/primeng';
+import {PasswordService} from "./Services/password.service";
 
 @NgModule({
   declarations: [
@@ -57,7 +58,6 @@ import {SummaryService} from "./Services/summary.service";
     ShopsComponent,
     ShopDetailsComponent,
     ProductDetailsComponent,
-    ShopEditComponent,
     CategoryDetailsComponent,
     ProductsComponent,
     CategoriesComponent,
@@ -81,9 +81,11 @@ import {SummaryService} from "./Services/summary.service";
     FormsModule,
     CalendarModule,
     MultiSelectModule,
-    CheckboxModule
+    CheckboxModule,
+    InputSwitchModule,
+    DropdownModule
   ],
-  providers: [ReceiptService, ShopService, ReceiptProductService, ProductService, CategoryService, LoginService, RegisterService, UserInfoService,PlanService, SummaryService],
+  providers: [ReceiptService, ShopService, ReceiptProductService, ProductService, CategoryService, LoginService, RegisterService, UserInfoService,PlanService, SummaryService, PasswordService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

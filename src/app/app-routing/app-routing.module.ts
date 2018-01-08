@@ -9,7 +9,6 @@ import {PlanDetailsComponent} from "../plan-details/plan-details.component";
 import {ShopsComponent} from "../shops/shops.component";
 import {ShopDetailsComponent} from "../shop-details/shop-details.component";
 import {ProductDetailsComponent} from "../product-details/product-details.component";
-import {ShopEditComponent} from "../shop-edit/shop-edit.component";
 import {CategoryDetailsComponent} from "../category-details/category-details.component";
 import {ProductsComponent} from "../products/products.component";
 import {CategoriesComponent} from "../categories/categories.component";
@@ -37,7 +36,6 @@ const routes: Routes = [
   { path:"products", component: ProductsComponent },
   { path:"categories", component: CategoriesComponent },
   { path:"shop-detail/:id", component: ShopDetailsComponent },
-  { path:"shop-edit/:id", component: ShopEditComponent },
   { path:"product-detail/:id", component: ProductDetailsComponent },
   { path:"category-detail/:id", component: CategoryDetailsComponent },
   { path:"receipt-detail/:id", component: ReceiptDetailsComponent },

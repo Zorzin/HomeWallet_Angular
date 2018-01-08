@@ -33,7 +33,6 @@ export class AppComponent implements OnInit{
     }
     else{
       this.login = true;
-      this.router.navigate(['/receipts']);
     }
   }
 

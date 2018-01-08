@@ -40,4 +40,8 @@ export class UserInfoService {
     return this.http.get(this.apiUrl + this.getUserId(),{responseType:"text"}).toPromise();
   }
 
+  changeUserCurrency(currency: string) {
+    return this.http.post(this.apiUrl+this.getUserId()+"/"+currency,null,{headers:this.headers,responseType: 'text' })
+      .toPromise();
+  }
 }

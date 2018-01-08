@@ -4,19 +4,54 @@
   <dl class="dl-horizontal">
     <dt>Password:</dt>
     <dd>
-      <a class="btn-bracketed">Change</a>
+      <a (click)="showPasswordDialog()" class="btn btn-default">Change</a>
     </dd>
     <dt>Theme:</dt>
     <dd>
-      <a class="btn-bracketed">Change</a>
+      <p-inputSwitch onLabel="Light" offLabel="Dark" [(ngModel)]="checked"></p-inputSwitch>
     </dd>
     <dt>Currency:</dt>
     <dd>
-      <a class="btn-bracketed">Change</a>
+      <a (click)="showCurrencyDialog()" class="btn btn-default">Change</a>
     </dd>
     <dt>Language:</dt>
     <dd>
-      <a class="btn-bracketed">Change</a>
+      <p-dropdown [(ngModel)]="language"></p-dropdown>
     </dd>
   </dl>
 </div>
+
+<p-dialog [width]="width" [height]="height" [draggable]="false" [modal]="true" header="Change password" [(visible)]="passwordDialogDisplay">
+    <div>
+      <div>
+        <label>Old Password:</label>
+        <input type="password" class="forminput" placeholder="Old Password" [(ngModel)]="passwordChange.oldPassword" />
+      </div>
+      <div>
+        <label>New Password:</label>
+        <input type="password" class="forminput" placeholder="New Password" [(ngModel)]="passwordChange.newPassword" />
+      </div>
+      <div>
+        <label>Re-type New Password:</label>
+        <input type="password" class="forminput" placeholder="New Password" [(ngModel)]="passwordChange.reNewPassword" />
+      </div>
+    </div>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="ConfirmChangePassword()" label="Save"></button>
+    <button type="button" pButton icon="fa-close" (click)="CancelChangePassword()" label="Cancel"></button>
+  </p-footer>
+</p-dialog>
+
+
+<p-dialog [width]="width" [height]="height" [draggable]="false" [modal]="true" header="Change currency" [(visible)]="currencyDialogDisplay">
+  <div>
+    <div>
+      <label>Select Currency:</label>
+      <p-dropdown class="forminput" [options]="currencies" [(ngModel)]="currency"></p-dropdown>
+    </div>
+  </div>
+  <p-footer>
+    <button type="button" pButton icon="fa-check" (click)="ConfirmChangeCurrency()" label="Save"></button>
+    <button type="button" pButton icon="fa-close" (click)="CancelChangeCurrency()" label="Cancel"></button>
+  </p-footer>
+</p-dialog>

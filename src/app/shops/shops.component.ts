@@ -11,6 +11,8 @@ import {UserInfoService} from "../Services/user-id.service";
 })
 export class ShopsComponent implements OnInit {
 
+  private width: number;
+  private height:number;
   shops: any;
   private displayCreateDialog: boolean;
   private newShopName: string;
@@ -20,6 +22,7 @@ export class ShopsComponent implements OnInit {
               private userService:UserInfoService) { }
 
   ngOnInit() {
+    this.getWidthAndHeight();
     this.checkUser();
     this.GetShops();
   }
@@ -56,5 +59,10 @@ export class ShopsComponent implements OnInit {
 
   Cancel() {
     this.displayCreateDialog=false;
+  }
+
+  private getWidthAndHeight() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
   }
 }

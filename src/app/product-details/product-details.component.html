@@ -121,7 +121,7 @@
   <div class="col-md-12">
   </div>
 
-  <p-dialog header="Edit product" [(visible)]="editDialogDisplay" [width]="300">
+  <p-dialog header="Edit product" [(visible)]="editDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
 
     <label>EditProduct</label>
     <div>
@@ -136,7 +136,7 @@
     </p-footer>
   </p-dialog>
 
-  <p-dialog header="Remove shop" [(visible)]="removeDialogDisplay" [width]="300">
+  <p-dialog header="Remove shop" [(visible)]="removeDialogDisplay" [width]="width" [height]="height">
 
     <label>Are you sure you want to delete this product?</label>
     <p-footer>

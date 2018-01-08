@@ -3,5 +3,5 @@ export class UserRegister {
   password : string;
   repassword : string;
   email : string;
-  curency : string;
+  currency : string;
 }

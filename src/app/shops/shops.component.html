@@ -14,10 +14,12 @@
     </div>
   </div>
 
-  <p-dialog header="Create shop" [(visible)]="displayCreateDialog" [width]="300">
+  <p-dialog header="Create shop" [(visible)]="displayCreateDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
 
-    <label>Type new shop name:</label>
-    <input type="text" [(ngModel)]="newShopName">
+    <div class="shopmodal">
+      <label>Type new shop name:</label>
+      <input type="text" [(ngModel)]="newShopName">
+    </div>
     <p-footer>
       <button type="button" pButton icon="fa-check" (click)="ConfirmCreate()" label="Create"></button>
       <button type="button" pButton icon="fa-close" (click)="Cancel()" label="Cancel"></button>

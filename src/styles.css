@@ -478,6 +478,10 @@ textarea { max-width: 280px; }
   display: inline;
 }
 
+.shopmodal input{
+  display: block;
+}
+
 /*!* DIALOG MAIN CONTAINER *!*/
 .ui-dialog.ui-widget-content {
   border: none;

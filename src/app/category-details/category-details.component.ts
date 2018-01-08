@@ -11,6 +11,8 @@ import {UserInfoService} from "../Services/user-id.service";
 })
 export class CategoryDetailsComponent implements OnInit {
 
+  private width:number;
+  private height:number;
   private details: boolean;
   private isDataLoaded: boolean;
   private hasProducts: boolean;
@@ -28,6 +30,7 @@ export class CategoryDetailsComponent implements OnInit {
     private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.getWidthAndHeight();
     this.checkUser();
     this.route.paramMap
       .switchMap((params: ParamMap) => this.categoryService.getCategory(+params.get('id')))
@@ -105,5 +108,10 @@ export class CategoryDetailsComponent implements OnInit {
 
   CancelEdit() {
     this.editDialogDisplay = false;
+  }
+
+  private getWidthAndHeight() {
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
   }
 }
