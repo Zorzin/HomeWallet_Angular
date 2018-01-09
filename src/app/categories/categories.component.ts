@@ -10,6 +10,7 @@ import {UserInfoService} from "../Services/user-id.service";
 })
 export class CategoriesComponent implements OnInit {
 
+  private isDataLoaded: boolean;
   private width:number;
   private height:number;
   products: any;
@@ -40,6 +41,7 @@ export class CategoriesComponent implements OnInit {
   {
     this.categoryService.getCategories().then((response)=>{
       this.categories= response;
+      this.isDataLoaded = true;
     });
 
   }

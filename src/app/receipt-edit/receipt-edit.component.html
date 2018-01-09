@@ -99,6 +99,10 @@
   </div>
 </div>
 
+<div *ngIf="!isDataLoaded">
+  <mat-spinner></mat-spinner>
+</div>
+
 <p-dialog header="Add product" [(visible)]="productDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
   <div class="createproductproduct" *ngIf="!newProduct">
     <label>Product:</label>

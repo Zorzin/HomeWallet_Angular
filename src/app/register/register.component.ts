@@ -5,6 +5,7 @@ import {UserRegister} from "../Models/user-register";
 import {Router} from "@angular/router";
 import {SelectItem} from "primeng/primeng";
 import {CurrenciesService} from "../Services/currencies.service";
+import {AccountService} from "../Services/account.service";
 
 @Component({
   selector: 'app-register',
@@ -13,16 +14,21 @@ import {CurrenciesService} from "../Services/currencies.service";
 })
 export class RegisterComponent implements OnInit {
 
-  currencies: SelectItem[];
+  private themes: SelectItem[];
+  private languages: SelectItem[];
+  private currencies: SelectItem[];
   private user : UserRegister;
 
   constructor(private registerService: RegisterService,
+              private accountService: AccountService,
               private userIdService: UserInfoService,
               private router: Router,
               private currenciesService: CurrenciesService) { }
 
   ngOnInit() {
     this.getCurrencies();
+    this.getThemes();
+    this.getLanguages();
     this.user = new UserRegister();
   }
 
@@ -42,6 +48,14 @@ export class RegisterComponent implements OnInit {
 
   private getCurrencies() {
     this.currencies = this.currenciesService.getCurrencies();
+  }
+
+  private getThemes() {
+    this.themes = this.accountService.getThemes();
+  }
+
+  private getLanguages() {
+    this.languages = this.accountService.getLanguages();
   }
 
 }

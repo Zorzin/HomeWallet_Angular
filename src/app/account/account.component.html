@@ -1,57 +1,47 @@
-<div>
-  <h4>Change your account settings</h4>
-  <hr />
-  <dl class="dl-horizontal">
-    <dt>Password:</dt>
-    <dd>
-      <a (click)="showPasswordDialog()" class="btn btn-default">Change</a>
-    </dd>
-    <dt>Theme:</dt>
-    <dd>
-      <p-inputSwitch onLabel="Light" offLabel="Dark" [(ngModel)]="checked"></p-inputSwitch>
-    </dd>
-    <dt>Currency:</dt>
-    <dd>
-      <a (click)="showCurrencyDialog()" class="btn btn-default">Change</a>
-    </dd>
-    <dt>Language:</dt>
-    <dd>
-      <p-dropdown [(ngModel)]="language"></p-dropdown>
-    </dd>
-  </dl>
+<div class="accountpage">
+  <mat-tab-group>
+    <mat-tab label="Account">
+      <div class="account-container">
+          <mat-form-field >
+            <mat-select  placeholder="Theme" [(ngModel)]="theme" >
+              <mat-option *ngFor="let theme of themes" [value]="theme.value">
+                {{ theme.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field >
+            <mat-select  placeholder="Currency" [(ngModel)]="currency" >
+              <mat-option *ngFor="let currency of currencies" [value]="currency.value">
+                {{ currency.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field  >
+            <mat-select  placeholder="Language" [(ngModel)]="language" >
+              <mat-option *ngFor="let language of languages" [value]="language.value">
+                {{ language.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        <button type="button" pButton (click)="saveAccount()" label="Save"></button>
+      </div>
+    </mat-tab>
+    <mat-tab label="Password" >
+      <div class="passwordchange">
+        <div>
+          <label>Old Password:</label>
+          <input type="password" class="forminput" placeholder="Old Password" [(ngModel)]="passwordChange.oldPassword" />
+        </div>
+        <div>
+          <label>New Password:</label>
+          <input type="password" class="forminput" placeholder="New Password" [(ngModel)]="passwordChange.newPassword" />
+        </div>
+        <div>
+          <label>Re-type New Password:</label>
+          <input type="password" class="forminput" placeholder="New Password" [(ngModel)]="passwordChange.reNewPassword" />
+        </div>
+        <button type="button" pButton (click)="ConfirmChangePassword()" label="Save"></button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>
-
-<p-dialog [width]="width" [height]="height" [draggable]="false" [modal]="true" header="Change password" [(visible)]="passwordDialogDisplay">
-    <div>
-      <div>
-        <label>Old Password:</label>
-        <input type="password" class="forminput" placeholder="Old Password" [(ngModel)]="passwordChange.oldPassword" />
-      </div>
-      <div>
-        <label>New Password:</label>
-        <input type="password" class="forminput" placeholder="New Password" [(ngModel)]="passwordChange.newPassword" />
-      </div>
-      <div>
-        <label>Re-type New Password:</label>
-        <input type="password" class="forminput" placeholder="New Password" [(ngModel)]="passwordChange.reNewPassword" />
-      </div>
-    </div>
-  <p-footer>
-    <button type="button" pButton icon="fa-check" (click)="ConfirmChangePassword()" label="Save"></button>
-    <button type="button" pButton icon="fa-close" (click)="CancelChangePassword()" label="Cancel"></button>
-  </p-footer>
-</p-dialog>
-
-
-<p-dialog [width]="width" [height]="height" [draggable]="false" [modal]="true" header="Change currency" [(visible)]="currencyDialogDisplay">
-  <div>
-    <div>
-      <label>Select Currency:</label>
-      <p-dropdown class="forminput" [options]="currencies" [(ngModel)]="currency"></p-dropdown>
-    </div>
-  </div>
-  <p-footer>
-    <button type="button" pButton icon="fa-check" (click)="ConfirmChangeCurrency()" label="Save"></button>
-    <button type="button" pButton icon="fa-close" (click)="CancelChangeCurrency()" label="Cancel"></button>
-  </p-footer>
-</p-dialog>

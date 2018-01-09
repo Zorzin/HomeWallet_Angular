@@ -39,14 +39,19 @@ import {RegisterService} from "./Services/register.service";
 import {UserInfoService} from "./Services/user-id.service";
 import {CheckboxModule} from 'primeng/primeng';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { AccountComponent } from './account/account.component';
+import {AccountComponent, PasswordSuccessDialog} from './account/account.component';
 import { DailySummaryComponent } from './daily-summary/daily-summary.component';
 import {SummaryService} from "./Services/summary.service";
 import {DropdownModule} from 'primeng/primeng';
 import {PasswordService} from "./Services/password.service";
 import {CurrenciesService} from "./Services/currencies.service";
-
+import {MatSelectModule} from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
+import {AccountService} from "./Services/account.service";
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
+  entryComponents:[PasswordSuccessDialog],
   declarations: [
     AppComponent,
     ReceiptComponent,
@@ -70,6 +75,7 @@ import {CurrenciesService} from "./Services/currencies.service";
     WelcomeComponent,
     AccountComponent,
     DailySummaryComponent,
+    PasswordSuccessDialog
   ],
   imports: [
     AppRoutingModule,
@@ -83,7 +89,11 @@ import {CurrenciesService} from "./Services/currencies.service";
     MultiSelectModule,
     CheckboxModule,
     InputSwitchModule,
-    DropdownModule
+    DropdownModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers:
     [
@@ -98,7 +108,8 @@ import {CurrenciesService} from "./Services/currencies.service";
       PlanService,
       SummaryService,
       PasswordService,
-      CurrenciesService
+      CurrenciesService,
+      AccountService
     ],
   bootstrap: [AppComponent]
 })

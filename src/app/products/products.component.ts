@@ -12,6 +12,7 @@ import {UserInfoService} from "../Services/user-id.service";
 })
 export class ProductsComponent implements OnInit {
 
+  private isDataLoaded:boolean;
   private width:number;
   private height:number;
   products: any;
@@ -47,6 +48,7 @@ export class ProductsComponent implements OnInit {
   private GetProducts() {
     this.productService.getProducts().then((result)=>{
       this.products = result;
+      this.isDataLoaded = true;
     });
   }
 

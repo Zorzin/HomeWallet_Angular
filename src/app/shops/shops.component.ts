@@ -13,7 +13,8 @@ export class ShopsComponent implements OnInit {
 
   private width: number;
   private height:number;
-  shops: any;
+  private shops: any;
+  private isDataLoaded: boolean;
   private displayCreateDialog: boolean;
   private newShopName: string;
 
@@ -38,6 +39,7 @@ export class ShopsComponent implements OnInit {
   private GetShops() {
     this.shopService.getShops().then((result)=>{
       this.shops = result;
+      this.isDataLoaded = true;
     });
   }
 

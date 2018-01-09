@@ -9,7 +9,7 @@ export class UserInfoService {
   private loginAnnouncedSource = new Subject<number>();
 
   loginAnnounced$ = this.loginAnnouncedSource.asObservable();
-  private apiUrl = 'http://localhost:54044/api/Users/currency/';  // URL to web
+  private apiUrl = 'http://localhost:54044/api/Users/';  // URL to web
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) { }
@@ -37,11 +37,29 @@ export class UserInfoService {
   }
 
   getUserCurrency() {
-    return this.http.get(this.apiUrl + this.getUserId(),{responseType:"text"}).toPromise();
+    return this.http.get(this.apiUrl+"currency/" + this.getUserId(),{responseType:"text"}).toPromise();
+  }
+
+  getUserTheme() {
+    return this.http.get(this.apiUrl+"theme/" + this.getUserId(),{responseType:"text"}).toPromise();
+  }
+
+  getUserLanguage() {
+    return this.http.get(this.apiUrl+"language/" + this.getUserId(),{responseType:"text"}).toPromise();
   }
 
   changeUserCurrency(currency: string) {
-    return this.http.post(this.apiUrl+this.getUserId()+"/"+currency,null,{headers:this.headers,responseType: 'text' })
+    return this.http.post(this.apiUrl+"currency/"+this.getUserId()+"/"+currency,null,{headers:this.headers,responseType: 'text' })
+      .toPromise();
+  }
+
+  changeUserTheme(theme: string) {
+    return this.http.post(this.apiUrl+"theme/"+this.getUserId()+"/"+theme,null,{headers:this.headers,responseType: 'text' })
+      .toPromise();
+  }
+
+  changeUserLanguage(language: string) {
+    return this.http.post(this.apiUrl+"language/"+this.getUserId()+"/"+language,null,{headers:this.headers,responseType: 'text' })
       .toPromise();
   }
 }

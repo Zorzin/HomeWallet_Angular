@@ -1,3 +1,4 @@
+<div *ngIf="isDataLoaded">
   <p>
     <a class="btn btn-success" (click)="Create()">Create New</a>
   </p>
@@ -25,3 +26,8 @@
       <button type="button" pButton icon="fa-close" (click)="Cancel()" label="Cancel"></button>
     </p-footer>
   </p-dialog>
+</div>
+<div *ngIf="!isDataLoaded">
+  <mat-spinner></mat-spinner>
+</div>
+

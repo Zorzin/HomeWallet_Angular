@@ -17,5 +17,8 @@
 <div>
   <a (click)="goToDetails()">Back to Details</a>
 </div>
+<div *ngIf="!isDataLoaded">
+  <mat-spinner></mat-spinner>
+</div>
 
 

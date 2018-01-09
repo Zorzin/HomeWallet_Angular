@@ -8,7 +8,28 @@
     <input [(ngModel)]="user.login"  type="text" placeholder="Login" label="false" spellcheck="false" class="is-sensitive" value="" />
     <input [(ngModel)]="user.password" placeholder="Password" label="false" autocomplete="off" class="is-sensitive" type="password"/>
     <input [(ngModel)]="user.repassword" placeholder="Type password again" label="false" autocomplete="off" class="is-sensitive" type="password"/>
-    <p-dropdown class="registerSelect" [style]="{'width': '280px', 'margin-left':'55px', 'height':'55px'}" [(ngModel)]="user.currency"  [options]="currencies" placeholder="Currency" [filter]="true" filterBy="label,value"></p-dropdown>
+    <mat-form-field class="registerSelect" >
+      <mat-select  placeholder="Currency" [(ngModel)]="user.currency" >
+        <mat-option *ngFor="let currency of currencies" [value]="currency.value">
+          {{ currency.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="registerSelect" >
+      <mat-select  placeholder="Theme" [(ngModel)]="user.theme" >
+        <mat-option *ngFor="let theme of themes" [value]="theme.value">
+          {{ theme.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="registerSelect" >
+      <mat-select  placeholder="Language" [(ngModel)]="user.language" >
+        <mat-option *ngFor="let language of languages" [value]="language.value">
+          {{ language.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <input  type="submit" name="commit" value="Register" (click)="onRegister()"/>
   </div>
   <div class='footer'>

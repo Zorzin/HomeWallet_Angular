@@ -1,34 +1,39 @@
-<p>
-  <a class="btn btn-success" (click)="Create()">Create New</a>
-</p>
+<div *ngIf="isDataLoaded">
+  <p>
+    <a class="btn btn-success" (click)="Create()">Create New</a>
+  </p>
 
-<div class="col-md-12">
-  <div *ngFor="let product of products" class="col-md-3 panelmaindiv">
-    <div  class="panel panel-default listpanel">
-      <a (click)="goToDetails(product)">
-        <div>
-          <span>{{product.name}}</span>
-        </div>
-      </a>
+  <div class="col-md-12">
+    <div *ngFor="let product of products" class="col-md-3 panelmaindiv">
+      <div  class="panel panel-default listpanel">
+        <a (click)="goToDetails(product)">
+          <div>
+            <span>{{product.name}}</span>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
+
+  <p-dialog header="Create product" [(visible)]="displayCreateDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
+    <div id="newproduct">
+      <div class="createproductname">
+        <label>Name:</label>
+        <input class="forminput" placeholder="Name" [(ngModel)]="newProductName" />
+      </div>
+      <div class="createproductcategories">
+        <label>Categories:</label>
+        <p-multiSelect [options] = "multiSelectCategories" data-placeholder="Select categories" class="forminput chosen-group-select" multiple="multiple" [(ngModel)]="newProductCategories">
+
+        </p-multiSelect>
+      </div>
+    </div>
+    <p-footer>
+      <button type="button" pButton icon="fa-check" (click)="ConfirmCreate()" label="Create"></button>
+      <button type="button" pButton icon="fa-close" (click)="Cancel()" label="Cancel"></button>
+    </p-footer>
+  </p-dialog>
 </div>
-
-<p-dialog header="Create product" [(visible)]="displayCreateDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
-  <div id="newproduct">
-    <div class="createproductname">
-      <label>Name:</label>
-      <input class="forminput" placeholder="Name" [(ngModel)]="newProductName" />
-    </div>
-    <div class="createproductcategories">
-      <label>Categories:</label>
-      <p-multiSelect [options] = "multiSelectCategories" data-placeholder="Select categories" class="forminput chosen-group-select" multiple="multiple" [(ngModel)]="newProductCategories">
-
-      </p-multiSelect>
-    </div>
-  </div>
-  <p-footer>
-    <button type="button" pButton icon="fa-check" (click)="ConfirmCreate()" label="Create"></button>
-    <button type="button" pButton icon="fa-close" (click)="Cancel()" label="Cancel"></button>
-  </p-footer>
-</p-dialog>
+<div *ngIf="!isDataLoaded">
+  <mat-spinner></mat-spinner>
+</div>
