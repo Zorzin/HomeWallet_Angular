@@ -856,4 +856,8 @@ p-footer{
   .login br.only-mobile {
     display: inline;
   }
+
+  .registerSelect{
+    height: 55px;
+  }
 }

@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {PasswordService} from "../Services/password.service";
 import {PasswordChange} from "../Models/password-change";
 import {SelectItem} from "primeng/primeng";
+import {CurrenciesService} from "../Services/currencies.service";
 
 @Component({
   selector: 'app-account',
@@ -22,7 +23,8 @@ export class AccountComponent implements OnInit {
 
   constructor(private userService:UserInfoService,
               private passwordService: PasswordService,
-              private router:Router) { }
+              private router:Router,
+              private currenciesService:CurrenciesService) { }
 
   ngOnInit() {
     this.getCurrencies();
@@ -81,11 +83,9 @@ export class AccountComponent implements OnInit {
     this.currencyDialogDisplay = false;
   }
 
+
   private getCurrencies() {
-    this.currencies = [
-      {label:'PLN', value:"zł"},
-      {label:'USD', value:"$"},
-    ];
+    this.currencies = this.currenciesService.getCurrencies();
     this.userService.getUserCurrency().then((response)=>this.currency = JSON.parse(response));
   }
 }

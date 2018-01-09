@@ -8,8 +8,8 @@
     <input [(ngModel)]="user.login"  type="text" placeholder="Login" label="false" spellcheck="false" class="is-sensitive" value="" />
     <input [(ngModel)]="user.password" placeholder="Password" label="false" autocomplete="off" class="is-sensitive" type="password"/>
     <input [(ngModel)]="user.repassword" placeholder="Type password again" label="false" autocomplete="off" class="is-sensitive" type="password"/>
-    <p-dropdown [(ngModel)]="user.currency"  [options]="currencies" placeholder="Currency"  ></p-dropdown>
-    <input type="submit" name="commit" value="Register" (click)="onRegister()"/>
+    <p-dropdown class="registerSelect" [style]="{'width': '280px', 'margin-left':'55px', 'height':'55px'}" [(ngModel)]="user.currency"  [options]="currencies" placeholder="Currency" [filter]="true" filterBy="label,value"></p-dropdown>
+    <input  type="submit" name="commit" value="Register" (click)="onRegister()"/>
   </div>
   <div class='footer'>
     <p>

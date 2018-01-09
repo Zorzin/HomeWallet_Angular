@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { ReceiptComponent } from './receipt/receipt.component';
 import {AppRoutingModule} from "./app-routing/app-routing.module";
@@ -45,6 +44,7 @@ import { DailySummaryComponent } from './daily-summary/daily-summary.component';
 import {SummaryService} from "./Services/summary.service";
 import {DropdownModule} from 'primeng/primeng';
 import {PasswordService} from "./Services/password.service";
+import {CurrenciesService} from "./Services/currencies.service";
 
 @NgModule({
   declarations: [
@@ -85,7 +85,21 @@ import {PasswordService} from "./Services/password.service";
     InputSwitchModule,
     DropdownModule
   ],
-  providers: [ReceiptService, ShopService, ReceiptProductService, ProductService, CategoryService, LoginService, RegisterService, UserInfoService,PlanService, SummaryService, PasswordService],
+  providers:
+    [
+      ReceiptService,
+      ShopService,
+      ReceiptProductService,
+      ProductService,
+      CategoryService,
+      LoginService,
+      RegisterService,
+      UserInfoService,
+      PlanService,
+      SummaryService,
+      PasswordService,
+      CurrenciesService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
