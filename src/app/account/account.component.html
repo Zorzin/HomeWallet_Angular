@@ -1,46 +1,46 @@
 <div class="accountpage">
   <mat-tab-group>
-    <mat-tab label="Account">
+    <mat-tab label="{{'account-account'|translate}}">
       <div class="account-container">
           <mat-form-field >
-            <mat-select  placeholder="Theme" [(ngModel)]="theme" >
+            <mat-select  placeholder="{{'account-theme'|translate}}" [(ngModel)]="theme" >
               <mat-option *ngFor="let theme of themes" [value]="theme.value">
                 {{ theme.label }}
               </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field >
-            <mat-select  placeholder="Currency" [(ngModel)]="currency" >
-              <mat-option *ngFor="let currency of currencies" [value]="currency.value">
+            <mat-select  placeholder="{{'account-currency'|translate}}" [(ngModel)]="currency" >
+              <mat-option *ngFor="let currency of currencies" [value]=  "currency.value">
                 {{ currency.label }}
               </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field  >
-            <mat-select  placeholder="Language" [(ngModel)]="language" >
+            <mat-select  placeholder="{{'account-language'|translate}}" [(ngModel)]="language" >
               <mat-option *ngFor="let language of languages" [value]="language.value">
                 {{ language.label }}
               </mat-option>
             </mat-select>
           </mat-form-field>
-        <button type="button" pButton (click)="saveAccount()" label="Save"></button>
+        <button type="button" pButton (click)="saveAccount()" label="{{'common-save'|translate}}"></button>
       </div>
     </mat-tab>
-    <mat-tab label="Password" >
+    <mat-tab label="{{'account-password'|translate}}" >
       <div class="passwordchange">
         <div>
-          <label>Old Password:</label>
-          <input type="password" class="forminput" placeholder="Old Password" [(ngModel)]="passwordChange.oldPassword" />
+          <label>{{'account-oldpassword'|translate}}</label>
+          <input type="password" class="forminput" placeholder="{{'account-oldpassword'|translate}}" [(ngModel)]="passwordChange.oldPassword" />
         </div>
         <div>
-          <label>New Password:</label>
-          <input type="password" class="forminput" placeholder="New Password" [(ngModel)]="passwordChange.newPassword" />
+          <label>{{'account-newpassword'|translate}}</label>
+          <input type="password" class="forminput" placeholder="{{'account-newpassword'|translate}}" [(ngModel)]="passwordChange.newPassword" />
         </div>
         <div>
-          <label>Re-type New Password:</label>
-          <input type="password" class="forminput" placeholder="New Password" [(ngModel)]="passwordChange.reNewPassword" />
+          <label>{{'account-retypepassword'|translate}}</label>
+          <input type="password" class="forminput" placeholder="{{'account-newpassword'|translate}}" [(ngModel)]="passwordChange.reNewPassword" />
         </div>
-        <button type="button" pButton (click)="ConfirmChangePassword()" label="Save"></button>
+        <button type="button" pButton (click)="ConfirmChangePassword()" label="{{'common-save'|translate}}"></button>
       </div>
     </mat-tab>
   </mat-tab-group>

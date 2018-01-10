@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
   {
     this.registerService.register(this.user).then((response)=>{
       this.userIdService.setUserId(parseInt(response,10));
+      this.userIdService.changeUserLanguage(this.user.language);
       this.router.navigate(['/receipts']);
     })
   }

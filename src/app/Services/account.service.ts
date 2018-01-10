@@ -35,7 +35,7 @@ export class AccountService {
   initLanguages(){
     this.languages = [
       {label:'Polish',value:'pl'},
-      {label:'English',value:'eng'}
+      {label:'English',value:'en'}
     ];
   }
 

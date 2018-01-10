@@ -2,14 +2,14 @@
   <br/>
 
   <ul class="nav nav-tabs detailstab">
-    <li role="presentation" [ngClass]="details ? 'active' : ''" ><a id="detailstab" (click)="SetDetails()">Details</a></li>
-    <li role="presentation" [ngClass]="details ? '' : 'active'"><a id="statisticstab" (click)="SetStatistics()">Statistics</a></li>
+    <li role="presentation" [ngClass]="details ? 'active' : ''" ><a id="detailstab" (click)="SetDetails()">{{'productdetails-details'|translate}}</a></li>
+    <li role="presentation" [ngClass]="details ? '' : 'active'"><a id="statisticstab" (click)="SetStatistics()">{{'productdetails-statistics'|translate}}</a></li>
   </ul>
   <br />
   <div id="statisticsdiv" *ngIf="!details">
     <div class="col-md-12">
       <div class="col-md-6 detailsviewnochart">
-        Totally spent
+        {{'productdetails-totallyspent'|translate}}
       </div>
       <div class="col-md-6">
         <div class="incremental-counter totalspent"></div>
@@ -21,14 +21,14 @@
         <div class="incremental-counter timesbought"></div>
       </div>
       <div class="col-md-6 detailsviewnochart">
-        Times bought
+        {{'productdetails-timesbought'|translate}}
       </div>
     </div>
 
     <hr />
     <div class="col-md-12">
       <div class="col-md-6 detailsviewnochart">
-        Amount bought
+        {{'productdetails-amountbought'|translate}}
       </div>
       <div class="col-md-6">
         <div class="incremental-counter amountbought"></div>
@@ -37,7 +37,7 @@
     <hr/>
     <div class="col-md-12">
       <div class="col-md-6 detailsviewnochart">
-        Average cost
+        {{'productdetails-avaragecost'|translate}}
       </div>
       <div class="col-md-6">
         <div class="incremental-counter averagecost"></div>
@@ -49,13 +49,13 @@
 
       </div>
       <div class="col-md-6 detailsviewchart">
-        Times bought in shops
+        {{'productdetails-timesboughtshops'|translate}}
       </div>
     </div>
     <hr />
     <div class="col-md-12">
       <div class="col-md-6 detailsviewchart">
-        Average cost in shops
+        {{'productdetails-avaragecostshops'|translate}}
       </div>
       <div class="col-md-6">
 
@@ -67,22 +67,21 @@
 
       </div>
       <div class="col-md-6 detailsviewchart">
-        Percent of all plans in this period
+        {{'productdetails-percentplans'|translate}}
       </div>
     </div>
     <hr />
     <div class="col-md-12">
       <div class="col-md-6">
-        @Model.LastBought
       </div>
       <div class="col-md-6">
-        Last bought
+        {{'productdetails-lastbought'|translate}}
       </div>
     </div>
     <hr />
     <div class="col-md-12">
       <div class="col-md-6 detailsviewnochart">
-        Most bought at once
+        {{'productdetails-mostbought'|translate}}
       </div>
       <div class="col-md-6">
         <div class="incremental-counter mostbought"></div>
@@ -96,10 +95,10 @@
         <h2>{{product.name}}</h2>
       </div>
       <div *ngIf="hasCategories">
-        Categories:
+        {{'productdetails-categories'|translate}}
       </div>
       <div *ngIf="!hasCategories">
-        No categories found.
+        {{'productdetails-nocategories'|translate}}
       </div>
       <div *ngIf="hasCategories" class="col-md-offset-2" >
         <li *ngFor="let category of categories">
@@ -112,36 +111,37 @@
     </div>
     <div class="col-md-6">
       <div class="detailsbuttonsdiv">
-        <a class="btn btn-default" (click)="GoBack()">Back to List</a><br/>
-        <a class="btn btn-warning" (click)="Edit()">Edit</a><br />
-        <a class="btn btn-danger" (click)="Delete()">Delete</a><br />
+        <a class="btn btn-default" (click)="GoBack()">{{'common-goback'|translate}}</a><br/>
+        <a class="btn btn-warning" (click)="Edit()">{{'common-edit'|translate}}</a><br />
+        <a class="btn btn-danger" (click)="Delete()">{{'common-delete'|translate}}</a><br />
       </div>
     </div>
   </div>
   <div class="col-md-12">
   </div>
 
-  <p-dialog header="Edit product" [(visible)]="editDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
+  <p-dialog header="{{'productdetails-edit'|translate}}" [(visible)]="editDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
 
-    <label>EditProduct</label>
+    <label>{{'productdetails-edit'|translate}}</label>
     <div>
       <input type="text" [(ngModel)]="product.name">
-      <p-multiSelect [options] = "multiSelectCategories" data-placeholder="Select categories" class="forminput chosen-group-select" multiple="multiple" [(ngModel)]="currentCategories">
+      <!-- {{'productdetails-selectcategories'|translate}} -->
+      <p-multiSelect [options] = "multiSelectCategories" data-placeholder="" class="forminput chosen-group-select" multiple="multiple" [(ngModel)]="currentCategories">
 
       </p-multiSelect>
     </div>
     <p-footer>
-      <button type="button" pButton icon="fa-check" (click)="ConfirmEdit()" label="Save"></button>
-      <button type="button" pButton icon="fa-close" (click)="CancelEdit()" label="Cancel"></button>
+      <button type="button" pButton (click)="ConfirmEdit()" label="{{'common-save'|translate}}"></button>
+      <button type="button" pButton (click)="CancelEdit()" label="{{'common-cancel'|translate}}"></button>
     </p-footer>
   </p-dialog>
 
-  <p-dialog header="Remove shop" [(visible)]="removeDialogDisplay" [width]="width" [height]="height">
+  <p-dialog header="{{'productdetails-remove'|translate}}" [(visible)]="removeDialogDisplay" [width]="width" [height]="height">
 
-    <label>Are you sure you want to delete this product?</label>
+    <label>{{'productdetails-yousure'|translate}}</label>
     <p-footer>
-      <button type="button" pButton icon="fa-check" (click)="ConfirmDelete()" label="Delete"></button>
-      <button type="button" pButton icon="fa-close" (click)="CancelDelete()" label="Cancel"></button>
+      <button type="button" pButton (click)="ConfirmDelete()" label="{{'common-delete'|translate}}"></button>
+      <button type="button" pButton (click)="CancelDelete()" label="{{'common-cancel'|translate}}"></button>
     </p-footer>
   </p-dialog>
 </div>

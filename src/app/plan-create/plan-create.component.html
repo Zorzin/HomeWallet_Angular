@@ -1,22 +1,22 @@
 <div *ngIf="!canCreate">
-  <h1>Sorry, you can have only one plan active.</h1>
+  <h1>{{'plancreate-sorry'|translate}}</h1>
 </div>
 <div *ngIf="canCreate">
   <div class="form-horizontal">
-    <h4>Plan</h4>
+    <h4>{{'plancreate-plan'|translate}}</h4>
     <hr />
-    <p>I want to spend no more than</p>
+    <p>{{'plancreate-iwanttospend'|translate}}</p>
     <input type="number" min="0" class="form-control" [(ngModel)]="amount" />
-    <p>starting from </p>
-    <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="startDate"></p-calendar>
-    <p>to</p>
-    <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="endDate"></p-calendar>
+    <p>{{'plancreate-starting'|translate}}</p>
+    <p-calendar dateFormat="dd.mm.yy" placeholder="{{'plancreate-date'|translate}}" [(ngModel)]="startDate"></p-calendar>
+    <p>{{'plancreate-to'|translate}}</p>
+    <p-calendar dateFormat="dd.mm.yy" placeholder="{{'plancreate-date'|translate}}" [(ngModel)]="endDate"></p-calendar>
 
-    <input type="submit" value="Create" class="btn btn-success" (click)="create()" />
+    <input type="submit" value="{{'common-create'|translate}}" class="btn btn-success" (click)="create()" />
   </div>
 </div>
 
 
 <div>
-  <a class="btn btn-info" (click)="goToList()" >Back to List</a>
+  <a class="btn btn-info" (click)="goToList()" >{{'common-goback'|translate}}</a>
 </div>

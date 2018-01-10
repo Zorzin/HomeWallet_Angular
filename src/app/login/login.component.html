@@ -2,17 +2,17 @@
 
   <div class="vertical-form sign-in" >
     <legend>
-      Log In
+      {{'login-log-in'|translate}}
     </legend>
-    <input [(ngModel)]="user.login" type="text" placeholder="Login" label="false" spellcheck="false" class="is-sensitive" value="" id="user_email" />
-    <input [(ngModel)]="user.password" placeholder="Password" label="false" autocomplete="off" class="is-sensitive" type="password" id="user_password" />
-    <input type="submit" name="commit" value="Log In" (click)="onLogin()"/>
-    <p><a (click)="onForgot()">Forgot password?</a></p>
+    <input [(ngModel)]="user.login" type="text" placeholder="{{'login-login'|translate}}" label="false" spellcheck="false" class="is-sensitive" value="" id="user_email" />
+    <input [(ngModel)]="user.password" placeholder="{{'login-password'|translate}}" label="false" autocomplete="off" class="is-sensitive" type="password" id="user_password" />
+    <input type="submit" name="commit" value="{{'login-log-in'|translate}}" (click)="onLogin()"/>
+    <p><a (click)="onForgot()">{{'login-forgot'|translate}}</a></p>
   </div>
   <div class='footer'>
     <p>
-      Don't have an account?
-      <a (click)="onRegister()">Sign Up</a>
+      {{'login-donthave'|translate}}
+      <a (click)="onRegister()">{{'login-signup'|translate}}</a>
     </p>
   </div>
 </div>

@@ -7,8 +7,12 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 export class UserInfoService {
 
   private loginAnnouncedSource = new Subject<number>();
+  private themeAnnouncedSource = new Subject<string>();
+  private langAnnouncedSource = new Subject<string>();
 
   loginAnnounced$ = this.loginAnnouncedSource.asObservable();
+  languageAnnounced$ = this.langAnnouncedSource.asObservable();
+  themeAnnounced$ = this.themeAnnouncedSource.asObservable();
   private apiUrl = 'http://localhost:54044/api/Users/';  // URL to web
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -55,11 +59,16 @@ export class UserInfoService {
 
   changeUserTheme(theme: string) {
     return this.http.post(this.apiUrl+"theme/"+this.getUserId()+"/"+theme,null,{headers:this.headers,responseType: 'text' })
-      .toPromise();
+      .toPromise().then(()=>{
+        this.themeAnnouncedSource.next(theme);
+      });
   }
 
   changeUserLanguage(language: string) {
     return this.http.post(this.apiUrl+"language/"+this.getUserId()+"/"+language,null,{headers:this.headers,responseType: 'text' })
-      .toPromise();
+      .toPromise().then(()=>{
+        localStorage.setItem('lang',language);
+        this.langAnnouncedSource.next(language);
+      });
   }
 }

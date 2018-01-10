@@ -1,6 +1,6 @@
 <div *ngIf="isDataLoaded">
   <p>
-    <a class="btn btn-success" (click)="Create()">Create New</a>
+    <a class="btn btn-success" (click)="Create()">{{'products-create'|translate}}</a>
   </p>
 
   <div class="col-md-12">
@@ -15,22 +15,22 @@
     </div>
   </div>
 
-  <p-dialog header="Create product" [(visible)]="displayCreateDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
+  <p-dialog header="{{'products-createproduct'|translate}}" [(visible)]="displayCreateDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
     <div id="newproduct">
       <div class="createproductname">
-        <label>Name:</label>
-        <input class="forminput" placeholder="Name" [(ngModel)]="newProductName" />
+        <label>{{'products-name'|translate}}:</label>
+        <input class="forminput" placeholder="{{'products-name'|translate}}" [(ngModel)]="newProductName" />
       </div>
       <div class="createproductcategories">
-        <label>Categories:</label>
+        <label>{{'products-categories'|translate}}:</label>
         <p-multiSelect [options] = "multiSelectCategories" data-placeholder="Select categories" class="forminput chosen-group-select" multiple="multiple" [(ngModel)]="newProductCategories">
 
         </p-multiSelect>
       </div>
     </div>
     <p-footer>
-      <button type="button" pButton icon="fa-check" (click)="ConfirmCreate()" label="Create"></button>
-      <button type="button" pButton icon="fa-close" (click)="Cancel()" label="Cancel"></button>
+      <button type="button" pButton (click)="ConfirmCreate()" label="{{'common-save'|translate}}"></button>
+      <button type="button" pButton (click)="Cancel()" label="{{'common-cancel'|translate}}"></button>
     </p-footer>
   </p-dialog>
 </div>

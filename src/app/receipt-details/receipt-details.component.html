@@ -2,7 +2,7 @@
   <div class="receiptcreate">
     <div class=" col-md-5 col-sm-12 col-xs-12">
       <div class="col-md-2 col-sm-12 col-xs-12">
-        <label>Date</label>
+        <label>{{'receipt-date'|translate}}</label>
       </div>
       <div class="col-md-10 col-sm-12 col-xs-12 date-div">
         {{receipt.purchaseDate}}
@@ -15,7 +15,7 @@
 
     <div class=" col-md-6 col-sm-12 col-xs-12">
       <div class=" col-md-2 col-sm-12 col-xs-12">
-        <label>Shop</label>
+        <label>{{'receipt-shop'|translate}}</label>
       </div>
       <div class=" col-md-8 col-sm-8 col-xs-8">
             {{receipt.shopName}}
@@ -28,16 +28,16 @@
 
     <div class="tableheaders col-md-12 col-sm-12 col-xs-12">
       <div class="col-md-5 col-md-offset-1">
-        <label>Name</label>
+        <label>{{'receipt-name'|translate}}</label>
       </div>
       <div class="col-md-2">
-        <label>Amount</label>
+        <label>{{'receipt-amount'|translate}}</label>
       </div>
       <div class="col-md-2">
-        <label>Price</label>
+        <label>{{'receipt-price'|translate}}</label>
       </div>
       <div class="col-md-2">
-        <label>Total</label>
+        <label>{{'receipt-total'|translate}}</label>
       </div>
     </div>
 
@@ -68,7 +68,7 @@
 
     <div class="productstotal col-md-12 col-sm-12">
       <div class="col-md-offset-9 col-md-1">
-        <label>Total:</label>
+        <label>{{'receipt-total'|translate}}:</label>
       </div>
       <div class="col-md-2">
         <label>{{receipt.totalValue}} {{currency}}</label>
@@ -83,17 +83,17 @@
 </div>
 
 <div class="col-md-12">
-  <a class="btn btn-danger" (click)="onDelete()">Remove</a>
-  <a class="btn btn-warning" (click)="goEdit()">Edit</a>
-  <a class="btn btn-default" (click)="goBack()">Back to List</a>
+  <a class="btn btn-danger" (click)="onDelete()">{{'common-remove'|translate}}</a>
+  <a class="btn btn-warning" (click)="goEdit()">{{'common-edit'|translate}}</a>
+  <a class="btn btn-default" (click)="goBack()">{{'common-goback'|translate}}</a>
 </div>
 
 
 
-<p-dialog header="Remove?" [(visible)]="removeDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
-  <label>Remove this receipt?</label>
+<p-dialog header="{{'receipt-remove'|translate}}" [(visible)]="removeDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
+  <label>{{'receipt-yousure'|translate}}</label>
   <p-footer>
-    <button type="button" pButton icon="fa-check" (click)="onRemoveConfirm()" label="Remove"></button>
-    <button type="button" pButton icon="fa-close" (click)="removeDialogDisplay=false" label="Cancel"></button>
+    <button type="button" pButton (click)="onRemoveConfirm()" label="{{'common-remove'|translate}}"></button>
+    <button type="button" pButton (click)="removeDialogDisplay=false" label="{{'common-cancel'|translate}}"></button>
   </p-footer>
 </p-dialog>

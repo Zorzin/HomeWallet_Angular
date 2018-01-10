@@ -1,12 +1,12 @@
 <div *ngIf="isDataLoaded">
   <br/>
   <ul class="nav nav-tabs detailstab">
-    <li role="presentation" [ngClass]="details ? 'active' : ''" ><a id="detailstab" (click)="SetDetails()">Details</a></li>
-    <li role="presentation" [ngClass]="details ? '' : 'active'"><a id="statisticstab" (click)="SetStatistics()">Statistics</a></li>
+    <li role="presentation" [ngClass]="details ? 'active' : ''" ><a id="detailstab" (click)="SetDetails()">{{'shopdetails-details'|translate}}</a></li>
+    <li role="presentation" [ngClass]="details ? '' : 'active'"><a id="statisticstab" (click)="SetStatistics()">{{'shopdetails-statistics'|translate}}</a></li>
   </ul>
   <br />
   <div id="statisticsdiv" *ngIf="!details">
-    Statistics
+    {{'shopdetails-statistics'|translate}}
   </div>
   <div class="col-md-12" id="detailsdiv" *ngIf="details">
     <div class="col-md-6">
@@ -15,10 +15,10 @@
       </div>
 
       <div *ngIf="hasProducts">
-        Products bought in this shop:
+        {{'shopdetails-productsbought'|translate}}
       </div>
       <div *ngIf="!hasProducts">
-        No products were found bought in this shop.
+        {{'shopdetails-noproducts'|translate}}
       </div>
 
       <div *ngIf="hasProducts" class="col-md-offset-2" >
@@ -33,9 +33,9 @@
     </div>
     <div class="col-md-6">
       <div class="detailsbuttonsdiv">
-        <a class="btn btn-default" (click)="GoBack()">Back to List</a><br/>
-        <a class="btn btn-warning" (click)="Edit()">Edit</a><br />
-        <a class="btn btn-danger" (click)="Delete()">Delete</a><br />
+        <a class="btn btn-default" (click)="GoBack()">{{'common-goback'|translate}}</a><br/>
+        <a class="btn btn-warning" (click)="Edit()">{{'common-edit'|translate}}</a><br />
+        <a class="btn btn-danger" (click)="Delete()">{{'common-delete'|translate}}</a><br />
       </div>
     </div>
   </div>
@@ -43,24 +43,24 @@
   </div>
 
 
-  <p-dialog header="Edit name" [(visible)]="editDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
+  <p-dialog header="{{'shopdetails-edit'|translate}}" [(visible)]="editDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
 
     <div class="shopmodal">
-      <label>Type new shop name:</label>
+      <label>{{'shopdetails-name'|translate}}:</label>
       <input type="text" [(ngModel)]="shop.name">
     </div>
     <p-footer>
-      <button type="button" pButton icon="fa-check" (click)="ConfirmEdit()" label="Save"></button>
-      <button type="button" pButton icon="fa-close" (click)="CancelEdit()" label="Cancel"></button>
+      <button type="button" pButton (click)="ConfirmEdit()" label="{{'common-save'|translate}}"></button>
+      <button type="button" pButton (click)="CancelEdit()" label="{{'common-cancel'|translate}}"></button>
     </p-footer>
   </p-dialog>
 
-  <p-dialog header="Remove shop" [(visible)]="removeDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
+  <p-dialog header="{{'shopdetails-delete'|translate}}" [(visible)]="removeDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
 
-    <label>Are you sure you want to delete this shop? This will delete all receipts from this shop.</label>
+    <label>{{'shopdetails-yousure'|translate}}</label>
     <p-footer>
-      <button type="button" pButton icon="fa-check" (click)="ConfirmDelete()" label="Delete"></button>
-      <button type="button" pButton icon="fa-close" (click)="CancelDelete()" label="Cancel"></button>
+      <button type="button" pButton (click)="ConfirmDelete()" label="{{'common-delete'|translate}}"></button>
+      <button type="button" pButton (click)="CancelDelete()" label="{{'common-cancel'|translate}}"></button>
     </p-footer>
   </p-dialog>
 </div>

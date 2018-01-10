@@ -1,21 +1,21 @@
 <div *ngIf="isDataLoaded">
   <div *ngIf="!canEdit">
-    <h1>Sorry, you can edit only current plans.</h1>
+    <h1>{{'planedit-sorry'|translate}}</h1>
   </div>
   <div *ngIf="canEdit">
-    <p>I want to spend no more than</p>
+    <p>{{'planedit-iwanttospend'|translate}}</p>
     <input [(ngModel)]="plan.amount" type="number" min="0" class="form-control" />
-    <p>starting from </p>
-    <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="plan.startDate"></p-calendar>
-    <p>to</p>
-    <p-calendar dateFormat="dd.mm.yy" placeholder="Date" [(ngModel)]="plan.endDate"></p-calendar>
+    <p>{{'planedit-starting'|translate}}</p>
+    <p-calendar dateFormat="dd.mm.yy" placeholder="{{'planedit-date'|translate}}" [(ngModel)]="plan.startDate"></p-calendar>
+    <p>{{'planedit-to'|translate}}</p>
+    <p-calendar dateFormat="dd.mm.yy" placeholder="{{'planedit-date'|translate}}" [(ngModel)]="plan.endDate"></p-calendar>
     <br>
-    <input type="submit" value="Save" class="btn btn-success" (click)="onSave()" />
+    <input type="submit" value="{{'common-save'|translate}}" class="btn btn-success" (click)="onSave()" />
   </div>
 </div>
 
 <div>
-  <a (click)="goToDetails()">Back to Details</a>
+  <a (click)="goToDetails()">{{'common-goback'|translate}}</a>
 </div>
 <div *ngIf="!isDataLoaded">
   <mat-spinner></mat-spinner>

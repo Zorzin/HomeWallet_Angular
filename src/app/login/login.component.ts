@@ -23,8 +23,9 @@ export class LoginComponent implements OnInit {
 
   onLogin(){
     this.loginService.login(this.user).then((response)=>{
-      console.log(response);
       this.userIdService.setUserId(parseInt(response,10));
+      this.userIdService.getUserLanguage().then(response=>this.userIdService.changeUserLanguage(JSON.parse(response)));
+
       this.router.navigate(['/receipts']);
     })
   }

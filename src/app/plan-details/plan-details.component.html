@@ -1,11 +1,11 @@
 <div *ngIf="isDataLoaded">
   <div class="col-md-12 planviewheader">
-    <p>Plan for {{planDetails.startDate.toLocaleDateString()}} - {{planDetails.endDate.toLocaleDateString()}}</p>
+    <p>{{'plandetails-planfor'|translate}} {{planDetails.startDate.toLocaleDateString()}} - {{planDetails.endDate.toLocaleDateString()}}</p>
   </div>
 
   <div class="col-md-12">
     <div class="col-md-4 col-md-offset-1 planviewtextnochart">
-      <p>You want to spend no more than {{planDetails.amount}} zł</p>
+      <p>{{'plandetails-youwanttospend'|translate}} {{planDetails.amount}} {{currency}}</p>
     </div>
     <div class="col-md-6 col-md-offset-1">
       <div class="incremental-counter" data-value="@Model.Amount"></div>
@@ -20,7 +20,7 @@
 
     </div>
     <div class="col-md-4 col-md-offset-1 planviewtextchart">
-      <p>To this day you spend {{planDetails.alreadySpent}} zł which is {{planDetails.alreadySpentPercent}}%. You have {{planDetails.moneyLeft}} zł left.</p>
+      <p>{{'plandetails-tothisday'|translate}} {{planDetails.alreadySpent}} {{currency}} {{'plandetails-whichis'|translate}} {{planDetails.alreadySpentPercent}}%. {{'plandetails-youhave'|translate}} {{planDetails.moneyLeft}} {{currency}} {{'plandetails-left'|translate}}.</p>
     </div>
   </div>
 
@@ -28,7 +28,7 @@
 
   <div class="col-md-12 chartdiv">
     <div class="col-md-4 col-md-offset-1 planviewtextchart">
-      <p>{{planDetails.daysLeft}} days left until the end of the plan</p>
+      <p>{{planDetails.daysLeft}} {{'plandetails-daysleft'|translate}}</p>
     </div>
     <div class="col-md-6 col-md-offset-1">
 
@@ -42,23 +42,23 @@
       <div class="incremental-counteraverage" data-value="@Model.Average"></div>
     </div>
     <div class="col-md-4 col-md-offset-1 planviewtextnochart">
-      <p>On average you have to spend no more than {{planDetails.averageLeft}} zł a day</p>
+      <p>{{'plandetails-onavarage'|translate}} {{planDetails.averageLeft}} zł {{'plandetails-aday'|translate}}</p>
     </div>
   </div>
 
 
   <div>
-    <a class="btn btn-default" (click)="goToList()">Back to List</a>
-    <a *ngIf="canEdit" class="btn btn-info" (click)="goEdit()">Edit</a>
-    <a *ngIf="canEdit" class="btn btn-danger" (click)="onRemove()">Delete</a>
+    <a class="btn btn-default" (click)="goToList()">{{'common-goback'|translate}}</a>
+    <a *ngIf="canEdit" class="btn btn-info" (click)="goEdit()">{{'common-edit'|translate}}</a>
+    <a *ngIf="canEdit" class="btn btn-danger" (click)="onRemove()">{{'common-delete'|translate}}</a>
   </div>
 
-  <p-dialog header="Remove category" [(visible)]="showRemoveDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
+  <p-dialog header="{{'plandetails-delete'|translate}}" [(visible)]="showRemoveDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
 
-    <label>Are you sure you want to delete this plan?</label>
+    <label>{{'plandetails-yousure'|translate}}</label>
     <p-footer>
-      <button type="button" pButton icon="fa-check" (click)="ConfirmDelete()" label="Delete"></button>
-      <button type="button" pButton icon="fa-close" (click)="CancelDelete()" label="Cancel"></button>
+      <button type="button" pButton (click)="ConfirmDelete()" label="{{'common-delete'|translate}}"></button>
+      <button type="button" pButton (click)="CancelDelete()" label="{{'common-cancel'|translate}}"></button>
     </p-footer>
   </p-dialog>
 </div>

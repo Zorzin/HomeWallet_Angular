@@ -1,10 +1,10 @@
 <div *ngIf="dataLoaded">
   <div *ngIf="!login">
-    <p >Login to start using HomeWallet</p>
+    <p >{{'receipts-login'|translate}}</p>
   </div>
   <div *ngIf="login">
     <div *ngIf="!dates">
-      <p >Add your first receipt.</p>
+      <p>{{'receipts-addfirst'|translate}}</p>
     </div>
 
     <div *ngIf="addToday || !dates" class="container">
@@ -17,10 +17,10 @@
       <a (click)="onCreate()">
         <div class="col-md-3 col-xs-6 receiptsummary">
           <div class="shoptextfield">
-            <h1>Add</h1>
+            <h1>{{'receipts-add'|translate}}</h1>
           </div>
           <div class="pricetextfield">
-            <h3>new</h3>
+            <h3>{{'receipts-new'|translate}}</h3>
           </div>
         </div>
       </a>
@@ -33,7 +33,7 @@
             <label class="datefield">{{date[0].purchaseDate}}</label>
           </div>
           <div class="col-xs-6 col-md-4 summarybutton">
-            <a class="btn btn-default" (click)="onSummary(date[0].purchaseDate)" >Summary</a>
+            <a class="btn btn-default" (click)="onSummary(date[0].purchaseDate)" >{{'receipts-summary'|translate}}</a>
           </div>
         </div>
         <hr />
@@ -53,10 +53,10 @@
         <a (click)="onCreate()">
           <div class="col-md-3 col-xs-6 receiptsummary">
             <div class="shoptextfield">
-              <h1>Add</h1>
+              <h1>{{'receipts-add'|translate}}</h1>
             </div>
             <div class="pricetextfield">
-              <h3>new</h3>
+              <h3>{{'receipts-new'|translate}}</h3>
             </div>
           </div>
         </a>

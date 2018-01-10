@@ -11,11 +11,11 @@
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><a (click)="goToOptions()">Options</a></li>
+        <li><a (click)="goToOptions()">{{ 'navbar-options' | translate}}</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a (click)="onAccount()">Account</a></li>
-        <li><a (click)="onLogOut()">Logout</a></li>
+        <li><a (click)="onAccount()">{{ 'navbar-account' | translate}}</a></li>
+        <li><a (click)="onLogOut()">{{ 'navbar-logout' | translate}}</a></li>
       </ul>
     </div>
   </div>

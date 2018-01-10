@@ -1,6 +1,6 @@
 <div *ngIf="isDataLoaded">
   <p>
-    <a class="btn btn-success" (click)="Create()">Create New</a>
+    <a class="btn btn-success" (click)="Create()">{{'shops-create'|translate}}</a>
   </p>
 
   <div class="col-md-12">
@@ -15,15 +15,15 @@
     </div>
   </div>
 
-  <p-dialog header="Create shop" [(visible)]="displayCreateDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
+  <p-dialog header="{{'shops-createshop'|translate}}" [(visible)]="displayCreateDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
 
     <div class="shopmodal">
-      <label>Type new shop name:</label>
+      <label>{{'shops-name'|translate}}:</label>
       <input type="text" [(ngModel)]="newShopName">
     </div>
     <p-footer>
-      <button type="button" pButton icon="fa-check" (click)="ConfirmCreate()" label="Create"></button>
-      <button type="button" pButton icon="fa-close" (click)="Cancel()" label="Cancel"></button>
+      <button type="button" pButton (click)="ConfirmCreate()" label="{{'common-add'|translate}}"></button>
+      <button type="button" pButton (click)="Cancel()" label="{{'common-cancel'|translate}}"></button>
     </p-footer>
   </p-dialog>
 </div>

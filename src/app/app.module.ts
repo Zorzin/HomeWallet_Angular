@@ -9,7 +9,7 @@ import {ReceiptProductService} from "./Services/receiptproduct.service";
 import { ReceiptDetailsComponent } from './receipt-details/receipt-details.component';
 import {ProductService} from "./Services/product.service";
 import { ReceiptCreateComponent } from './receipt-create/receipt-create.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {DialogModule} from 'primeng/primeng';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ButtonModule} from 'primeng/primeng';
@@ -50,6 +50,13 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {AccountService} from "./Services/account.service";
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {TranslateModule,TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
 @NgModule({
   entryComponents:[PasswordSuccessDialog],
   declarations: [
@@ -93,7 +100,14 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatSelectModule,
     MatTabsModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers:
     [
