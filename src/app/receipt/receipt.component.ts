@@ -15,12 +15,15 @@ import {UserInfoService} from "../Services/user-id.service";
 export class ReceiptComponent implements OnInit {
 
   dates: Array<Array<any>>;
-  receipts: any;
+  datesToView: Array<Array<any>>;
+  private loadButton:boolean = true;
+  private receipts: any;
   private login:boolean;
-  private addToday:boolean
+  private addToday:boolean;
   private todayString:string;
   private dataLoaded:boolean;
   private currency:string;
+  private lastId: number;
 
   constructor(private receiptService: ReceiptService,
               private shopService: ShopService,
@@ -29,6 +32,8 @@ export class ReceiptComponent implements OnInit {
               private userService: UserInfoService) { }
 
   ngOnInit() {
+    this.datesToView = [[]];
+    this.lastId = 0;
     this.checkUser();
     this.dataLoaded = false;
     this.todayString = new Date().toLocaleDateString();
@@ -37,6 +42,34 @@ export class ReceiptComponent implements OnInit {
     this.location.subscribe((x) => {
       this.getReceipts();
     });
+  }
+
+  getReceiptToView(){
+    let last = this.lastId;
+    if(!this.dates)
+    {
+      this.hideButton();
+      return;
+    }
+    for(let i=last;i<last+5;i++)
+    {
+      if(this.dates.length>i)
+      {
+        this.datesToView[i] = [];
+        for(let date of this.dates[i]){
+          this.datesToView[i].push(date);
+        }
+      }
+      else{
+        this.hideButton();
+        return;
+      }
+      this.lastId = i;
+    }
+  }
+
+  hideButton(){
+    this.loadButton = false;
   }
 
   checkUser()
@@ -63,6 +96,7 @@ export class ReceiptComponent implements OnInit {
         {
           this.addToday = false;
         }
+        this.getReceiptToView();
         this.dataLoaded = true;
       });
   }

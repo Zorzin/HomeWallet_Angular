@@ -27,7 +27,7 @@
     </div>
 
     <div *ngIf="dates" >
-      <div *ngFor="let date of dates" class="container">
+      <div *ngFor="let date of datesToView" class="container">
         <div class="row dayheader">
           <div class="col-xs-6 col-md-8 datetextfield">
             <label class="datefield">{{date[0].purchaseDate}}</label>
@@ -62,6 +62,10 @@
         </a>
       </div>
     </div>
+    <div class="col-md-12 morebuttondiv">
+      <button *ngIf="loadButton" class="btn btn-default showmorebutton" (click)="getReceiptToView()">{{'receipts-load'|translate}}</button>
+    </div>
+
   </div>
 </div>
 <div *ngIf="!dataLoaded">
