@@ -120,30 +120,6 @@
   <div class="col-md-12">
   </div>
 
-  <p-dialog header="{{'productdetails-edit'|translate}}" [(visible)]="editDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
-
-    <label>{{'productdetails-edit'|translate}}</label>
-    <div>
-      <input type="text" [(ngModel)]="product.name">
-      <!-- {{'productdetails-selectcategories'|translate}} -->
-      <p-multiSelect [options] = "multiSelectCategories" data-placeholder="" class="forminput chosen-group-select" multiple="multiple" [(ngModel)]="currentCategories">
-
-      </p-multiSelect>
-    </div>
-    <p-footer>
-      <button type="button" pButton (click)="ConfirmEdit()" label="{{'common-save'|translate}}"></button>
-      <button type="button" pButton (click)="CancelEdit()" label="{{'common-cancel'|translate}}"></button>
-    </p-footer>
-  </p-dialog>
-
-  <p-dialog header="{{'productdetails-remove'|translate}}" [(visible)]="removeDialogDisplay" [width]="width" [height]="height">
-
-    <label>{{'productdetails-yousure'|translate}}</label>
-    <p-footer>
-      <button type="button" pButton (click)="ConfirmDelete()" label="{{'common-delete'|translate}}"></button>
-      <button type="button" pButton (click)="CancelDelete()" label="{{'common-cancel'|translate}}"></button>
-    </p-footer>
-  </p-dialog>
 </div>
 <div *ngIf="!isDataLoaded">
   <mat-spinner></mat-spinner>

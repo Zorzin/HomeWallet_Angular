@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>{{header|translate}}</h2>
+<mat-dialog-content>
+  <label>{{content|translate}}</label>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="Delete()">{{'common-remove'|translate}}</button>
+  <button mat-button mat-dialog-close (click)="Cancel()">{{'common-cancel'|translate}}</button>
+</mat-dialog-actions>

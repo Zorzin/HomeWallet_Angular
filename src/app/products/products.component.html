@@ -15,24 +15,6 @@
     </div>
   </div>
 
-  <p-dialog header="{{'products-createproduct'|translate}}" [(visible)]="displayCreateDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
-    <div id="newproduct">
-      <div class="createproductname">
-        <label>{{'products-name'|translate}}:</label>
-        <input class="forminput" placeholder="{{'products-name'|translate}}" [(ngModel)]="newProductName" />
-      </div>
-      <div class="createproductcategories">
-        <label>{{'products-categories'|translate}}:</label>
-        <p-multiSelect [options] = "multiSelectCategories" data-placeholder="Select categories" class="forminput chosen-group-select" multiple="multiple" [(ngModel)]="newProductCategories">
-
-        </p-multiSelect>
-      </div>
-    </div>
-    <p-footer>
-      <button type="button" pButton (click)="ConfirmCreate()" label="{{'common-save'|translate}}"></button>
-      <button type="button" pButton (click)="Cancel()" label="{{'common-cancel'|translate}}"></button>
-    </p-footer>
-  </p-dialog>
 </div>
 <div *ngIf="!isDataLoaded">
   <mat-spinner></mat-spinner>

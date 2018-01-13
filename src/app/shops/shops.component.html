@@ -15,17 +15,7 @@
     </div>
   </div>
 
-  <p-dialog header="{{'shops-createshop'|translate}}" [(visible)]="displayCreateDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
 
-    <div class="shopmodal">
-      <label>{{'shops-name'|translate}}:</label>
-      <input type="text" [(ngModel)]="newShopName">
-    </div>
-    <p-footer>
-      <button type="button" pButton (click)="ConfirmCreate()" label="{{'common-add'|translate}}"></button>
-      <button type="button" pButton (click)="Cancel()" label="{{'common-cancel'|translate}}"></button>
-    </p-footer>
-  </p-dialog>
 </div>
 <div *ngIf="!isDataLoaded">
   <mat-spinner></mat-spinner>

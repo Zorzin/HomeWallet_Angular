@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {CategoryService} from "../Services/category.service";
 import {UserInfoService} from "../Services/user-id.service";
+import {CategoryCreateDialogComponent} from "../dialogs/category-create-dialog/category-create-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-categories',
@@ -13,15 +15,13 @@ export class CategoriesComponent implements OnInit {
   private isDataLoaded: boolean;
   private width:number;
   private height:number;
-  products: any;
-  newCategoryName: string;
-
+  private products: any;
   private categories: any;
-  private displayCreateDialog: boolean;
 
   constructor(private router: Router,
               private categoryService: CategoryService,
-              private userService: UserInfoService) { }
+              private userService: UserInfoService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getWidthAndHeight();
@@ -51,19 +51,14 @@ export class CategoriesComponent implements OnInit {
   }
 
   Create() {
-    this.displayCreateDialog=true;
-  }
-
-  ConfirmCreate() {
-    this.categoryService.createCategory(this.newCategoryName).add(()=>{
-      this.getCategories();
-      this.displayCreateDialog=false;
-      this.newCategoryName = "";
+    let dialogRef = this.dialog.open(CategoryCreateDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
     });
-  }
 
-  Cancel() {
-    this.displayCreateDialog=false;
+    dialogRef.afterClosed().subscribe(result => {
+      this.getCategories();
+    });
   }
 
   private getWidthAndHeight() {

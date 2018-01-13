@@ -3,6 +3,8 @@ import {ShopService} from "../Services/shop.service";
 import {Shop} from "../Models/shop";
 import {Router} from "@angular/router";
 import {UserInfoService} from "../Services/user-id.service";
+import {ShopCreateDialogComponent} from "../dialogs/shop-create-dialog/shop-create-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-shops',
@@ -15,17 +17,16 @@ export class ShopsComponent implements OnInit {
   private height:number;
   private shops: any;
   private isDataLoaded: boolean;
-  private displayCreateDialog: boolean;
-  private newShopName: string;
 
   constructor(private shopService: ShopService,
               private router: Router,
-              private userService:UserInfoService) { }
+              private userService:UserInfoService,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getWidthAndHeight();
     this.checkUser();
-    this.GetShops();
+    this.getShops();
   }
 
   checkUser()
@@ -36,7 +37,7 @@ export class ShopsComponent implements OnInit {
     }
   }
 
-  private GetShops() {
+  private getShops() {
     this.shopService.getShops().then((result)=>{
       this.shops = result;
       this.isDataLoaded = true;
@@ -48,19 +49,14 @@ export class ShopsComponent implements OnInit {
   }
 
   Create() {
-    this.displayCreateDialog=true;
-  }
 
-  ConfirmCreate() {
-    this.shopService.createShop(this.newShopName).add(()=>{
-      this.GetShops();
-      this.displayCreateDialog=false;
-      this.newShopName = "";
+    let dialogRef = this.dialog.open(ShopCreateDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
     });
-  }
-
-  Cancel() {
-    this.displayCreateDialog=false;
+    dialogRef.afterClosed().subscribe(result => {
+      this.getShops();
+    });
   }
 
   private getWidthAndHeight() {

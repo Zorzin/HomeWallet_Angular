@@ -52,13 +52,31 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {TranslateModule,TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { ShopCreateDialogComponent } from './dialogs/shop-create-dialog/shop-create-dialog.component';
+import { ProductAddDialogComponent } from './dialogs/product-add-dialog/product-add-dialog.component';
+import { ProductCreateDialogComponent } from './dialogs/product-create-dialog/product-create-dialog.component';
+import { CategoryCreateDialogComponent } from './dialogs/category-create-dialog/category-create-dialog.component';
+import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
+import { ProductEditDialogComponent } from './dialogs/product-edit-dialog/product-edit-dialog.component';
+import { ShopEditDialogComponent } from './dialogs/shop-edit-dialog/shop-edit-dialog.component';
+import { CategoryEditDialogComponent } from './dialogs/category-edit-dialog/category-edit-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-  entryComponents:[PasswordSuccessDialog],
+  entryComponents:[
+    PasswordSuccessDialog,
+    ShopCreateDialogComponent,
+    ProductAddDialogComponent,
+    ProductCreateDialogComponent,
+    CategoryCreateDialogComponent,
+    DeleteDialogComponent,
+    ProductEditDialogComponent,
+    ShopEditDialogComponent,
+    CategoryEditDialogComponent
+  ],
   declarations: [
     AppComponent,
     ReceiptComponent,
@@ -82,7 +100,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     WelcomeComponent,
     AccountComponent,
     DailySummaryComponent,
-    PasswordSuccessDialog
+    PasswordSuccessDialog,
+    ShopCreateDialogComponent,
+    ProductAddDialogComponent,
+    ProductCreateDialogComponent,
+    CategoryCreateDialogComponent,
+    DeleteDialogComponent,
+    ProductEditDialogComponent,
+    ShopEditDialogComponent,
+    CategoryEditDialogComponent
   ],
   imports: [
     AppRoutingModule,

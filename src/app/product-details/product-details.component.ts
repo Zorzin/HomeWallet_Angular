@@ -4,6 +4,9 @@ import {ProductService} from "../Services/product.service";
 import {SelectItem} from "primeng/primeng";
 import {CategoryService} from "../Services/category.service";
 import {UserInfoService} from "../Services/user-id.service";
+import {ProductEditDialogComponent} from "../dialogs/product-edit-dialog/product-edit-dialog.component";
+import {MatDialog} from "@angular/material";
+import {DeleteDialogComponent} from "../dialogs/delete-dialog/delete-dialog.component";
 
 @Component({
   selector: 'app-product-details',
@@ -31,7 +34,8 @@ export class ProductDetailsComponent implements OnInit {
     private productService: ProductService,
     private route: ActivatedRoute,
     private categoryService: CategoryService,
-    private userService: UserInfoService) { }
+    private userService: UserInfoService,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getWidthAndHeight();
@@ -104,17 +108,33 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   Edit() {
-    this.editDialogDisplay = true;
+
+    let dialogRef = this.dialog.open(ProductEditDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+      data:this.product
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.product.name = result.name;
+      this.GetCategories();
+    });
   }
 
   Delete()
   {
-    this.removeDialogDisplay = true;
-  }
+    let dialogRef = this.dialog.open(DeleteDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+      data: { content: 'productdetails-yousure',header:'productdetails-remove'},
+    });
 
-  CancelDelete()
-  {
-    this.removeDialogDisplay = false;
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.ConfirmDelete();
+      }
+    });
   }
 
   ConfirmDelete()
@@ -122,17 +142,6 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.deleteProduct(this.product.id).then(()=>{
       this.GoBack();
     });
-  }
-
-  ConfirmEdit() {
-    this.productService.updateProduct(this.product.id,this.product.name,this.currentCategories).then(()=>{
-      this.GetCategories();
-      this.editDialogDisplay=false;
-    });
-  }
-
-  CancelEdit() {
-    this.editDialogDisplay = false;
   }
 
   private getWidthAndHeight() {

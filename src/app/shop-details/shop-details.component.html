@@ -54,15 +54,6 @@
       <button type="button" pButton (click)="CancelEdit()" label="{{'common-cancel'|translate}}"></button>
     </p-footer>
   </p-dialog>
-
-  <p-dialog header="{{'shopdetails-delete'|translate}}" [(visible)]="removeDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
-
-    <label>{{'shopdetails-yousure'|translate}}</label>
-    <p-footer>
-      <button type="button" pButton (click)="ConfirmDelete()" label="{{'common-delete'|translate}}"></button>
-      <button type="button" pButton (click)="CancelDelete()" label="{{'common-cancel'|translate}}"></button>
-    </p-footer>
-  </p-dialog>
 </div>
 
 <div *ngIf="!isDataLoaded">

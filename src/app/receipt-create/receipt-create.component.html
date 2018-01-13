@@ -63,10 +63,10 @@
         {{product.Name.substring(0,60)}}
       </div>
       <div class="col-md-2 col-sm-3">
-        {{product.Amount}}
+        <input pInputText  type="number" [(ngModel)]="product.Amount" (keyup)="updateProductValues(product)" (change)="updateProductValues(product)">
       </div>
       <div class="col-md-2 col-sm-2">
-        {{product.Price}} {{currency}}
+        <input pInputText  type="number" [(ngModel)]="product.Price" (keyup)="updateProductValues(product)"  (change)="updateProductValues(product)"> {{currency}}
       </div>
       <div class="col-md-2 col-sm-2">
         {{product.TotalValue}} {{currency}}
@@ -96,52 +96,3 @@
     <a class="btn btn-success" (click)="save()">{{'common-save'|translate}}</a>
   </div>
 </div>
-
-<p-dialog  header="{{'receipt-addproduct'|translate}}" [(visible)]="productDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
-  <div class="createproductproduct" *ngIf="!newProduct">
-    <label>{{'receipt-product'|translate}}:</label>
-    <select class="forminput chosen-single-select"  [(ngModel)]="currentProduct.ID">
-      <option *ngFor="let product of products" [value] = "product.id" >
-        {{product.name}}
-      </option>
-    </select>
-  </div>
-  <div class="checkbox">
-    <label><input id="newproductcheckbox" type="checkbox" (change)="newProduct = !newProduct"/>{{'receipt-newproduct'|translate}}</label>
-  </div>
-  <div id="newproduct" *ngIf="newProduct">
-    <div class="createproductname">
-      <label>{{'receipt-name'|translate}}:</label>
-      <input class="forminput" placeholder="{{'receipt-name'|translate}}" [(ngModel)]="newProductName" />
-    </div>
-    <div class="createproductcategories">
-      <label>{{'receipt-categories'|translate}}:</label>
-      <p-multiSelect [options] = "multiSelectCategories" class="forminput chosen-group-select" multiple="multiple" [(ngModel)]="newProductCategories">
-
-      </p-multiSelect>
-    </div>
-  </div>
-  <div class="createproductamount">
-    <label>{{'receipt-amount'|translate}}:</label>
-    <input type="number" class="forminput" placeholder="{{'receipt-amount'|translate}}" [(ngModel)]="currentProduct.Amount"/>
-  </div>
-  <div class="createproductprice">
-    <label>{{'receipt-priceperunit'|translate}}:</label>
-    <input type="number" class="forminput" placeholder="{{'receipt-priceperunit'|translate}}" [(ngModel)]="currentProduct.Price"/>
-  </div>
-
-  <p-footer>
-    <button type="button" pButton (click)="addProduct()" label="{{'common-add'|translate}}"></button>
-    <button type="button" pButton (click)="productDialogDisplay=false" label="{{'common-cancel'|translate}}"></button>
-  </p-footer>
-</p-dialog>
-
-
-<p-dialog header="{{'receipt-addshop'|translate}}" [(visible)]="shopDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
-  <label>{{'receipt-name'|translate}}:</label>
-  <input type="text" #newShopName class="form-control" placeholder="{{'receipt-name'|translate}}"/>
-  <p-footer>
-    <button type="button" pButton (click)="addShop(newShopName)" label="{{'common-add'|translate}}"></button>
-    <button type="button" pButton (click)="shopDialogDisplay=false" label="{{'common-cancel'|translate}}"></button>
-  </p-footer>
-</p-dialog>

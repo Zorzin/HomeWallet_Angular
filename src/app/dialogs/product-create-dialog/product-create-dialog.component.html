@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{'products-createproduct'|translate}}</h2>
+<mat-dialog-content>
+  <div id="newproduct">
+    <div class="createproductname">
+      <label>{{'products-name'|translate}}:</label>
+      <input class="forminput" placeholder="{{'products-name'|translate}}" [(ngModel)]="newProductName" />
+    </div>
+    <div class="createproductcategories">
+      <label>{{'products-categories'|translate}}:</label>
+      <br>
+      <mat-form-field >
+        <mat-select  placeholder="{{'receipt-categories'|translate}}" [(ngModel)]="newProductCategories" multiple >
+          <mat-option *ngFor="let category of multiSelectCategories" [value]="category.value">
+            {{ category.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button type="button" id="addshopbutton" class="btn btn-success" (click)="showCategoryDialog()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="ConfirmCreate()">{{'common-create'|translate}}</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button mat-button mat-dialog-close (click)="Close()">{{'common-cancel'|translate}}</button>
+</mat-dialog-actions>

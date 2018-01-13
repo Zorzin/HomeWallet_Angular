@@ -12,6 +12,9 @@ import {ReceiptCreate} from "../Models/receipt-create";
 import {ReceiptProductPost} from "../Models/receipt-product-post";
 import {Router} from "@angular/router";
 import {UserInfoService} from "../Services/user-id.service";
+import {MatDialog} from "@angular/material";
+import {ProductAddDialogComponent} from "../dialogs/product-add-dialog/product-add-dialog.component";
+import {ShopCreateDialogComponent} from "../dialogs/shop-create-dialog/shop-create-dialog.component";
 
 @Component({
   selector: 'app-receipt-create',
@@ -23,49 +26,29 @@ export class ReceiptCreateComponent implements OnInit {
   constructor(
     private router: Router,
     private shopService: ShopService,
-    private productService: ProductService,
     private receiptService: ReceiptService,
-    private receiptProductService: ReceiptProductService,
-    private categoryService: CategoryService,
-    private userService: UserInfoService) { }
+    private userService: UserInfoService,
+    public dialog: MatDialog) { }
 
 
   private currency:string;
   private width: number;
   private height:number;
-  private receipt: Receipt;
   private shops: any;
   private newProducts: ReceiptProduct[];
-
-  private products: any;
-  private categories: any;
-  multiSelectCategories: SelectItem[];
-  currentProduct : ReceiptProduct;
-
-  newProductName: string;
-  newProductCategories: number[];
-
-  newProduct: boolean = false;
-  productDialogDisplay: boolean = false;
-  shopDialogDisplay: boolean = false;
-
-  receiptTotal: number = 0;
-  receiptShop: number;
-  receiptDate: Date;
-
+  private currentProduct : ReceiptProduct;
+  private receiptTotal: number = 0;
+  private receiptShop: number;
+  private receiptDate: Date;
 
   ngOnInit() {
     this.checkUser();
     this.getWidthAndHeight();
     this.currentProduct = new ReceiptProduct();
     this.newProducts = [];
-    this.multiSelectCategories = [];
-    this.newProductCategories = [];
     this.receiptDate = new Date();
     this.getUSerCurrency();
     this.getShops();
-    this.getProducts();
-    this.getCategories();
     this.updateTotal();
   }
 
@@ -85,35 +68,13 @@ export class ReceiptCreateComponent implements OnInit {
     this.updateTotal();
   }
 
-  addProduct()
-  {
-    if(this.newProduct)
-    {
-      this.productService.createProduct(this.newProductName,this.newProductCategories).then((response)=>{
-        this.currentProduct.Name = this.newProductName;
-        this.currentProduct.ID = parseInt(response);
-        this.afterCreateProduct();
-      })
-    }
-    else {
-      this.getProductName().then(()=>{
-        this.afterCreateProduct();
-      });
-    }
-  }
 
   private afterCreateProduct()
   {
     this.currentProduct.TotalValue = this.currentProduct.Amount * this.currentProduct.Price;
     this.newProducts.push(this.currentProduct);
     this.currentProduct = new ReceiptProduct();
-    this.newProductCategories = [];
-    this.newProductName = '';
-    this.productDialogDisplay = false;
     this.updateTotal();
-  }
-  private getProductName() {
-    return this.productService.getProduct(this.currentProduct.ID).then(response=>this.currentProduct.Name = response.name);
   }
 
   save()
@@ -135,16 +96,28 @@ export class ReceiptCreateComponent implements OnInit {
 
 
   showProductDialog() {
-    this.productDialogDisplay = true;
+    let dialogRef = this.dialog.open(ProductAddDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.currentProduct = result;
+        this.afterCreateProduct();
+      }
+    });
   }
 
   showShopDialog() {
-    this.shopDialogDisplay = true;
-  }
-
-  addShop(newShopName: any) {
-    this.shopService.createShop(newShopName.value.toString()).add(()=>{this.getShops()});
-    this.shopDialogDisplay = false;
+    let dialogRef = this.dialog.open(ShopCreateDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getShops();
+    });
   }
 
   getShops()
@@ -152,26 +125,6 @@ export class ReceiptCreateComponent implements OnInit {
     this.shopService.getShops().then(response=>this.shops = response)
   }
 
-  getProducts()
-  {
-    this.productService.getProducts().then(response=>this.products = response);
-  }
-
-
-  getCategories()
-  {
-    this.categoryService.getCategories().then((response)=>{
-      this.categories= response;
-      for (let category of this.categories)
-      {
-        let item:any = {};
-        item.value = category.id;
-        item.label = category.name;
-        this.multiSelectCategories.push(item);
-      }
-    });
-
-  }
 
   updateTotal(): any {
     let total = 0;
@@ -180,6 +133,13 @@ export class ReceiptCreateComponent implements OnInit {
       total += (product.Price * product.Amount);
     }
     this.receiptTotal = total;
+  }
+
+
+  private updateProductValues(product: ReceiptProduct)
+  {
+    product.TotalValue= product.Amount * product.Price;
+    this.updateTotal();
   }
 
   private goMainpage() {

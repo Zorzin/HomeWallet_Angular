@@ -10,6 +10,9 @@ import {SelectItem} from "primeng/primeng";
 import {CategoryService} from "../Services/category.service";
 import {ReceiptProductEdit} from "../Models/receipt-product-edit";
 import {UserInfoService} from "../Services/user-id.service";
+import {ShopCreateDialogComponent} from "../dialogs/shop-create-dialog/shop-create-dialog.component";
+import {ProductAddDialogComponent} from "../dialogs/product-add-dialog/product-add-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-receipt-edit',
@@ -24,43 +27,29 @@ export class ReceiptEditComponent implements OnInit {
   private isDataLoaded: boolean;
   private receipt: any;
   private shops:any;
-  private categories:any;
-  private products:any;
   private receiptProducts:ReceiptProductEdit[];
-
-  multiSelectCategories: SelectItem[];
-  currentNewProduct : ReceiptProductEdit;
-
-  newProductCategories: number[];
-
-  newProduct: boolean = false;
-  productDialogDisplay: boolean = false;
-  shopDialogDisplay: boolean = false;
+  private currentNewProduct : ReceiptProductEdit;
 
   constructor(
-    private categoryService: CategoryService,
     private productService: ProductService,
     private receiptProductService: ReceiptProductService,
     private shopService: ShopService,
     private receiptService: ReceiptService,
     private route: ActivatedRoute,
-    private location: Location,
     private router: Router,
-    private userService: UserInfoService
+    private userService: UserInfoService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void{
     this.checkUser();
     this.receiptProducts = [];
     this.currentNewProduct = new ReceiptProductEdit();
-    this.multiSelectCategories = [];
 
     this.route.paramMap
       .switchMap((params: ParamMap) => this.receiptService.getReceipt(+params.get('id')))
       .subscribe((receipt) => {
         this.receipt = receipt;
-        this.getCategories();
-        this.getProducts();
         this.getReceiptDate();
         this.getShopName();
         this.getReceiptProducts();
@@ -110,61 +99,42 @@ export class ReceiptEditComponent implements OnInit {
     })
   }
 
-  getCategories()
-  {
-    this.categoryService.getCategories().then((response)=>{
-      this.categories= response;
-      for (let category of this.categories)
-      {
-        let item:any = {};
-        item.value = category.id;
-        item.label = category.name;
-        this.multiSelectCategories.push(item);
-      }
-    });
-  }
-
-  addProduct()
-  {
-    if(this.newProduct)
-    {
-        this.productService.createProduct(this.currentNewProduct.productName,this.newProductCategories).then((response)=>{
-        this.currentNewProduct.productId = parseInt(response);
-        this.afterCreateProduct();
-      });
-    }
-    else {
-      this.getProductName().then(()=>{
-        this.afterCreateProduct();
-      });
-    }
-  }
-
   private afterCreateProduct()
   {
     this.currentNewProduct.total = this.currentNewProduct.amount * this.currentNewProduct.price;
     this.currentNewProduct.receiptProductId = -1;
     this.receiptProducts.push(this.currentNewProduct);
     this.currentNewProduct = new ReceiptProductEdit();
-    this.newProductCategories = [];
-    this.productDialogDisplay = false;
     this.updateTotal();
-  }
-  private getProductName() {
-    return this.productService.getProduct(this.currentNewProduct.productId).then(response=>this.currentNewProduct.productName = response.name);
-  }
-
-  getProducts()
-  {
-    this.productService.getProducts().then(response=>this.products = response);
   }
 
   showProductDialog() {
-    this.productDialogDisplay = true;
+    let dialogRef = this.dialog.open(ProductAddDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.currentNewProduct = new ReceiptProductEdit();
+        this.currentNewProduct.price = result.Price;
+        this.currentNewProduct.amount = result.Amount;
+        this.currentNewProduct.productName= result.Name;
+        this.currentNewProduct.productId = result.ID;
+        this.afterCreateProduct();
+      }
+    });
   }
 
   showShopDialog() {
-    this.shopDialogDisplay = true;
+    let dialogRef = this.dialog.open(ShopCreateDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getShops();
+    });
   }
 
   updateTotal(): any {

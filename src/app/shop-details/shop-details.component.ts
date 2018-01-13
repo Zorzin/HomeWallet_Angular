@@ -3,6 +3,9 @@ import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {ShopService} from "../Services/shop.service";
 import {Location} from "@angular/common";
 import {UserInfoService} from "../Services/user-id.service";
+import {DeleteDialogComponent} from "../dialogs/delete-dialog/delete-dialog.component";
+import {MatDialog} from "@angular/material";
+import {ShopEditDialogComponent} from "../dialogs/shop-edit-dialog/shop-edit-dialog.component";
 
 @Component({
   selector: 'app-shop-details',
@@ -18,15 +21,13 @@ export class ShopDetailsComponent implements OnInit {
   private details: boolean;
   private hasProducts: boolean;
   private products: any;
-  private removeDialogDisplay: boolean;
-  private editDialogDisplay: boolean;
 
   constructor(
-    private location: Location,
     private router: Router,
     private shopService: ShopService,
     private route: ActivatedRoute,
-    private userService: UserInfoService) { }
+    private userService: UserInfoService,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getWidthAndHeight();
@@ -78,17 +79,35 @@ export class ShopDetailsComponent implements OnInit {
   }
 
   Edit() {
-    this.editDialogDisplay = true;
+
+    let dialogRef = this.dialog.open(ShopEditDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+      data: { Name: this.shop.name,Id:this.shop.id },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.updateShop(result);
+      }
+    });
   }
 
   Delete()
   {
-    this.removeDialogDisplay = true;
-  }
+    let dialogRef = this.dialog.open(DeleteDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+      data: { content: 'shopdetails-yousure',header:'shopdetails-delete'},
+    });
 
-  CancelDelete()
-  {
-    this.removeDialogDisplay = false;
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.ConfirmDelete();
+      }
+    });
   }
 
   ConfirmDelete()
@@ -98,18 +117,12 @@ export class ShopDetailsComponent implements OnInit {
     });
   }
 
-  ConfirmEdit() {
-    this.shopService.editShop(this.shop.id,this.shop.name).add(()=>{
-      this.editDialogDisplay = false;
-    })
-  }
-
-  CancelEdit() {
-    this.editDialogDisplay = false;
-  }
-
   private getWidthAndHeight() {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+  }
+
+  private updateShop(result: string) {
+    this.shop.name = result;
   }
 }

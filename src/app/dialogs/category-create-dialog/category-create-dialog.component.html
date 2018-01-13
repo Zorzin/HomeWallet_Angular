@@ -1,0 +1,11 @@
+
+<h2 mat-dialog-title>{{'categories-createcategory'|translate}}</h2>
+<mat-dialog-content>
+  <label>{{'categories-name'|translate}}</label>
+  <input type="text" [(ngModel)]="name" placeholder="{{'categories-name'|translate}}">
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="ConfirmCreate()">{{'common-create'|translate}}</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button mat-button mat-dialog-close (click)="Close()">{{'common-cancel'|translate}}</button>
+</mat-dialog-actions>

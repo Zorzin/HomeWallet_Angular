@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
-import {ProductService} from "../Services/product.service";
 import {CategoryService} from "../Services/category.service";
 import {UserInfoService} from "../Services/user-id.service";
+import {CategoryEditDialogComponent} from "../dialogs/category-edit-dialog/category-edit-dialog.component";
+import {MatDialog} from "@angular/material";
+import {DeleteDialogComponent} from "../dialogs/delete-dialog/delete-dialog.component";
 
 @Component({
   selector: 'app-category-details',
@@ -16,15 +18,12 @@ export class CategoryDetailsComponent implements OnInit {
   private details: boolean;
   private isDataLoaded: boolean;
   private hasProducts: boolean;
-  private removeDialogDisplay: boolean;
-  private editDialogDisplay: boolean;
-
-  category:any;
-  products : any;
+  private category:any;
+  private products : any;
 
   constructor(
     private router : Router,
-    private productService: ProductService,
+    private dialog: MatDialog,
     private route: ActivatedRoute,
     private categoryService: CategoryService,
     private userService: UserInfoService) { }
@@ -79,17 +78,34 @@ export class CategoryDetailsComponent implements OnInit {
   }
 
   Edit() {
-    this.editDialogDisplay = true;
+    let dialogRef = this.dialog.open(CategoryEditDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+      data: { Name: this.category.name,Id:this.category.id },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.updateCategory(result);
+      }
+    });
   }
 
   Delete()
   {
-    this.removeDialogDisplay = true;
-  }
+    let dialogRef = this.dialog.open(DeleteDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+      data: { content: 'categorydetails-areyousure',header:'categorydetails-remove'},
+    });
 
-  CancelDelete()
-  {
-    this.removeDialogDisplay = false;
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.ConfirmDelete();
+      }
+    });
   }
 
   ConfirmDelete()
@@ -99,19 +115,12 @@ export class CategoryDetailsComponent implements OnInit {
     });
   }
 
-  ConfirmEdit() {
-    this.categoryService.updateCategory(this.category.id,this.category.name).add(()=>{
-      this.GetProducts();
-      this.editDialogDisplay=false;
-    });
-  }
-
-  CancelEdit() {
-    this.editDialogDisplay = false;
-  }
-
   private getWidthAndHeight() {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+  }
+
+  private updateCategory(name:string) {
+    this.category.name = name;
   }
 }

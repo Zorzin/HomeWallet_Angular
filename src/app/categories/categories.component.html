@@ -14,19 +14,6 @@
       </div>
     </div>
   </div>
-
-  <p-dialog header="{{'categories-createcategory'|translate}}" [(visible)]="displayCreateDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
-    <div id="newproduct">
-      <div class="createproductname">
-        <label>{{'categories-name'|translate}}:</label>
-        <input class="forminput" placeholder="{{'categories-name'|translate}}" [(ngModel)]="newCategoryName" />
-      </div>
-    </div>
-    <p-footer>
-      <button type="button" pButton (click)="ConfirmCreate()" label="{{'common-create'|translate}}"></button>
-      <button type="button" pButton (click)="Cancel()" label="{{'common-cancel'|translate}}"></button>
-    </p-footer>
-  </p-dialog>
 </div>
 <div *ngIf="!isDataLoaded">
   <mat-spinner></mat-spinner>

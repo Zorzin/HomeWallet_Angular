@@ -117,6 +117,6 @@ export class PasswordSuccessDialog {
   constructor(public dialogRef: MatDialogRef<PasswordSuccessDialog>,
               @Inject(MAT_DIALOG_DATA) public data: any) {}
   closeDialog() {
-    this.dialogRef.close('Pizza!');
+    this.dialogRef.close();
   }
 }

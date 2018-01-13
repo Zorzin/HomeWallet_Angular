@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {ShopService} from "../Services/shop.service";
 import {ReceiptService} from '../Services/receipt.service';
-import {ProductService} from "../Services/product.service";
-import {ReceiptProductService} from "../Services/receiptproduct.service";
-import {CategoryService} from "../Services/category.service";
-import {Receipt} from "../Models/receipt";
 import {ReceiptProduct} from '../Models/receipt-product';
-import {SelectItem} from 'primeng/components/common/selectitem';
-import {ReceiptCreate} from "../Models/receipt-create";
 import {ReceiptProductPost} from "../Models/receipt-product-post";
 import {ReceiptCyclicalCreate} from "../Models/receipt-cyclical-create";
 import {UserInfoService} from "../Services/user-id.service";
 import {Router} from "@angular/router";
+import {ShopCreateDialogComponent} from "../dialogs/shop-create-dialog/shop-create-dialog.component";
+import {ProductAddDialogComponent} from "../dialogs/product-add-dialog/product-add-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-receipt-cyclical',
@@ -22,52 +19,34 @@ export class ReceiptCyclicalComponent implements OnInit {
 
   constructor(
     private shopService: ShopService,
-    private productService: ProductService,
     private receiptService: ReceiptService,
-    private receiptProductService: ReceiptProductService,
-    private categoryService: CategoryService,
     private userService: UserInfoService,
-    private router: Router) { }
+    private router: Router,
+    public dialog: MatDialog) { }
 
 
   private width: number;
   private height:number;
-  private receipt: Receipt;
   private shops: any;
   private newProducts: ReceiptProduct[];
   private currency: string;
+  private currentProduct : ReceiptProduct;
 
-  private products: any;
-  private categories: any;
-  multiSelectCategories: SelectItem[];
-  currentProduct : ReceiptProduct;
-
-  newProductName: string;
-  newProductCategories: number[];
-
-  newProduct: boolean = false;
-  productDialogDisplay: boolean = false;
-  shopDialogDisplay: boolean = false;
-
-  receiptTotal: number = 0;
-  receiptShop: number;
-  receiptStartDate: Date;
-  receiptEndDate: Date;
-  receiptCycle: number;
+  private receiptTotal: number = 0;
+  private receiptShop: number;
+  private receiptStartDate: Date;
+  private receiptEndDate: Date;
+  private receiptCycle: number;
 
   ngOnInit() {
     this.checkUser();
     this.currentProduct = new ReceiptProduct();
     this.newProducts = [];
-    this.multiSelectCategories = [];
-    this.newProductCategories = [];
     this.receiptStartDate = new Date();
     this.receiptEndDate = new Date();
     this.receiptEndDate.setMonth(this.receiptStartDate.getMonth()+1);
     this.getWidthAndHeight();
     this.getShops();
-    this.getProducts();
-    this.getCategories();
     this.getUSerCurrency();
     this.updateTotal();
   }
@@ -88,35 +67,12 @@ export class ReceiptCyclicalComponent implements OnInit {
     this.updateTotal();
   }
 
-  addProduct()
-  {
-    if(this.newProduct)
-    {
-      this.productService.createProduct(this.newProductName,this.newProductCategories).then((response)=>{
-        this.currentProduct.Name = this.newProductName;
-        this.currentProduct.ID = parseInt(response);
-        this.afterCreateProduct();
-      })
-    }
-    else {
-      this.getProductName().then(()=>{
-        this.afterCreateProduct();
-      });
-    }
-  }
-
   private afterCreateProduct()
   {
     this.currentProduct.TotalValue = this.currentProduct.Amount * this.currentProduct.Price;
     this.newProducts.push(this.currentProduct);
     this.currentProduct = new ReceiptProduct();
-    this.newProductCategories = [];
-    this.newProductName = '';
-    this.productDialogDisplay = false;
     this.updateTotal();
-  }
-  private getProductName() {
-    return this.productService.getProduct(this.currentProduct.ID).then(response=>this.currentProduct.Name = response.name);
   }
 
   save()
@@ -140,42 +96,34 @@ export class ReceiptCyclicalComponent implements OnInit {
 
 
   showProductDialog() {
-    this.productDialogDisplay = true;
+    let dialogRef = this.dialog.open(ProductAddDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.currentProduct = result;
+        this.afterCreateProduct();
+      }
+    });
   }
+
 
   showShopDialog() {
-    this.shopDialogDisplay = true;
-  }
-
-  addShop(newShopName: any) {
-    this.shopService.createShop(newShopName.value.toString()).add(()=>{this.getShops()});
-    this.shopDialogDisplay = false;
+    let dialogRef = this.dialog.open(ShopCreateDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getShops();
+    });
   }
 
   getShops()
   {
     this.shopService.getShops().then(response=>this.shops = response)
-  }
-
-  getProducts()
-  {
-    this.productService.getProducts().then(response=>this.products = response);
-  }
-
-
-  getCategories()
-  {
-    this.categoryService.getCategories().then((response)=>{
-      this.categories= response;
-      for (let category of this.categories)
-      {
-        let item:any = {};
-        item.value = category.id;
-        item.label = category.name;
-        this.multiSelectCategories.push(item);
-      }
-    });
-
   }
 
   updateTotal(): any {

@@ -41,26 +41,6 @@
   </div>
   <div class="col-md-12">
   </div>
-  <p-dialog header="{{'categorydetails-editcategory'|translate}}" [(visible)]="editDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
-
-    <label>{{'categorydetails-editcategory'|translate}}</label>
-    <div>
-      <input type="text" [(ngModel)]="category.name">
-    </div>
-    <p-footer>
-      <button type="button" pButton (click)="ConfirmEdit()" label="{{'common-save'|translate}}"></button>
-      <button type="button" pButton (click)="CancelEdit()" label="{{'common-cancel'|translate}}"></button>
-    </p-footer>
-  </p-dialog>
-
-  <p-dialog header="Remove category" [(visible)]="removeDialogDisplay" [width]="width" [height]="height">
-
-    <label>{{'categorydetails-areyousure'|translate}}</label>
-    <p-footer>
-      <button type="button" pButton (click)="ConfirmDelete()" label="{{'common-delete'|translate}}"></button>
-      <button type="button" pButton (click)="CancelDelete()" label="{{'common-cancel'|translate}}"></button>
-    </p-footer>
-  </p-dialog>
 
 </div>
 <div *ngIf="!isDataLoaded">
