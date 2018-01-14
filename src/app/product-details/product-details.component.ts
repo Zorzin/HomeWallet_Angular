@@ -20,20 +20,16 @@ export class ProductDetailsComponent implements OnInit {
   private details: boolean;
   private isDataLoaded: boolean;
   private hasCategories: boolean;
-  private removeDialogDisplay: boolean;
-  private editDialogDisplay: boolean;
 
   product:any;
   categories : any;
 
-  multiSelectCategories: SelectItem[];
   currentCategories: any;
 
   constructor(
     private router : Router,
     private productService: ProductService,
     private route: ActivatedRoute,
-    private categoryService: CategoryService,
     private userService: UserInfoService,
     private dialog: MatDialog) { }
 
@@ -41,14 +37,12 @@ export class ProductDetailsComponent implements OnInit {
     this.getWidthAndHeight();
     this.checkUser();
     this.currentCategories = [];
-    this.multiSelectCategories = [];
     this.route.paramMap
       .switchMap((params: ParamMap) => this.productService.getProduct(+params.get('id')))
       .subscribe((product) => {
         this.details = true;
         this.product = product;
         this.GetCategories();
-        this.getAllCategories();
         this.isDataLoaded = true;
       });
   }
@@ -73,28 +67,15 @@ export class ProductDetailsComponent implements OnInit {
     this.productService.getCategories(this.product.id).then((response)=>{
       if(response.toString())
       {
+        this.currentCategories=[];
         this.hasCategories = true;
         this.categories = response;
         for(let category of this.categories) {
           this.currentCategories.push(category.id);
         }
+        this.product.productCategories = this.currentCategories;
       }
     });
-  }
-
-  getAllCategories()
-  {
-    this.categoryService.getCategories().then((response)=>{
-      this.categories= response;
-      for (let category of this.categories)
-      {
-        let item:any = {};
-        item.value = category.id;
-        item.label = category.name;
-        this.multiSelectCategories.push(item);
-      }
-    });
-
   }
 
   CategoryDetails(category:any)
@@ -116,8 +97,10 @@ export class ProductDetailsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.product.name = result.name;
-      this.GetCategories();
+      if(!result)
+      {
+        this.GetCategories();
+      }
     });
   }
 

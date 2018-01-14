@@ -9,7 +9,7 @@
       <label>{{'products-categories'|translate}}:</label>
       <br>
       <mat-form-field >
-        <mat-select  placeholder="{{'receipt-categories'|translate}}" [(ngModel)]="currentCategories" multiple >
+        <mat-select  placeholder="{{'receipt-categories'|translate}}" [(ngModel)]="product.productCategories" multiple >
           <mat-option *ngFor="let category of multiSelectCategories" [value]="category.value">
             {{ category.label }}
           </mat-option>

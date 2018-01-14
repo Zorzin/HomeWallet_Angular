@@ -13,10 +13,9 @@ import {CategoryCreateDialogComponent} from "../category-create-dialog/category-
 })
 export class ProductEditDialogComponent{
 
-  private newProductCategories: number[];
+  private oldName:string;
   private product:any;
   private multiSelectCategories: SelectItem[];
-  private currentCategories: any;
   private width: number;
   private height:number;
   private categories : any;
@@ -27,19 +26,20 @@ export class ProductEditDialogComponent{
               private categoryService: CategoryService,
               public dialog: MatDialog) {
     this.product = data;
-    this.newProductCategories = [];
+    this.oldName = data.name;
     this.multiSelectCategories = [];
     this.getWidthAndHeight();
     this.getCategories();
   }
 
   Cancel() {
+    this.product.name = this.oldName;
     this.dialogRef.close(true);
   }
 
   ConfirmEdit()
   {
-    this.productService.updateProduct(this.product.id,this.product.name,this.currentCategories).then(()=>{
+    this.productService.updateProduct(this.product.id,this.product.name,this.product.productCategories).then(()=>{
       this.dialogRef.close(false);
     });
   }
