@@ -33,7 +33,7 @@ import { OptionsComponent } from './options/options.component';
 import { PlanEditComponent } from './plan-edit/plan-edit.component';
 import { PlansComponent } from './plans/plans.component';
 import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+import {LoginComponent, LoginErrorDialog} from './login/login.component';
 import {LoginService} from "./Services/login.service";
 import {RegisterService} from "./Services/register.service";
 import {UserInfoService} from "./Services/user-id.service";
@@ -69,6 +69,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   entryComponents:[
+    LoginErrorDialog,
     PasswordSuccessDialog,
     ShopCreateDialogComponent,
     ProductAddDialogComponent,
@@ -103,6 +104,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AccountComponent,
     DailySummaryComponent,
     PasswordSuccessDialog,
+    LoginErrorDialog,
     ShopCreateDialogComponent,
     ProductAddDialogComponent,
     ProductCreateDialogComponent,

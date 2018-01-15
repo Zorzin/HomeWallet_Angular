@@ -5,11 +5,12 @@ import {UserLogin} from "../Models/user-login";
 @Injectable()
 export class LoginService {
 
-  private apiUrl = 'http://localhost:54044/api/Users/login/';  // URL to web
+  private apiUrl = 'http://localhost:54044/api/Users/';  // URL to web
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private userId : string;
 
-  private response : any;
+  private logins : any
+  private emails : any;
 
   constructor(private http: HttpClient) { }
 
@@ -18,10 +19,64 @@ export class LoginService {
     return Promise.reject(error.message || error);
   }
 
+  getLogins(){
+    return this.http.get(this.apiUrl)
+      .toPromise()
+      .then(response=>this.logins = response);
+  }
+
+  getEmails(){
+    return this.http.get(this.apiUrl+"emails")
+      .toPromise()
+      .then(response=>this.emails = response);
+  }
+
+
   login(user:UserLogin) {
     let body = JSON.stringify(user);
-    return this.http.post(this.apiUrl,body,{headers:this.headers,responseType: 'text' })
+    return this.http.post(this.apiUrl+"login",body,{headers:this.headers,responseType: 'text' })
       .toPromise();
   }
 
+  ifLoginExist(login: any) {
+    if(!this.logins){
+      this.getLogins().then(()=>{
+        return this.checkName(login);
+      })
+    }
+    return this.checkName(login);
+  }
+
+  checkName(name:string):boolean{
+    if(this.logins)
+    {
+      for(let login of this.logins){
+        if(login==name){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  ifEmailExist(email: any) {
+    if(!this.emails){
+      this.getEmails().then(()=>{
+        return this.checkEmail(email);
+      })
+    }
+    return this.checkEmail(email);
+  }
+
+  checkEmail(name:string):boolean{
+    if(this.emails)
+    {
+      for(let email of this.emails){
+        if(email==name){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 }

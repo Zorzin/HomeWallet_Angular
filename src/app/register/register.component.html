@@ -1,41 +1,74 @@
-<div class="login">
+<form [formGroup]="registerForm">
+  <div class="login">
+    <div class="vertical-form sign-in" >
+      <legend>
+        {{'register-signup'|translate}}
+      </legend>
+      <div formGroupName="email">
+        <mat-form-field class="registerSelect" >
+          <input matInput formControlName="emailName" required placeholder="{{'register-email'|translate}}">
+          <mat-error *ngIf="emailName.errors" >{{GetEmailErrorName()|translate}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div formGroupName="login">
+        <mat-form-field class="registerSelect" >
+          <input matInput formControlName="loginName" required placeholder="{{'register-login'|translate}}">
+          <mat-error *ngIf="loginName.errors" >{{GetLoginErrorName()|translate}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div formGroupName="password">
+        <mat-form-field class="registerSelect"  >
+          <input matInput formControlName="passwordName" required placeholder="{{'register-password'|translate}}" type="password">
+          <mat-error *ngIf="passwordName.errors" >{{GetPasswordErrorName()|translate}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div formGroupName="repassword">
+        <mat-form-field class="registerSelect" >
+          <input matInput formControlName="rePasswordName" required placeholder="{{'register-repassword'|translate}}" type="password">
+          <mat-error *ngIf="rePasswordName.errors" >{{GetRePasswordErrorName()|translate}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div formGroupName="currency">
+        <mat-form-field class="registerSelect" >
+          <mat-select  placeholder="{{'register-currency'|translate}}" formControlName="currencyValue" >
+            <mat-option *ngFor="let currency of currencies" [value]="currency.value">
+              {{ currency.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div formGroupName="theme">
+        <mat-form-field class="registerSelect" >
+          <mat-select  placeholder="{{'register-theme'|translate}}" formControlName="themeValue" >
+            <mat-option *ngFor="let theme of themes" [value]="theme.value">
+              {{ theme.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div formGroupName="language">
+        <mat-form-field class="registerSelect" >
+          <mat-select  placeholder="{{'register-language'|translate}}" formControlName="languageValue" >
+            <mat-option *ngFor="let language of languages" [value]="language.value">
+              {{ language.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-  <div class="vertical-form sign-in" >
-    <legend>
-      {{'register-signup'|translate}}
-    </legend>
-    <input [(ngModel)]="user.email"  type="email" placeholder="{{'register-email'|translate}}" label="false" spellcheck="false" class="is-sensitive" value="" />
-    <input [(ngModel)]="user.login"  type="text" placeholder="{{'register-login'|translate}}" label="false" spellcheck="false" class="is-sensitive" value="" />
-    <input [(ngModel)]="user.password" placeholder="{{'register-password'|translate}}" label="false" autocomplete="off" class="is-sensitive" type="password"/>
-    <input [(ngModel)]="user.repassword" placeholder="{{'register-repassword'|translate}}" label="false" autocomplete="off" class="is-sensitive" type="password"/>
-    <mat-form-field class="registerSelect" >
-      <mat-select  placeholder="{{'register-currency'|translate}}" [(ngModel)]="user.currency" >
-        <mat-option *ngFor="let currency of currencies" [value]="currency.value">
-          {{ currency.label }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="registerSelect" >
-      <mat-select  placeholder="{{'register-theme'|translate}}" [(ngModel)]="user.theme" >
-        <mat-option *ngFor="let theme of themes" [value]="theme.value">
-          {{ theme.label }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="registerSelect" >
-      <mat-select  placeholder="{{'register-language'|translate}}" [(ngModel)]="user.language" >
-        <mat-option *ngFor="let language of languages" [value]="language.value">
-          {{ language.label }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <input  type="submit" name="commit" value="{{'register-signup'|translate}}" (click)="onRegister()"/>
+      <p><button style="font-size: 30px" [disabled]="loginName.errors
+      || passwordName.errors
+      || emailName.errors
+      || rePasswordName.errors
+      || currencyValue.errors
+      || themeValue.errors
+      || languageValue.errors" mat-button (click)="onRegister()">{{'register-signup'|translate}}</button></p>
+    </div>
+    <div class='footer'>
+      <p>
+        {{'register-haveaccount'|translate}}
+        <a (click)="onLogin()">{{'register-log-in'|translate}}</a>
+      </p>
+    </div>
   </div>
-  <div class='footer'>
-    <p>
-      {{'register-haveaccount'|translate}}
-      <a (click)="onLogin()">{{'register-log-in'|translate}}</a>
-    </p>
-  </div>
-</div>
+</form>

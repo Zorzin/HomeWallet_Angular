@@ -738,20 +738,6 @@ p-footer{
   font-size: 17px;
 }
 
-.login .vertical-form input[type='text'], .login .vertical-form input[type='email'], .login .vertical-form input[type='password'], .login .vertical-form input[type='number'], .login .vertical-form input[type='submit'] {
-  background: #fcfcfc;
-  border: 2px solid #e7e7e7;
-  margin: 20px auto;
-  padding: 15px;
-  width: 100%;
-  display: block;
-  border-radius: 3px;
-  font-size: 18px;
-  transition: opacity 0.4s;
-  text-align: left;
-  height: auto;
-  -webkit-appearance: none;
-}
 
 .login .vertical-form input[type='text']:focus, .login .vertical-form input[type='email']:focus, .login .vertical-form input[type='password']:focus, .login .vertical-form input[type='number']:focus, .login .vertical-form input[type='submit']:focus {
   border-color: #E7E7E7;
@@ -860,9 +846,7 @@ p-footer{
 }
 
 .registerSelect{
-  height: 55px;
-  width: 280px;
-  margin-left:55px;
+  width: 100%;
 }
 
 .account-container {

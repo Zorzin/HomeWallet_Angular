@@ -1,18 +1,32 @@
-<div class="login">
+<form [formGroup]="loginForm">
+  <div class="login">
+    <div class="vertical-form" >
+      <legend>
+        {{'login-log-in'|translate}}
+      </legend>
 
-  <div class="vertical-form sign-in" >
-    <legend>
-      {{'login-log-in'|translate}}
-    </legend>
-    <input [(ngModel)]="user.login" type="text" placeholder="{{'login-login'|translate}}" label="false" spellcheck="false" class="is-sensitive" value="" id="user_email" />
-    <input [(ngModel)]="user.password" placeholder="{{'login-password'|translate}}" label="false" autocomplete="off" class="is-sensitive" type="password" id="user_password" />
-    <input type="submit" name="commit" value="{{'login-log-in'|translate}}" (click)="onLogin()"/>
-    <p><a (click)="onForgot()">{{'login-forgot'|translate}}</a></p>
+      <div formGroupName="login">
+        <mat-form-field style="width: 100%;" >
+          <input matInput formControlName="loginName" required placeholder="{{'login-login'|translate}}">
+          <mat-error *ngIf="loginName.errors" >{{'login-name-length'|translate}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div formGroupName="password">
+        <mat-form-field style="width: 100%;" >
+          <input matInput formControlName="passwordName" required placeholder="{{'login-password'|translate}}" type="password" >
+          <mat-error *ngIf="passwordName.errors" >{{'password-name-length'|translate}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <p><button style="font-size: 30px" [disabled]="loginName.errors || passwordName.errors" mat-button (click)="onLogin()">{{'login-log-in'|translate}}</button></p>
+      <p><a (click)="onForgot()">{{'login-forgot'|translate}}</a></p>
+    </div>
+    <div class='footer'>
+      <p>
+        {{'login-donthave'|translate}}
+        <a (click)="onRegister()">{{'login-signup'|translate}}</a>
+      </p>
+    </div>
   </div>
-  <div class='footer'>
-    <p>
-      {{'login-donthave'|translate}}
-      <a (click)="onRegister()">{{'login-signup'|translate}}</a>
-    </p>
-  </div>
-</div>
+</form>
