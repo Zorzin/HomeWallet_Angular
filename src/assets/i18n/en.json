@@ -27,6 +27,8 @@
   "categories-createnew": "Create new",
   "categories-createcategory": "Create category",
   "categories-name": "Name",
+  "categories-name-error":"Category with that name already exist",
+  "categories-name-length":"Type category name",
 
   "categorydetails-details": "Details",
   "categorydetails-statistics": "Statistics",
@@ -118,6 +120,13 @@
   "products-createproduct": "Create product",
   "products-name": "Name",
   "products-categories": "Categories",
+  "products-name-length": "Type product name",
+  "products-name-error": "Product with that name already exist",
+  "products-list-error": "Select product",
+  "products-amount-length": "Amount must be bigger than 0",
+  "products-price-length": "Price must be bigger than 0",
+  "products-amount-error": "Type amount",
+  "products-price-error": "Type price",
 
   "receipts-login": "Login to start using HomeWallet",
   "receipts-addfirst": "Add your first receipt",
@@ -147,6 +156,8 @@
   "shops-create": "Create new",
   "shops-name": "Name",
   "shops-createshop": "Create shop",
+  "shops-name-length": "Type name",
+  "shops-name-error": "Shop with that name already exist",
 
   "shopdetails-details": "Details",
   "shopdetails-statistics": "Statistics",

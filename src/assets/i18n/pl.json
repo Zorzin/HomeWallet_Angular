@@ -25,6 +25,8 @@
   "categories-createnew": "Stwórz nową",
   "categories-createcategory": "Stwórz kategorię",
   "categories-name": "Nazwa",
+  "categories-name-error":"Kategoria z taką nazwą już istnieje",
+  "categories-name-length":"Wpisz nazwę kategorii",
 
   "categorydetails-details": "Szczegóły",
   "categorydetails-statistics": "Statystyki",
@@ -116,6 +118,13 @@
   "products-createproduct": "Stwórz produkt",
   "products-name": "Nazwa",
   "products-categories": "Kategorie",
+  "products-name-length": "Wpisz nazwę produktu",
+  "products-name-error": "Produkt o takiej nazwie już istnieje",
+  "products-list-error": "Wybierz produkt",
+  "products-amount-length": "Ilość musi być większa niż 0",
+  "products-price-length": "Cena musi być większa niż 0",
+  "products-amount-error": "Wpisz ilość",
+  "products-price-error": "Wpisz cenę",
 
   "receipts-login": "Zaloguj się aby używać HomeWallet",
   "receipts-addfirst": "Dodaj swój pierwszy rachunek",
@@ -145,6 +154,8 @@
   "shops-create": "Stwórz nowy",
   "shops-name": "Nazwa",
   "shops-createshop": "Stwórz sklep",
+  "shops-name-length": "Wpisz nazwę",
+  "shops-name-error": "Sklep z taką nazwą już istnieje",
 
   "shopdetails-details": "Szczegóły",
   "shopdetails-statistics": "Statystyki",

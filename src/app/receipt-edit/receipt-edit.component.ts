@@ -50,11 +50,12 @@ export class ReceiptEditComponent implements OnInit {
       .switchMap((params: ParamMap) => this.receiptService.getReceipt(+params.get('id')))
       .subscribe((receipt) => {
         this.receipt = receipt;
+        this.shops = [];
         this.getReceiptDate();
         this.getShopName();
         this.getReceiptProducts();
         this.getTotalValue();
-        this.getShops();
+        this.getShops(false);
         this.getUserCurrency();
         this.getWidthAndHeight();
         this.isDataLoaded = true;
@@ -93,9 +94,23 @@ export class ReceiptEditComponent implements OnInit {
       this.receiptProducts.splice(index,1);
   }
 
-  private getShops() {
+
+  getShops(newShop:boolean)
+  {
     this.shopService.getShops().then((response)=>{
-      this.shops = response;
+      for (let shop of response)
+      {
+        let item:any = {};
+        item.value = shop.id;
+        item.label = shop.name;
+        this.shops.push(item);
+      }
+      if(newShop){
+        this.receipt.ShopId = this.shops[this.shops.length-1].value;
+      }
+      else{
+        this.receipt.ShopId = this.shops[0].value;
+      }
     })
   }
 
@@ -133,7 +148,7 @@ export class ReceiptEditComponent implements OnInit {
       width: this.width.toString(),
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.getShops();
+      this.getShops(result?true:false);
     });
   }
 

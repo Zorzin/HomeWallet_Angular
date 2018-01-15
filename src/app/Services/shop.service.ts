@@ -10,7 +10,7 @@ export class ShopService {
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private userId : string;
 
-  private response : any;
+  private shops : any;
 
   constructor(private http: HttpClient,
               private userService: UserInfoService) { }
@@ -35,12 +35,13 @@ export class ShopService {
   getShops() {
     return this.http.get(this.apiUrl+this.userService.getUserId())
       .toPromise()
+      .then(response=>this.shops = response)
       .catch(this.handleError);
   }
 
   createShop(shopName: string){
     return this.http.post(this.apiUrl+this.userService.getUserId(),"\""+shopName+"\"",{headers:this.headers,responseType: 'text' })
-      .subscribe();
+      .toPromise();
   }
 
   deleteShop(id:number) {
@@ -51,5 +52,26 @@ export class ShopService {
   editShop(id:number,newName: string) {
     return this.http.put(this.apiUrl+this.userService.getUserId()+"/"+id+"/"+newName,{headers:this.headers,responseType: 'text' })
       .subscribe();
+  }
+
+
+  checkName(name:string,currentName:string):boolean{
+    if(this.shops)
+    {
+      for(let shop of this.shops){
+        if(shop.name==name && shop.name!=currentName){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  ifShopExist(name:string, currentName:string):boolean{
+    if(!this.shops){
+      this.getShops().then(()=>{
+        return this.checkName(name,currentName);
+      })
+    }
+    return this.checkName(name,currentName);
   }
 }

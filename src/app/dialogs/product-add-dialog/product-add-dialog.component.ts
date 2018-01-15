@@ -6,6 +6,8 @@ import {ShopService} from "../../Services/shop.service";
 import {CategoryService} from "../../Services/category.service";
 import {SelectItem} from "primeng/primeng";
 import {CategoryCreateDialogComponent} from "../category-create-dialog/category-create-dialog.component";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {productNameValidator} from "../../Validators/product-validators";
 
 @Component({
   selector: 'app-product-add-dialog',
@@ -14,16 +16,20 @@ import {CategoryCreateDialogComponent} from "../category-create-dialog/category-
 })
 export class ProductAddDialogComponent{
 
-  private newProduct: boolean = false;
-  private newProductName: string;
-  private newProductCategories: number[];
+  private newProductSwitch: boolean = false;
   private currentProduct : ReceiptProduct;
   private multiSelectCategories: SelectItem[];
-  private shops: any;
-  private products: any;
+  private products: SelectItem[];
   private categories: any;
   private width: number;
   private height:number;
+
+  private existProductList: FormControl;
+  private productName: FormControl;
+  private newProductCategories: FormControl;
+  private productAmount: FormControl;
+  private productPrice: FormControl;
+  private productForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<ProductAddDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -31,18 +37,66 @@ export class ProductAddDialogComponent{
               private shopService: ShopService,
               private categoryService: CategoryService,
               public dialog: MatDialog) {
-
-    this.newProductCategories = [];
-    this.currentProduct = new ReceiptProduct();
-    this.multiSelectCategories = [];
+    this.productService.getProducts();
+    this.createFormControls();
+    this.createForm();
+    this.setValues();
     this.getWidthAndHeight();
-    this.getShops();
     this.getProducts();
     this.getCategories();
   }
+
+  setValues(){
+    this.currentProduct = new ReceiptProduct();
+    this.multiSelectCategories = [];
+    this.products = [];
+  }
+
+  createFormControls() {
+    this.existProductList = new FormControl('', [
+      Validators.required,
+    ]);
+    this.productName = new FormControl('', [
+      Validators.required,
+      Validators.minLength(1),
+      productNameValidator(this.productService,"")
+    ]);
+
+    this.productAmount = new FormControl('', [
+      Validators.required,
+      Validators.min(0.01)
+    ]);
+
+    this.productPrice = new FormControl('', [
+      Validators.required,
+      Validators.min(0.01)
+    ]);
+
+    this.newProductCategories = new FormControl();
+  }
+
+  createForm(){
+    this.productForm = new FormGroup({
+      existProduct:new FormGroup({
+        existProductList: this.existProductList
+      }),
+      newProduct:new FormGroup({
+        productName: this.productName,
+        newProductCategories: this.newProductCategories
+      }),
+      price:new FormGroup({
+        productPrice: this.productPrice
+      }),
+      amount:new FormGroup({
+        productAmount: this.productAmount
+      }),
+      categories: new FormGroup({
+        newCategories: this.newProductCategories
+      })
+    });
+  }
+
   closeDialog( cancel: boolean) {
-    this.newProductCategories = [];
-    this.newProductName = '';
     if(cancel)
     {
       this.dialogRef.close(null);
@@ -55,15 +109,18 @@ export class ProductAddDialogComponent{
 
   addProduct()
   {
-    if(this.newProduct)
+    this.currentProduct.Amount = this.productAmount.value;
+    this.currentProduct.Price = this.productPrice.value;
+    if(this.newProductSwitch)
     {
-      this.productService.createProduct(this.newProductName,this.newProductCategories).then((response)=>{
-        this.currentProduct.Name = this.newProductName;
+      this.productService.createProduct(this.productName.value,this.newProductCategories.value?this.newProductCategories.value:null).then((response)=>{
+        this.currentProduct.Name = this.productName.value;
         this.currentProduct.ID = parseInt(response);
         this.closeDialog(false);
       })
     }
     else {
+      this.currentProduct.ID = this.existProductList.value;
       this.getProductName().then(()=>{
         this.closeDialog(false);
       });
@@ -71,19 +128,22 @@ export class ProductAddDialogComponent{
   }
 
   private getProductName() {
-    return this.productService.getProduct(this.currentProduct.ID).then(response=>this.currentProduct.Name = response.name);
-  }
-
-
-
-  getShops()
-  {
-    this.shopService.getShops().then(response=>this.shops = response)
+    return this.productService.getProduct(this.currentProduct.ID).then((response)=>{
+      this.currentProduct.Name = response.name;
+    });
   }
 
   getProducts()
   {
-    this.productService.getProducts().then(response=>this.products = response);
+    this.productService.getProducts().then((response)=>{
+      for (let product of response)
+      {
+        let item:any = {};
+        item.value = product.id;
+        item.label = product.name;
+        this.products.push(item);
+      }
+    });
   }
 
 
@@ -120,5 +180,23 @@ export class ProductAddDialogComponent{
   private afterCreateCategory() {
     this.multiSelectCategories = [];
     this.getCategories();
+  }
+
+  getExistProductErrorName(){
+    return this.existProductList.hasError('required') ? 'products-list-error' : '';
+  }
+
+  getNewProductErrorName(){
+    return this.productName.hasError('required') ? 'products-name-length' :
+      this.productName.hasError('minlength') ? 'products-name-length' :
+        this.productName.hasError('forbiddenName') ? 'products-name-error' : '';
+  }
+
+  getAmountErrorName(){
+    return this.existProductList.hasError('required') ? 'products-amount-length' :'';
+  }
+
+  getPriceErrorName(){
+    return this.existProductList.hasError('required') ? 'products-price-length' :'';
   }
 }

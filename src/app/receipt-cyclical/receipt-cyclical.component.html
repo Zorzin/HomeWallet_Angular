@@ -5,14 +5,14 @@
       <label>{{'receipt-startdate'|translate}}</label>
     </div>
     <div class="col-md-9 col-sm-12 col-xs-12 date-div">
-      <p-calendar dateFormat="dd.mm.yy" [(ngModel)]="receiptStartDate" [showIcon]="true"></p-calendar>
+      <p-calendar dateFormat="dd.mm.yy" [(ngModel)]="receiptStartDate" ></p-calendar>
     </div>
 
     <div class="col-md-3 col-sm-12 col-xs-12">
       <label>{{'receipt-enddate'|translate}}</label>
     </div>
     <div class="col-md-9 col-sm-12 col-xs-12 date-div">
-      <p-calendar dateFormat="dd.mm.yy" [(ngModel)]="receiptEndDate" [showIcon]="true"></p-calendar>
+      <p-calendar dateFormat="dd.mm.yy" [(ngModel)]="receiptEndDate" ></p-calendar>
     </div>
   </div>
 
@@ -25,14 +25,16 @@
       <label>{{'receipt-shop'|translate}}</label>
     </div>
     <div class=" col-md-8 col-sm-8 col-xs-8 shop-div">
-      <select  id="selectshop" data-placeholder="Select shop" class="form-control chosen-single-select" [(ngModel)]="receiptShop">
-        <option *ngFor="let shop of shops" [value] = "shop.id">
-          {{shop.name}}
-        </option>
-      </select>
+      <mat-form-field style="width: 100%;">
+        <mat-select  placeholder="{{'shops-name'|translate}}" [(ngModel)]="receiptShop">
+          <mat-option *ngFor="let shop of shops" [value]="shop.value">
+            {{ shop.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div class=" col-md-2 col-sm-4 col-xs-4 shop-div">
-      <button mat-raised-button type="button" id="addshopbutton" class="btn btn-success" (click)="showShopDialog()">
+      <button mat-button type="button" id="addshopbutton" (click)="showShopDialog()">
         <span class="glyphicon glyphicon-plus"></span>
       </button>
     </div>
@@ -41,7 +43,7 @@
       <label>{{'receipt-cycle'|translate}}</label>
     </div>
     <div class=" col-md-8 col-sm-8 col-xs-8">
-      <input min="0" type="number" class="form-control chosen-single-select cycleInput" [(ngModel)]="receiptCycle"/>
+      <input min="1" type="number" class="form-control chosen-single-select cycleInput" [(ngModel)]="receiptCycle" (keyup)="checkCycle()"/>
     </div>
   </div>
 
@@ -78,10 +80,10 @@
         {{product.Name.substring(0,60)}}
       </div>
       <div class="col-md-2 col-sm-3">
-        {{product.Amount}}
+        <input pInputText  type="number" [(ngModel)]="product.Amount" (keyup)="updateProductValues(product)" (change)="updateProductValues(product)">
       </div>
       <div class="col-md-2 col-sm-2">
-        {{product.Price}} {{currency}}
+        <input pInputText  type="number" [(ngModel)]="product.Price" (keyup)="updateProductValues(product)"  (change)="updateProductValues(product)"> {{currency}}
       </div>
       <div class="col-md-2 col-sm-2">
         {{product.TotalValue}} {{currency}}
@@ -107,7 +109,7 @@
   </div>
 
   <div class="receiptbuttons col-md-12 col-sm-12">
-    <a class="btn btn-danger" (click)="onCancel()">{{'common-cancel'|translate}}</a>
-    <a class="btn btn-success" (click)="save()">{{'common-save'|translate}}</a>
+    <button mat-raised-button color="warn" (click)="onCancel()">{{'common-cancel'|translate}}</button>
+    <button class="receipt-save-button" mat-raised-button [disabled]="newProducts.length==0"  (click)="save()">{{'common-save'|translate}}</button>
   </div>
 </div>

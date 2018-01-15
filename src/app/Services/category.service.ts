@@ -11,6 +11,7 @@ export class CategoryService {
   private userId : string;
 
   private response : any;
+  private categories:any;
 
   constructor(private http: HttpClient,
               private userService: UserInfoService) { }
@@ -30,6 +31,7 @@ export class CategoryService {
   {
     return this.http.get(this.apiUrl+this.userService.getUserId())
       .toPromise()
+      .then((response)=>this.categories = response)
       .catch(this.handleError);
   }
 
@@ -56,5 +58,26 @@ export class CategoryService {
 
     return this.http.put(this.apiUrl+this.userService.getUserId()+ "/"+id+"/"+name,{headers:this.headers,responseType: 'text' })
       .subscribe();
+  }
+
+  ifCategoryExist(name:string, currentName:string):boolean{
+    if(!this.categories){
+      this.getCategories().then(()=>{
+        return this.checkName(name,currentName);
+      })
+    }
+    return this.checkName(name,currentName);
+  }
+
+  checkName(name:string,currentName:string):boolean{
+    if(this.categories)
+    {
+      for(let category of this.categories){
+        if(category.name==name && category.name!=currentName){
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

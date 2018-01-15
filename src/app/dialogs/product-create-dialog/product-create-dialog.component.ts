@@ -6,6 +6,8 @@ import {ProductService} from "../../Services/product.service";
 import {SelectItem} from "primeng/primeng";
 import {ReceiptProduct} from "../../Models/receipt-product";
 import {CategoryCreateDialogComponent} from "../category-create-dialog/category-create-dialog.component";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {productNameValidator} from "../../Validators/product-validators";
 
 @Component({
   selector: 'app-product-create-dialog',
@@ -14,24 +16,49 @@ import {CategoryCreateDialogComponent} from "../category-create-dialog/category-
 })
 export class ProductCreateDialogComponent{
 
-  private newProductName: string;
-  private newProductCategories: number[];
   private currentProduct : ReceiptProduct;
   private multiSelectCategories: SelectItem[];
   private categories: any;
   private width: number;
   private height:number;
 
+  private name:FormControl;
+  private newProductCategories: FormControl;
+  productForm: FormGroup;
+
   constructor(public dialogRef: MatDialogRef<ProductCreateDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private productService: ProductService,
               private categoryService: CategoryService,
               public dialog: MatDialog) {
-    this.newProductCategories = [];
+    this.productService.getProducts();
+    this.createFormControls();
+    this.createForm();
     this.currentProduct = new ReceiptProduct();
     this.multiSelectCategories = [];
     this.getWidthAndHeight();
     this.getCategories();
+  }
+
+  createFormControls() {
+    this.name = new FormControl('', [
+      Validators.required,
+      Validators.minLength(1),
+      productNameValidator(this.productService,'')
+    ]);
+
+    this.newProductCategories = new FormControl();
+  }
+
+  createForm(){
+    this.productForm = new FormGroup({
+      name: new FormGroup({
+        productName: this.name
+      }),
+      categories: new FormGroup({
+        newCategories: this.newProductCategories
+      })
+    });
   }
 
   Close() {
@@ -40,8 +67,8 @@ export class ProductCreateDialogComponent{
 
   ConfirmCreate()
   {
-      this.productService.createProduct(this.newProductName,this.newProductCategories).then((response)=>{
-        this.currentProduct.Name = this.newProductName;
+      this.productService.createProduct(this.name.value,this.newProductCategories.value).then((response)=>{
+        this.currentProduct.Name = this.name.value;
         this.currentProduct.ID = parseInt(response);
         this.dialogRef.close();
       });
@@ -80,6 +107,13 @@ export class ProductCreateDialogComponent{
   private afterCreateCategory() {
     this.multiSelectCategories = [];
     this.getCategories();
+  }
+
+  getErrorName() {
+    return this.name.hasError('required') ? 'categories-name-length' :
+      this.name.hasError('minlength') ? 'categories-name-length' :
+        this.name.hasError('forbiddenName') ? 'categories-name-error' : '';
+    //|translate
   }
 
 }

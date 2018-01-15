@@ -5,7 +5,7 @@
         <label>{{'receipt-date'|translate}}</label>
       </div>
       <div class="col-md-10 col-sm-12 col-xs-12 date-div">
-        <p-calendar dateFormat="dd.mm.yy" [(ngModel)]="receipt.purchaseDate" [showIcon]="true"></p-calendar>
+        <p-calendar dateFormat="dd.mm.yy" [(ngModel)]="receipt.purchaseDate" ></p-calendar>
       </div>
     </div>
 
@@ -19,14 +19,16 @@
         <label>{{'receipt-shop'|translate}}</label>
       </div>
       <div class=" col-md-8 col-sm-8 col-xs-8">
-        <select  id="selectshop" class="form-control chosen-single-select" [(ngModel)]="receipt.shopID">
-          <option *ngFor="let shop of shops" [value] = "shop.id">
-            {{shop.name}}
-          </option>
-        </select>
+        <mat-form-field style="width: 100%;">
+          <mat-select  placeholder="{{'shops-name'|translate}}" [(ngModel)]="receipt.shopID">
+            <mat-option *ngFor="let shop of shops" [value]="shop.value">
+              {{ shop.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div class=" col-md-2 col-sm-4 col-xs-4">
-        <button mat-raised-button type="button" id="addshopbutton" class="btn btn-success" (click)="showShopDialog()">
+        <button mat-button type="button" id="addshopbutton" (click)="showShopDialog()">
           <span class="glyphicon glyphicon-plus"></span>
         </button>
       </div>
@@ -93,8 +95,8 @@
     </div>
 
     <div class="receiptbuttons">
-      <a class="btn btn-danger" (click)="onCancel()">{{'common-cancel'|translate}}</a>
-      <a class="btn btn-success" (click)="save()">{{'common-save'|translate}}</a>
+      <button mat-raised-button color="warn" (click)="onCancel()">{{'common-cancel'|translate}}</button>
+      <button class="receipt-save-button" mat-raised-button [disabled]="receiptProducts.length==0"  (click)="save()">{{'common-save'|translate}}</button>
     </div>
   </div>
 </div>

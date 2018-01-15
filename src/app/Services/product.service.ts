@@ -12,7 +12,7 @@ export class ProductService {
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private userId : string;
 
-  private response : any;
+  private products : any;
 
   constructor(private http: HttpClient,
               private userService: UserInfoService) { }
@@ -32,15 +32,25 @@ export class ProductService {
   {
     return this.http.get(this.apiUrl+this.userService.getUserId())
       .toPromise()
+      .then(response=>this.products = response)
       .catch(this.handleError);
   }
 
   createProduct(name: string, categories: number[])
   {
-    let body = "{" +
-      "\"name\":\"" + name + "\","+
-      "\"categories\":[" + categories.toString() + "]"+
-      "}"
+    let body;
+    if(categories){
+      body = "{" +
+        "\"name\":\"" + name + "\","+
+        "\"categories\":[" + categories.toString() + "]"+
+        "}";
+    }
+    else {
+      body = "{" +
+        "\"name\":\"" + name + "\","+
+        "\"categories\":[]"+
+        "}";
+    }
     return this.http.post(this.apiUrl+this.userService.getUserId(),body,{headers:this.headers,responseType: 'text' })
       .toPromise();
   }
@@ -58,12 +68,40 @@ export class ProductService {
   }
 
   updateProduct(id:number,name: string, categories: number[]) {
-
-    let body = "{" +
+    let body;
+    if(categories){
+       body = "{" +
+        "\"name\":\"" + name + "\","+
+        "\"categories\":[" + categories.toString() + "]"+
+        "}";
+    }
+    else {
+      body = "{" +
       "\"name\":\"" + name + "\","+
-      "\"categories\":[" + categories.toString() + "]"+
-      "}"
+      "\"categories\":[]"+
+      "}";
+    }
     return this.http.put(this.apiUrl+this.userService.getUserId()+ "/"+id,body,{headers:this.headers,responseType: 'text' })
       .toPromise();
+  }
+
+  checkName(name:string,currentName:string):boolean{
+    if(this.products)
+    {
+      for(let product of this.products){
+        if(product.name==name && product.name!=currentName){
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  ifProductExist(name:string, currentName:string):boolean{
+    if(!this.products){
+      this.getProducts().then(()=>{
+        return this.checkName(name,currentName);
+      })
+    }
+    return this.checkName(name,currentName);
   }
 }

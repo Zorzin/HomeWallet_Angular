@@ -47,8 +47,9 @@ export class ReceiptCreateComponent implements OnInit {
     this.currentProduct = new ReceiptProduct();
     this.newProducts = [];
     this.receiptDate = new Date();
-    this.getUSerCurrency();
-    this.getShops();
+    this.shops = [];
+    this.getUserCurrency();
+    this.getShops(false);
     this.updateTotal();
   }
 
@@ -115,16 +116,30 @@ export class ReceiptCreateComponent implements OnInit {
       height: this.height.toString(),
       width: this.width.toString(),
     });
-    dialogRef.afterClosed().subscribe(result => {
-      this.getShops();
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+      this.getShops(result?true:false);
     });
   }
 
-  getShops()
+  getShops(newShop:boolean)
   {
-    this.shopService.getShops().then(response=>this.shops = response)
+    this.shopService.getShops().then((response)=>{
+      for (let shop of response)
+      {
+        let item:any = {};
+        item.value = shop.id;
+        item.label = shop.name;
+        this.shops.push(item);
+      }
+      if(newShop){
+        this.receiptShop = this.shops[this.shops.length-1].value;
+      }
+      else{
+        this.receiptShop = this.shops[0].value;
+      }
+    })
   }
-
 
   updateTotal(): any {
     let total = 0;
@@ -146,7 +161,7 @@ export class ReceiptCreateComponent implements OnInit {
     setTimeout(()=>{this.router.navigate(['/receipts']);},500);
   }
 
-  private getUSerCurrency() {
+  private getUserCurrency() {
     this.userService.getUserCurrency().then((response)=>{
       this.currency = JSON.parse(response);
     });

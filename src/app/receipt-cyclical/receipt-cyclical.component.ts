@@ -36,17 +36,18 @@ export class ReceiptCyclicalComponent implements OnInit {
   private receiptShop: number;
   private receiptStartDate: Date;
   private receiptEndDate: Date;
-  private receiptCycle: number;
+  private receiptCycle: number = 1;
 
   ngOnInit() {
     this.checkUser();
     this.currentProduct = new ReceiptProduct();
     this.newProducts = [];
+    this.shops = [];
     this.receiptStartDate = new Date();
     this.receiptEndDate = new Date();
     this.receiptEndDate.setMonth(this.receiptStartDate.getMonth()+1);
     this.getWidthAndHeight();
-    this.getShops();
+    this.getShops(false);
     this.getUSerCurrency();
     this.updateTotal();
   }
@@ -117,13 +118,27 @@ export class ReceiptCyclicalComponent implements OnInit {
       width: this.width.toString(),
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.getShops();
+      this.getShops(result?true:false);
     });
   }
 
-  getShops()
+  getShops(newShop:boolean)
   {
-    this.shopService.getShops().then(response=>this.shops = response)
+    this.shopService.getShops().then((response)=>{
+      for (let shop of response)
+      {
+        let item:any = {};
+        item.value = shop.id;
+        item.label = shop.name;
+        this.shops.push(item);
+      }
+      if(newShop){
+        this.receiptShop = this.shops[this.shops.length-1].value;
+      }
+      else{
+        this.receiptShop = this.shops[0].value;
+      }
+    })
   }
 
   updateTotal(): any {
@@ -133,6 +148,11 @@ export class ReceiptCyclicalComponent implements OnInit {
       total += (product.Price * product.Amount);
     }
     this.receiptTotal = total;
+  }
+  private updateProductValues(product: ReceiptProduct)
+  {
+    product.TotalValue= product.Amount * product.Price;
+    this.updateTotal();
   }
 
   private getUSerCurrency() {
@@ -153,6 +173,12 @@ export class ReceiptCyclicalComponent implements OnInit {
 
   private goMainpage() {
     setTimeout(()=>{this.router.navigate(['/receipts']);},500);
+  }
+
+  checkCycle(){
+    if(this.receiptCycle<=0){
+      this.receiptCycle=1;
+    }
   }
 
 }

@@ -13,7 +13,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {DialogModule} from 'primeng/primeng';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ButtonModule} from 'primeng/primeng';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CategoryService} from "./Services/category.service";
 import {CalendarModule} from 'primeng/primeng';
 import {InputSwitchModule} from 'primeng/primeng';
@@ -60,7 +60,9 @@ import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.com
 import { ProductEditDialogComponent } from './dialogs/product-edit-dialog/product-edit-dialog.component';
 import { ShopEditDialogComponent } from './dialogs/shop-edit-dialog/shop-edit-dialog.component';
 import { CategoryEditDialogComponent } from './dialogs/category-edit-dialog/category-edit-dialog.component';
-
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -126,7 +128,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatSelectModule,
     MatTabsModule,
     MatDialogModule,
+    MatInputModule,
+    MatButtonModule,
+    MatFormFieldModule,
     MatProgressSpinnerModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

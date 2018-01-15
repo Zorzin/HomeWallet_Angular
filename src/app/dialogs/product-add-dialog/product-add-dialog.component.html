@@ -1,47 +1,55 @@
-<h2 mat-dialog-title>{{'receipt-addproduct'|translate}}</h2>
-<mat-dialog-content>
-  <div class="createproductproduct" *ngIf="!newProduct">
-    <label>{{'receipt-product'|translate}}:</label>
-    <select class="forminput chosen-single-select"  [(ngModel)]="currentProduct.ID">
-      <option *ngFor="let product of products" [value] = "product.id" >
-        {{product.name}}
-      </option>
-    </select>
-  </div>
-  <div class="checkbox">
-    <label><input id="newproductcheckbox" type="checkbox" (change)="newProduct = !newProduct"/>{{'receipt-newproduct'|translate}}</label>
-  </div>
-  <div id="newproduct" *ngIf="newProduct">
-    <div class="createproductname">
-      <label>{{'receipt-name'|translate}}:</label>
-      <input class="forminput" placeholder="{{'receipt-name'|translate}}" [(ngModel)]="newProductName" />
-    </div>
-    <div class="createproductcategories">
-      <label>{{'receipt-categories'|translate}}:</label>
-      <br>
+<form [formGroup]="productForm">
+  <h2 mat-dialog-title>{{'receipt-addproduct'|translate}}</h2>
+  <mat-dialog-content>
+    <div class="createproductproduct" *ngIf="!newProductSwitch" formGroupName="existProduct">
       <mat-form-field >
-        <mat-select  placeholder="{{'receipt-categories'|translate}}" [(ngModel)]="newProductCategories" multiple >
-          <mat-option *ngFor="let category of multiSelectCategories" [value]="category.value">
-            {{ category.label }}
+        <mat-select  placeholder="{{'receipt-product'|translate}}" formControlName="existProductList">
+          <mat-option *ngFor="let product of products" [value]="product.value">
+            {{ product.label }}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="existProductList.errors" >{{getExistProductErrorName()|translate}}</mat-error>
       </mat-form-field>
-      <button mat-raised-button type="button" id="addshopbutton" class="btn btn-success" (click)="showCategoryDialog()">
-        <span class="glyphicon glyphicon-plus"></span>
-      </button>
     </div>
-  </div>
-  <div class="createproductamount">
-    <label>{{'receipt-amount'|translate}}:</label>
-    <input type="number" class="forminput" placeholder="{{'receipt-amount'|translate}}" [(ngModel)]="currentProduct.Amount"/>
-  </div>
-  <div class="createproductprice">
-    <label>{{'receipt-priceperunit'|translate}}:</label>
-    <input type="number" class="forminput" placeholder="{{'receipt-priceperunit'|translate}}" [(ngModel)]="currentProduct.Price"/>
-  </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="addProduct()" >{{'common-add'|translate}}</button>
-  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-  <button mat-button mat-dialog-close (click)="closeDialog(true)" >{{'common-cancel'|translate}}</button>
-</mat-dialog-actions>
+    <div class="checkbox">
+      <label><input id="newproductcheckbox" type="checkbox" (change)="newProductSwitch = !newProductSwitch"/>{{'receipt-newproduct'|translate}}</label>
+    </div>
+    <div id="newproduct" *ngIf="newProductSwitch" formGroupName="newProduct">
+      <div class="createproductname">
+        <mat-form-field style="width: 100%;">
+          <input matInput formControlName="productName" required  placeholder="{{'receipt-name'|translate}}">
+          <mat-error *ngIf="productName.errors" >{{getNewProductErrorName()|translate}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="createproductcategories">
+        <mat-form-field >
+          <mat-select  placeholder="{{'receipt-categories'|translate}}" formControlName="newProductCategories" multiple >
+            <mat-option *ngFor="let category of multiSelectCategories" [value]="category.value">
+              {{ category.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button type="button" id="addshopbutton" class="btn btn-success" (click)="showCategoryDialog()">
+          <span class="glyphicon glyphicon-plus"></span>
+        </button>
+      </div>
+    </div>
+    <div class="createproductamount" formGroupName="amount">
+      <mat-form-field style="width: 100%;">
+        <input type="number"  matInput formControlName="productAmount" required  placeholder="{{'receipt-amount'|translate}}">
+        <mat-error *ngIf="productAmount.errors" >{{getAmountErrorName()|translate}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="createproductprice" formGroupName="price">
+
+      <mat-form-field style="width: 100%;">
+        <input type="number"  matInput formControlName="productPrice" required  placeholder="{{'receipt-priceperunit'|translate}}">
+        <mat-error *ngIf="productPrice.errors" >{{getPriceErrorName()|translate}}</mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="closeDialog(true)" >{{'common-cancel'|translate}}</button>
+    <button [disabled]="newProductSwitch?productPrice.errors || productAmount.errors || productName.errors : productPrice.errors || productAmount.errors || existProductList.errors" mat-button mat-dialog-close (click)="addProduct()" >{{'common-add'|translate}}</button>
+  </mat-dialog-actions>
+</form>

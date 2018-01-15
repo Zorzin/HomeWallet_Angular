@@ -1,10 +1,15 @@
-<h2 mat-dialog-title>{{'receipt-addshop'|translate}}</h2>
-<mat-dialog-content>
-  <label>{{'receipt-name'|translate}}:</label>
-  <input type="text" #newShopName class="form-control" placeholder="{{'receipt-name'|translate}}"/>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="addShop(newShopName)">{{'common-add'|translate}}</button>
-  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-  <button mat-button [mat-dialog-close]="true">{{'common-cancel'|translate}}</button>
-</mat-dialog-actions>
+<form [formGroup]="shopForm">
+  <h2 mat-dialog-title>{{'receipt-addshop'|translate}}</h2>
+  <div formGroupName="name">
+    <mat-dialog-content>
+      <mat-form-field style="width: 100%;">
+        <input matInput formControlName="shopName" required placeholder="{{'shops-name'|translate}}">
+        <mat-error *ngIf="name.errors" >{{getErrorName()|translate}}</mat-error>
+      </mat-form-field>
+    </mat-dialog-content>
+  </div>
+  <mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false">{{'common-cancel'|translate}}</button>
+    <button [disabled]="name.errors" mat-button mat-dialog-close (click)="addShop()">{{'common-add'|translate}}</button>
+  </mat-dialog-actions>
+</form>

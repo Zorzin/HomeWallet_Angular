@@ -1,10 +1,15 @@
-<h2 mat-dialog-title>{{'shopdetails-edit'|translate}}</h2>
-<mat-dialog-content>
-  <label>{{'shopdetails-name'|translate}}:</label>
-  <input type="text"  [(ngModel)]="name" class="form-control"/>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="ConfirmEdit()">{{'common-save'|translate}}</button>
-  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
-  <button mat-button mat-dialog-close (click)="Cancel()">{{'common-cancel'|translate}}</button>
-</mat-dialog-actions>
+<form [formGroup]="shopForm">
+  <h2 mat-dialog-title>{{'shopdetails-edit'|translate}}</h2>
+  <div formGroupName="name">
+    <mat-dialog-content>
+      <mat-form-field style="width: 100%;">
+        <input matInput formControlName="shopName" required placeholder="{{'shops-name'|translate}}">
+        <mat-error *ngIf="name.errors" >{{getErrorName()|translate}}</mat-error>
+      </mat-form-field>
+    </mat-dialog-content>
+  </div>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close (click)="Cancel()">{{'common-cancel'|translate}}</button>
+    <button [disabled]="name.errors" mat-button mat-dialog-close (click)="ConfirmEdit()">{{'common-save'|translate}}</button>
+  </mat-dialog-actions>
+</form>

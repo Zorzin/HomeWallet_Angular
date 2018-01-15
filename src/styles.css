@@ -881,3 +881,10 @@ p-footer{
 .passwordchange input{
   color: black !important;
 }
+
+.warning-info{
+  color: red;
+}
+.receipt-save-button{
+  color: black !important;
+}
