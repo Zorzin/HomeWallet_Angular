@@ -23,6 +23,8 @@
   "account-newpassword": "New password",
   "account-retypepassword": "Re-type new password",
   "account-passwordsuccess": "Password successfully changed",
+  "account-passworderror": "An error occurred. Try again.",
+  "account-password-length": "Type old password",
 
   "categories-createnew": "Create new",
   "categories-createcategory": "Create category",
@@ -83,12 +85,18 @@
   "options-cyclical": "Cyclical receipt",
   "options-plan": "Plan",
 
+  "plan-money": "Money to spend",
+  "plan-startdate": "Start date",
+  "plan-enddate": "End date",
+  "plan-enddate-error": "End date must be bigger than start date.",
+  "plan-money-error": "Amount must be bigger than 0",
+  "plan-nostartdate-error": "Type start date",
+  "plan-noenddate-error": "Type end date",
+  "plan-nomoney-error": "Type amount",
+  "plan-error": "An error occurred. Try again.",
+
   "plancreate-sorry": "Sorry, you can have only one plan active.",
   "plancreate-plan": "Plan",
-  "plancreate-iwanttospend": "I want to spend no more than",
-  "plancreate-starting": "starting from",
-  "plancreate-to": "to",
-  "plancreate-date": "Date",
 
   "plandetails-planfor": "Plan for",
   "plandetails-youwanttospend": "You want to spend no more than",
@@ -103,10 +111,6 @@
   "plandetails-delete": "Delete plan",
 
   "planedit-sorry": "Sorry, you can have only current plans.",
-  "planedit-iwanttospend": "I want to spend no more than",
-  "planedit-starting": "starting from",
-  "planedit-to": "to",
-  "planedit-date": "Date",
 
   "plans-createnew": "Create new",
 

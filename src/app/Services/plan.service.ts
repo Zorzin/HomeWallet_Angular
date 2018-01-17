@@ -28,7 +28,7 @@ export class PlanService {
       "\"StartDate\":\"" + plan.StartDate.toLocaleDateString() + "\","+
       "\"EndDate\":\"" + plan.EndDate.toLocaleDateString() + "\","+
       "}";
-    return this.http.post(this.apiUrl,body,{headers:this.headers,responseType: 'text' })
+    return this.http.post(this.apiUrl+this.userService.getUserId(),body,{headers:this.headers,responseType: 'text' })
       .toPromise();
   }
 
@@ -47,7 +47,7 @@ export class PlanService {
   }
 
   editPlan(plan: any) {
-    return this.http.put(this.apiUrl+this.userService.getUserId()+ "/"+plan.id,plan);
+    return this.http.put(this.apiUrl+this.userService.getUserId()+ "/"+plan.id,plan).toPromise();
   }
 
   getPlans() {

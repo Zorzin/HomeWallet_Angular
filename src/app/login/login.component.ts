@@ -6,7 +6,7 @@ import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {categoryNameValidator} from "../Validators/category-validators";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
-import {PasswordSuccessDialog} from "../account/account.component";
+import {PasswordChangeDialog} from "../account/account.component";
 
 @Component({
   selector: 'app-login',

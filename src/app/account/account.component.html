@@ -27,21 +27,29 @@
       </div>
     </mat-tab>
     <mat-tab label="{{'account-password'|translate}}" >
-      <div class="passwordchange">
-        <div>
-          <label>{{'account-oldpassword'|translate}}</label>
-          <input type="password" class="forminput" placeholder="{{'account-oldpassword'|translate}}" [(ngModel)]="passwordChange.oldPassword" />
+      <form [formGroup]="passwordForm">
+        <div class="passwordchange">
+          <div formGroupName="oldPassword">
+            <mat-form-field style="width: 100%;">
+              <input type="password" matInput formControlName="oldPasswordName" required placeholder="{{'account-oldpassword'|translate}}">
+              <mat-error *ngIf="oldPasswordName.errors" >{{getOldPasswordErrorName()|translate}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div formGroupName="newPassword">
+            <mat-form-field style="width: 100%;">
+              <input type="password" matInput formControlName="newPasswordName" required placeholder="{{'account-newpassword'|translate}}">
+              <mat-error *ngIf="newPasswordName.errors" >{{getNewPasswordErrorName()|translate}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div formGroupName="reNewPassword">
+            <mat-form-field style="width: 100%;">
+              <input type="password" matInput formControlName="reNewPasswordName" required placeholder="{{'account-retypepassword'|translate}}">
+              <mat-error *ngIf="reNewPasswordName.errors" >{{getRePasswordErrorName()|translate}}</mat-error>
+            </mat-form-field>
+          </div>
+          <button mat-button [disabled]="oldPasswordName.errors || newPasswordName.errors || reNewPasswordName.errors" pButton (click)="ConfirmChangePassword()" label="{{'common-save'|translate}}"></button>
         </div>
-        <div>
-          <label>{{'account-newpassword'|translate}}</label>
-          <input type="password" class="forminput" placeholder="{{'account-newpassword'|translate}}" [(ngModel)]="passwordChange.newPassword" />
-        </div>
-        <div>
-          <label>{{'account-retypepassword'|translate}}</label>
-          <input type="password" class="forminput" placeholder="{{'account-newpassword'|translate}}" [(ngModel)]="passwordChange.reNewPassword" />
-        </div>
-        <button type="button" pButton (click)="ConfirmChangePassword()" label="{{'common-save'|translate}}"></button>
-      </div>
+      </form>
     </mat-tab>
   </mat-tab-group>
 </div>

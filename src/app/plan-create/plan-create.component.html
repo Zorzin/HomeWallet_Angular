@@ -2,18 +2,33 @@
   <h1>{{'plancreate-sorry'|translate}}</h1>
 </div>
 <div *ngIf="canCreate">
-  <div class="form-horizontal">
-    <h4>{{'plancreate-plan'|translate}}</h4>
-    <hr />
-    <p>{{'plancreate-iwanttospend'|translate}}</p>
-    <input type="number" min="0" class="form-control" [(ngModel)]="amount" />
-    <p>{{'plancreate-starting'|translate}}</p>
-    <p-calendar dateFormat="dd.mm.yy" placeholder="{{'plancreate-date'|translate}}" [(ngModel)]="startDate"></p-calendar>
-    <p>{{'plancreate-to'|translate}}</p>
-    <p-calendar dateFormat="dd.mm.yy" placeholder="{{'plancreate-date'|translate}}" [(ngModel)]="endDate"></p-calendar>
-
-    <input type="submit" value="{{'common-create'|translate}}" class="btn btn-success" (click)="create()" />
-  </div>
+  <form [formGroup]="createPlanForm">
+    <div formGroupName="amount">
+      <mat-form-field>
+        <input matInput formControlName="amountValue"  required  type="number" min="0" placeholder="{{'plan-money'|translate}}"  />
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <mat-error *ngIf="amountValue.errors" >{{GetAmountErrorName()|translate}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div formGroupName="startDate">
+      <mat-form-field>
+        <input matInput formControlName="startDateValue" required [matDatepicker]="startPicker" placeholder="{{'plan-startdate'|translate}}"   />
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+        <mat-error *ngIf="startDateValue.errors" >{{GetStartDateErrorName()|translate}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div formGroupName="endDate">
+      <mat-form-field>
+        <input matInput formControlName="endDateValue" required [matDatepicker]="endPicker" placeholder="{{'plan-enddate'|translate}}"   />
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+        <mat-error *ngIf="endDateValue.errors" >{{GetEndDateErrorName()|translate}}</mat-error>
+      </mat-form-field>
+    </div>
+    <button [disabled]="amountValue.errors || startDateValue.errors || endDateValue.errors" mat-button (click)="create()" >{{'common-create'|translate}}</button>
+  </form>
 </div>
 
 

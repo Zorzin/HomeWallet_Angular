@@ -7,6 +7,9 @@ import {SelectItem} from "primeng/primeng";
 import {CurrenciesService} from "../Services/currencies.service";
 import {AccountService} from "../Services/account.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {categoryNameValidator} from "../Validators/category-validators";
+import {passwordValueValidator, rePasswordValidator} from "../Validators/password-validators";
 
 @Component({
   selector: 'app-account',
@@ -27,6 +30,12 @@ export class AccountComponent implements OnInit {
   private passwordDialogDisplay:boolean;
   private currencyDialogDisplay: boolean;
 
+  private oldPasswordName:FormControl;
+  private newPasswordName:FormControl;
+  private reNewPasswordName:FormControl;
+  private passwordForm: FormGroup;
+
+
   constructor(private userService:UserInfoService,
               private accountService: AccountService,
               private passwordService: PasswordService,
@@ -41,6 +50,39 @@ export class AccountComponent implements OnInit {
     this.passwordChange = new PasswordChange();
     this.checkUser();
     this.getWidthAndHeight();
+    this.createFormControls();
+    this.createForm();
+  }
+
+  createFormControls() {
+    this.oldPasswordName = new FormControl('', [
+      Validators.required
+    ]);
+
+    this.newPasswordName = new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+      passwordValueValidator()
+    ]);
+
+    this.reNewPasswordName = new FormControl('', [
+      Validators.required,
+      rePasswordValidator(this.newPasswordName)
+    ]);
+  }
+
+  createForm(){
+    this.passwordForm = new FormGroup({
+      oldPassword: new FormGroup({
+        oldPasswordName: this.oldPasswordName
+      }),
+      newPassword: new FormGroup({
+        newPasswordName: this.newPasswordName
+      }),
+      reNewPassword: new FormGroup({
+        reNewPasswordName: this.reNewPasswordName
+      })
+    });
   }
 
   checkUser()
@@ -57,19 +99,28 @@ export class AccountComponent implements OnInit {
   }
 
   private ConfirmChangePassword() {
-      if(this.passwordChange.newPassword == this.passwordChange.reNewPassword)
-      {
-        this.passwordService.changePassword(this.passwordChange).then(()=>{
-          this.passwordChange = new PasswordChange();
-          this.openPasswordSuccessDialog();
-        })
-      }
+    this.passwordChange.newPassword = this.newPasswordName.value;
+    this.passwordChange.reNewPassword = this.reNewPasswordName.value;
+    this.passwordChange.oldPassword = this.oldPasswordName.value;
+    this.passwordService.changePassword(this.passwordChange)
+    .then(()=>{
+      this.passwordChange = new PasswordChange();
+      this.openPasswordSuccessDialog("account-passwordsuccess");
+    })
+    .catch((reason) =>{
+      this.openPasswordSuccessDialog("account-passworderror");
+    });
+
+    this.reNewPasswordName.reset();
+    this.newPasswordName.reset();
+    this.oldPasswordName.reset();
   }
 
-  openPasswordSuccessDialog(){
-    let dialogRef = this.dialog.open(PasswordSuccessDialog,{
+  openPasswordSuccessDialog(data:any){
+    let dialogRef = this.dialog.open(PasswordChangeDialog,{
       height: '100px',
       width: '300px',
+      data: data
     });
   }
 
@@ -107,14 +158,30 @@ export class AccountComponent implements OnInit {
     this.changeTheme();
     this.changeLanguage();
   }
+
+  getRePasswordErrorName() {
+    return this.reNewPasswordName.hasError('wrongRePassword') ? 'register-repassword-error' :'';
+  }
+
+  getNewPasswordErrorName() {
+    return this.newPasswordName.hasError('required') ? 'register-password-length' :
+      this.newPasswordName.hasError('minlength') ? 'register-password-length' :
+        this.newPasswordName.hasError('wrongPassword') ? 'register-password-chars' : '';
+
+  }
+
+  getOldPasswordErrorName() {
+    return this.oldPasswordName.hasError('required') ? 'account-password-length' : '';
+
+  }
 }
 
 @Component({
-  selector: 'password-success-dialog',
-  templateUrl: 'passwordSuccessDialog.html',
+  selector: 'password-change-dialog',
+  templateUrl: 'passwordChangeDialog.html',
 })
-export class PasswordSuccessDialog {
-  constructor(public dialogRef: MatDialogRef<PasswordSuccessDialog>,
+export class PasswordChangeDialog {
+  constructor(public dialogRef: MatDialogRef<PasswordChangeDialog>,
               @Inject(MAT_DIALOG_DATA) public data: any) {}
   closeDialog() {
     this.dialogRef.close();

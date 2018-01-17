@@ -19,7 +19,7 @@ import {CalendarModule} from 'primeng/primeng';
 import {InputSwitchModule} from 'primeng/primeng';
 import {MultiSelectModule} from 'primeng/primeng';
 import { ReceiptCyclicalComponent } from './receipt-cyclical/receipt-cyclical.component';
-import { PlanCreateComponent } from './plan-create/plan-create.component';
+import {PlanCreateComponent, PlanErrorDialog} from './plan-create/plan-create.component';
 import {PlanService} from "./Services/plan.service";
 import { PlanDetailsComponent } from './plan-details/plan-details.component';
 import { ShopsComponent } from './shops/shops.component';
@@ -39,7 +39,7 @@ import {RegisterService} from "./Services/register.service";
 import {UserInfoService} from "./Services/user-id.service";
 import {CheckboxModule} from 'primeng/primeng';
 import { WelcomeComponent } from './welcome/welcome.component';
-import {AccountComponent, PasswordSuccessDialog} from './account/account.component';
+import {AccountComponent, PasswordChangeDialog} from './account/account.component';
 import { DailySummaryComponent } from './daily-summary/daily-summary.component';
 import {SummaryService} from "./Services/summary.service";
 import {DropdownModule} from 'primeng/primeng';
@@ -63,6 +63,9 @@ import { CategoryEditDialogComponent } from './dialogs/category-edit-dialog/cate
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from "@angular/material";
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
@@ -70,7 +73,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   entryComponents:[
     LoginErrorDialog,
-    PasswordSuccessDialog,
+    PasswordChangeDialog,
     ShopCreateDialogComponent,
     ProductAddDialogComponent,
     ProductCreateDialogComponent,
@@ -78,7 +81,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeleteDialogComponent,
     ProductEditDialogComponent,
     ShopEditDialogComponent,
-    CategoryEditDialogComponent
+    CategoryEditDialogComponent,
+    PlanErrorDialog
   ],
   declarations: [
     AppComponent,
@@ -103,8 +107,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     WelcomeComponent,
     AccountComponent,
     DailySummaryComponent,
-    PasswordSuccessDialog,
+    PasswordChangeDialog,
     LoginErrorDialog,
+    PlanErrorDialog,
     ShopCreateDialogComponent,
     ProductAddDialogComponent,
     ProductCreateDialogComponent,
@@ -134,6 +139,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatButtonModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {

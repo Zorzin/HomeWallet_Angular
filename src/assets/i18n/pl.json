@@ -21,6 +21,8 @@
   "account-newpassword": "Nowe hasło",
   "account-retypepassword": "Powtórz nowe hasło",
   "account-passwordsuccess": "Hasło pomyślnie zmienione.",
+  "account-passworderror": "Zmiana hasła zakończona niepowodzeniem.",
+  "account-password-length": "Wpisz stare hasło",
 
   "categories-createnew": "Stwórz nową",
   "categories-createcategory": "Stwórz kategorię",
@@ -81,12 +83,19 @@
   "options-cyclical": "Rachunki cykliczne",
   "options-plan": "Plany",
 
+
+  "plan-money": "Kwota do wydania",
+  "plan-startdate": "Data początkowa",
+  "plan-enddate": "Data końcowa",
+  "plan-enddate-error": "Data końcowa musi być większa niż data początkowa",
+  "plan-money-error": "Kwota musi być większa niż 0",
+  "plan-nostartdate-error": "Wprowadź datę początkową",
+  "plan-noenddate-error": "Wprowadź datę końcową",
+  "plan-nomoney-error": "Wprowadź kwotę",
+  "plan-error": "Wystąpił błąd. Spróbuj ponownie.",
+
   "plancreate-sorry": "Niestety, możesz mieć tylko jeden aktywny plan",
   "plancreate-plan": "Plan",
-  "plancreate-iwanttospend": "Chcę wydać nie więcej niż",
-  "plancreate-starting": "zaczynając od",
-  "plancreate-to": "do",
-  "plancreate-date": "Data",
 
   "plandetails-planfor": "Plan dla",
   "plandetails-youwanttospend": "Chcesz wydać nie więcej niż",
@@ -101,10 +110,6 @@
   "plandetails-delete": "Usuń plan",
 
   "planedit-sorry": "Niestety, możesz edytować tylko aktywny plan.",
-  "planedit-iwanttospend": "Chcę wydać nie więcej niż",
-  "planedit-starting": "zaczynając od",
-  "planedit-to": "do",
-  "planedit-date": "Data",
 
   "plans-createnew": "Stwórz nowy",
 
