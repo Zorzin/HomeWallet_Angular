@@ -114,8 +114,11 @@ export class AppComponent implements OnInit{
   private changeTheme(theme: string) {
     if(theme=='light')
     {
-      this.renderer.setStyle(document.querySelector("body"), 'color', "#000");
-      this.renderer.setStyle(document.querySelector("body") , 'background-color', "#fbfbfb");
+      var bodyStyles = document.body.style;
+      bodyStyles.setProperty('--text-color', 'black');
+      bodyStyles.setProperty('--main-bg', 'white');
+      bodyStyles.setProperty('--receipt-bg', 'rgba(154, 154, 154, 0.5)');
+      bodyStyles.setProperty('--receipt-border', 'black');
     }
     else if(theme=='dark')
     {
@@ -123,4 +126,3 @@ export class AppComponent implements OnInit{
     }
   }
 }
-//.receiptcreate rgba(154, 154, 154, 0.5) border: 1px solid black
