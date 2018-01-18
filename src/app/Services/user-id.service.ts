@@ -45,7 +45,8 @@ export class UserInfoService {
   }
 
   getUserTheme() {
-    return this.http.get(this.apiUrl+"theme/" + this.getUserId(),{responseType:"text"}).toPromise();
+    return this.http.get(this.apiUrl+"theme/" + this.getUserId(),{responseType:"text"})
+      .toPromise();
   }
 
   getUserLanguage() {

@@ -5,14 +5,22 @@
       <label>{{'receipt-startdate'|translate}}</label>
     </div>
     <div class="col-md-9 col-sm-12 col-xs-12 date-div">
-      <p-calendar dateFormat="dd.mm.yy" [(ngModel)]="receiptStartDate" ></p-calendar>
+      <mat-form-field>
+        <input matInput [(ngModel)]="receiptStartDate" [matDatepicker]="startPicker" placeholder="{{'receipt-startdate'|translate}}" (dateChange)="updateMinDate()">
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker ></mat-datepicker>
+      </mat-form-field>
     </div>
 
     <div class="col-md-3 col-sm-12 col-xs-12">
       <label>{{'receipt-enddate'|translate}}</label>
     </div>
     <div class="col-md-9 col-sm-12 col-xs-12 date-div">
-      <p-calendar dateFormat="dd.mm.yy" [(ngModel)]="receiptEndDate" ></p-calendar>
+      <mat-form-field>
+        <input matInput [(ngModel)]="receiptEndDate" [min]="minEndDate"  [matDatepicker]="endPicker" placeholder="{{'receipt-enddate'|translate}}">
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker ></mat-datepicker>
+      </mat-form-field>
     </div>
   </div>
 

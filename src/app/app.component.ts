@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserInfoService} from "./Services/user-id.service";
 import {TranslateService} from '@ngx-translate/core';
-
+import {Renderer2} from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,7 +15,9 @@ export class AppComponent implements OnInit{
 
   constructor(private router:Router,
               private userService: UserInfoService,
-              private translate: TranslateService){
+              private translate: TranslateService,
+              private renderer: Renderer2,
+              private el: ElementRef){
 
 
     userService.loginAnnounced$.subscribe(
@@ -28,6 +30,10 @@ export class AppComponent implements OnInit{
       lang => {
         this.getLanguage();
       });
+
+    userService.themeAnnounced$.subscribe(
+      theme=>this.changeTheme(theme)
+    )
   }
 
   setTranslate(){
@@ -41,6 +47,7 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.checkUser();
     this.getLanguage();
+    this.userService.getUserTheme().then(response=>this.changeTheme(JSON.parse(response)));
   }
 
   getLanguage(){
@@ -103,4 +110,17 @@ export class AppComponent implements OnInit{
     this.userService.setUserId(-1);
     this.router.navigate(['/login']);
   }
+
+  private changeTheme(theme: string) {
+    if(theme=='light')
+    {
+      this.renderer.setStyle(document.querySelector("body"), 'color', "#000");
+      this.renderer.setStyle(document.querySelector("body") , 'background-color', "#fbfbfb");
+    }
+    else if(theme=='dark')
+    {
+      document.querySelector("body").style.cssText = "--main-bg: rgba(0, 0, 0, .7)";
+    }
+  }
 }
+//.receiptcreate rgba(154, 154, 154, 0.5) border: 1px solid black

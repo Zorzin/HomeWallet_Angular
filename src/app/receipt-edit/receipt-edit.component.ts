@@ -175,10 +175,26 @@ export class ReceiptEditComponent implements OnInit {
       }
   }
 
-  private updateProductValues(product: ReceiptProductEdit)
+  private updateProductValues(product: ReceiptProduct)
   {
-    product.total = product.amount * product.price;
+    this.checkAmount(product);
+    this.checkPrice(product);
+    product.TotalValue= product.Amount * product.Price;
     this.updateTotal();
+  }
+
+
+  checkAmount(product: ReceiptProduct){
+    if(product.Amount<=0){
+      product.Amount=1;
+    }
+  }
+
+
+  private checkPrice(product: ReceiptProduct) {
+    if(product.Price<=0){
+      product.Price=1;
+    }
   }
 
   private save()

@@ -65,6 +65,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material";
+import { WarningDialogComponent } from './dialogs/warning-dialog/warning-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -72,6 +73,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   entryComponents:[
+    WarningDialogComponent,
     LoginErrorDialog,
     PasswordChangeDialog,
     ShopCreateDialogComponent,
@@ -117,7 +119,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeleteDialogComponent,
     ProductEditDialogComponent,
     ShopEditDialogComponent,
-    CategoryEditDialogComponent
+    CategoryEditDialogComponent,
+    WarningDialogComponent
   ],
   imports: [
     AppRoutingModule,

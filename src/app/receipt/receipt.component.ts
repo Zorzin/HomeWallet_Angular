@@ -139,7 +139,7 @@ export class ReceiptComponent implements OnInit {
   private getReceiptDate() {
     for(let receipt of this.receipts)
     {
-      receipt.purchaseDate = new Date(receipt.purchaseDate).toLocaleDateString();
+      receipt.purchaseDate = new Date(receipt.purchaseDate);
     }
   }
 
@@ -148,9 +148,17 @@ export class ReceiptComponent implements OnInit {
     this.router.navigate(['/receipt-detail',receipt.id]);
   }
 
-  private onCreate()
+  private onCreate(date:any)
   {
-    this.router.navigate(['/receipt-create']);
+    let param;
+    if(date)
+    {
+      param = date[0].purchaseDate.toUTCString();
+    }
+    else {
+      param = new Date().toUTCString();
+    }
+    this.router.navigate(['/receipt-create',param]);
   }
 
   private getUserId() {

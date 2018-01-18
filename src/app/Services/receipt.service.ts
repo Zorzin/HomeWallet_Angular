@@ -56,7 +56,7 @@ export class ReceiptService {
     let body = JSON.stringify(receipt);
     log(body);
     return this.http.post(this.apiCyclicalUrl+this.userService.getUserId(),body,{headers:this.headers,responseType: 'text' })
-      .subscribe();
+      .toPromise();
   }
 
   removeReceipt(id: number)

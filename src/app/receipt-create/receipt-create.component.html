@@ -5,7 +5,11 @@
       <label>{{'receipt-date'|translate}}</label>
     </div>
     <div class="col-md-10 col-sm-12 col-xs-12 date-div">
-      <p-calendar dateFormat="dd.mm.yy" [(ngModel)]="receiptDate"></p-calendar>
+      <mat-form-field>
+        <input matInput [(ngModel)]="receiptDate" [matDatepicker]="startPicker" placeholder="{{'receipt-date'|translate}}">
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker ></mat-datepicker>
+      </mat-form-field>
     </div>
   </div>
 

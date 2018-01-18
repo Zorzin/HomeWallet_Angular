@@ -9,6 +9,7 @@ import {Router} from "@angular/router";
 import {ShopCreateDialogComponent} from "../dialogs/shop-create-dialog/shop-create-dialog.component";
 import {ProductAddDialogComponent} from "../dialogs/product-add-dialog/product-add-dialog.component";
 import {MatDialog} from "@angular/material";
+import {WarningDialogComponent} from "../dialogs/warning-dialog/warning-dialog.component";
 
 @Component({
   selector: 'app-receipt-cyclical',
@@ -35,6 +36,7 @@ export class ReceiptCyclicalComponent implements OnInit {
   private receiptTotal: number = 0;
   private receiptShop: number;
   private receiptStartDate: Date;
+  private minEndDate: Date;
   private receiptEndDate: Date;
   private receiptCycle: number = 1;
 
@@ -46,9 +48,11 @@ export class ReceiptCyclicalComponent implements OnInit {
     this.receiptStartDate = new Date();
     this.receiptEndDate = new Date();
     this.receiptEndDate.setMonth(this.receiptStartDate.getMonth()+1);
+    this.minEndDate = new Date();
+    this.minEndDate.setDate(this.receiptStartDate.getDate()+1);
     this.getWidthAndHeight();
     this.getShops(false);
-    this.getUSerCurrency();
+    this.getUserCurrency();
     this.updateTotal();
   }
 
@@ -82,6 +86,11 @@ export class ReceiptCyclicalComponent implements OnInit {
     receipt.ShopId = this.receiptShop;
     receipt.StartDate = this.receiptStartDate.toLocaleDateString();
     receipt.EndDate = this.receiptEndDate.toLocaleDateString();
+    if(receipt.EndDate<receipt.StartDate)
+    {
+      this.openDialog();
+      return;
+    }
     receipt.Cycle = this.receiptCycle;
     receipt.Products = [];
     for(let product of this.newProducts)
@@ -92,7 +101,9 @@ export class ReceiptCyclicalComponent implements OnInit {
       receiptProduct.ProductId = product.ID;
       receipt.Products.push(receiptProduct);
     }
-    this.receiptService.createReceiptCyclical(receipt).add(this.goMainpage());;
+    this.receiptService.createReceiptCyclical(receipt)
+      .then(response=>this.goMainpage())
+      .catch(reason => this.openDialog());
   }
 
 
@@ -151,11 +162,27 @@ export class ReceiptCyclicalComponent implements OnInit {
   }
   private updateProductValues(product: ReceiptProduct)
   {
+    this.checkAmount(product);
+    this.checkPrice(product);
     product.TotalValue= product.Amount * product.Price;
     this.updateTotal();
   }
 
-  private getUSerCurrency() {
+
+  checkAmount(product: ReceiptProduct){
+    if(product.Amount<=0){
+      product.Amount=1;
+    }
+  }
+
+
+  private checkPrice(product: ReceiptProduct) {
+    if(product.Price<=0){
+      product.Price=1;
+    }
+  }
+
+  private getUserCurrency() {
     this.userService.getUserCurrency().then((response)=>{
       this.currency = JSON.parse(response);
     });
@@ -181,4 +208,20 @@ export class ReceiptCyclicalComponent implements OnInit {
     }
   }
 
+  updateMinDate() {
+    console.log("weszlo");
+    this.minEndDate.setDate(this.receiptStartDate.getDate()+1);
+    if(this.receiptEndDate<this.minEndDate)
+    {
+      this.receiptEndDate.setDate(this.minEndDate.getDate());
+    }
+  }
+
+  private openDialog() {
+    this.dialog.open(WarningDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+      data: 'common-error'
+    });
+  }
 }

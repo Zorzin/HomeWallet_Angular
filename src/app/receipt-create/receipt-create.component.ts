@@ -10,7 +10,7 @@ import {CategoryService} from "../Services/category.service"
 import {SelectItem} from "primeng/primeng";
 import {ReceiptCreate} from "../Models/receipt-create";
 import {ReceiptProductPost} from "../Models/receipt-product-post";
-import {Router} from "@angular/router";
+import {ActivatedRoute, ParamMap, Route, Router} from "@angular/router";
 import {UserInfoService} from "../Services/user-id.service";
 import {MatDialog} from "@angular/material";
 import {ProductAddDialogComponent} from "../dialogs/product-add-dialog/product-add-dialog.component";
@@ -28,7 +28,8 @@ export class ReceiptCreateComponent implements OnInit {
     private shopService: ShopService,
     private receiptService: ReceiptService,
     private userService: UserInfoService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private route: ActivatedRoute,) { }
 
 
   private currency:string;
@@ -40,13 +41,17 @@ export class ReceiptCreateComponent implements OnInit {
   private receiptTotal: number = 0;
   private receiptShop: number;
   private receiptDate: Date;
-
+  private dateFromRoute: Date;
   ngOnInit() {
     this.checkUser();
     this.getWidthAndHeight();
+
+    this.dateFromRoute = new Date(this.route.snapshot.paramMap.get('date'));
+console.log();
     this.currentProduct = new ReceiptProduct();
     this.newProducts = [];
     this.receiptDate = new Date();
+    this.receiptDate.setDate(this.dateFromRoute.getDate());
     this.shops = [];
     this.getUserCurrency();
     this.getShops(false);
@@ -153,8 +158,24 @@ export class ReceiptCreateComponent implements OnInit {
 
   private updateProductValues(product: ReceiptProduct)
   {
+    this.checkAmount(product);
+    this.checkPrice(product);
     product.TotalValue= product.Amount * product.Price;
     this.updateTotal();
+  }
+
+
+  checkAmount(product: ReceiptProduct){
+    if(product.Amount<=0){
+      product.Amount=1;
+    }
+  }
+
+
+  private checkPrice(product: ReceiptProduct) {
+    if(product.Price<=0){
+      product.Price=1;
+    }
   }
 
   private goMainpage() {

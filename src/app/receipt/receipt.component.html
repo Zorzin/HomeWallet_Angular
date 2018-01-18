@@ -30,10 +30,10 @@
       <div *ngFor="let date of datesToView" class="container">
         <div class="row dayheader">
           <div class="col-xs-6 col-md-8 datetextfield">
-            <label class="datefield">{{date[0].purchaseDate}}</label>
+            <label class="datefield">{{date[0].purchaseDate.toLocaleDateString()}}</label>
           </div>
           <div class="col-xs-6 col-md-4 summarybutton">
-            <a class="btn btn-default" (click)="onSummary(date[0].purchaseDate)" >{{'receipts-summary'|translate}}</a>
+            <a class="btn btn-default" (click)="onSummary(date[0].purchaseDate.toLocaleDateString())" >{{'receipts-summary'|translate}}</a>
           </div>
         </div>
         <hr />
@@ -50,7 +50,7 @@
           </div>
         </a>
 
-        <a (click)="onCreate()">
+        <a (click)="onCreate(date)">
           <div class="col-md-3 col-xs-6 receiptsummary">
             <div class="shoptextfield">
               <h1>{{'receipts-add'|translate}}</h1>

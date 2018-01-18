@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'main', component: WelcomeComponent},
   { path: 'receipts',  component: ReceiptComponent },
   { path: 'options',  component: OptionsComponent},
-  { path:"receipt-create", component: ReceiptCreateComponent },
+  { path:"receipt-create/:date", component: ReceiptCreateComponent },
   { path:"plan-create", component: PlanCreateComponent },
   { path:"receipt-cyclical", component: ReceiptCyclicalComponent },
   { path:"shops", component: ShopsComponent },
