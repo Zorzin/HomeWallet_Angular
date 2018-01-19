@@ -823,20 +823,6 @@ p-footer{
   margin-bottom: 40px;
 }
 
-.login label{
-  color: var(--login-text-color) !important;
-}
-
-.login input{
-  color: var(--login-text-color) !important;
-}
-.login .mat-form-field-underline{
-  background-color: var(--login-text-color) !important;
-}
-
-.login .mat-select-arrow{
-  color: var(--login-text-color) !important;
-}
 @media screen and (max-width: 550px) {
 
   .login .logo {
@@ -883,19 +869,55 @@ p-footer{
 {
   color: white;
 }
-.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label, .mat-form-field-empty.mat-form-field-label, .mat-select-arrow
-{
-  color: var(--inputs-text-color);
+
+#changepassword label{
+  color: var(--inputs-text-color) ;
 }
 
-.mat-tab-label, .mat-tab-link
-{
-  color: var(--inputs-text-color);
+#changepassword input{
+  color: var(--inputs-text-color) ;
 }
 
-.mat-form-field-underline
-{
-  background-color: var(--inputs-text-color);
+#changepassword span{
+  color: var(--inputs-text-color) ;
+}
+
+
+#receipt label{
+  color: var(--inputs-text-color) ;
+}
+
+#receipt input{
+  color: var(--inputs-text-color) ;
+}
+
+#receipt span{
+  color: var(--inputs-text-color) ;
+}
+
+#login label{
+  color: var(--login-text-color) ;
+}
+
+#login input{
+  color: var(--login-text-color) ;
+}
+
+#login span{
+  color: var(--login-text-color) ;
+}
+
+
+#dialog label{
+  color: var(--login-text-color);
+}
+
+#dialog input{
+  color: var(--login-text-color);
+}
+
+#dialog span{
+  color: var(--login-text-color);
 }
 
 .passwordchange input{

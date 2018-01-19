@@ -34,7 +34,7 @@ export class AppComponent implements OnInit{
 
     userService.themeAnnounced$.subscribe(
       theme=>this.changeTheme(theme)
-    )
+    );
   }
 
   setTranslate(){
