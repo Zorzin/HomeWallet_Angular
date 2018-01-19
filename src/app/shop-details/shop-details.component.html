@@ -1,59 +1,47 @@
 <div *ngIf="isDataLoaded">
-  <br/>
-  <ul class="nav nav-tabs detailstab">
-    <li role="presentation" [ngClass]="details ? 'active' : ''" ><a id="detailstab" (click)="SetDetails()">{{'shopdetails-details'|translate}}</a></li>
-    <li role="presentation" [ngClass]="details ? '' : 'active'"><a id="statisticstab" (click)="SetStatistics()">{{'shopdetails-statistics'|translate}}</a></li>
-  </ul>
-  <br />
-  <div id="statisticsdiv" *ngIf="!details">
-    {{'shopdetails-statistics'|translate}}
-  </div>
-  <div class="col-md-12" id="detailsdiv" *ngIf="details">
-    <div class="col-md-6">
-      <div>
-        <h2>{{shop.name}}</h2>
-      </div>
+  <mat-tab-group>
+    <mat-tab label="{{'shopdetails-details'|translate}}">
+      <div class="col-md-12" id="detailsdiv">
+        <div class="col-md-6">
+          <div>
+            <h2>{{shop.name}}</h2>
+          </div>
 
-      <div *ngIf="hasProducts">
-        {{'shopdetails-productsbought'|translate}}
-      </div>
-      <div *ngIf="!hasProducts">
-        {{'shopdetails-noproducts'|translate}}
-      </div>
+          <div *ngIf="hasProducts">
+            {{'shopdetails-productsbought'|translate}}
+          </div>
+          <div *ngIf="!hasProducts">
+            {{'shopdetails-noproducts'|translate}}
+          </div>
 
-      <div *ngIf="hasProducts" class="col-md-offset-2" >
-        <li *ngFor="let product of products">
-          <a (click)="ProductDetails(product)" >
-            {{product.name}}
-          </a>
-        </li>
+          <div *ngIf="hasProducts" class="col-md-offset-2" >
+            <li *ngFor="let product of products">
+              <a (click)="ProductDetails(product)" >
+                {{product.name}}
+              </a>
+            </li>
+            <br />
+
+          </div>
+        </div>
         <br />
-
+        <div class="col-md-6">
+          <div class="detailsbuttonsdiv">
+            <a class="btn btn-default" (click)="GoBack()">{{'common-goback'|translate}}</a><br/>
+            <a class="btn btn-warning" (click)="Edit()">{{'common-edit'|translate}}</a><br />
+            <a class="btn btn-danger" (click)="Delete()">{{'common-delete'|translate}}</a><br />
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="detailsbuttonsdiv">
-        <a class="btn btn-default" (click)="GoBack()">{{'common-goback'|translate}}</a><br/>
-        <a class="btn btn-warning" (click)="Edit()">{{'common-edit'|translate}}</a><br />
-        <a class="btn btn-danger" (click)="Delete()">{{'common-delete'|translate}}</a><br />
+    </mat-tab>
+    <mat-tab label="{{'shopdetails-statistics'|translate}}">
+      <div id="statisticsdiv" >
+        {{'shopdetails-statistics'|translate}}
       </div>
-    </div>
-  </div>
+    </mat-tab>
+  </mat-tab-group>
   <div class="col-md-12">
   </div>
-
-
-  <p-dialog header="{{'shopdetails-edit'|translate}}" [(visible)]="editDialogDisplay" [width]="width" [height]="height" [draggable]="false" [modal]="true">
-
-    <div class="shopmodal">
-      <label>{{'shopdetails-name'|translate}}:</label>
-      <input type="text" [(ngModel)]="shop.name">
-    </div>
-    <p-footer>
-      <button type="button" pButton (click)="ConfirmEdit()" label="{{'common-save'|translate}}"></button>
-      <button type="button" pButton (click)="CancelEdit()" label="{{'common-cancel'|translate}}"></button>
-    </p-footer>
-  </p-dialog>
 </div>
 
 <div *ngIf="!isDataLoaded">

@@ -24,6 +24,7 @@ export class AppComponent implements OnInit{
       id => {
         this.checkUser();
         this.getLanguage();
+        this.userService.getUserTheme().then(response=>this.changeTheme(JSON.parse(response)));
       });
 
     userService.languageAnnounced$.subscribe(
@@ -77,6 +78,7 @@ export class AppComponent implements OnInit{
     if(!this.userService.isUserLogIn())
     {
       this.login = false;
+      document.querySelector("body").style.cssText = "--main-bg: rgba(0, 0, 0, .7)";
     }
     else{
       this.login = true;
@@ -119,6 +121,8 @@ export class AppComponent implements OnInit{
       bodyStyles.setProperty('--main-bg', 'white');
       bodyStyles.setProperty('--receipt-bg', 'rgba(154, 154, 154, 0.5)');
       bodyStyles.setProperty('--receipt-border', 'black');
+      bodyStyles.setProperty('--inputs-text-color', 'black');
+      //
     }
     else if(theme=='dark')
     {

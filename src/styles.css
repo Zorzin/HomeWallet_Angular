@@ -8,6 +8,8 @@
   --text-color: white;
   --receipt-bg:rgba(0, 0, 0, .5);
   --receipt-border: white;
+  --inputs-text-color: white;
+  --login-text-color: black;
 }
 a :hover{
   cursor: pointer;
@@ -821,10 +823,20 @@ p-footer{
   margin-bottom: 40px;
 }
 
-.login input{
-  color: black;
+.login label{
+  color: var(--login-text-color) !important;
 }
 
+.login input{
+  color: var(--login-text-color) !important;
+}
+.login .mat-form-field-underline{
+  background-color: var(--login-text-color) !important;
+}
+
+.login .mat-select-arrow{
+  color: var(--login-text-color) !important;
+}
 @media screen and (max-width: 550px) {
 
   .login .logo {
@@ -861,11 +873,29 @@ p-footer{
 
 }
 .account-container span{
-  color: white !important;
+  color: var(--inputs-text-color);
+}
+
+.mat-select-value-text{
+  color: var(--inputs-text-color);
 }
 .accountpage
 {
-  color: white !important;
+  color: white;
+}
+.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label, .mat-form-field-empty.mat-form-field-label, .mat-select-arrow
+{
+  color: var(--inputs-text-color);
+}
+
+.mat-tab-label, .mat-tab-link
+{
+  color: var(--inputs-text-color);
+}
+
+.mat-form-field-underline
+{
+  background-color: var(--inputs-text-color);
 }
 
 .passwordchange input{
