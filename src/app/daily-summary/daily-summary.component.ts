@@ -25,7 +25,8 @@ export class DailySummaryComponent implements OnInit {
     this.date = this.route.snapshot.paramMap.get('date');
     this.summaryService.getDailySummaryByDate(this.date)
       .then((summary)=>{
-        this.summary = summary;
+        console.log(summary)
+        this.summary = summary.result;
         this.dataLoaded = true;
       })
   }

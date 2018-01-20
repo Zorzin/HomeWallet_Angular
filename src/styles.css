@@ -930,3 +930,11 @@ p-footer{
 .receipt-save-button{
   color: black !important;
 }
+
+.summaryNumber {
+  font-size: 60px;
+}
+
+.summaryBlock {
+  height: 200px;
+}

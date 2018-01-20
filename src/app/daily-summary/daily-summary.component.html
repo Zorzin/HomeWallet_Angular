@@ -4,18 +4,94 @@
     <p>{{'dailysummary-date'|translate}}: {{summary.date}}</p>
   </div>
   <div class="col-md-12 col-sm-12">
-    <div class="col-md-6 col-sm-12">
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
       <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p>{{'dailysummary-youspend'|translate}}</p>
-        <p>{{summary.totalCost}} {{currency}}</p>
-        <p>{{'dailysummary-thatday'|translate}}</p>
+        <p class="summaryNumber">{{summary.totalCost}} {{currency}}</p>
+        <p>{{'dailysummary-youspend'|translate}} {{'dailysummary-thatday'|translate}}</p>
       </div>
     </div>
-    <div class="col-md-6 col-sm-12">
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
       <div *ngIf="summary.percentPlan !=-1" class="col-md-12 col-sm-12 dailysummarytext">
-        <p translate [translateParams]="{value: summary.percentPlan}">dailysummary-thatsofyourplan</p>
+        <p class="summaryNumber">{{summary.percentPlan}}%</p>
+        <p>of your plan</p>
       </div>
     </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">2</p>
+        <p>w tylu sklepach kupiłeś tego dnia</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">3</p>
+        <p>tyle produktów kupiłeś tego dnia</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">4</p>
+        <p>tyle kategorii</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">wykres</p>
+        <p>wydane pieniadze na kazda kategorie</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">wykres</p>
+        <p>wydane pieniadze w kazdym sklepie</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">wykres</p>
+        <p>produkty kupione w sklepie</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">120 zł</p>
+        <p>najdroższy przedmiot</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">1 zł</p>
+        <p>najtańszy przedmiot</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">5 zł</p>
+        <p>średni koszt produktu</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">23 zł</p>
+        <p>średni koszt rachunku</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col-md-12">
   </div>
 
 
