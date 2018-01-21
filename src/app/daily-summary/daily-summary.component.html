@@ -1,7 +1,7 @@
 <div *ngIf="dataLoaded">
 
   <div class="col-md-12 col-sm-12 dailysummarydate">
-    <p>{{'dailysummary-date'|translate}}: {{summary.date}}</p>
+    <p>{{'dailysummary-date'|translate}}: {{date}}</p>
   </div>
   <div class="col-md-12 col-sm-12">
 
@@ -21,70 +21,106 @@
 
     <div class="col-md-6 col-sm-12 summaryBlock">
       <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">2</p>
+        <p class="summaryNumber">{{summary.shopsCount}}</p>
         <p>w tylu sklepach kupiłeś tego dnia</p>
       </div>
     </div>
 
     <div class="col-md-6 col-sm-12 summaryBlock">
       <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">3</p>
+        <p class="summaryNumber">{{summary.productsCount}}</p>
         <p>tyle produktów kupiłeś tego dnia</p>
       </div>
     </div>
 
     <div class="col-md-6 col-sm-12 summaryBlock">
       <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">4</p>
+        <p class="summaryNumber">{{summary.categoriesCount}}</p>
         <p>tyle kategorii</p>
       </div>
     </div>
 
-    <div class="col-md-6 col-sm-12 summaryBlock">
+    <div class="col-md-6 col-sm-12 summaryBlock" *ngIf="summary.eachCategoryCost.length>0">
       <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">wykres</p>
-        <p>wydane pieniadze na kazda kategorie</p>
+        <ngx-charts-bar-vertical
+          [view]="view"
+          [scheme]="scheme"
+          [results]="summary.eachCategoryCost"
+          [gradient]="false"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]='eachCategoriesCostXLabel'
+          [yAxisLabel]='eachCategoriesCostYLabel'
+          (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock" *ngIf="summary.eachShopProducts.length>0">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <ngx-charts-bar-vertical
+          [view]="view"
+          [scheme]="scheme"
+          [results]="summary.eachShopProducts"
+          [gradient]="false"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]='eachShopProductsXLabel'
+          [yAxisLabel]='eachShopProductsYLabel'
+          (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock" *ngIf="summary.eachShopMoney.length>0">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <ngx-charts-bar-vertical
+          [view]="view"
+          [scheme]="scheme"
+          [results]="summary.eachShopMoney"
+          [gradient]="false"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]='eachShopCostXLabel'
+          [yAxisLabel]='eachShopCostYLabel'
+          (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
       </div>
     </div>
 
     <div class="col-md-6 col-sm-12 summaryBlock">
       <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">wykres</p>
-        <p>wydane pieniadze w kazdym sklepie</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">wykres</p>
-        <p>produkty kupione w sklepie</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">120 zł</p>
+        <p class="summaryNumber">{{summary.maxProductCost}} zł</p>
         <p>najdroższy przedmiot</p>
       </div>
     </div>
 
     <div class="col-md-6 col-sm-12 summaryBlock">
       <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">1 zł</p>
+        <p class="summaryNumber">{{summary.minProductCost}} zł</p>
         <p>najtańszy przedmiot</p>
       </div>
     </div>
 
     <div class="col-md-6 col-sm-12 summaryBlock">
       <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">5 zł</p>
+        <p class="summaryNumber">{{summary.averageProductCost}} zł</p>
         <p>średni koszt produktu</p>
       </div>
     </div>
 
     <div class="col-md-6 col-sm-12 summaryBlock">
       <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">23 zł</p>
+        <p class="summaryNumber">{{summary.averageReceiptCost}}zł</p>
         <p>średni koszt rachunku</p>
       </div>
     </div>
@@ -93,26 +129,6 @@
 
   <div class="col-md-12">
   </div>
-
-
-
-
-  <div class="col-md-12 col-sm-12 dailysummarytext">
-    <p>{{'dailysummary-checkother'|translate}}</p>
-  </div>
-
-  <div class="col-md-12 col-sm-12 dailysummarybuttons">
-    <div class="col-md-4 col-sm-12">
-      <a class="btn btn-default">{{'dailysummary-plan'|translate}}</a>
-    </div>
-    <div class="col-md-4 col-sm-12">
-      <a class="btn btn-default">{{'dailysummary-monthly'|translate}}</a>
-    </div>
-    <div class="col-md-4 col-sm-12">
-      <a class="btn btn-default">XXX</a>
-    </div>
-  </div>
-
 </div>
 <div *ngIf="!dataLoaded">
   <mat-spinner></mat-spinner>

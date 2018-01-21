@@ -66,6 +66,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material";
 import { WarningDialogComponent } from './dialogs/warning-dialog/warning-dialog.component';
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -145,6 +146,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    NgxChartsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

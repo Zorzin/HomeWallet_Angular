@@ -8,17 +8,30 @@ import {SummaryService} from "../Services/summary.service";
   templateUrl: './daily-summary.component.html',
   styleUrls: ['./daily-summary.component.css']
 })
+
+
 export class DailySummaryComponent implements OnInit {
 
   private currency:string;
   private summary:any;
   private dataLoaded:boolean;
   private date :string;
+  eachShopProductsXLabel= "Sklep";
+  eachShopProductsYLabel= "ilość produktów";
+  eachShopCostXLabel = "Sklep";
+  eachShopCostYLabel = "Kwota produktu";
+  eachCategoriesCostXLabel = 'Kategorie';
+  eachCategoriesCostYLabel = 'Kwota';
+  view: any[] = [500, 400];
+  scheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
 
   constructor(private userService:UserInfoService,
               private router:Router,
               private route: ActivatedRoute,
-              private summaryService:SummaryService) { }
+              private summaryService:SummaryService) {
+  }
 
   ngOnInit() {
     this.getUserCurrency();
@@ -26,7 +39,7 @@ export class DailySummaryComponent implements OnInit {
     this.summaryService.getDailySummaryByDate(this.date)
       .then((summary)=>{
         console.log(summary)
-        this.summary = summary.result;
+        this.summary = summary;
         this.dataLoaded = true;
       })
   }
