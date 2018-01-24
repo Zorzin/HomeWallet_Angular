@@ -117,7 +117,7 @@ export class ReceiptComponent implements OnInit {
       this.dates = [[]];
       for(let receipt of this.receipts)
       {
-        if(receipt.purchaseDate != date)
+        if(receipt.purchaseDate.toLocaleDateString() != date.toLocaleDateString())
         {
           datesCounter++;
           this.dates[datesCounter] = [];
@@ -176,7 +176,7 @@ export class ReceiptComponent implements OnInit {
     {
       for(let date of this.dates)
       {
-        if(date[0].purchaseDate == new Date().toLocaleDateString())
+        if(date[0].purchaseDate.toLocaleDateString() == new Date().toLocaleDateString())
         {
           return true;
         }
