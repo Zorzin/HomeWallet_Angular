@@ -21,6 +21,13 @@ export class ShopDetailsComponent implements OnInit {
   private details: boolean;
   private hasProducts: boolean;
   private products: any;
+  private summary : any;
+  moneySpentXLabel= "Kategoria";
+  moneySpentYLabel= "wydano";
+  view: any[] = [500, 400];
+  scheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
 
   constructor(
     private router: Router,
@@ -37,8 +44,8 @@ export class ShopDetailsComponent implements OnInit {
       .subscribe((shop) => {
         this.shop = shop;
         this.details = true;
-        this.isDataLoaded = true;
         this.GetProducts();
+        this.GetStatistics();
       });
   }
 
@@ -124,5 +131,13 @@ export class ShopDetailsComponent implements OnInit {
 
   private updateShop(result: string) {
     this.shop.name = result;
+  }
+
+  private GetStatistics() {
+    this.shopService.getShopStatistics(this.shop.id,"01-01-2017","02-02-2019")
+      .then((response)=> {
+        this.summary = response;
+        this.isDataLoaded = true;
+      });
   }
 }

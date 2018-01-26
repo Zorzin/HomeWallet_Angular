@@ -27,6 +27,12 @@ export class CategoryService {
       .catch(this.handleError);
   }
 
+  getCategoryStatistics(id:number, startDate:string, endDate:string) {
+    return this.http.get(this.apiUrl+"summary/"+this.userService.getUserId() + "/"+id+"/"+startDate+"/"+endDate)
+      .toPromise()
+      .catch(this.handleError);
+  }
+
   getCategories()
   {
     return this.http.get(this.apiUrl+this.userService.getUserId())

@@ -34,85 +34,119 @@
 
     <mat-tab label="{{'productdetails-statistics'|translate}}">
       <div id="statisticsdiv" >
-        <div class="col-md-12">
-          <div class="col-md-6 detailsviewnochart">
-            {{'productdetails-totallyspent'|translate}}
-          </div>
-          <div class="col-md-6">
-            <div class="incremental-counter totalspent"></div>
-          </div>
-        </div>
-        <hr/>
-        <div class="col-md-12">
-          <div class="col-md-6">
-            <div class="incremental-counter timesbought"></div>
-          </div>
-          <div class="col-md-6 detailsviewnochart">
-            {{'productdetails-timesbought'|translate}}
-          </div>
-        </div>
+        <div class="col-md-12 col-sm-12">
 
-        <hr />
-        <div class="col-md-12">
-          <div class="col-md-6 detailsviewnochart">
-            {{'productdetails-amountbought'|translate}}
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.totalTimesBoughtAmount}}</p>
+              <p>tyle razy kupiony</p>
+            </div>
           </div>
-          <div class="col-md-6">
-            <div class="incremental-counter amountbought"></div>
-          </div>
-        </div>
-        <hr/>
-        <div class="col-md-12">
-          <div class="col-md-6 detailsviewnochart">
-            {{'productdetails-avaragecost'|translate}}
-          </div>
-          <div class="col-md-6">
-            <div class="incremental-counter averagecost"></div>
-          </div>
-        </div>
-        <hr/>
-        <div class="col-md-12">
-          <div class="col-md-6">
 
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.totalMoneySpent}}</p>
+              <p>tyle wydane</p>
+            </div>
           </div>
-          <div class="col-md-6 detailsviewchart">
-            {{'productdetails-timesboughtshops'|translate}}
-          </div>
-        </div>
-        <hr />
-        <div class="col-md-12">
-          <div class="col-md-6 detailsviewchart">
-            {{'productdetails-avaragecostshops'|translate}}
-          </div>
-          <div class="col-md-6">
 
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.maxPrice}}</p>
+              <p>najwyzsza cena</p>
+            </div>
           </div>
-        </div>
-        <hr />
-        <div class="col-md-12">
-          <div class="col-md-6">
 
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.minPrice}}</p>
+              <p>najnizsza cena</p>
+            </div>
           </div>
-          <div class="col-md-6 detailsviewchart">
-            {{'productdetails-percentplans'|translate}}
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.averagePrice}}</p>
+              <p>srednia cena</p>
+            </div>
           </div>
-        </div>
-        <hr />
-        <div class="col-md-12">
-          <div class="col-md-6">
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.shopsAmount}}</p>
+              <p>w tylu sklepach kupiono</p>
+            </div>
           </div>
-          <div class="col-md-6">
-            {{'productdetails-lastbought'|translate}}
+
+          <div class="col-md-6 col-sm-12 summaryBlock" *ngIf="summary.averagePriceInShops.length>0">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <ngx-charts-bar-vertical
+                [view]="view"
+                [scheme]="scheme"
+                [results]="summary.averagePriceInShops"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]='shopPriceXLabel'
+                [yAxisLabel]='shopPriceYLabel'
+                (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+            </div>
           </div>
-        </div>
-        <hr />
-        <div class="col-md-12">
-          <div class="col-md-6 detailsviewnochart">
-            {{'productdetails-mostbought'|translate}}
+
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.shopWithCheapestPrice}}</p>
+              <p>w tym sklepie najtaniej bylo</p>
+            </div>
           </div>
-          <div class="col-md-6">
-            <div class="incremental-counter mostbought"></div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.shopWithMostExpensivePrice}}</p>
+              <p>w tym sklepie najdrozej bylo</p>
+            </div>
           </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.averageAmountOnReceipt}}</p>
+              <p>tyle srednio sztuk kupowano</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.minAmountOnReceipt}}</p>
+              <p>tyle najmniej na raz kupiono</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.maxAmountOnReceipt}}</p>
+              <p>tyle najwiecej na raz kupiono</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.percentageAmountOfTotalMoneySpent}}</p>
+              <p>tyle procentowo wydalismy na ten produkt porownujac do lacznych wydatkow</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.averageCostPerDay}}</p>
+              <p>tyle srednio dziennie</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </mat-tab>

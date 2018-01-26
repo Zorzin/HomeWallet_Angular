@@ -8,7 +8,6 @@ export class ShopService {
   private apiUrl = 'http://localhost:54044/api/shops/';  // URL to web api
   private apiProductsUrl = 'http://localhost:54044/api/shops/products/';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
-  private userId : string;
 
   private shops : any;
 
@@ -28,6 +27,12 @@ export class ShopService {
 
   getShopProducts(id:number) {
     return this.http.get(this.apiProductsUrl+this.userService.getUserId() + "/"+id)
+      .toPromise()
+      .catch(this.handleError);
+  }
+
+  getShopStatistics(id:number, startDate:string, endDate:string) {
+    return this.http.get(this.apiUrl+"summary/"+this.userService.getUserId() + "/"+id+"/"+startDate+"/"+endDate)
       .toPromise()
       .catch(this.handleError);
   }

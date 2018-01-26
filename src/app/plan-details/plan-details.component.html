@@ -3,46 +3,95 @@
     <p>{{'plandetails-planfor'|translate}} {{planDetails.startDate.toLocaleDateString()}} - {{planDetails.endDate.toLocaleDateString()}}</p>
   </div>
 
-  <div class="col-md-12">
-    <div class="col-md-4 col-md-offset-1 planviewtextnochart">
-      <p>{{'plandetails-youwanttospend'|translate}} {{planDetails.amount}} {{currency}}</p>
+  <div class="col-md-12 col-sm-12">
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">{{summary.amount}} {{currency}}</p>
+        <p>tyle ustaliles</p>
+      </div>
     </div>
-    <div class="col-md-6 col-md-offset-1">
-      <div class="incremental-counter" data-value="@Model.Amount"></div>
 
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">{{summary.moneyLeft}}</p>
+        <p>tyle zostalo</p>
+      </div>
     </div>
-  </div>
 
-  <hr class="planhr"/>
-
-  <div class="col-md-12 chartdiv">
-    <div class="col-md-6">
-
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">{{summary.moneyLeftPercentage}}</p>
+        <p>tyle zostalo procentowo</p>
+      </div>
     </div>
-    <div class="col-md-4 col-md-offset-1 planviewtextchart">
-      <p>{{'plandetails-tothisday'|translate}} {{planDetails.alreadySpent}} {{currency}} {{'plandetails-whichis'|translate}} {{planDetails.alreadySpentPercent}}%. {{'plandetails-youhave'|translate}} {{planDetails.moneyLeft}} {{currency}} {{'plandetails-left'|translate}}.</p>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">{{summary.moneySpentPercentage}}</p>
+        <p>tyle procentowo wydales</p>
+      </div>
     </div>
-  </div>
 
-  <hr class="planhr"/>
-
-  <div class="col-md-12 chartdiv">
-    <div class="col-md-4 col-md-offset-1 planviewtextchart">
-      <p>{{planDetails.daysLeft}} {{'plandetails-daysleft'|translate}}</p>
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">{{summary.mostPopularProduct}}</p>
+        <p>najpopularniejszy produkt</p>
+      </div>
     </div>
-    <div class="col-md-6 col-md-offset-1">
 
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">{{summary.mostExpensiveProduct}}</p>
+        <p>najdrozszy produkt</p>
+      </div>
     </div>
-  </div>
 
-  <hr class="planhr"/>
-
-  <div class="col-md-12">
-    <div class="col-md-6">
-      <div class="incremental-counteraverage" data-value="@Model.Average"></div>
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">{{summary.mostPopularCategory}}</p>
+        <p>najpopularniejsza kategoria</p>
+      </div>
     </div>
-    <div class="col-md-4 col-md-offset-1 planviewtextnochart">
-      <p>{{'plandetails-onavarage'|translate}} {{planDetails.averageLeft}} zł {{'plandetails-aday'|translate}}</p>
+
+    <div class="col-md-6 col-sm-12 summaryBlock" *ngIf="summary.moneySpentOnCategories.length>0">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <ngx-charts-bar-vertical
+          [view]="view"
+          [scheme]="scheme"
+          [results]="summary.moneySpentOnCategories"
+          [gradient]="false"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]='eachCategoriesSpentXLabel'
+          [yAxisLabel]='eachCategoriesSpentYLabel'
+          (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">{{summary.averageMoneyLeftPerDay}}</p>
+        <p>tyle średnio na dzien pozostalo</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">{{summary.productsBoughtAmount}}</p>
+        <p>tyle różnych przedmiotów kupiono</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-sm-12 summaryBlock">
+      <div class="col-md-12 col-sm-12 dailysummarytext">
+        <p class="summaryNumber">{{summary.averageMoneySpentPerDay}}</p>
+        <p>tyle średnio dziennie wydano</p>
+      </div>
     </div>
   </div>
 

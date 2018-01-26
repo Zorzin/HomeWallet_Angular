@@ -19,6 +19,14 @@ export class PlanDetailsComponent implements OnInit {
   private canEdit: boolean;
   private responseFromService: any;
   private showRemoveDialog: boolean;
+  private summary : any;
+
+  eachCategoriesSpentXLabel = 'Kategorie';
+  eachCategoriesSpentYLabel = 'Kwota';
+  view: any[] = [500, 400];
+  scheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
 
   constructor(
     private planService: PlanService,
@@ -38,7 +46,7 @@ export class PlanDetailsComponent implements OnInit {
         this.checkIfThereIsPlanAlready();
         this.planDetails.startDate = new Date(this.planDetails.startDate);
         this.planDetails.endDate = new Date(this.planDetails.endDate);
-        this.isDataLoaded = true;
+        this.GetStatistics();
       });
   }
 
@@ -96,5 +104,12 @@ export class PlanDetailsComponent implements OnInit {
   private getWidthAndHeight() {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+  }
+
+  private GetStatistics() {
+    this.planService.getPlanStatistics(this.planDetails.id).then((response)=>{
+      this.summary = response;
+      this.isDataLoaded = true;
+    });
   }
 }

@@ -20,6 +20,13 @@ export class CategoryDetailsComponent implements OnInit {
   private hasProducts: boolean;
   private category:any;
   private products : any;
+  private summary : any;
+  moneySpentXLabel= "Sklep";
+  moneySpentYLabel= "wydano";
+  view: any[] = [500, 400];
+  scheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
 
   constructor(
     private router : Router,
@@ -37,7 +44,7 @@ export class CategoryDetailsComponent implements OnInit {
         this.details = true;
         this.category = result;
         this.GetProducts();
-        this.isDataLoaded = true;
+        this.GetStatistics();
       });
   }
 
@@ -122,5 +129,13 @@ export class CategoryDetailsComponent implements OnInit {
 
   private updateCategory(name:string) {
     this.category.name = name;
+  }
+
+  private GetStatistics() {
+    this.categoryService.getCategoryStatistics(this.category.id,"01-01-1990","01-01-2020")
+      .then((response)=>{
+        this.summary=response;
+        this.isDataLoaded = true;
+      });
   }
 }

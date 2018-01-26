@@ -37,6 +37,169 @@
     <mat-tab label="{{'shopdetails-statistics'|translate}}">
       <div id="statisticsdiv" >
         {{'shopdetails-statistics'|translate}}
+
+        <div class="col-md-12 col-sm-12">
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.visitAmount}}</p>
+              <p>tyle razy odwiedzony</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.moneySpentAmount}}</p>
+              <p>tyle wydane</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.moneyAverageSpentAmount}}</p>
+              <p>tyle średnio wydane</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.moneyMaxSpentAmount}}</p>
+              <p>tyle najwiecej wydane</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.moneyMinSpentAmount}}</p>
+              <p>tyle najmniej wydane</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.productsBoughtTotalAmount}}</p>
+              <p>tyle kupiono produktów łącznie (nie sztuk)</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.productsBoughtAverageAmount}}</p>
+              <p>tyle kupiono produktów srednio (nie sztuk)</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.productsBoughtMinAmount}}</p>
+              <p>tyle kupiono produktów najmniej (nie sztuk)</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.productsBoughtMaxAmount}}</p>
+              <p>tyle kupiono produktów najwiecej (nie sztuk)</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.totalCategoriesAmount}}</p>
+              <p>tyle kategorii kupionych w sklepie</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.averageCategoryAmountForReceipt}}</p>
+              <p>tyle srednio kategorii na jeden rachunek</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.minCategoryAmountForReceipt}}</p>
+              <p>tyle najmniej kategorii na jeden rachunek</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.maxCategoryAmountForReceipt}}</p>
+              <p>tyle najwiecej kategorii na jeden rachunek</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock" *ngIf="summary.averageMoneySpentOnEachCategory.length>0">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <ngx-charts-bar-vertical
+                [view]="view"
+                [scheme]="scheme"
+                [results]="summary.averageMoneySpentOnEachCategory"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]='moneySpentXLabel'
+                [yAxisLabel]='moneySpentYLabel'
+                (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.averageMoneySpentPerDay}}</p>
+              <p>tyle srednio wydano dziennie</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.totalProductAmountBought}}</p>
+              <p>tyle łącznie kupiono sztuk produktu</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.minProductAmountBought}}</p>
+              <p>tyle minimum na jednen rachunek kupiono sztuk produktu</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.maxProductAmountBought}}</p>
+              <p>tyle maksimum na jednen rachunek kupiono sztuk produktu</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.averageProductAmountBought}}</p>
+              <p>tyle srednio na jednen rachunek kupiono sztuk produktu</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.mostPopularCategory}}</p>
+              <p>najpopularniejsza kategoria</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12 summaryBlock">
+            <div class="col-md-12 col-sm-12 dailysummarytext">
+              <p class="summaryNumber">{{summary.leastPopularCategory}}</p>
+              <p>najmniej popularna kategoria</p>
+            </div>
+          </div>
+
+        </div>
       </div>
     </mat-tab>
   </mat-tab-group>

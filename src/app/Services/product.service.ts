@@ -36,6 +36,12 @@ export class ProductService {
       .catch(this.handleError);
   }
 
+  getProductStatistics(id:number, startDate:string, endDate:string) {
+    return this.http.get(this.apiUrl+"summary/"+this.userService.getUserId() + "/"+id+"/"+startDate+"/"+endDate)
+      .toPromise()
+      .catch(this.handleError);
+  }
+
   createProduct(name: string, categories: number[])
   {
     let body;

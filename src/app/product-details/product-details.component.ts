@@ -23,8 +23,14 @@ export class ProductDetailsComponent implements OnInit {
 
   product:any;
   categories : any;
-
   currentCategories: any;
+
+  shopPriceXLabel= "Sklep";
+  shopPriceYLabel= "cena";
+  view: any[] = [500, 400];
+  scheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
 
   constructor(
     private router : Router,
@@ -32,6 +38,7 @@ export class ProductDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserInfoService,
     private dialog: MatDialog) { }
+    private summary : any;
 
   ngOnInit() {
     this.getWidthAndHeight();
@@ -43,7 +50,7 @@ export class ProductDetailsComponent implements OnInit {
         this.details = true;
         this.product = product;
         this.GetCategories();
-        this.isDataLoaded = true;
+        this.GetStatistics();
       });
   }
 
@@ -130,5 +137,13 @@ export class ProductDetailsComponent implements OnInit {
   private getWidthAndHeight() {
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+  }
+
+  private GetStatistics() {
+    this.productService.getProductStatistics(this.product.id,"01-01-2017","01-01-2019")
+      .then((response)=>{
+        this.summary = response;
+        this.isDataLoaded = true;
+      })
   }
 }

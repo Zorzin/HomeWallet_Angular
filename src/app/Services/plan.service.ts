@@ -42,6 +42,12 @@ export class PlanService {
     return this.http.get(this.apiUrl+this.userService.getUserId()+ "/"+ new Date().toLocaleDateString());
   }
 
+  getPlanStatistics(id:number) {
+    return this.http.get(this.apiUrl+"summary/"+this.userService.getUserId() + "/"+id+"/")
+      .toPromise()
+      .catch(this.handleError);
+  }
+
   getPlanWithDetails(id:number) {
     return this.http.get(this.apiDetailsUrl+this.userService.getUserId()+ "/"+ id);
   }
