@@ -21,6 +21,7 @@ export class CategoryDetailsComponent implements OnInit {
   private category:any;
   private products : any;
   private summary : any;
+  private currency : string;
   moneySpentXLabel= "Sklep";
   moneySpentYLabel= "wydano";
   view: any[] = [500, 400];
@@ -43,6 +44,7 @@ export class CategoryDetailsComponent implements OnInit {
       .subscribe((result) => {
         this.details = true;
         this.category = result;
+        this.GetCurrency();
         this.GetProducts();
         this.GetStatistics();
       });
@@ -138,4 +140,8 @@ export class CategoryDetailsComponent implements OnInit {
         this.isDataLoaded = true;
       });
   }
+
+    private GetCurrency() {
+      this.userService.getUserCurrency().then((response)=>this.currency = JSON.parse(response));
+    }
 }

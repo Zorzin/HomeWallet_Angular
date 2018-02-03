@@ -20,6 +20,7 @@ export class PlanDetailsComponent implements OnInit {
   private responseFromService: any;
   private showRemoveDialog: boolean;
   private summary : any;
+  private currency : string;
 
   eachCategoriesSpentXLabel = 'Kategorie';
   eachCategoriesSpentYLabel = 'Kwota';
@@ -46,6 +47,7 @@ export class PlanDetailsComponent implements OnInit {
         this.checkIfThereIsPlanAlready();
         this.planDetails.startDate = new Date(this.planDetails.startDate);
         this.planDetails.endDate = new Date(this.planDetails.endDate);
+        this.GetCurrency();
         this.GetStatistics();
       });
   }
@@ -111,5 +113,9 @@ export class PlanDetailsComponent implements OnInit {
       this.summary = response;
       this.isDataLoaded = true;
     });
+  }
+
+  private GetCurrency() {
+    this.userService.getUserCurrency().then((response)=>this.currency = JSON.parse(response));
   }
 }

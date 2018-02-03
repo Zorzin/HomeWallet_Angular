@@ -1,6 +1,6 @@
 <div *ngIf="isDataLoaded">
 
-  <mat-tab-group>
+  <mat-tab-group dynamicHeight>
     <mat-tab label="{{'categorydetails-details'|translate}}">
       <div class="col-md-12" id="detailsdiv">
         <div class="col-md-6">
@@ -37,7 +37,6 @@
 
     <mat-tab label="{{'categorydetails-statistics'|translate}}">
       <div id="statisticsdiv">
-        {{'categorydetails-statistics'|translate}}
         <div class="col-md-12 col-sm-12">
 
           <div class="col-md-6 col-sm-12 summaryBlock">
@@ -49,21 +48,21 @@
 
           <div class="col-md-6 col-sm-12 summaryBlock">
             <div class="col-md-12 col-sm-12 dailysummarytext">
-              <p class="summaryNumber">{{summary.moneySpent}}</p>
+              <p class="summaryNumber">{{summary.moneySpent}} {{currency}}</p>
               <p>tyle wydane</p>
             </div>
           </div>
 
           <div class="col-md-6 col-sm-12 summaryBlock">
             <div class="col-md-12 col-sm-12 dailysummarytext">
-              <p class="summaryNumber">{{summary.mostPopularShop}}</p>
+              <p class="summaryNumber">{{summary.mostPopularShopName}}</p>
               <p>najbardziej popularny sklep</p>
             </div>
           </div>
 
           <div class="col-md-6 col-sm-12 summaryBlock">
             <div class="col-md-12 col-sm-12 dailysummarytext">
-              <p class="summaryNumber">{{summary.moneySpentOnCategoryPerDay}}</p>
+              <p class="summaryNumber">{{summary.moneySpentOnCategoryPerDay}} {{currency}}</p>
               <p>tyle średnio dziennie wydane</p>
             </div>
           </div>

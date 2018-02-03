@@ -122,6 +122,7 @@ export class AppComponent implements OnInit{
       bodyStyles.setProperty('--receipt-bg', 'rgba(154, 154, 154, 0.5)');
       bodyStyles.setProperty('--receipt-border', 'black');
       bodyStyles.setProperty('--inputs-text-color', 'black');
+      bodyStyles.setProperty('--tab-color', 'black');
       //
     }
     else if(theme=='dark')

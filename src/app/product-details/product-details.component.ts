@@ -20,15 +20,19 @@ export class ProductDetailsComponent implements OnInit {
   private details: boolean;
   private isDataLoaded: boolean;
   private hasCategories: boolean;
+  private currency : string;
+  private startDate: Date;
+  private endDate: Date;
 
-  product:any;
-  categories : any;
-  currentCategories: any;
+  private step = -1;
+  private product:any;
+  private  categories : any;
+  private currentCategories: any;
 
-  shopPriceXLabel= "Sklep";
-  shopPriceYLabel= "cena";
-  view: any[] = [500, 400];
-  scheme = {
+  private shopPriceXLabel= "Sklep";
+  private shopPriceYLabel= "cena";
+  private view: any[] = [500, 400];
+  private scheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
@@ -47,8 +51,12 @@ export class ProductDetailsComponent implements OnInit {
     this.route.paramMap
       .switchMap((params: ParamMap) => this.productService.getProduct(+params.get('id')))
       .subscribe((product) => {
+        this.startDate = new Date();
+        this.endDate = new Date();
+        this.startDate.setMonth(this.endDate.getMonth()-1);
         this.details = true;
         this.product = product;
+        this.GetCurrency();
         this.GetCategories();
         this.GetStatistics();
       });
@@ -140,10 +148,31 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   private GetStatistics() {
-    this.productService.getProductStatistics(this.product.id,"01-01-2017","01-01-2019")
+    this.productService.getProductStatistics(this.product.id,this.startDate.toLocaleDateString(),this.endDate.toLocaleDateString())
       .then((response)=>{
         this.summary = response;
         this.isDataLoaded = true;
       })
+  }
+
+  private GetCurrency() {
+    this.userService.getUserCurrency().then((response)=>this.currency = JSON.parse(response));
+  }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+
+  SetDates() {
+    this.GetStatistics();
+    this.step = -1;
   }
 }

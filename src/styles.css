@@ -10,6 +10,7 @@
   --receipt-border: white;
   --inputs-text-color: white;
   --login-text-color: black;
+  --tab-color: white;
 }
 a :hover{
   cursor: pointer;
@@ -882,6 +883,9 @@ p-footer{
   color: var(--inputs-text-color) ;
 }
 
+#receiptCreateButton{
+  color: black !important;
+}
 
 #receipt label{
   color: var(--inputs-text-color) ;
@@ -932,9 +936,63 @@ p-footer{
 }
 
 .summaryNumber {
-  font-size: 60px;
+  font-size: 30px;
 }
 
 .summaryBlock {
+  height: 400px;
+}
+
+.mat-tab-label{
+  color: var(--tab-color);
+}
+
+.details-menu {
+  text-align: center;
+}
+
+.details-menu a{
+  width: 100%;
+}
+
+.statistics-menu {
+  border-left: 2px solid black;
+}
+
+.statistics-panel{
+  margin-bottom: 5px !important;
+  margin-top: 5px !important;;
+}
+
+.statistics-menu-dates
+{
+  text-align: center;
+}
+
+.detailsName {
+  font-weight: bold;
+  font-size: 35px;
+  text-align: left;
+}
+
+.detailsList {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.detailsListItems{
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.detailsListItems p{
+  font-size: 20px;
+}
+
+.summaryText {
+  font-size: 20px;
+}
+
+.chart-panel {
   height: 400px;
 }

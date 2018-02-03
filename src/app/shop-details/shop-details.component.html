@@ -36,8 +36,6 @@
     </mat-tab>
     <mat-tab label="{{'shopdetails-statistics'|translate}}">
       <div id="statisticsdiv" >
-        {{'shopdetails-statistics'|translate}}
-
         <div class="col-md-12 col-sm-12">
 
           <div class="col-md-6 col-sm-12 summaryBlock">
@@ -49,28 +47,28 @@
 
           <div class="col-md-6 col-sm-12 summaryBlock">
             <div class="col-md-12 col-sm-12 dailysummarytext">
-              <p class="summaryNumber">{{summary.moneySpentAmount}}</p>
+              <p class="summaryNumber">{{summary.moneySpentAmount}} {{currency}}</p>
               <p>tyle wydane</p>
             </div>
           </div>
 
           <div class="col-md-6 col-sm-12 summaryBlock">
             <div class="col-md-12 col-sm-12 dailysummarytext">
-              <p class="summaryNumber">{{summary.moneyAverageSpentAmount}}</p>
+              <p class="summaryNumber">{{summary.moneyAverageSpentAmount}} {{currency}}</p>
               <p>tyle średnio wydane</p>
             </div>
           </div>
 
           <div class="col-md-6 col-sm-12 summaryBlock">
             <div class="col-md-12 col-sm-12 dailysummarytext">
-              <p class="summaryNumber">{{summary.moneyMaxSpentAmount}}</p>
+              <p class="summaryNumber">{{summary.moneyMaxSpentAmount}} {{currency}}</p>
               <p>tyle najwiecej wydane</p>
             </div>
           </div>
 
           <div class="col-md-6 col-sm-12 summaryBlock">
             <div class="col-md-12 col-sm-12 dailysummarytext">
-              <p class="summaryNumber">{{summary.moneyMinSpentAmount}}</p>
+              <p class="summaryNumber">{{summary.moneyMinSpentAmount}} {{currency}}</p>
               <p>tyle najmniej wydane</p>
             </div>
           </div>
@@ -152,7 +150,7 @@
 
           <div class="col-md-6 col-sm-12 summaryBlock">
             <div class="col-md-12 col-sm-12 dailysummarytext">
-              <p class="summaryNumber">{{summary.averageMoneySpentPerDay}}</p>
+              <p class="summaryNumber">{{summary.averageMoneySpentPerDay}} {{currency}}</p>
               <p>tyle srednio wydano dziennie</p>
             </div>
           </div>
@@ -187,14 +185,14 @@
 
           <div class="col-md-6 col-sm-12 summaryBlock">
             <div class="col-md-12 col-sm-12 dailysummarytext">
-              <p class="summaryNumber">{{summary.mostPopularCategory}}</p>
+              <p class="summaryNumber">{{summary.mostPopularCategoryName}}</p>
               <p>najpopularniejsza kategoria</p>
             </div>
           </div>
 
           <div class="col-md-6 col-sm-12 summaryBlock">
             <div class="col-md-12 col-sm-12 dailysummarytext">
-              <p class="summaryNumber">{{summary.leastPopularCategory}}</p>
+              <p class="summaryNumber">{{summary.leastPopularCategoryName}}</p>
               <p>najmniej popularna kategoria</p>
             </div>
           </div>

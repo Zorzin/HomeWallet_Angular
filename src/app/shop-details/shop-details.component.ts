@@ -22,6 +22,7 @@ export class ShopDetailsComponent implements OnInit {
   private hasProducts: boolean;
   private products: any;
   private summary : any;
+  private currency : string;
   moneySpentXLabel= "Kategoria";
   moneySpentYLabel= "wydano";
   view: any[] = [500, 400];
@@ -44,6 +45,7 @@ export class ShopDetailsComponent implements OnInit {
       .subscribe((shop) => {
         this.shop = shop;
         this.details = true;
+        this.GetCurrency();
         this.GetProducts();
         this.GetStatistics();
       });
@@ -139,5 +141,9 @@ export class ShopDetailsComponent implements OnInit {
         this.summary = response;
         this.isDataLoaded = true;
       });
+  }
+
+  private GetCurrency() {
+    this.userService.getUserCurrency().then((response)=>this.currency = JSON.parse(response));
   }
 }
