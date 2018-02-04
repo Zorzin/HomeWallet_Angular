@@ -45,15 +45,15 @@ export class ProductDetailsComponent implements OnInit {
     private summary : any;
 
   ngOnInit() {
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.startDate.setMonth(this.endDate.getMonth()-1);
     this.getWidthAndHeight();
     this.checkUser();
     this.currentCategories = [];
     this.route.paramMap
       .switchMap((params: ParamMap) => this.productService.getProduct(+params.get('id')))
       .subscribe((product) => {
-        this.startDate = new Date();
-        this.endDate = new Date();
-        this.startDate.setMonth(this.endDate.getMonth()-1);
         this.details = true;
         this.product = product;
         this.GetCurrency();

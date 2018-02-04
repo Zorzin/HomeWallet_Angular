@@ -23,10 +23,14 @@ export class ShopDetailsComponent implements OnInit {
   private products: any;
   private summary : any;
   private currency : string;
-  moneySpentXLabel= "Kategoria";
-  moneySpentYLabel= "wydano";
-  view: any[] = [500, 400];
-  scheme = {
+  private startDate: Date;
+  private endDate: Date;
+
+  private step = -1;
+  private moneySpentXLabel= "Kategoria";
+  private moneySpentYLabel= "wydano";
+  private view: any[] = [500, 400];
+  private scheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
@@ -38,6 +42,9 @@ export class ShopDetailsComponent implements OnInit {
     private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.startDate = new Date();
+    this.endDate = new Date();
+    this.startDate.setMonth(this.endDate.getMonth()-1);
     this.getWidthAndHeight();
     this.checkUser();
     this.route.paramMap
@@ -136,7 +143,7 @@ export class ShopDetailsComponent implements OnInit {
   }
 
   private GetStatistics() {
-    this.shopService.getShopStatistics(this.shop.id,"01-01-2017","02-02-2019")
+    this.shopService.getShopStatistics(this.shop.id,this.startDate.toLocaleDateString(),this.endDate.toLocaleDateString())
       .then((response)=> {
         this.summary = response;
         this.isDataLoaded = true;
@@ -145,5 +152,22 @@ export class ShopDetailsComponent implements OnInit {
 
   private GetCurrency() {
     this.userService.getUserCurrency().then((response)=>this.currency = JSON.parse(response));
+  }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+
+  SetDates() {
+    this.GetStatistics();
+    this.step = -1;
   }
 }
