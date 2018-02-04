@@ -28,13 +28,13 @@
           <mat-error *ngIf="endDateValue.errors" >{{GetEndDateErrorName()|translate}}</mat-error>
         </mat-form-field>
       </div>
-      <button [disabled]="amountValue.errors || startDateValue.errors || endDateValue.errors" mat-button (click)="onSave()" >{{'common-save'|translate}}</button>
+      <button  mat-raised-button color="primary" (click)="goToDetails()">{{'common-goback'|translate}}</button>
+      <button [disabled]="amountValue.errors || startDateValue.errors || endDateValue.errors" mat-raised-button (click)="onSave()" >{{'common-save'|translate}}</button>
     </form>
   </div>
 </div>
 
 <div>
-  <a (click)="goToDetails()">{{'common-goback'|translate}}</a>
 </div>
 <div *ngIf="!isDataLoaded">
   <mat-spinner></mat-spinner>

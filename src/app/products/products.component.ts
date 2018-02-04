@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ProductService} from "../Services/product.service";
 import {Router} from "@angular/router";
 import {UserInfoService} from "../Services/user-id.service";
 import {ProductCreateDialogComponent} from "../dialogs/product-create-dialog/product-create-dialog.component";
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
+import {Category} from "../Models/category";
+import {Product} from "../Models/product";
 
 @Component({
   selector: 'app-products',
@@ -12,16 +14,29 @@ import {MatDialog} from "@angular/material";
 })
 export class ProductsComponent implements OnInit {
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
   private isDataLoaded:boolean;
   private width:number;
   private height:number;
-  private products: any;
+  private products: Product[];
+  dataSource: MatTableDataSource<Product>;
+  displayedColumns = ['name'];
 
   constructor(private productService: ProductService,
               private router: Router,
               private userService: UserInfoService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {
+    this.products = [];
+    this.dataSource = new MatTableDataSource<Product>(this.products);
+    this.isDataLoaded = true;
+  }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
   ngOnInit() {
     this.getWidthAndHeight();
     this.checkUser();
@@ -38,13 +53,14 @@ export class ProductsComponent implements OnInit {
 
   private GetProducts() {
     this.productService.getProducts().then((result)=>{
-      this.products = result;
-      this.isDataLoaded = true;
-    });
+      this.getProductsArray(result);
+      this.dataSource.data = this.products;
+    })
+    .catch(reason => this.isDataLoaded=false);;
   }
 
-  goToDetails(product:any) {
-    this.router.navigate(['/product-detail',product.id]);
+  goToDetails(id:number) {
+    this.router.navigate(['/product-detail',id]);
   }
 
   Create() {
@@ -63,4 +79,19 @@ export class ProductsComponent implements OnInit {
     this.height = window.innerHeight;
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
+  private getProductsArray(response: any) {
+    for(let product of response)
+    {
+      let newProduct = new Product();
+      newProduct.ID = product.id;
+      newProduct.Name = product.name;
+      this.products.push(newProduct);
+    }
+  }
 }

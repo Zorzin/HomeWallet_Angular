@@ -1,10 +1,7 @@
-<div class="receiptcreate" id="receipt">
+<div class="receiptcreate" >
 
-  <div class=" col-md-5 col-sm-12 col-xs-12">
-    <div class="col-md-2 col-sm-12 col-xs-12">
-      <label>{{'receipt-date'|translate}}</label>
-    </div>
-    <div class="col-md-10 col-sm-12 col-xs-12 date-div">
+  <div class=" col-md-5 col-sm-12 col-xs-12" id="receiptDateText">
+    <div class="col-md-12 col-sm-12 col-xs-12 date-div">
       <mat-form-field>
         <input matInput [(ngModel)]="receiptDate" [matDatepicker]="startPicker" placeholder="{{'receipt-date'|translate}}">
         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
@@ -17,13 +14,10 @@
     <div class="vertical-line"></div>
   </div>
 
-  <div class=" col-md-6 col-sm-12 col-xs-12">
-    <div class=" col-md-2 col-sm-12 col-xs-12">
-      <label>{{'receipt-shop'|translate}}</label>
-    </div>
-    <div class=" col-md-8 col-sm-8 col-xs-8">
+  <div class=" col-md-6 col-sm-12 col-xs-12" id="receiptShopText">
+    <div class=" col-md-10 col-sm-10 col-xs-10">
       <mat-form-field style="width: 100%;">
-        <mat-select  placeholder="{{'shops-name'|translate}}" [(ngModel)]="receiptShop">
+        <mat-select  placeholder="{{'receipt-shop'|translate}}" [(ngModel)]="receiptShop">
           <mat-option *ngFor="let shop of shops" [value]="shop.value">
             {{ shop.label }}
           </mat-option>
@@ -41,7 +35,7 @@
     <hr class="hrH">
   </div>
 
-  <div class="tableheaders col-md-12 col-sm-12 col-xs-12">
+  <div class="tableheaders col-md-12 col-sm-12 col-xs-12" >
     <div class="col-md-5 col-md-offset-1">
       <label>{{'receipt-name'|translate}}</label>
     </div>
@@ -60,7 +54,7 @@
     <hr class="hrH">
   </div>
 
-  <div class="receiptproducts col-md-12">
+  <div class="receiptproducts col-md-12" >
     <div class="productslinecreate" *ngFor="let product of newProducts">
       <div class="col-md-1 buttonproductcreate">
         <button (click)="removeProduct(product.ID)" class="btn btn-danger btn-xs" type="button" id="removeproductbutton"><small><span class="glyphicon glyphicon-remove"></span></small></button>
@@ -93,11 +87,11 @@
     </div>
   </div>
 
-  <div class="receiptaddproduct">
-    <button type="button" id="opendialogbutton" (click)="showProductDialog()" class="btn btn-success">{{'receipt-addproduct'|translate}}</button>
+  <div class="receiptaddproduct" id="addProductButton">
+    <button  mat-raised-button color="primary" id="opendialogbutton" (click)="showProductDialog()">{{'receipt-addproduct'|translate}}</button>
   </div>
 
-  <div class="receiptbuttons">
+  <div class="receiptbuttons" id="saveReceiptButton">
     <button mat-raised-button color="warn" (click)="onCancel()">{{'common-cancel'|translate}}</button>
     <button  color="primary" class="receipt-save-button" mat-raised-button [disabled]="newProducts.length==0"  (click)="save()">{{'common-save'|translate}}</button>
   </div>

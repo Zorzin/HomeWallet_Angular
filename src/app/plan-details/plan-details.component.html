@@ -3,114 +3,166 @@
     <p>{{'plandetails-planfor'|translate}} {{planDetails.startDate.toLocaleDateString()}} - {{planDetails.endDate.toLocaleDateString()}}</p>
   </div>
 
-  <div class="col-md-12 col-sm-12">
+  <div class="col-md-12 ">
+    <div class="col-md-12">
+        <mat-accordion class="example-headers-align" [multi]="true">
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'plandetails-amount'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
 
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.amount}} {{currency}}</p>
-        <p>tyle ustaliles</p>
-      </div>
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.amount}} {{currency}} </span> <span class="summaryText">- {{'plandetails-amount-description'|translate}} </span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" *ngIf="summary.percentPlan !=-1">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'plandetails-moneyLeft'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.moneyLeft}} {{currency}} </span> <span class="summaryText">- {{'plandetails-moneyLeft-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'plandetails-moneyLeftPercentage'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.moneyLeftPercentage}}%</span> <span class="summaryText">- {{'plandetails-moneyLeftPercentage-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'plandetails-moneySpentPercentage'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.moneySpentPercentage}}%</span> <span class="summaryText">- {{'plandetails-moneySpentPercentage-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel class="statistics-panel" *ngIf="summary.mostPopularProductName">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'plandetails-mostPopularProductName'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.mostPopularProductName}} </span> <span class="summaryText">- {{'plandetails-mostPopularProductName-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel"  *ngIf="summary.moneySpentOnCategories.length>0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'plandetails-moneySpentOnCategories'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="chart-panel">
+              <ngx-charts-bar-vertical
+                [view]="view"
+                [scheme]="scheme"
+                [results]="summary.moneySpentOnCategories"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]='eachCategoriesSpentXLabel|translate'
+                [yAxisLabel]='eachCategoriesSpentYLabel|translate'
+                (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" *ngIf="summary.mostExpensiveProductName">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'plandetails-mostExpensiveProductName'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.mostExpensiveProductName}}</span> <span class="summaryText">- {{'plandetails-mostExpensiveProductName-description'|translate}}</span>
+
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" *ngIf="summary.mostPopularCategoryName">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'plandetails-mostPopularCategoryName'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.mostPopularCategoryName}}</span> <span class="summaryText">- {{'plandetails-mostPopularCategoryName-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" *ngIf="summary.averageMoneyLeftPerDay>=0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'plandetails-averageMoneyLeftPerDay'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.averageMoneyLeftPerDay}} {{currency}}</span> <span class="summaryText">- {{'plandetails-averageMoneyLeftPerDay-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'plandetails-productsBoughtAmount'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.productsBoughtAmount}}</span> <span class="summaryText">- {{'plandetails-productsBoughtAmount-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'plandetails-averageMoneySpentPerDay'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.averageMoneySpentPerDay}} {{currency}}</span> <span class="summaryText">- {{'plandetails-averageMoneySpentPerDay-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+        </mat-accordion>
     </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.moneyLeft}} {{currency}}</p>
-        <p>tyle zostalo</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.moneyLeftPercentage}} %</p>
-        <p>tyle zostalo procentowo</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.moneySpentPercentage}} %</p>
-        <p>tyle procentowo wydales</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.mostPopularProductName}}</p>
-        <p>najpopularniejszy produkt</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.mostExpensiveProductName}}</p>
-        <p>najdrozszy produkt</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.mostPopularCategoryName}}</p>
-        <p>najpopularniejsza kategoria</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock" *ngIf="summary.moneySpentOnCategories.length>0">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <ngx-charts-bar-vertical
-          [view]="view"
-          [scheme]="scheme"
-          [results]="summary.moneySpentOnCategories"
-          [gradient]="false"
-          [xAxis]="true"
-          [yAxis]="true"
-          [legend]="false"
-          [showXAxisLabel]="true"
-          [showYAxisLabel]="true"
-          [xAxisLabel]='eachCategoriesSpentXLabel'
-          [yAxisLabel]='eachCategoriesSpentYLabel'
-          (select)="onSelect($event)">
-        </ngx-charts-bar-vertical>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.averageMoneyLeftPerDay}} {{currency}}</p>
-        <p>tyle średnio na dzien pozostalo</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.productsBoughtAmount}}</p>
-        <p>tyle różnych przedmiotów kupiono</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.averageMoneySpentPerDay}} {{currency}}</p>
-        <p>tyle średnio dziennie wydano</p>
-      </div>
-    </div>
-  </div>
-
-
   <div>
-    <a class="btn btn-default" (click)="goToList()">{{'common-goback'|translate}}</a>
-    <a *ngIf="canEdit" class="btn btn-info" (click)="goEdit()">{{'common-edit'|translate}}</a>
-    <a *ngIf="canEdit" class="btn btn-danger" (click)="onRemove()">{{'common-delete'|translate}}</a>
+    <a mat-raised-button (click)="goToList()">{{'common-goback'|translate}}</a>
+    <a *ngIf="canEdit" mat-raised-button color="primary" (click)="goEdit()">{{'common-edit'|translate}}</a>
+    <a *ngIf="canEdit" mat-raised-button color="warn" (click)="Delete()">{{'common-delete'|translate}}</a>
   </div>
-
-  <p-dialog header="{{'plandetails-delete'|translate}}" [(visible)]="showRemoveDialog" [width]="width" [height]="height" [draggable]="false" [modal]="true">
-
-    <label>{{'plandetails-yousure'|translate}}</label>
-    <p-footer>
-      <button type="button" pButton (click)="ConfirmDelete()" label="{{'common-delete'|translate}}"></button>
-      <button type="button" pButton (click)="CancelDelete()" label="{{'common-cancel'|translate}}"></button>
-    </p-footer>
-  </p-dialog>
 </div>
+  <div class="col-md-12">
+    <br>
+    <hr>
+  </div>
 <div *ngIf="!isDataLoaded">
   <mat-spinner></mat-spinner>
 </div>

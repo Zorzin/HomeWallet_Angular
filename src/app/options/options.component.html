@@ -1,56 +1,24 @@
 <div class="col-md-12">
-  <div class="col-md-3 panelmaindiv col-md-offset-2">
-    <div class="panel panel-default listpanel">
-      <a (click)="goShops()">
-        <div>
-          <span>{{'options-shops'|translate}}</span>
-        </div>
-      </a>
-    </div>
-  </div>
-  <div class="col-md-3 panelmaindiv">
-    <div class="panel panel-default listpanel">
-      <a (click)="goCategories()">
-        <div>
-          <span>{{'options-categories'|translate}}</span>
-        </div>
-      </a>
-    </div>
-  </div>
-  <div class="col-md-3 panelmaindiv">
-    <div class="panel panel-default listpanel">
-      <a (click)="goProducts()">
-        <div>
-          <span>{{'options-products'|translate}}</span>
-        </div>
-      </a>
-    </div>
-  </div>
-  <div class="col-md-3 panelmaindiv col-md-offset-2">
-    <div class="panel panel-default listpanel">
-      <a (click)="goCreateReceipt()">
-        <div>
-          <span>{{'options-receipt'|translate}}</span>
-        </div>
-      </a>
-    </div>
-  </div>
-  <div class="col-md-3 panelmaindiv">
-    <div class="panel panel-default listpanel">
-      <a (click)="goCreateCyclicalReceipt()">
-        <div>
-          <span>{{'options-cyclical'|translate}}</span>
-        </div>
-      </a>
-    </div>
-  </div>
-  <div class="col-md-3 panelmaindiv">
-    <div class="panel panel-default listpanel">
-      <a (click)="goPlan()">
-        <div>
-          <span>{{'options-plan'|translate}}</span>
-        </div>
-      </a>
-    </div>
-  </div>
+      <mat-card class="menu-card" (click)="goShops()">
+          <p>{{'options-shops'|translate}}</p>
+      </mat-card>
+      <mat-card class="menu-card" (click)="goCategories()">
+          <p>{{'options-categories'|translate}}</p>
+      </mat-card>
+      <mat-card class="menu-card" (click)="goProducts()">
+          <p>{{'options-products'|translate}}</p>
+      </mat-card>
+      <mat-card class="menu-card" (click)="goCreateReceipt()">
+          <p>{{'options-receipt'|translate}}</p>
+      </mat-card>
+      <mat-card class="menu-card" (click)="goCreateCyclicalReceipt()">
+          <p>{{'options-cyclical'|translate}}</p>
+      </mat-card>
+      <mat-card class="menu-card" (click)="goPlan()">
+          <p>{{'options-plan'|translate}}</p>
+      </mat-card>
+</div>
+<div class="col-md-12">
+  <hr>
+  <br>
 </div>

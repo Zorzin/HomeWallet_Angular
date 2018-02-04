@@ -1,10 +1,7 @@
 <div class="receiptcreate" id="receipt">
 
   <div class=" col-md-5 col-sm-12 col-xs-12">
-    <div class="col-md-3 col-sm-12 col-xs-12">
-      <label>{{'receipt-startdate'|translate}}</label>
-    </div>
-    <div class="col-md-9 col-sm-12 col-xs-12 date-div">
+    <div class="col-md-12 col-sm-12 col-xs-12 date-div">
       <mat-form-field>
         <input matInput [(ngModel)]="receiptStartDate" [matDatepicker]="startPicker" placeholder="{{'receipt-startdate'|translate}}" (dateChange)="updateMinDate()">
         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
@@ -12,10 +9,7 @@
       </mat-form-field>
     </div>
 
-    <div class="col-md-3 col-sm-12 col-xs-12">
-      <label>{{'receipt-enddate'|translate}}</label>
-    </div>
-    <div class="col-md-9 col-sm-12 col-xs-12 date-div">
+    <div class="col-md-12 col-sm-12 col-xs-12 date-div">
       <mat-form-field>
         <input matInput [(ngModel)]="receiptEndDate" [min]="minEndDate"  [matDatepicker]="endPicker" placeholder="{{'receipt-enddate'|translate}}">
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
@@ -29,12 +23,9 @@
   </div>
 
   <div class=" col-md-6 col-sm-12 col-xs-12">
-    <div class=" col-md-2 col-sm-12 col-xs-12">
-      <label>{{'receipt-shop'|translate}}</label>
-    </div>
-    <div class=" col-md-8 col-sm-8 col-xs-8 shop-div">
+    <div class=" col-md-10 col-sm-10 col-xs-10 shop-div">
       <mat-form-field style="width: 100%;">
-        <mat-select  placeholder="{{'shops-name'|translate}}" [(ngModel)]="receiptShop">
+        <mat-select  placeholder="{{'receipt-shop'|translate}}" [(ngModel)]="receiptShop">
           <mat-option *ngFor="let shop of shops" [value]="shop.value">
             {{ shop.label }}
           </mat-option>
@@ -47,11 +38,10 @@
       </button>
     </div>
 
-    <div class=" col-md-2 col-sm-12 col-xs-12">
-      <label>{{'receipt-cycle'|translate}}</label>
-    </div>
-    <div class=" col-md-8 col-sm-8 col-xs-8">
-      <input min="1" type="number" class="form-control chosen-single-select cycleInput" [(ngModel)]="receiptCycle" (keyup)="checkCycle()"/>
+    <div class=" col-md-12 col-sm-12 col-xs-12">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="{{'receipt-cycle'|translate}}" min="1" type="number" [(ngModel)]="receiptCycle" (keyup)="checkCycle()"/>
+      </mat-form-field>
     </div>
   </div>
 
@@ -113,7 +103,7 @@
   </div>
 
   <div class="receiptaddproduct col-md-12 col-sm-12">
-    <button type="button" id="opendialogbutton" (click)="showProductDialog()" class="btn btn-success">{{'receipt-addproduct'|translate}}</button>
+    <button mat-raised-button color="primary" id="opendialogbutton" (click)="showProductDialog()" class="btn btn-success">{{'receipt-addproduct'|translate}}</button>
   </div>
 
   <div class="receiptbuttons col-md-12 col-sm-12">

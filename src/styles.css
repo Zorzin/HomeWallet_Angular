@@ -80,13 +80,15 @@ textarea { max-width: 280px; }
 }
 
 .datetextfield {
-  font-size: 30px;
+  font-size: 25px;
   line-height: 50px;
 }
-
+.datetextfield label{
+  color: rgba(0,0,0,.87);
+}
 .summarybutton { height: 100%; }
 
-.summarybutton a {
+.summarybutton button {
   float: right;
   margin-top: 8px;
 }
@@ -209,12 +211,14 @@ textarea { max-width: 280px; }
 
 .hrH {
   width: 100%;
+  border-top: 1px solid white;
+  background-color: white;
 }
 
 .hrTotal {
   border: 0;
-  border-bottom: 2px dashed #8c8b8b;
-  background-color: rgba(0, 0, 0, .5);
+  border-bottom: 1px solid white;
+  background-color: var(--receipt-bg);
   width: 25%;
   float: right;
 }
@@ -276,8 +280,8 @@ textarea { max-width: 280px; }
 
 
 .dailysummarydate {
-  font-size: 70px;
-  margin-top: 50px;
+  font-size: 40px;
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -306,8 +310,8 @@ textarea { max-width: 280px; }
 /*PLAN*/
 
 .planviewheader {
-  font-size: 50px;
-  margin-bottom: 50px;
+  font-size: 40px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -607,8 +611,6 @@ p-footer{
 .listpanel {
   height: 200px;
   width: 200px;
-  text-align: center;
-  line-height: 200px;
   font-size: 30px;
   background-color: rgba(0, 0, 0, 0.5);
 }
@@ -619,10 +621,6 @@ p-footer{
   line-height: normal;
   padding-bottom: 30px;
   color: white;
-}
-
-.listpanel:hover {
-  background-color: rgba(0, 0, 0,1);
 }
 
 .panelmaindiv {
@@ -887,17 +885,6 @@ p-footer{
   color: black !important;
 }
 
-#receipt label{
-  color: var(--inputs-text-color) ;
-}
-
-#receipt input{
-  color: var(--inputs-text-color) ;
-}
-
-#receipt span{
-  color: var(--inputs-text-color) ;
-}
 
 #login label{
   color: var(--login-text-color) ;
@@ -932,7 +919,7 @@ p-footer{
   color: red;
 }
 .receipt-save-button{
-  color: black !important;
+  color: white !important;
 }
 
 .summaryNumber {
@@ -996,4 +983,60 @@ p-footer{
 
 .chart-panel {
   height: 400px;
+}
+
+mat-row:hover{
+  background-color: #c9c8d5;
+  cursor: pointer;
+}
+
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.navbar-inverse{
+  background-color: #3f51b5;
+  border-color: #3f51b5;
+}
+.navbar-inverse .navbar-brand{
+  color: white;
+}
+.navbar-inverse .navbar-nav>li>a{
+  color: white;
+}
+
+.menu-card{
+  margin-top: 20px;
+  height: 70px;
+}
+
+.menu-card p{
+  font-size: 20px;
+}
+
+.menu-card:hover{
+  background-color: #c9c8d5;
+  cursor: pointer;
+}
+
+.options-tabs{
+}
+
+.detailsDateField{
+  width: 201px;
+}
+
+#receiptDateText span,input,label{
+  color: var(--inputs-text-color) !important;
+}
+
+#receiptShopText span,input,label{
+  color: var(--inputs-text-color) !important;
 }

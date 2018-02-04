@@ -27,8 +27,8 @@ export class ShopDetailsComponent implements OnInit {
   private endDate: Date;
 
   private step = -1;
-  private moneySpentXLabel= "Kategoria";
-  private moneySpentYLabel= "wydano";
+  private moneySpentXLabel= "shopdetails-moneySpentXLabel";
+  private moneySpentYLabel= "shopdetails-moneySpentyLabel";
   private view: any[] = [500, 400];
   private scheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']

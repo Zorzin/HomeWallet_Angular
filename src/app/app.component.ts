@@ -54,10 +54,21 @@ export class AppComponent implements OnInit{
   getLanguage(){
 
     if(this.userService.isUserLogIn()) {
-      this.userService.getUserLanguage().then((response) => {
-        this.lang = JSON.parse(response);
-        this.setTranslate();
-      });
+      this.userService.getUserLanguage()
+        .then((response) => {
+          try {
+            this.lang = JSON.parse(response);
+            this.setTranslate();
+          }
+          catch(e) {
+            this.lang='en';
+            this.setTranslate();
+          }
+        })
+        .catch((reason) => {
+          this.lang='en';
+          this.setTranslate();
+        });
     }
     else {
 
@@ -119,7 +130,7 @@ export class AppComponent implements OnInit{
       var bodyStyles = document.body.style;
       bodyStyles.setProperty('--text-color', 'black');
       bodyStyles.setProperty('--main-bg', 'white');
-      bodyStyles.setProperty('--receipt-bg', 'rgba(154, 154, 154, 0.5)');
+      bodyStyles.setProperty('--receipt-bg', 'rgba(154, 154, 154, 0.2)');
       bodyStyles.setProperty('--receipt-border', 'black');
       bodyStyles.setProperty('--inputs-text-color', 'black');
       bodyStyles.setProperty('--tab-color', 'black');

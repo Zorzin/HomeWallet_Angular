@@ -3,132 +3,205 @@
   <div class="col-md-12 col-sm-12 dailysummarydate">
     <p>{{'dailysummary-date'|translate}}: {{date}}</p>
   </div>
-  <div class="col-md-12 col-sm-12">
 
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.totalCost}} {{currency}}</p>
-        <p>{{'dailysummary-youspend'|translate}} {{'dailysummary-thatday'|translate}}</p>
+  <div class="col-md-12 ">
+    <div class="col-md-12">
+      <div *ngIf="summary.totalCost==0">
+        {{'common-statistics-empty'|translate}}
+      </div>
+      <div *ngIf="summary.totalCost>0">
+        <mat-accordion class="example-headers-align" [multi]="true">
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-totalCost'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.totalCost}} {{currency}} </span> <span class="summaryText">- {{'dailysummary-totalCost-description'|translate}} </span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" *ngIf="summary.percentPlan !=-1">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-percentPlan'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.percentPlan}}% </span> <span class="summaryText">- {{'dailysummary-percentPlan-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-shopsCount'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.shopsCount}}</span> <span class="summaryText">- {{'dailysummary-shopsCount-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-productsCount'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.productsCount}} </span> <span class="summaryText">- {{'dailysummary-productsCount-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-categoriesCount'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.categoriesCount}} </span> <span class="summaryText">- {{'dailysummary-categoriesCount-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel"  *ngIf="summary.eachCategoryCost.length>0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-eachCategoryCost'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="chart-panel">
+              <ngx-charts-bar-vertical
+                [view]="view"
+                [scheme]="scheme"
+                [results]="summary.eachCategoryCost"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]='eachCategoriesCostXLabel|translate'
+                [yAxisLabel]='eachCategoriesCostYLabel|translate'
+                (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+            </div>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel class="statistics-panel" *ngIf="summary.eachShopProducts.length>0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-eachShopProducts'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="chart-panel">
+              <ngx-charts-bar-vertical
+                [view]="view"
+                [scheme]="scheme"
+                [results]="summary.eachShopProducts"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]='eachShopProductsXLabel|translate'
+                [yAxisLabel]='eachShopProductsYLabel|translate'
+                (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+            </div>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel class="statistics-panel" *ngIf="summary.eachShopMoney.length>0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-eachShopMoney'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="chart-panel">
+              <ngx-charts-bar-vertical
+                [view]="view"
+                [scheme]="scheme"
+                [results]="summary.eachShopMoney"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]='eachShopCostXLabel|translate'
+                [yAxisLabel]='eachShopCostYLabel|translate'
+                (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-maxProductCost'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.maxProductCost}} {{currency}}</span> <span class="summaryText">- {{'dailysummary-maxProductCost-description'|translate}}</span>
+
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-minProductCost'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.minProductCost}} {{currency}}</span> <span class="summaryText">- {{'dailysummary-minProductCost-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-averageProductCost'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.averageProductCost}} {{currency}}</span> <span class="summaryText">- {{'dailysummary-averageProductCost-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-averageReceiptCost'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.averageReceiptCost}} {{currency}}</span> <span class="summaryText">- {{'dailysummary-averageReceiptCost-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
     </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div *ngIf="summary.percentPlan !=-1" class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.percentPlan}}%</p>
-        <p>of your plan</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.shopsCount}}</p>
-        <p>w tylu sklepach kupiłeś tego dnia</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.productsCount}}</p>
-        <p>tyle produktów kupiłeś tego dnia</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.categoriesCount}}</p>
-        <p>tyle kategorii</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock" *ngIf="summary.eachCategoryCost.length>0">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <ngx-charts-bar-vertical
-          [view]="view"
-          [scheme]="scheme"
-          [results]="summary.eachCategoryCost"
-          [gradient]="false"
-          [xAxis]="true"
-          [yAxis]="true"
-          [legend]="false"
-          [showXAxisLabel]="true"
-          [showYAxisLabel]="true"
-          [xAxisLabel]='eachCategoriesCostXLabel'
-          [yAxisLabel]='eachCategoriesCostYLabel'
-          (select)="onSelect($event)">
-        </ngx-charts-bar-vertical>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock" *ngIf="summary.eachShopProducts.length>0">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <ngx-charts-bar-vertical
-          [view]="view"
-          [scheme]="scheme"
-          [results]="summary.eachShopProducts"
-          [gradient]="false"
-          [xAxis]="true"
-          [yAxis]="true"
-          [legend]="false"
-          [showXAxisLabel]="true"
-          [showYAxisLabel]="true"
-          [xAxisLabel]='eachShopProductsXLabel'
-          [yAxisLabel]='eachShopProductsYLabel'
-          (select)="onSelect($event)">
-        </ngx-charts-bar-vertical>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock" *ngIf="summary.eachShopMoney.length>0">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <ngx-charts-bar-vertical
-          [view]="view"
-          [scheme]="scheme"
-          [results]="summary.eachShopMoney"
-          [gradient]="false"
-          [xAxis]="true"
-          [yAxis]="true"
-          [legend]="false"
-          [showXAxisLabel]="true"
-          [showYAxisLabel]="true"
-          [xAxisLabel]='eachShopCostXLabel'
-          [yAxisLabel]='eachShopCostYLabel'
-          (select)="onSelect($event)">
-        </ngx-charts-bar-vertical>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.maxProductCost}} zł</p>
-        <p>najdroższy przedmiot</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.minProductCost}} zł</p>
-        <p>najtańszy przedmiot</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.averageProductCost}} zł</p>
-        <p>średni koszt produktu</p>
-      </div>
-    </div>
-
-    <div class="col-md-6 col-sm-12 summaryBlock">
-      <div class="col-md-12 col-sm-12 dailysummarytext">
-        <p class="summaryNumber">{{summary.averageReceiptCost}}zł</p>
-        <p>średni koszt rachunku</p>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="col-md-12">
-  </div>
+</div>
+</div>
+<div class="col-md-12">
+  <br>
+  <hr>
 </div>
 <div *ngIf="!dataLoaded">
   <mat-spinner></mat-spinner>

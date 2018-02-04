@@ -64,7 +64,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatExpansionModule, MatIconModule, MatListModule, MatNativeDateModule} from "@angular/material";
+import {
+  MatExpansionModule, MatIconModule, MatListModule, MatNativeDateModule,
+  MatTableModule, MatPaginatorModule, MatSortModule, MatCardModule,
+} from "@angular/material";
 import { WarningDialogComponent } from './dialogs/warning-dialog/warning-dialog.component';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 
@@ -149,6 +152,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatDatepickerModule,
     MatNativeDateModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCardModule,
     NgxChartsModule,
     TranslateModule.forRoot({
       loader: {

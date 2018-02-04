@@ -14,16 +14,9 @@
         </div>
       </div>
       <hr />
-      <a (click)="onCreate()">
-        <div class="col-md-3 col-xs-6 receiptsummary">
-          <div class="shoptextfield">
-            <h1>{{'receipts-add'|translate}}</h1>
-          </div>
-          <div class="pricetextfield">
-            <h3>{{'receipts-new'|translate}}</h3>
-          </div>
-        </div>
-      </a>
+      <mat-card class="menu-card" (click)="onCreate()">
+        <p>{{'receipts-add'|translate}} {{'receipts-new'|translate}}</p>
+      </mat-card>
     </div>
 
     <div *ngIf="dates" >
@@ -33,40 +26,31 @@
             <label class="datefield">{{date[0].purchaseDate.toLocaleDateString()}}</label>
           </div>
           <div class="col-xs-6 col-md-4 summarybutton">
-            <a class="btn btn-default" (click)="onSummary(date[0].purchaseDate.toLocaleDateString())" >{{'receipts-summary'|translate}}</a>
+            <button mat-raised-button (click)="onSummary(date[0].purchaseDate.toLocaleDateString())" >{{'receipts-summary'|translate}}</button>
           </div>
         </div>
         <hr />
 
-        <a *ngFor="let receipt of date" (click)="onSelect(receipt)">
+        <mat-card class="menu-card" *ngFor="let receipt of date" (click)="onSelect(receipt)">
+          <p>Sklep: {{receipt.shopName}}, Kwota: {{receipt.totalValue}} {{currency}}</p>
+        </mat-card>
 
-          <div class="col-md-3 col-xs-6 receiptsummary">
-            <div class="shoptextfield">
-              <h1>{{receipt.shopName}}</h1>
-            </div>
-            <div class="pricetextfield">
-              <h3>{{receipt.totalValue}} {{currency}}</h3>
-            </div>
-          </div>
-        </a>
-
-        <a (click)="onCreate(date)">
-          <div class="col-md-3 col-xs-6 receiptsummary">
-            <div class="shoptextfield">
-              <h1>{{'receipts-add'|translate}}</h1>
-            </div>
-            <div class="pricetextfield">
-              <h3>{{'receipts-new'|translate}}</h3>
-            </div>
-          </div>
-        </a>
+        <mat-card class="menu-card" (click)="onCreate(date)">
+          <p>{{'receipts-add'|translate}} {{'receipts-new'|translate}}</p>
+        </mat-card>
       </div>
+    </div>
+    <div class="col-md-12">
+      <br>
     </div>
     <div class="col-md-12 morebuttondiv">
       <button *ngIf="loadButton" class="btn btn-default showmorebutton" (click)="getReceiptToView()">{{'receipts-load'|translate}}</button>
     </div>
-
   </div>
+</div>
+<div class="col-md-12">
+  <hr>
+  <br>
 </div>
 <div *ngIf="!dataLoaded">
   <mat-spinner></mat-spinner>

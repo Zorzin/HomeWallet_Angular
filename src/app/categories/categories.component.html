@@ -1,19 +1,47 @@
 <div *ngIf="isDataLoaded">
   <p>
-    <a class="btn btn-success" (click)="Create()">{{'categories-createnew'|translate}}</a>
+    <a mat-raised-button color="primary" (click)="Create()">{{'categories-createnew'|translate}}</a>
   </p>
 
-  <div class="col-md-12">
-    <div *ngFor="let category of categories" class="col-md-3 panelmaindiv">
-      <div  class="panel panel-default listpanel">
-        <a (click)="goToDetails(category)">
-          <div>
-            <span>{{category.name}}</span>
-          </div>
-        </a>
-      </div>
-    </div>
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
   </div>
+
+  <div class="example-container mat-elevation-z8">
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell *matCellDef="let row" >
+          {{row.Name}}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row id="mat-row" (click)="goToDetails(row.ID)" *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+
+
+  <!--<div class="col-md-12">-->
+    <!--<div *ngFor="let category of categories" class="col-md-3 panelmaindiv">-->
+      <!--<div  class="panel panel-default listpanel">-->
+        <!--<a ">-->
+          <!--<div>-->
+            <!--<span>{{category.name}}</span>-->
+          <!--</div>-->
+        <!--</a>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
 </div>
 <div *ngIf="!isDataLoaded">
   <mat-spinner></mat-spinner>

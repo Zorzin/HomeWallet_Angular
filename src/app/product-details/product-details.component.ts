@@ -29,8 +29,8 @@ export class ProductDetailsComponent implements OnInit {
   private  categories : any;
   private currentCategories: any;
 
-  private shopPriceXLabel= "Sklep";
-  private shopPriceYLabel= "cena";
+  private shopPriceXLabel= "productdetails-shopPriceXLabel";
+  private shopPriceYLabel= "productdetails-shopPriceYLabel";
   private view: any[] = [500, 400];
   private scheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']

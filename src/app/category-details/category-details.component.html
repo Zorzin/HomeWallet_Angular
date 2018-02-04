@@ -27,13 +27,13 @@
     <div class="col-md-9 statistics-menu">
       <div class="col-md-12 statistics-menu-dates">
         <span>{{'common-startdate'|translate}}:</span>
-        <mat-form-field>
-          <input matInput [matDatepicker]="startPicker" placeholder="{{'common-startdate'|translate}}" [(ngModel)]="startDate">
+        <mat-form-field class="detailsDateField">
+          <input  matInput [matDatepicker]="startPicker" placeholder="{{'common-startdate'|translate}}" [(ngModel)]="startDate">
           <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
           <mat-datepicker #startPicker></mat-datepicker>
         </mat-form-field>
         <span>{{'common-enddate'|translate}}:</span>
-        <mat-form-field>
+        <mat-form-field class="detailsDateField">
           <input matInput [matDatepicker]="endPicker" placeholder="{{'common-enddate'|translate}}" [(ngModel)]="endDate">
           <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
           <mat-datepicker #endPicker></mat-datepicker>
@@ -130,8 +130,8 @@
                   [legend]="false"
                   [showXAxisLabel]="true"
                   [showYAxisLabel]="true"
-                  [xAxisLabel]='moneySpentXLabel'
-                  [yAxisLabel]='moneySpentYLabel'
+                  [xAxisLabel]='moneySpentXLabel|translate'
+                  [yAxisLabel]='moneySpentYLabel|translate'
                   (select)="onSelect($event)">
                 </ngx-charts-bar-vertical>
               </div>

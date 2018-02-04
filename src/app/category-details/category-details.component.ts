@@ -23,8 +23,8 @@ export class CategoryDetailsComponent implements OnInit {
   private summary : any;
   private currency : string;
   private step = -1;
-  private moneySpentXLabel= "Sklep";
-  private moneySpentYLabel= "wydano";
+  private moneySpentXLabel= "categorydetails-moneySpentXLabel";
+  private moneySpentYLabel= "categorydetails-moneySpentYLabel";
   private view: any[] = [500, 400];
   private scheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']

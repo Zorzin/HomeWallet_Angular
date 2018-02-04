@@ -16,12 +16,12 @@ export class DailySummaryComponent implements OnInit {
   private summary:any;
   private dataLoaded:boolean;
   private date :string;
-  eachShopProductsXLabel= "Sklep";
-  eachShopProductsYLabel= "ilość produktów";
-  eachShopCostXLabel = "Sklep";
-  eachShopCostYLabel = "Kwota produktu";
-  eachCategoriesCostXLabel = 'Kategorie';
-  eachCategoriesCostYLabel = 'Kwota';
+  eachShopProductsXLabel= "dailysummary-eachShopProductsXLabel";
+  eachShopProductsYLabel= "dailysummary-eachShopProductsYLabel";
+  eachShopCostXLabel = "dailysummary-eachShopCostXLabel";
+  eachShopCostYLabel = "dailysummary-eachShopCostYLabel";
+  eachCategoriesCostXLabel = 'dailysummary-eachCategoriesCostXLabel';
+  eachCategoriesCostYLabel = 'dailysummary-eachCategoriesCostYLabel';
   view: any[] = [500, 400];
   scheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']

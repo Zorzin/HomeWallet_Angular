@@ -1,6 +1,7 @@
 <div class="accountpage" id="changepassword">
   <mat-tab-group>
     <mat-tab label="{{'account-account'|translate}}">
+      <br>
       <div class="account-container">
           <mat-form-field >
             <mat-select  placeholder="{{'account-theme'|translate}}" [(ngModel)]="theme" >
@@ -23,10 +24,11 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-        <button type="button" pButton (click)="saveAccount()" label="{{'common-save'|translate}}"></button>
+        <button mat-button color="primary" (click)="saveAccount()">{{'common-save'|translate}}</button>
       </div>
     </mat-tab>
     <mat-tab label="{{'account-password'|translate}}" >
+      <br>
       <form [formGroup]="passwordForm">
         <div class="account-container">
           <div formGroupName="oldPassword">
@@ -47,7 +49,7 @@
               <mat-error *ngIf="reNewPasswordName.errors" >{{getRePasswordErrorName()|translate}}</mat-error>
             </mat-form-field>
           </div>
-          <button mat-button [disabled]="oldPasswordName.errors || newPasswordName.errors || reNewPasswordName.errors" pButton (click)="ConfirmChangePassword()" label="{{'common-save'|translate}}"></button>
+          <button mat-button [disabled]="oldPasswordName.errors || newPasswordName.errors || reNewPasswordName.errors" (click)="ConfirmChangePassword()">{{'common-save'|translate}}</button>
         </div>
       </form>
     </mat-tab>

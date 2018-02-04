@@ -4,6 +4,8 @@ import {PlanService} from "../Services/plan.service";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {Location} from "@angular/common";
 import {UserInfoService} from "../Services/user-id.service";
+import {DeleteDialogComponent} from "../dialogs/delete-dialog/delete-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-plan-details',
@@ -22,8 +24,8 @@ export class PlanDetailsComponent implements OnInit {
   private summary : any;
   private currency : string;
 
-  eachCategoriesSpentXLabel = 'Kategorie';
-  eachCategoriesSpentYLabel = 'Kwota';
+  eachCategoriesSpentXLabel = 'plandetails-eachCategoriesSpentXLabel';
+  eachCategoriesSpentYLabel = 'plandetails-eachCategoriesSpentYLabel';
   view: any[] = [500, 400];
   scheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -34,7 +36,8 @@ export class PlanDetailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private userService: UserInfoService
+    private userService: UserInfoService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -86,21 +89,27 @@ export class PlanDetailsComponent implements OnInit {
     this.router.navigate(['/plans']);
   }
 
-  private onRemove()
+  Delete()
   {
-    this.showRemoveDialog = true;
+    let dialogRef = this.dialog.open(DeleteDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+      data: { content: 'plandetails-yousure',header:'plandetails-delete'},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.ConfirmDelete();
+      }
+    });
   }
 
-  private ConfirmDelete()
+  ConfirmDelete()
   {
     this.planService.removePlan(this.planDetails.id).subscribe(()=>{
       this.router.navigate(['/plans']);
-    })
-  }
-
-  private CancelDelete()
-  {
-    this.showRemoveDialog = false;
+    });
   }
 
   private getWidthAndHeight() {

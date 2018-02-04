@@ -4,16 +4,16 @@
   </p>
 
   <div class="col-md-12">
-    <div *ngFor="let plan of plans" class="col-md-3 panelmaindiv">
-      <div  class="panel panel-default listpanel">
-        <a (click)="goToDetails(plan.id)">
-          <div>
-            <span>{{plan.startDate}} - {{plan.endDate}}</span>
-          </div>
-        </a>
-      </div>
+    <div *ngFor="let plan of plans">
+      <mat-card class="menu-card" (click)="goToDetails(plan.id)">
+        <p>Plan wydatków dla okresu: {{plan.startDate}} - {{plan.endDate}}</p>
+      </mat-card>
     </div>
   </div>
+</div>
+<div class="col-md-12">
+  <hr>
+  <br>
 </div>
 <div *ngIf="!isDataLoaded">
   <mat-spinner></mat-spinner>
