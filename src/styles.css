@@ -11,6 +11,10 @@
   --inputs-text-color: white;
   --login-text-color: black;
   --tab-color: white;
+  --modal-color:#363636;
+  --modal-text:white;
+  --panel-color:#636363;
+  --navbar-color:#2f2f2f;
 }
 a :hover{
   cursor: pointer;
@@ -887,15 +891,19 @@ p-footer{
 
 
 #login label{
-  color: var(--login-text-color) ;
+  color: var(--login-text-color) !important;
 }
 
 #login input{
-  color: var(--login-text-color) ;
+  color: var(--login-text-color) !important;
 }
 
 #login span{
-  color: var(--login-text-color) ;
+  color: var(--login-text-color) !important;
+}
+
+#login .mat-form-field-underline{
+  background-color: var(--login-text-color) !important;
 }
 
 
@@ -1002,8 +1010,8 @@ mat-row:hover{
 }
 
 .navbar-inverse{
-  background-color: #3f51b5;
-  border-color: #3f51b5;
+  background-color: var(--navbar-color) ;
+  border-color: var(--navbar-color);
 }
 .navbar-inverse .navbar-brand{
   color: white;
@@ -1039,4 +1047,61 @@ mat-row:hover{
 
 #receiptShopText span,input,label{
   color: var(--inputs-text-color) !important;
+}
+
+mat-dialog-container{
+  background-color: var(--modal-color) !important;
+  color: var(--modal-text) !important;
+}
+mat-dialog-container span{
+  color: var(--modal-text) !important;
+}
+.mat-select-arrow{
+  color: var(--modal-text) !important;
+}
+.mat-form-field-underline{
+  background-color: var(--modal-text) !important;
+}
+
+.receiptcategory, .createproductcategories{
+  padding-left: 0 !important;
+}
+mat-expansion-panel{
+  background-color: var(--panel-color) !important;
+  color: var(--text-color) !important;
+}
+.mat-expansion-indicator{
+  color: var(--text-color) !important;
+}
+mat-panel-title{
+  color: var(--text-color) !important;
+}
+mat-card{
+  background-color: var(--panel-color) !important;
+  color: var(--text-color) !important;
+}
+.mat-sort-header-container{
+  color: var(--text-color) !important;
+}
+.mat-paginator-decrement, .mat-paginator-increment{
+  border-top: 2px solid var(--text-color);
+  border-right: 2px solid var(--text-color);
+}
+mat-table{
+  background-color: var(--panel-color) !important;
+  color: var(--text-color) !important;
+}
+mat-cell{
+  color: var(--text-color) !important;
+}
+
+mat-paginator{
+  background-color: var(--panel-color) !important;
+  color: var(--text-color) !important;
+}
+.mat-list-item{
+  color: var(--text-color) !important;
+}
+.mat-raised-button{
+  background-color: var(--panel-color);
 }

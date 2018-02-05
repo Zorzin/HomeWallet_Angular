@@ -134,6 +134,11 @@ export class AppComponent implements OnInit{
       bodyStyles.setProperty('--receipt-border', 'black');
       bodyStyles.setProperty('--inputs-text-color', 'black');
       bodyStyles.setProperty('--tab-color', 'black');
+      bodyStyles.setProperty('--inputs-text-color', 'black');
+      bodyStyles.setProperty('--modal-color', 'white');
+      bodyStyles.setProperty('--modal-text', 'black');
+      bodyStyles.setProperty('--panel-color', 'white')
+      bodyStyles.setProperty('--navbar-color', '#3f51b5');
       //
     }
     else if(theme=='dark')

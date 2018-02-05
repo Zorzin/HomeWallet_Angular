@@ -46,7 +46,7 @@
         </div>
         <div *ngIf="summary.visitAmount>0">
           <mat-accordion class="example-headers-align" [multi]="true">
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 0" (opened)="setStep(0)" >
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-visitAmount'|translate}}
@@ -56,13 +56,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.visitAmount}} </span> <span class="summaryText">- {{'shopdetails-visitAmount-description'|translate}} </span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 1" (opened)="setStep(1)" >
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-moneySpentAmount'|translate}}
@@ -72,14 +68,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.moneySpentAmount}} {{currency}} </span> <span class="summaryText">- {{'shopdetails-moneySpentAmount-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 2" (opened)="setStep(2)">
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-moneyAverageSpentAmount'|translate}}
@@ -89,14 +80,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.moneyAverageSpentAmount}} {{currency}}</span> <span class="summaryText">- {{'shopdetails-moneyAverageSpentAmount-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 3" (opened)="setStep(3)">
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-moneyMaxSpentAmount'|translate}}
@@ -106,15 +92,10 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.moneyMaxSpentAmount}} {{currency}}</span> <span class="summaryText">- {{'shopdetails-moneyMaxSpentAmount-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 4" (opened)="setStep(4)">
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-moneyMinSpentAmount'|translate}}
@@ -124,14 +105,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.moneyMinSpentAmount}} {{currency}}</span> <span class="summaryText">- {{'shopdetails-moneyMinSpentAmount-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 5" (opened)="setStep(5)" >
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-productsBoughtTotalAmount'|translate}}
@@ -141,14 +117,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.productsBoughtTotalAmount}}</span> <span class="summaryText">- {{'shopdetails-productsBoughtTotalAmount-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 6" (opened)="setStep(6)" >
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-productsBoughtAverageAmount'|translate}}
@@ -158,14 +129,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.productsBoughtAverageAmount}}</span> <span class="summaryText">- {{'shopdetails-productsBoughtAverageAmount-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 7" (opened)="setStep(7)" >
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-productsBoughtMinAmount'|translate}}
@@ -175,14 +141,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.productsBoughtMinAmount}}</span> <span class="summaryText">- {{'shopdetails-productsBoughtMinAmount-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 8" (opened)="setStep(8)" >
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-productsBoughtMaxAmount'|translate}}
@@ -192,14 +153,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.productsBoughtMaxAmount}}</span> <span class="summaryText">- {{'shopdetails-productsBoughtMaxAmount-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 9" (opened)="setStep(9)" >
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-totalCategoriesAmount'|translate}}
@@ -209,14 +165,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.totalCategoriesAmount}}</span> <span class="summaryText">- {{'shopdetails-totalCategoriesAmount-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 10" (opened)="setStep(10)" >
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-averageCategoryAmountForReceipt'|translate}}
@@ -226,14 +177,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.averageCategoryAmountForReceipt}}</span> <span class="summaryText">- {{'shopdetails-averageCategoryAmountForReceipt-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 11" (opened)="setStep(11)" >
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-minCategoryAmountForReceipt'|translate}}
@@ -243,14 +189,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.minCategoryAmountForReceipt}}</span> <span class="summaryText">- {{'shopdetails-minCategoryAmountForReceipt-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 12" (opened)="setStep(12)" >
+            <mat-expansion-panel class="statistics-panel" >
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-maxCategoryAmountForReceipt'|translate}}
@@ -260,15 +201,10 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.maxCategoryAmountForReceipt}}</span> <span class="summaryText">- {{'shopdetails-maxCategoryAmountForReceipt-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 13" (opened)="setStep(13)" >
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-averageMoneySpentOnEachCategory'|translate}}
@@ -290,14 +226,9 @@
                   (select)="onSelect($event)">
                 </ngx-charts-bar-vertical>
               </div>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 14" (opened)="setStep(14)">
+            <mat-expansion-panel class="statistics-panel" >
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-averageMoneySpentPerDay'|translate}}
@@ -306,15 +237,10 @@
 
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.averageMoneySpentPerDay}}</span> <span class="summaryText">- {{'shopdetails-averageMoneySpentPerDay-description'|translate}}</span>
-
               </ng-template>
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 15" (opened)="setStep(15)">
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-totalProductAmountBought'|translate}}
@@ -324,14 +250,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.totalProductAmountBought}}</span> <span class="summaryText">- {{'shopdetails-totalProductAmountBought-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 16" (opened)="setStep(16)">
+            <mat-expansion-panel class="statistics-panel">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-minProductAmountBought'|translate}}
@@ -341,14 +262,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.minProductAmountBought}}</span> <span class="summaryText">- {{'shopdetails-minProductAmountBought-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 17" (opened)="setStep(17)">
+            <mat-expansion-panel class="statistics-panel" >
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-maxProductAmountBought'|translate}}
@@ -358,14 +274,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.maxProductAmountBought}}</span> <span class="summaryText">- {{'shopdetails-maxProductAmountBought-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 18" (opened)="setStep(18)">
+            <mat-expansion-panel class="statistics-panel" >
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-averageProductAmountBought'|translate}}
@@ -375,14 +286,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.averageProductAmountBought}}</span> <span class="summaryText">- {{'shopdetails-averageProductAmountBought-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 19" (opened)="setStep(19)">
+            <mat-expansion-panel class="statistics-panel" >
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-mostPopularCategoryName'|translate}}
@@ -392,14 +298,9 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.mostPopularCategoryName}} %</span> <span class="summaryText">- {{'shopdetails-mostPopularCategoryName-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-next'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="statistics-panel" [expanded]="step === 20" (opened)="setStep(20)">
+            <mat-expansion-panel class="statistics-panel" >
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   {{'shopdetails-leastPopularCategoryName'|translate}}
@@ -408,11 +309,6 @@
               <ng-template matExpansionPanelContent>
                 <span class="summaryNumber">{{summary.leastPopularCategoryName}} {{currency}}</span> <span class="summaryText">- {{'shopdetails-leastPopularCategoryName-description'|translate}}</span>
               </ng-template>
-
-              <mat-action-row>
-                <button mat-button color="warn" (click)="prevStep()">{{'common-previous'|translate}}</button>
-                <button mat-button color="primary" (click)="nextStep()">{{'common-end'|translate}}</button>
-              </mat-action-row>
             </mat-expansion-panel>
 
           </mat-accordion>
