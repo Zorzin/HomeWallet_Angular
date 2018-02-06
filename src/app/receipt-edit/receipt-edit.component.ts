@@ -21,14 +21,14 @@ import {MatDialog} from "@angular/material";
 })
 export class ReceiptEditComponent implements OnInit {
 
-  private currency:string;
-  private width: number;
-  private height:number;
-  private isDataLoaded: boolean;
-  private receipt: any;
-  private shops:any;
-  private receiptProducts:ReceiptProductEdit[];
-  private currentNewProduct : ReceiptProductEdit;
+  public currency:string;
+  public width: number;
+  public height:number;
+  public isDataLoaded: boolean;
+  public receipt: any;
+  public shops:any;
+  public receiptProducts:ReceiptProductEdit[];
+  public currentNewProduct : ReceiptProductEdit;
 
   constructor(
     private productService: ProductService,

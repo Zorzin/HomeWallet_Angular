@@ -14,20 +14,20 @@ import {MatDialog} from "@angular/material";
 })
 export class PlanDetailsComponent implements OnInit {
 
-  private width:number;
-  private height:number;
-  private planDetails: any;
-  private isDataLoaded: boolean;
-  private canEdit: boolean;
-  private responseFromService: any;
-  private showRemoveDialog: boolean;
-  private summary : any;
-  private currency : string;
+  public width:number;
+  public height:number;
+  public planDetails: any;
+  public isDataLoaded: boolean;
+  public canEdit: boolean;
+  public responseFromService: any;
+  public showRemoveDialog: boolean;
+  public summary : any;
+  public currency : string;
 
-  eachCategoriesSpentXLabel = 'plandetails-eachCategoriesSpentXLabel';
-  eachCategoriesSpentYLabel = 'plandetails-eachCategoriesSpentYLabel';
-  view: any[] = [500, 400];
-  scheme = {
+  public eachCategoriesSpentXLabel = 'plandetails-eachCategoriesSpentXLabel';
+  public eachCategoriesSpentYLabel = 'plandetails-eachCategoriesSpentYLabel';
+  public view: any[] = [500, 400];
+  public scheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 

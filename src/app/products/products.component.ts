@@ -17,12 +17,12 @@ export class ProductsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  private isDataLoaded:boolean;
-  private width:number;
-  private height:number;
-  private products: Product[];
-  dataSource: MatTableDataSource<Product>;
-  displayedColumns = ['name'];
+  public isDataLoaded:boolean;
+  public width:number;
+  public height:number;
+  public products: Product[];
+  public dataSource: MatTableDataSource<Product>;
+  public displayedColumns = ['name'];
 
   constructor(private productService: ProductService,
               private router: Router,

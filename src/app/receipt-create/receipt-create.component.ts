@@ -32,16 +32,16 @@ export class ReceiptCreateComponent implements OnInit {
     private route: ActivatedRoute,) { }
 
 
-  private currency:string;
-  private width: number;
-  private height:number;
-  private shops: any;
-  private newProducts: ReceiptProduct[];
-  private currentProduct : ReceiptProduct;
-  private receiptTotal: number = 0;
-  private receiptShop: number;
-  private receiptDate: Date;
-  private dateFromRoute: Date;
+  public currency:string;
+  public width: number;
+  public height:number;
+  public shops: any;
+  public newProducts: ReceiptProduct[];
+  public currentProduct : ReceiptProduct;
+  public receiptTotal: number = 0;
+  public receiptShop: number;
+  public receiptDate: Date;
+  public dateFromRoute: Date;
   ngOnInit() {
     this.checkUser();
     this.getWidthAndHeight();

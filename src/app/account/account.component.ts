@@ -18,22 +18,22 @@ import {passwordValueValidator, rePasswordValidator} from "../Validators/passwor
 })
 export class AccountComponent implements OnInit {
 
-  private currencies: SelectItem[];
-  private themes: SelectItem[];
-  private languages: SelectItem[];
-  private language:string;
-  private theme:string;
-  private currency:string;
-  private passwordChange: PasswordChange;
-  private width:number;
-  private height:number;
-  private passwordDialogDisplay:boolean;
-  private currencyDialogDisplay: boolean;
+  public currencies: SelectItem[];
+  public themes: SelectItem[];
+  public languages: SelectItem[];
+  public language:string;
+  public theme:string;
+  public currency:string;
+  public passwordChange: PasswordChange;
+  public width:number;
+  public height:number;
+  public passwordDialogDisplay:boolean;
+  public currencyDialogDisplay: boolean;
 
-  private oldPasswordName:FormControl;
-  private newPasswordName:FormControl;
-  private reNewPasswordName:FormControl;
-  private passwordForm: FormGroup;
+  public oldPasswordName:FormControl;
+  public newPasswordName:FormControl;
+  public reNewPasswordName:FormControl;
+  public passwordForm: FormGroup;
 
 
   constructor(private userService:UserInfoService,
@@ -98,7 +98,7 @@ export class AccountComponent implements OnInit {
     this.height = window.innerHeight;
   }
 
-  private ConfirmChangePassword() {
+  public ConfirmChangePassword() {
     this.passwordChange.newPassword = this.newPasswordName.value;
     this.passwordChange.reNewPassword = this.reNewPasswordName.value;
     this.passwordChange.oldPassword = this.oldPasswordName.value;
@@ -152,7 +152,7 @@ export class AccountComponent implements OnInit {
     this.userService.getUserTheme().then((response)=>this.theme = JSON.parse(response));
   }
 
-  private saveAccount()
+  public saveAccount()
   {
     this.changeCurrency();
     this.changeTheme();

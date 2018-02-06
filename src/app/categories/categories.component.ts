@@ -16,12 +16,12 @@ export class CategoriesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  private isDataLoaded: boolean;
-  private width:number;
-  private height:number;
-  private categories: Category[];
-  dataSource: MatTableDataSource<Category>;
-  displayedColumns = ['name'];
+  public isDataLoaded: boolean;
+  public width:number;
+  public height:number;
+  public categories: Category[];
+  public dataSource: MatTableDataSource<Category>;
+  public displayedColumns = ['name'];
 
   constructor(private router: Router,
               private categoryService: CategoryService,

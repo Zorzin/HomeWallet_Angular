@@ -14,16 +14,16 @@ import {UserInfoService} from "../Services/user-id.service";
 })
 export class ReceiptComponent implements OnInit {
 
-  dates: Array<Array<any>>;
-  datesToView: Array<Array<any>>;
-  private loadButton:boolean = true;
-  private receipts: any;
-  private login:boolean;
-  private addToday:boolean;
-  private todayString:string;
-  private dataLoaded:boolean;
-  private currency:string;
-  private lastId: number;
+  public dates: Array<Array<any>>;
+  public datesToView: Array<Array<any>>;
+  public loadButton:boolean = true;
+  public receipts: any;
+  public login:boolean;
+  public addToday:boolean;
+  public todayString:string;
+  public dataLoaded:boolean;
+  public currency:string;
+  public lastId: number;
 
   constructor(private receiptService: ReceiptService,
               private shopService: ShopService,

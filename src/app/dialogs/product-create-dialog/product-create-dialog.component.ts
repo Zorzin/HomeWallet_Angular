@@ -16,15 +16,15 @@ import {productNameValidator} from "../../Validators/product-validators";
 })
 export class ProductCreateDialogComponent{
 
-  private currentProduct : ReceiptProduct;
-  private multiSelectCategories: SelectItem[];
-  private categories: any;
-  private width: number;
-  private height:number;
+  public currentProduct : ReceiptProduct;
+  public multiSelectCategories: SelectItem[];
+  public categories: any;
+  public width: number;
+  public height:number;
 
-  private name:FormControl;
-  private newProductCategories: FormControl;
-  productForm: FormGroup;
+  public name:FormControl;
+  public newProductCategories: FormControl;
+  public productForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<ProductCreateDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,

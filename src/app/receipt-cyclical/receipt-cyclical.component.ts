@@ -26,19 +26,19 @@ export class ReceiptCyclicalComponent implements OnInit {
     public dialog: MatDialog) { }
 
 
-  private width: number;
-  private height:number;
-  private shops: any;
-  private newProducts: ReceiptProduct[];
-  private currency: string;
-  private currentProduct : ReceiptProduct;
+  public width: number;
+  public height:number;
+  public shops: any;
+  public newProducts: ReceiptProduct[];
+  public currency: string;
+  public currentProduct : ReceiptProduct;
 
-  private receiptTotal: number = 0;
-  private receiptShop: number;
-  private receiptStartDate: Date;
-  private minEndDate: Date;
-  private receiptEndDate: Date;
-  private receiptCycle: number = 1;
+  public receiptTotal: number = 0;
+  public receiptShop: number;
+  public receiptStartDate: Date;
+  public minEndDate: Date;
+  public receiptEndDate: Date;
+  public receiptCycle: number = 1;
 
   ngOnInit() {
     this.checkUser();

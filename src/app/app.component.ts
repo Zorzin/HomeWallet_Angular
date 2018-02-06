@@ -10,8 +10,8 @@ import {Renderer2} from '@angular/core';
 })
 export class AppComponent implements OnInit{
 
-  private login:boolean;
-  private lang:string = 'en';
+  public login:boolean;
+  public lang:string = 'en';
 
   constructor(private router:Router,
               private userService: UserInfoService,

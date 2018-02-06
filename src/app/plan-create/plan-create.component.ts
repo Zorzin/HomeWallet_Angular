@@ -16,13 +16,13 @@ import {PasswordChangeDialog} from "../account/account.component";
 })
 export class PlanCreateComponent implements OnInit {
 
-  private responseFromService: object;
-  private canCreate: boolean;
+  public responseFromService: object;
+  public canCreate: boolean;
 
-  private amountValue: FormControl;
-  private startDateValue:FormControl;
-  private endDateValue:FormControl;
-  private createPlanForm: FormGroup;
+  public amountValue: FormControl;
+  public startDateValue:FormControl;
+  public endDateValue:FormControl;
+  public createPlanForm: FormGroup;
 
   constructor(
     private planService: PlanService,
@@ -119,7 +119,7 @@ export class PlanCreateComponent implements OnInit {
     });
   }
 
-  private goToList()
+  public goToList()
   {
     this.router.navigate(['/plans']);
   }

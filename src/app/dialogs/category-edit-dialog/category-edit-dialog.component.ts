@@ -11,9 +11,9 @@ import {categoryNameValidator} from "../../Validators/category-validators";
 })
 export class CategoryEditDialogComponent{
 
-  private oldName: string;
-  private name:FormControl;
-  categoryForm: FormGroup;
+  public oldName: string;
+  public name:FormControl;
+  public categoryForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<CategoryEditDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,

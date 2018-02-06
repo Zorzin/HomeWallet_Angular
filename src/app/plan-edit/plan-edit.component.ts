@@ -17,15 +17,15 @@ import {MatDialog} from "@angular/material";
 })
 export class PlanEditComponent implements OnInit {
 
-  private canEdit: boolean;
-  private isDataLoaded: boolean;
-  private plan: any;
-  private currentPlan: any;
+  public canEdit: boolean;
+  public isDataLoaded: boolean;
+  public plan: any;
+  public currentPlan: any;
 
-  private amountValue: FormControl;
-  private startDateValue:FormControl;
-  private endDateValue:FormControl;
-  private editForm: FormGroup;
+  public amountValue: FormControl;
+  public startDateValue:FormControl;
+  public endDateValue:FormControl;
+  public editForm: FormGroup;
 
   constructor(
     private planService: PlanService,

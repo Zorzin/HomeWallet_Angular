@@ -15,24 +15,24 @@ import {DeleteDialogComponent} from "../dialogs/delete-dialog/delete-dialog.comp
 })
 export class ProductDetailsComponent implements OnInit {
 
-  private width:number;
-  private height:number;
-  private details: boolean;
-  private isDataLoaded: boolean;
-  private hasCategories: boolean;
-  private currency : string;
-  private startDate: Date;
-  private endDate: Date;
+  public width:number;
+  public height:number;
+  public details: boolean;
+  public isDataLoaded: boolean;
+  public hasCategories: boolean;
+  public currency : string;
+  public startDate: Date;
+  public endDate: Date;
 
-  private step = -1;
-  private product:any;
-  private  categories : any;
-  private currentCategories: any;
+  public step = -1;
+  public product:any;
+  public  categories : any;
+  public currentCategories: any;
 
-  private shopPriceXLabel= "productdetails-shopPriceXLabel";
-  private shopPriceYLabel= "productdetails-shopPriceYLabel";
-  private view: any[] = [500, 400];
-  private scheme = {
+  public shopPriceXLabel= "productdetails-shopPriceXLabel";
+  public shopPriceYLabel= "productdetails-shopPriceYLabel";
+  public view: any[] = [500, 400];
+  public scheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 

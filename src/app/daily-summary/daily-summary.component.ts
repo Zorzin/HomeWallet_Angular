@@ -12,18 +12,18 @@ import {SummaryService} from "../Services/summary.service";
 
 export class DailySummaryComponent implements OnInit {
 
-  private currency:string;
-  private summary:any;
-  private dataLoaded:boolean;
-  private date :string;
-  eachShopProductsXLabel= "dailysummary-eachShopProductsXLabel";
-  eachShopProductsYLabel= "dailysummary-eachShopProductsYLabel";
-  eachShopCostXLabel = "dailysummary-eachShopCostXLabel";
-  eachShopCostYLabel = "dailysummary-eachShopCostYLabel";
-  eachCategoriesCostXLabel = 'dailysummary-eachCategoriesCostXLabel';
-  eachCategoriesCostYLabel = 'dailysummary-eachCategoriesCostYLabel';
-  view: any[] = [500, 400];
-  scheme = {
+  public currency:string;
+  public summary:any;
+  public dataLoaded:boolean;
+  public date :string;
+  public eachShopProductsXLabel= "dailysummary-eachShopProductsXLabel";
+  public eachShopProductsYLabel= "dailysummary-eachShopProductsYLabel";
+  public eachShopCostXLabel = "dailysummary-eachShopCostXLabel";
+  public eachShopCostYLabel = "dailysummary-eachShopCostYLabel";
+  public eachCategoriesCostXLabel = 'dailysummary-eachCategoriesCostXLabel';
+  public eachCategoriesCostYLabel = 'dailysummary-eachCategoriesCostYLabel';
+  public view: any[] = [500, 400];
+  public scheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 

@@ -13,24 +13,24 @@ import {DeleteDialogComponent} from "../dialogs/delete-dialog/delete-dialog.comp
 })
 export class CategoryDetailsComponent implements OnInit {
 
-  private width:number;
-  private height:number;
-  private details: boolean;
-  private isDataLoaded: boolean;
-  private hasProducts: boolean;
-  private category:any;
-  private products : any;
-  private summary : any;
-  private currency : string;
-  private step = -1;
-  private moneySpentXLabel= "categorydetails-moneySpentXLabel";
-  private moneySpentYLabel= "categorydetails-moneySpentYLabel";
-  private view: any[] = [500, 400];
-  private scheme = {
+  public width:number;
+  public height:number;
+  public details: boolean;
+  public isDataLoaded: boolean;
+  public hasProducts: boolean;
+  public category:any;
+  public products : any;
+  public summary : any;
+  public currency : string;
+  public step = -1;
+  public moneySpentXLabel= "categorydetails-moneySpentXLabel";
+  public moneySpentYLabel= "categorydetails-moneySpentYLabel";
+  public view: any[] = [500, 400];
+  public scheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
-  private startDate: Date;
-  private endDate: Date;
+  public startDate: Date;
+  public endDate: Date;
 
   constructor(
     private router : Router,

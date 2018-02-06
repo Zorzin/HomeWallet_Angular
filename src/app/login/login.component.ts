@@ -15,10 +15,10 @@ import {PasswordChangeDialog} from "../account/account.component";
 })
 export class LoginComponent implements OnInit {
 
-  private user : UserLogin;
-  private loginName:FormControl;
-  private passwordName:FormControl;
-  private loginForm: FormGroup;
+  public user : UserLogin;
+  public loginName:FormControl;
+  public passwordName:FormControl;
+  public loginForm: FormGroup;
 
   constructor(private loginService:LoginService,
               private userIdService: UserInfoService,

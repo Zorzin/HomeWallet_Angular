@@ -18,12 +18,12 @@ export class ShopsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  private width: number;
-  private height:number;
-  private shops: Shop[];
-  private isDataLoaded: boolean;
-  dataSource: MatTableDataSource<Shop>;
-  displayedColumns = ['name'];
+  public width: number;
+  public height:number;
+  public shops: Shop[];
+  public isDataLoaded: boolean;
+  public dataSource: MatTableDataSource<Shop>;
+  public displayedColumns = ['name'];
 
   constructor(private shopService: ShopService,
               private router: Router,

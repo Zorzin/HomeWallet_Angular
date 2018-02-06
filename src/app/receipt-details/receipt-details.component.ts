@@ -16,12 +16,12 @@ import {UserInfoService} from "../Services/user-id.service";
 })
 export class ReceiptDetailsComponent implements OnInit {
 
-  private currency:string;
-  private width: number;
-  private height:number;
-  private isDataLoaded: boolean;
-  private receipt: any;
-  removeDialogDisplay:boolean =false;
+  public currency:string;
+  public width: number;
+  public height:number;
+  public isDataLoaded: boolean;
+  public receipt: any;
+  public removeDialogDisplay:boolean =false;
 
   constructor(
     private productService: ProductService,
@@ -96,11 +96,11 @@ export class ReceiptDetailsComponent implements OnInit {
     this.receiptService.getReceiptTotalValue(this.receipt.id).then(responce=>this.receipt.totalValue = responce);
   }
 
-  private goEdit() {
+  public goEdit() {
     this.router.navigate(['/receipt-edit', this.receipt.id]);
   }
 
-  private onDelete() {
+  public onDelete() {
     this.removeDialogDisplay = true;
   }
 

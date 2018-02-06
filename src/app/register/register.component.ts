@@ -20,19 +20,19 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 })
 export class RegisterComponent implements OnInit {
 
-  private themes: SelectItem[];
-  private languages: SelectItem[];
-  private currencies: SelectItem[];
-  private userObj : UserRegister;
+  public themes: SelectItem[];
+  public languages: SelectItem[];
+  public currencies: SelectItem[];
+  public userObj : UserRegister;
 
-  private emailName: FormControl;
-  private loginName:FormControl;
-  private passwordName:FormControl;
-  private rePasswordName:FormControl;
-  private currencyValue:FormControl;
-  private themeValue:FormControl;
-  private languageValue:FormControl;
-  private registerForm: FormGroup;
+  public emailName: FormControl;
+  public loginName:FormControl;
+  public passwordName:FormControl;
+  public rePasswordName:FormControl;
+  public currencyValue:FormControl;
+  public themeValue:FormControl;
+  public languageValue:FormControl;
+  public registerForm: FormGroup;
 
   constructor(private registerService: RegisterService,
               private accountService: AccountService,

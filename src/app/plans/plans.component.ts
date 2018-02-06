@@ -10,10 +10,10 @@ import {UserInfoService} from "../Services/user-id.service";
 })
 export class PlansComponent implements OnInit {
 
-  private plans: any;
-  private isDataLoaded: boolean;
-  private canCreate: boolean;
-  private responseFromService: object;
+  public plans: any;
+  public isDataLoaded: boolean;
+  public canCreate: boolean;
+  public responseFromService: object;
 
   constructor(
     private planService: PlanService,

@@ -11,8 +11,8 @@ import {shopNameValidator} from "../../Validators/shop-validators";
 })
 export class ShopEditDialogComponent{
 
-  private name:FormControl;
-  private shopForm: FormGroup;
+  public name:FormControl;
+  public shopForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<ShopEditDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,

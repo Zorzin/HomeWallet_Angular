@@ -16,20 +16,20 @@ import {productNameValidator} from "../../Validators/product-validators";
 })
 export class ProductAddDialogComponent{
 
-  private newProductSwitch: boolean = false;
-  private currentProduct : ReceiptProduct;
-  private multiSelectCategories: SelectItem[];
-  private products: SelectItem[];
-  private categories: any;
-  private width: number;
-  private height:number;
+  public newProductSwitch: boolean = false;
+  public currentProduct : ReceiptProduct;
+  public multiSelectCategories: SelectItem[];
+  public products: SelectItem[];
+  public categories: any;
+  public width: number;
+  public height:number;
 
-  private existProductList: FormControl;
-  private productName: FormControl;
-  private newProductCategories: FormControl;
-  private productAmount: FormControl;
-  private productPrice: FormControl;
-  private productForm: FormGroup;
+  public existProductList: FormControl;
+  public productName: FormControl;
+  public newProductCategories: FormControl;
+  public productAmount: FormControl;
+  public productPrice: FormControl;
+  public productForm: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<ProductAddDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,

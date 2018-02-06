@@ -14,23 +14,23 @@ import {ShopEditDialogComponent} from "../dialogs/shop-edit-dialog/shop-edit-dia
 })
 export class ShopDetailsComponent implements OnInit {
 
-  private width:number;
-  private height:number;
-  private isDataLoaded: boolean;
-  private shop: any;
-  private details: boolean;
-  private hasProducts: boolean;
-  private products: any;
-  private summary : any;
-  private currency : string;
-  private startDate: Date;
-  private endDate: Date;
+  public width:number;
+  public height:number;
+  public isDataLoaded: boolean;
+  public shop: any;
+  public details: boolean;
+  public hasProducts: boolean;
+  public products: any;
+  public summary : any;
+  public currency : string;
+  public startDate: Date;
+  public endDate: Date;
 
-  private step = -1;
-  private moneySpentXLabel= "shopdetails-moneySpentXLabel";
-  private moneySpentYLabel= "shopdetails-moneySpentyLabel";
-  private view: any[] = [500, 400];
-  private scheme = {
+  public step = -1;
+  public moneySpentXLabel= "shopdetails-moneySpentXLabel";
+  public moneySpentYLabel= "shopdetails-moneySpentyLabel";
+  public view: any[] = [500, 400];
+  public scheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
