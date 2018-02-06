@@ -88,7 +88,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProductEditDialogComponent,
     ShopEditDialogComponent,
     CategoryEditDialogComponent,
-    PlanErrorDialog
+    PlanErrorDialog,
+    RegisterErrorDialog
   ],
   declarations: [
     AppComponent,
@@ -116,6 +117,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PasswordChangeDialog,
     LoginErrorDialog,
     PlanErrorDialog,
+    RegisterErrorDialog,
     ShopCreateDialogComponent,
     ProductAddDialogComponent,
     ProductCreateDialogComponent,
