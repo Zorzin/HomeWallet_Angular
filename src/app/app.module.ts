@@ -32,7 +32,7 @@ import { ReceiptEditComponent } from './receipt-edit/receipt-edit.component';
 import { OptionsComponent } from './options/options.component';
 import { PlanEditComponent } from './plan-edit/plan-edit.component';
 import { PlansComponent } from './plans/plans.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent, RegisterErrorDialog } from './register/register.component';
 import {LoginComponent, LoginErrorDialog} from './login/login.component';
 import {LoginService} from "./Services/login.service";
 import {RegisterService} from "./Services/register.service";
@@ -89,7 +89,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProductEditDialogComponent,
     ShopEditDialogComponent,
     CategoryEditDialogComponent,
-    PlanErrorDialog
+    PlanErrorDialog,
+    RegisterErrorDialog
   ],
   declarations: [
     AppComponent,
@@ -117,6 +118,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PasswordChangeDialog,
     LoginErrorDialog,
     PlanErrorDialog,
+    RegisterErrorDialog,
     ShopCreateDialogComponent,
     ProductAddDialogComponent,
     ProductCreateDialogComponent,
