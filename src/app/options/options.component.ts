@@ -54,4 +54,7 @@ export class OptionsComponent implements OnInit {
     this.router.navigate(['/plans']);
   }
 
+  goStatistics() {
+    this.router.navigate(['/summary']);
+  }
 }

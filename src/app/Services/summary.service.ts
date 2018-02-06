@@ -21,4 +21,10 @@ export class SummaryService {
       .toPromise()
       .catch(this.handleError);
   }
+
+  getSummaryByDates(startDate: string,endDate: string) {
+    return this.http.get(this.apiUrl+this.userService.getUserId() + "/"+startDate+ "/"+endDate)
+      .toPromise()
+      .catch(this.handleError);
+  }
 }

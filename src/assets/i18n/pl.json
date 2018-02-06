@@ -283,5 +283,7 @@
 	"dailysummary-eachCategoriesCostXLabel": "Kategoria",
 	"dailysummary-eachCategoriesCostYLabel": "Kwota",
 	"categorydetails-moneySpentXLabel": "Sklep",
-	"categorydetails-moneySpentYLabel": "Kwota"
+	"categorydetails-moneySpentYLabel": "Kwota",
+	"summary-statistics": "Statystyki",
+	"options-statistics": "Statystyki okresowe"
 }

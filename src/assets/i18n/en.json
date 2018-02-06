@@ -283,5 +283,7 @@
 	"dailysummary-eachCategoriesCostXLabel": "Category",
 	"dailysummary-eachCategoriesCostYLabel": "Cost",
 	"categorydetails-moneySpentXLabel": "Shop",
-	"categorydetails-moneySpentYLabel": "Cost"
+	"categorydetails-moneySpentYLabel": "Cost",
+	"summary-statistics": "Statistics",
+	"options-statistics": "Period statistics"
 }

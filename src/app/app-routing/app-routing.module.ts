@@ -21,6 +21,7 @@ import {LoginComponent} from "../login/login.component";
 import {WelcomeComponent} from "../welcome/welcome.component";
 import {AccountComponent} from "../account/account.component";
 import {DailySummaryComponent} from "../daily-summary/daily-summary.component";
+import {DateSummaryComponent} from "../date-summary/date-summary.component";
 
 
 const routes: Routes = [
@@ -45,7 +46,8 @@ const routes: Routes = [
   { path:"register", component: RegisterComponent},
   { path:"login", component: LoginComponent},
   { path:"account", component: AccountComponent},
-  { path: 'daily-summary/:date', component: DailySummaryComponent}
+  { path: 'daily-summary/:date', component: DailySummaryComponent},
+  { path: 'summary', component: DateSummaryComponent}
 
 ];
 

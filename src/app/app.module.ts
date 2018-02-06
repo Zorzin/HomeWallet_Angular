@@ -70,6 +70,7 @@ import {
 } from "@angular/material";
 import { WarningDialogComponent } from './dialogs/warning-dialog/warning-dialog.component';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
+import { DateSummaryComponent } from './date-summary/date-summary.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -124,7 +125,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ProductEditDialogComponent,
     ShopEditDialogComponent,
     CategoryEditDialogComponent,
-    WarningDialogComponent
+    WarningDialogComponent,
+    DateSummaryComponent
   ],
   imports: [
     AppRoutingModule,

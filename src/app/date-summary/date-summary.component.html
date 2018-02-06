@@ -1,0 +1,223 @@
+<div *ngIf="dataLoaded">
+
+  <div class="col-md-12 col-sm-12 dailysummarydate">
+    <p>{{'summary-statistics'|translate}}</p>
+  </div>
+
+  <div class="col-md-12 ">
+    <div class="col-md-12 statistics-menu-dates">
+      <span>{{'common-startdate'|translate}}:</span>
+      <mat-form-field class="detailsDateField">
+        <input  matInput [matDatepicker]="startPicker" placeholder="{{'common-startdate'|translate}}" [(ngModel)]="startDate">
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+      <span>{{'common-enddate'|translate}}:</span>
+      <mat-form-field class="detailsDateField">
+        <input matInput [matDatepicker]="endPicker" placeholder="{{'common-enddate'|translate}}" [(ngModel)]="endDate">
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+      <a mat-button color="basic"  (click)="SetDates()">{{'common-setdates'|translate}}</a>
+    </div>
+    <div class="col-md-12">
+      <div *ngIf="summary.totalCost<=0">
+        {{'common-statistics-empty'|translate}}
+      </div>
+      <div *ngIf="summary.totalCost>0">
+        <mat-accordion class="example-headers-align" [multi]="true">
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-totalCost'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.totalCost}} {{currency}} </span> <span class="summaryText">- {{'dailysummary-totalCost-description'|translate}} </span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" *ngIf="summary.percentPlan !=-1">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-percentPlan'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.percentPlan}}% </span> <span class="summaryText">- {{'dailysummary-percentPlan-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-shopsCount'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.shopsCount}}</span> <span class="summaryText">- {{'dailysummary-shopsCount-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-productsCount'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.productsCount}} </span> <span class="summaryText">- {{'dailysummary-productsCount-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-categoriesCount'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.categoriesCount}} </span> <span class="summaryText">- {{'dailysummary-categoriesCount-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel"  *ngIf="summary.eachCategoryCost.length>0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-eachCategoryCost'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="chart-panel">
+              <ngx-charts-bar-vertical
+                [view]="view"
+                [scheme]="scheme"
+                [results]="summary.eachCategoryCost"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]='eachCategoriesCostXLabel|translate'
+                [yAxisLabel]='eachCategoriesCostYLabel|translate'
+                (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+            </div>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel class="statistics-panel" *ngIf="summary.eachShopProducts.length>0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-eachShopProducts'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="chart-panel">
+              <ngx-charts-bar-vertical
+                [view]="view"
+                [scheme]="scheme"
+                [results]="summary.eachShopProducts"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]='eachShopProductsXLabel|translate'
+                [yAxisLabel]='eachShopProductsYLabel|translate'
+                (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+            </div>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel class="statistics-panel" *ngIf="summary.eachShopMoney.length>0">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-eachShopMoney'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="chart-panel">
+              <ngx-charts-bar-vertical
+                [view]="view"
+                [scheme]="scheme"
+                [results]="summary.eachShopMoney"
+                [gradient]="false"
+                [xAxis]="true"
+                [yAxis]="true"
+                [legend]="false"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                [xAxisLabel]='eachShopCostXLabel|translate'
+                [yAxisLabel]='eachShopCostYLabel|translate'
+                (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+            </div>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-maxProductCost'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.maxProductCost}} {{currency}}</span> <span class="summaryText">- {{'dailysummary-maxProductCost-description'|translate}}</span>
+
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-minProductCost'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.minProductCost}} {{currency}}</span> <span class="summaryText">- {{'dailysummary-minProductCost-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-averageProductCost'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.averageProductCost}} {{currency}}</span> <span class="summaryText">- {{'dailysummary-averageProductCost-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel class="statistics-panel" >
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{'dailysummary-averageReceiptCost'|translate}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              <span class="summaryNumber">{{summary.averageReceiptCost}} {{currency}}</span> <span class="summaryText">- {{'dailysummary-averageReceiptCost-description'|translate}}</span>
+            </ng-template>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-12">
+  <br>
+  <hr>
+</div>
+<div *ngIf="!dataLoaded">
+  <mat-spinner></mat-spinner>
+</div>
