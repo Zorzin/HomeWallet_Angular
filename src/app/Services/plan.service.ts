@@ -6,9 +6,9 @@ import {UserInfoService} from "./user-id.service";
 @Injectable()
 export class PlanService {
 
-  private apiUrl = 'http://homewalletapi.azurewebsites.net/api/plans/';  // URL to web
-  private apiUrlId = 'http://homewalletapi.azurewebsites.net/api/plans/id/';  // URL to web api
-  private apiDetailsUrl = 'http://homewalletapi.azurewebsites.net/api/plans/details/';  // URL to web api
+  private apiUrl = 'https://homewalletapi.azurewebsites.net/api/plans/';  // URL to web
+  private apiUrlId = 'https://homewalletapi.azurewebsites.net/api/plans/id/';  // URL to web api
+  private apiDetailsUrl = 'https://homewalletapi.azurewebsites.net/api/plans/details/';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private userId : string;
 

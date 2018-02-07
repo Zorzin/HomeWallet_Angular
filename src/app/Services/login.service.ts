@@ -5,7 +5,7 @@ import {UserLogin} from "../Models/user-login";
 @Injectable()
 export class LoginService {
 
-  private apiUrl = 'http://homewalletapi.azurewebsites.net/api/Users/';  // URL to web
+  private apiUrl = 'https://homewalletapi.azurewebsites.net/api/Users/';  // URL to web
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private userId : string;
 

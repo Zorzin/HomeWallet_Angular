@@ -4,7 +4,7 @@ import {UserInfoService} from './user-id.service';
 
 @Injectable()
 export class SummaryService {
-  private apiUrl = 'http://homewalletapi.azurewebsites.net/api/summary/';  // URL to web api
+  private apiUrl = 'https://homewalletapi.azurewebsites.net/api/summary/';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient,

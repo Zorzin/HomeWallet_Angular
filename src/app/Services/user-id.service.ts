@@ -13,7 +13,7 @@ export class UserInfoService {
   loginAnnounced$ = this.loginAnnouncedSource.asObservable();
   languageAnnounced$ = this.langAnnouncedSource.asObservable();
   themeAnnounced$ = this.themeAnnouncedSource.asObservable();
-  private apiUrl = 'http://homewalletapi.azurewebsites.net/api/Users/';  // URL to web
+  private apiUrl = 'https://homewalletapi.azurewebsites.net/api/Users/';  // URL to web
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) { }
