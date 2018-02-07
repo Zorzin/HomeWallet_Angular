@@ -12,8 +12,8 @@ import {UserInfoService} from "./user-id.service";
 @Injectable()
 export class ReceiptService {
 
-  private apiUrl = 'http://localhost:54044/api/receipts/';  // URL to web api
-  private apiCyclicalUrl = 'http://localhost:54044/api/receipts/cyclical/';  // URL to web api
+  private apiUrl = 'http://homewalletapi.azurewebsites.net/api/receipts/';  // URL to web api
+  private apiCyclicalUrl = 'http://homewalletapi.azurewebsites.net/api/receipts/cyclical/';  // URL to web api
 
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 

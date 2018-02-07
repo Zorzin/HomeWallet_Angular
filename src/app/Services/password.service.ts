@@ -6,7 +6,7 @@ import {UserInfoService} from "./user-id.service";
 @Injectable()
 export class PasswordService {
 
-  private apiUrl = 'http://localhost:54044/api/Users/password/';  // URL to web
+  private apiUrl = 'http://homewalletapi.azurewebsites.net/api/Users/password/';  // URL to web
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   private response : any;

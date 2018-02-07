@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 @Injectable()
 export class ReceiptProductService {
 
-  private apiUrl = 'http://localhost:54044/api/receiptproducts';  // URL to web api
+  private apiUrl = 'http://homewalletapi.azurewebsites.net/api/receiptproducts';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private userId : string;
 

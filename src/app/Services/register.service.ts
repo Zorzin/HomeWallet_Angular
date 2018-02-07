@@ -4,7 +4,7 @@ import {UserRegister} from "../Models/user-register";
 
 @Injectable()
 export class RegisterService {
-  private apiUrl = 'http://localhost:54044/api/Users/register/';  // URL to web
+  private apiUrl = 'http://homewalletapi.azurewebsites.net/api/Users/register/';  // URL to web
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private userId : string;
 

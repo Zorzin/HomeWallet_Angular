@@ -5,7 +5,7 @@ import {UserInfoService} from "./user-id.service";
 @Injectable()
 export class CategoryService {
 
-  private apiUrl = 'http://localhost:54044/api/categories/';  // URL to web api
+  private apiUrl = 'http://homewalletapi.azurewebsites.net/api/categories/';  // URL to web api
   private apiProductsUrl = 'http://localhost:54044/api/categories/products/';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
   private userId : string;
