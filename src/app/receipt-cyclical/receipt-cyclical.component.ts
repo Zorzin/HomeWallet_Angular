@@ -84,8 +84,17 @@ export class ReceiptCyclicalComponent implements OnInit {
   {
     let receipt = new ReceiptCyclicalCreate();
     receipt.ShopId = this.receiptShop;
-    receipt.StartDate = this.receiptStartDate.toISOString();
-    receipt.EndDate = this.receiptEndDate.toISOString();
+
+    let startoffset = this.receiptStartDate.getTimezoneOffset()*60000;
+    let startdate = new Date(this.receiptStartDate);
+    startdate.setTime(startdate.getTime()-startoffset);
+    receipt.StartDate = startdate.toISOString();
+
+    let endoffset = this.receiptEndDate.getTimezoneOffset()*60000;
+    let enddate = new Date(this.receiptEndDate);
+    enddate.setTime(enddate.getTime()-endoffset);
+    receipt.EndDate = enddate.toISOString();
+
     if(receipt.EndDate<receipt.StartDate)
     {
       this.openDialog();

@@ -87,10 +87,12 @@ console.log();
   {
     let receipt = new ReceiptCreate();
     receipt.ShopId = this.receiptShop;
+
     let offset = this.receiptDate.getTimezoneOffset()*60000;
     let date = new Date(this.receiptDate);
     date.setTime(date.getTime()-offset);
     receipt.Date = date.toISOString();
+
     receipt.Products = [];
     for(let product of this.newProducts)
     {

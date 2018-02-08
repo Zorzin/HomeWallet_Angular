@@ -143,7 +143,15 @@ export class ShopDetailsComponent implements OnInit {
   }
 
   private GetStatistics() {
-    this.shopService.getShopStatistics(this.shop.id,this.startDate.toISOString(),this.endDate.toISOString())
+    let startoffset = this.startDate.getTimezoneOffset()*60000;
+    let startdate = new Date(this.startDate);
+    startdate.setTime(startdate.getTime()-startoffset);
+
+    let endoffset = this.endDate.getTimezoneOffset()*60000;
+    let enddate = new Date(this.endDate);
+    enddate.setTime(enddate.getTime()-endoffset);
+
+    this.shopService.getShopStatistics(this.shop.id,startdate.toISOString(),enddate.toISOString())
       .then((response)=> {
         this.summary = response;
         this.isDataLoaded = true;

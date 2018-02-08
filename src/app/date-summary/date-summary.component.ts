@@ -48,7 +48,15 @@ export class DateSummaryComponent implements OnInit {
   }
 
   getStatistics(){
-    this.summaryService.getSummaryByDates(this.startDate.toISOString(),this.endDate.toISOString())
+    let startoffset = this.startDate.getTimezoneOffset()*60000;
+    let startdate = new Date(this.startDate);
+    startdate.setTime(startdate.getTime()-startoffset);
+
+    let endoffset = this.endDate.getTimezoneOffset()*60000;
+    let enddate = new Date(this.endDate);
+    enddate.setTime(enddate.getTime()-endoffset);
+
+    this.summaryService.getSummaryByDates(startdate.toISOString(),enddate.toISOString())
       .then((summary)=>{
         console.log(summary)
         this.summary = summary;
