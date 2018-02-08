@@ -77,7 +77,7 @@ console.log();
 
   private afterCreateProduct()
   {
-    this.currentProduct.TotalValue = this.currentProduct.Amount * this.currentProduct.Price;
+    this.currentProduct.TotalValue = Math.round(this.currentProduct.Amount * this.currentProduct.Price)/100;
     this.newProducts.push(this.currentProduct);
     this.currentProduct = new ReceiptProduct();
     this.updateTotal();

@@ -41,7 +41,7 @@
         <a mat-button color="basic"  (click)="SetDates()">{{'common-setdates'|translate}}</a>
       </div>
       <div class="col-md-12">
-        <div *ngIf="summary.visitAmount==0">
+        <div *ngIf="summary.visitAmount<=0">
           {{'common-statistics-empty'|translate}}
         </div>
         <div *ngIf="summary.visitAmount>0">
