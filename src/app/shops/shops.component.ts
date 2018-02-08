@@ -56,7 +56,7 @@ export class ShopsComponent implements OnInit {
   private getShops() {
     this.shopService.getShops().then((result)=>{
       this.getShopsArray(result);
-      this.dataSource.data = null;
+      this.dataSource.data = [];
       this.dataSource.data = this.shops;
     })
     .catch(reason => this.isDataLoaded=false);;

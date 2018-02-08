@@ -80,7 +80,7 @@ export class ReceiptService {
       let date = new Date(receipt.purchaseDate);
       date.setTime(date.getTime()-offset);
       receiptEdit.Date = date.toISOString();
-      
+
       receiptEdit.ShopId = receipt.shopID;
       receiptEdit.Products = receiptProducts;
       receiptEdit.ReceiptId = receipt.id;
