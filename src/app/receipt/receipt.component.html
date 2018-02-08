@@ -26,7 +26,7 @@
             <label class="datefield">{{date[0].purchaseDate.toLocaleDateString()}}</label>
           </div>
           <div class="col-xs-6 col-md-4 summarybutton">
-            <button mat-raised-button (click)="onSummary(date[0].purchaseDate.toLocaleDateString())" >{{'receipts-summary'|translate}}</button>
+            <button mat-raised-button (click)="onSummary(date[0].purchaseDate.toISOString())" >{{'receipts-summary'|translate}}</button>
           </div>
         </div>
         <hr />
