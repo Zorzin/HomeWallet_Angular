@@ -56,8 +56,8 @@ export class ShopsComponent implements OnInit {
   private getShops() {
     this.shopService.getShops().then((result)=>{
       this.getShopsArray(result);
-      this.dataSource.data = [];
-      this.dataSource.data = this.shops;
+      this.dataSource.disconnect();
+      this.dataSource = new MatTableDataSource<Shop>(this.shops);
     })
     .catch(reason => this.isDataLoaded=false);;
   }

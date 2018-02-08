@@ -54,8 +54,8 @@ export class ProductsComponent implements OnInit {
   private GetProducts() {
     this.productService.getProducts().then((result)=>{
       this.getProductsArray(result);
-      this.dataSource.data = [];
-      this.dataSource.data = this.products;
+      this.dataSource.disconnect();
+      this.dataSource = new MatTableDataSource<Product>(this.products);
     })
     .catch(reason => this.isDataLoaded=false);;
   }
