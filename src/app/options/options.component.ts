@@ -41,7 +41,7 @@ export class OptionsComponent implements OnInit {
 
   goCreateReceipt()
   {
-    this.router.navigate(['/receipt-create',new Date().toLocaleDateString()]);
+    this.router.navigate(['/receipt-create',new Date().toUTCString()]);
   }
 
   goCreateCyclicalReceipt()

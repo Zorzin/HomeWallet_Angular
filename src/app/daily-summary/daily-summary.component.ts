@@ -16,6 +16,7 @@ export class DailySummaryComponent implements OnInit {
   public summary:any;
   public dataLoaded:boolean;
   public date :string;
+  public dateView :string;
   public eachShopProductsXLabel= "dailysummary-eachShopProductsXLabel";
   public eachShopProductsYLabel= "dailysummary-eachShopProductsYLabel";
   public eachShopCostXLabel = "dailysummary-eachShopCostXLabel";
@@ -39,6 +40,7 @@ export class DailySummaryComponent implements OnInit {
     this.summaryService.getDailySummaryByDate(this.date)
       .then((summary)=>{
         console.log(summary)
+        this.dateView = new Date(this.date).toLocaleDateString();
         this.summary = summary;
         this.dataLoaded = true;
       })

@@ -153,7 +153,7 @@ export class ReceiptComponent implements OnInit {
     let param;
     if(date)
     {
-      param = date[0].purchaseDate.toUTCString().setHours(0,0,0,0);
+      param = date[0].purchaseDate.toUTCString();
     }
     else {
       param = new Date().toUTCString();
