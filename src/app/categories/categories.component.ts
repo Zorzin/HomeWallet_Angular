@@ -55,8 +55,6 @@ export class CategoriesComponent implements OnInit {
     this.categoryService.getCategories()
       .then((response)=>{
         this.getCategoriesArray(response);
-        this.dataSource.disconnect();
-        this.dataSource = new MatTableDataSource<Category>(this.categories);
       })
       .catch(reason => this.isDataLoaded=false);
 
