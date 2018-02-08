@@ -95,7 +95,7 @@ export class ShopsComponent implements OnInit {
 
     for(let shop of this.shops)
     {
-      if(!this.dataSource.data.includes(shop))
+      if(!this.dataSource.data.some(s=>s.ID===shop.ID))
       {
         this.dataSource.data = [shop];
       }
