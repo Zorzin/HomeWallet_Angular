@@ -143,7 +143,7 @@ export class ShopDetailsComponent implements OnInit {
   }
 
   private GetStatistics() {
-    this.shopService.getShopStatistics(this.shop.id,this.startDate.toLocaleDateString(),this.endDate.toLocaleDateString())
+    this.shopService.getShopStatistics(this.shop.id,this.startDate.toISOString(),this.endDate.toISOString())
       .then((response)=> {
         this.summary = response;
         this.isDataLoaded = true;

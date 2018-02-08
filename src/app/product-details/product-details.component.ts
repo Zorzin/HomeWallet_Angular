@@ -148,7 +148,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   private GetStatistics() {
-    this.productService.getProductStatistics(this.product.id,this.startDate.toLocaleDateString(),this.endDate.toLocaleDateString())
+    this.productService.getProductStatistics(this.product.id,this.startDate.toISOString(),this.endDate.toISOString())
       .then((response)=>{
         this.summary = response;
         this.isDataLoaded = true;

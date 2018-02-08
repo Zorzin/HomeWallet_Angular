@@ -75,7 +75,7 @@ export class ReceiptService {
   private getReceiptJSON(receipt: any, receiptProducts: ReceiptProductEdit[]) {
       let receiptEdit = new ReceiptEdit();
       console.log(receipt.purchaseDate);
-      receiptEdit.Date = receipt.purchaseDate.toLocaleDateString();
+      receiptEdit.Date = receipt.purchaseDate.toISOString();
       receiptEdit.ShopId = receipt.shopID;
       receiptEdit.Products = receiptProducts;
       receiptEdit.ReceiptId = receipt.id;

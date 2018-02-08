@@ -140,7 +140,7 @@ export class CategoryDetailsComponent implements OnInit {
   }
 
   private GetStatistics() {
-    this.categoryService.getCategoryStatistics(this.category.id,this.startDate.toLocaleDateString(),this.endDate.toLocaleDateString())
+    this.categoryService.getCategoryStatistics(this.category.id,this.startDate.toISOString(),this.endDate.toISOString())
       .then((response)=>{
         this.summary=response;
         this.isDataLoaded = true;

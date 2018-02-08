@@ -87,7 +87,7 @@ console.log();
   {
     let receipt = new ReceiptCreate();
     receipt.ShopId = this.receiptShop;
-    receipt.Date = this.receiptDate.toLocaleDateString();
+    receipt.Date = this.receiptDate.toISOString();
     receipt.Products = [];
     for(let product of this.newProducts)
     {

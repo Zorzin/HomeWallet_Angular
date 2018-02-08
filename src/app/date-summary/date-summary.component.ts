@@ -48,7 +48,7 @@ export class DateSummaryComponent implements OnInit {
   }
 
   getStatistics(){
-    this.summaryService.getSummaryByDates(this.startDate.toLocaleDateString(),this.endDate.toLocaleDateString())
+    this.summaryService.getSummaryByDates(this.startDate.toISOString(),this.endDate.toISOString())
       .then((summary)=>{
         console.log(summary)
         this.summary = summary;
