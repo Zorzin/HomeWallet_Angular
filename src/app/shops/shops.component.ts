@@ -56,6 +56,7 @@ export class ShopsComponent implements OnInit {
   private getShops() {
     this.shopService.getShops().then((result)=>{
       this.getShopsArray(result);
+      this.checkTableArray();
     })
     .catch(reason => this.isDataLoaded=false);;
   }
@@ -87,6 +88,17 @@ export class ShopsComponent implements OnInit {
       newShop.ID = shop.id;
       newShop.Name = shop.name;
       this.shops.push(newShop);
+    }
+  }
+
+  private checkTableArray() {
+
+    for(let shop of this.shops)
+    {
+      if(!this.dataSource.data.includes(shop))
+      {
+        this.dataSource.data = [shop];
+      }
     }
   }
 }
