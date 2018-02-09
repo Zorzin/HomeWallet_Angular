@@ -167,7 +167,7 @@ export class ReceiptCyclicalComponent implements OnInit {
     {
       total += (product.Price * product.Amount);
     }
-    this.receiptTotal = total;
+    this.receiptTotal = +total.toFixed(2);
   }
   private updateProductValues(product: ReceiptProduct)
   {

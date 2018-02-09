@@ -20,7 +20,6 @@ export class PlanDetailsComponent implements OnInit {
   public isDataLoaded: boolean;
   public canEdit: boolean;
   public responseFromService: any;
-  public showRemoveDialog: boolean;
   public summary : any;
   public currency : string;
 

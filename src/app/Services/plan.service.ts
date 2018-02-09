@@ -21,8 +21,8 @@ export class PlanService {
   createPlan(plan:Plan) {
     let body = "{" +
       "\"Amount\":\"" + plan.Amount + "\","+
-      "\"StartDate\":\"" + plan.StartDate.toLocaleDateString() + "\","+
-      "\"EndDate\":\"" + plan.EndDate.toLocaleDateString() + "\","+
+      "\"StartDate\":\"" + plan.StartDate.toISOString() + "\","+
+      "\"EndDate\":\"" + plan.EndDate.toISOString() + "\","+
       "}";
     return this.http.post(this.apiSerive.getPlansUrl()+this.userService.getUserId(),body,{headers:this.headers,responseType: 'text' })
       .toPromise();
@@ -35,7 +35,7 @@ export class PlanService {
 
   getPlan()
   {
-    return this.http.get(this.apiSerive.getPlansUrl()+this.userService.getUserId()+ "/"+ new Date().toLocaleDateString());
+    return this.http.get(this.apiSerive.getPlansUrl()+this.userService.getUserId()+ "/"+ new Date().toISOString());
   }
 
   getPlanStatistics(id:number) {

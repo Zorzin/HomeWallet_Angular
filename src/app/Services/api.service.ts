@@ -4,7 +4,7 @@ import {SelectItem} from "primeng/primeng";
 @Injectable()
 export class ApiService {
 
-  private apiUrl = 'https://homewalletapi.azurewebsites.net/api/';  // URL to web api
+  private apiUrl = 'https://homewalletapi.azurewebsites.net/api';  // URL to web api
 
   constructor() { }
 

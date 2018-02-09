@@ -8,6 +8,8 @@ import {ShopService} from "../Services/shop.service";
 import {ReceiptProductService} from "../Services/receiptproduct.service";
 import {ProductService} from "../Services/product.service";
 import {UserInfoService} from "../Services/user-id.service";
+import {DeleteDialogComponent} from "../dialogs/delete-dialog/delete-dialog.component";
+import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-receipt-details',
@@ -31,7 +33,8 @@ export class ReceiptDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
-    private userService:UserInfoService
+    private userService:UserInfoService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void{
@@ -88,12 +91,12 @@ export class ReceiptDetailsComponent implements OnInit {
   private getProductsValue() {
     for(let product of this.receipt.receiptProducts)
     {
-      product.totalValue = product.amount * product.price;
+      product.totalValue = +(product.amount * product.price).toFixed(2);
     }
   }
 
   private getTotalValue() {
-    this.receiptService.getReceiptTotalValue(this.receipt.id).then(responce=>this.receipt.totalValue = responce);
+    this.receiptService.getReceiptTotalValue(this.receipt.id).then(responce=>this.receipt.totalValue = +(responce).toFixed(2));
   }
 
   public goEdit() {
@@ -101,7 +104,18 @@ export class ReceiptDetailsComponent implements OnInit {
   }
 
   public onDelete() {
-    this.removeDialogDisplay = true;
+    let dialogRef = this.dialog.open(DeleteDialogComponent,{
+      height: this.height.toString(),
+      width: this.width.toString(),
+      data: { content: 'receipt-yousure',header:'receipt-remove'},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result)
+      {
+        this.onRemoveConfirm();
+      }
+    });
   }
 
   onRemoveConfirm()

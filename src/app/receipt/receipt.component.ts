@@ -110,7 +110,6 @@ export class ReceiptComponent implements OnInit {
 
   private getDates() {
     let datesCounter = 0;
-    let dateCounter =0;
     if(this.receipts.length>0)
     {
       let date = this.receipts[0].purchaseDate;
@@ -132,7 +131,7 @@ export class ReceiptComponent implements OnInit {
   {
       for(let receipt of this.receipts)
       {
-        this.receiptService.getReceiptTotalValue(receipt.id).then(value => receipt.totalValue = value);
+        this.receiptService.getReceiptTotalValue(receipt.id).then(value => receipt.totalValue = +(value).toFixed(2));
       }
   }
 

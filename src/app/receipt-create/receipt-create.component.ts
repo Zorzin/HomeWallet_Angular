@@ -157,7 +157,7 @@ console.log();
     {
       total += (product.Price * product.Amount);
     }
-    this.receiptTotal = total;
+    this.receiptTotal = +total.toFixed(2);
   }
 
 

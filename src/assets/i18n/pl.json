@@ -285,5 +285,7 @@
 	"categorydetails-moneySpentXLabel": "Sklep",
 	"categorydetails-moneySpentYLabel": "Kwota",
 	"summary-statistics": "Statystyki",
-	"options-statistics": "Statystyki okresowe"
+	"options-statistics": "Statystyki okresowe",
+	"receipt-summary-shop": "Sklep",
+	"receipt-summary-cost": "Kwota"
 }

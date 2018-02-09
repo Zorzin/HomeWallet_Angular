@@ -32,7 +32,7 @@
         <hr />
 
         <mat-card class="menu-card" *ngFor="let receipt of date" (click)="onSelect(receipt)">
-          <p>Sklep: {{receipt.shopName}}, Kwota: {{receipt.totalValue}} {{currency}}</p>
+          <p>{{'receipt-summary-shop'|translate}}: {{receipt.shopName}}, {{'receipt-summary-cost'|translate}}: {{receipt.totalValue}} {{currency}}</p>
         </mat-card>
 
         <mat-card class="menu-card" (click)="onCreate(date)">
