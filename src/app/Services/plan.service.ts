@@ -2,20 +2,16 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Plan} from "../Models/plan";
 import {UserInfoService} from "./user-id.service";
+import {ApiService} from "./api.service";
 
 @Injectable()
 export class PlanService {
 
-  private apiUrl = 'https://homewalletapi.azurewebsites.net/api/plans/';  // URL to web
-  private apiUrlId = 'https://homewalletapi.azurewebsites.net/api/plans/id/';  // URL to web api
-  private apiDetailsUrl = 'https://homewalletapi.azurewebsites.net/api/plans/details/';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
-  private userId : string;
-
-  private response : any;
 
   constructor(private http: HttpClient,
-              private userService: UserInfoService) { }
+              private userService: UserInfoService,
+              private apiSerive: ApiService) { }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
@@ -28,39 +24,39 @@ export class PlanService {
       "\"StartDate\":\"" + plan.StartDate.toLocaleDateString() + "\","+
       "\"EndDate\":\"" + plan.EndDate.toLocaleDateString() + "\","+
       "}";
-    return this.http.post(this.apiUrl+this.userService.getUserId(),body,{headers:this.headers,responseType: 'text' })
+    return this.http.post(this.apiSerive.getPlansUrl()+this.userService.getUserId(),body,{headers:this.headers,responseType: 'text' })
       .toPromise();
   }
 
   getPlanById(id:number)
   {
-    return this.http.get(this.apiUrlId+this.userService.getUserId()+ "/"+ id);
+    return this.http.get(this.apiSerive.getPlansIdUrl()+this.userService.getUserId()+ "/"+ id);
   }
 
   getPlan()
   {
-    return this.http.get(this.apiUrl+this.userService.getUserId()+ "/"+ new Date().toLocaleDateString());
+    return this.http.get(this.apiSerive.getPlansUrl()+this.userService.getUserId()+ "/"+ new Date().toLocaleDateString());
   }
 
   getPlanStatistics(id:number) {
-    return this.http.get(this.apiUrl+"summary/"+this.userService.getUserId() + "/"+id+"/")
+    return this.http.get(this.apiSerive.getPlansUrl()+"summary/"+this.userService.getUserId() + "/"+id+"/")
       .toPromise()
       .catch(this.handleError);
   }
 
   getPlanWithDetails(id:number) {
-    return this.http.get(this.apiDetailsUrl+this.userService.getUserId()+ "/"+ id);
+    return this.http.get(this.apiSerive.getPlansDetailsUrl()+this.userService.getUserId()+ "/"+ id);
   }
 
   editPlan(plan: any) {
-    return this.http.put(this.apiUrl+this.userService.getUserId()+ "/"+plan.id,plan).toPromise();
+    return this.http.put(this.apiSerive.getPlansUrl()+this.userService.getUserId()+ "/"+plan.id,plan).toPromise();
   }
 
   getPlans() {
-    return this.http.get(this.apiUrl+this.userService.getUserId());
+    return this.http.get(this.apiSerive.getPlansUrl()+this.userService.getUserId());
   }
 
   removePlan(id:number) {
-    return this.http.delete(this.apiUrl+this.userService.getUserId()+ "/"+id);
+    return this.http.delete(this.apiSerive.getPlansUrl()+this.userService.getUserId()+ "/"+id);
   }
 }

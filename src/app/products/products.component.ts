@@ -86,6 +86,7 @@ export class ProductsComponent implements OnInit {
   }
 
   private getProductsArray(response: any) {
+    this.products = [];
     for(let product of response)
     {
       let newProduct = new Product();

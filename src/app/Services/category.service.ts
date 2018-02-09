@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {UserInfoService} from "./user-id.service";
+import {ApiService} from "./api.service";
 
 @Injectable()
 export class CategoryService {
 
-  private apiUrl = 'https://homewalletapi.azurewebsites.net/api/categories/';  // URL to web api
-  private apiProductsUrl = 'https://localhost:54044/api/categories/products/';  // URL to web api
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
-  private userId : string;
-
-  private response : any;
   private categories:any;
 
   constructor(private http: HttpClient,
-              private userService: UserInfoService) { }
+              private userService: UserInfoService,
+              private apiSerive: ApiService) { }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
@@ -22,20 +19,20 @@ export class CategoryService {
   }
 
   getCategory(id:number) {
-    return this.http.get(this.apiUrl +this.userService.getUserId()+ "/"+id)
+    return this.http.get(this.apiSerive.getCategoriesUrl() +this.userService.getUserId()+ "/"+id)
       .toPromise()
       .catch(this.handleError);
   }
 
   getCategoryStatistics(id:number, startDate:string, endDate:string) {
-    return this.http.get(this.apiUrl+"summary/"+this.userService.getUserId() + "/"+id+"/"+startDate+"/"+endDate)
+    return this.http.get(this.apiSerive.getCategoriesUrl()+"summary/"+this.userService.getUserId() + "/"+id+"/"+startDate+"/"+endDate)
       .toPromise()
       .catch(this.handleError);
   }
 
   getCategories()
   {
-    return this.http.get(this.apiUrl+this.userService.getUserId())
+    return this.http.get(this.apiSerive.getCategoriesUrl()+this.userService.getUserId())
       .toPromise()
       .then((response)=>this.categories = response)
       .catch(this.handleError);
@@ -43,26 +40,26 @@ export class CategoryService {
 
   createCategory(name: string)
   {
-    return this.http.post(this.apiUrl+this.userService.getUserId()+ "/"+name,{headers:this.headers,responseType: 'text' })
+    return this.http.post(this.apiSerive.getCategoriesUrl()+this.userService.getUserId()+ "/"+name,{headers:this.headers,responseType: 'text' })
       .subscribe();
   }
 
   getProducts(id:number) {
 
-    return this.http.get(this.apiProductsUrl+this.userService.getUserId()+ "/"+id)
+    return this.http.get(this.apiSerive.getCategoriesProductsUrl()+this.userService.getUserId()+ "/"+id)
       .toPromise()
       .catch(this.handleError);
   }
 
   deleteCategory(id:number) {
 
-    return this.http.delete(this.apiUrl+this.userService.getUserId()+ "/"+id,{headers:this.headers,responseType: 'text' })
+    return this.http.delete(this.apiSerive.getCategoriesUrl()+this.userService.getUserId()+ "/"+id,{headers:this.headers,responseType: 'text' })
       .subscribe();
   }
 
   updateCategory(id, name) {
 
-    return this.http.put(this.apiUrl+this.userService.getUserId()+ "/"+id+"/"+name,{headers:this.headers,responseType: 'text' })
+    return this.http.put(this.apiSerive.getCategoriesUrl()+this.userService.getUserId()+ "/"+id+"/"+name,{headers:this.headers,responseType: 'text' })
       .subscribe();
   }
 

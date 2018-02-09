@@ -3,6 +3,7 @@ import {Http} from "@angular/http";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {log} from "util";
 import {UserInfoService} from "./user-id.service";
+import {ApiService} from "./api.service";
 
 @Injectable()
 export class ProductService {
@@ -15,7 +16,8 @@ export class ProductService {
   private products : any;
 
   constructor(private http: HttpClient,
-              private userService: UserInfoService) { }
+              private userService: UserInfoService,
+              private apiSerive: ApiService) { }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
@@ -23,21 +25,21 @@ export class ProductService {
   }
 
   getProduct(id:number) {
-    return this.http.get(this.apiUrl + this.userService.getUserId()+ "/"+id)
+    return this.http.get(this.apiSerive.getProductsUrl() + this.userService.getUserId()+ "/"+id)
       .toPromise()
       .catch(this.handleError);
   }
 
   getProducts()
   {
-    return this.http.get(this.apiUrl+this.userService.getUserId())
+    return this.http.get(this.apiSerive.getProductsUrl()+this.userService.getUserId())
       .toPromise()
       .then(response=>this.products = response)
       .catch(this.handleError);
   }
 
   getProductStatistics(id:number, startDate:string, endDate:string) {
-    return this.http.get(this.apiUrl+"summary/"+this.userService.getUserId() + "/"+id+"/"+startDate+"/"+endDate)
+    return this.http.get(this.apiSerive.getProductsUrl()+"summary/"+this.userService.getUserId() + "/"+id+"/"+startDate+"/"+endDate)
       .toPromise()
       .catch(this.handleError);
   }
@@ -57,18 +59,18 @@ export class ProductService {
         "\"categories\":[]"+
         "}";
     }
-    return this.http.post(this.apiUrl+this.userService.getUserId(),body,{headers:this.headers,responseType: 'text' })
+    return this.http.post(this.apiSerive.getProductsUrl()+this.userService.getUserId(),body,{headers:this.headers,responseType: 'text' })
       .toPromise();
   }
 
   getCategories(id:number) {
-    return this.http.get(this.apiCategoriesUrl+this.userService.getUserId()+ "/"+id)
+    return this.http.get(this.apiSerive.getProductCategoriesUrl()+this.userService.getUserId()+ "/"+id)
       .toPromise()
       .catch(this.handleError);
   }
 
   deleteProduct(id:number) {
-    return this.http.delete(this.apiUrl+this.userService.getUserId()+ "/"+id)
+    return this.http.delete(this.apiSerive.getProductsUrl()+this.userService.getUserId()+ "/"+id)
       .toPromise()
       .catch(this.handleError);
   }
@@ -87,7 +89,7 @@ export class ProductService {
       "\"categories\":[]"+
       "}";
     }
-    return this.http.put(this.apiUrl+this.userService.getUserId()+ "/"+id,body,{headers:this.headers,responseType: 'text' })
+    return this.http.put(this.apiSerive.getProductsUrl()+this.userService.getUserId()+ "/"+id,body,{headers:this.headers,responseType: 'text' })
       .toPromise();
   }
 

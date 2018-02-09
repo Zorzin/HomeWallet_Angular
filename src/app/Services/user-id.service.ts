@@ -2,6 +2,7 @@ import {EventEmitter, Injectable, Output} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {Subject} from "rxjs/Subject";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {ApiService} from "./api.service";
 
 @Injectable()
 export class UserInfoService {
@@ -13,10 +14,10 @@ export class UserInfoService {
   loginAnnounced$ = this.loginAnnouncedSource.asObservable();
   languageAnnounced$ = this.langAnnouncedSource.asObservable();
   themeAnnounced$ = this.themeAnnouncedSource.asObservable();
-  private apiUrl = 'https://homewalletapi.azurewebsites.net/api/Users/';  // URL to web
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private apiSerive: ApiService) { }
 
   setUserId(id:number)
   {
@@ -41,32 +42,32 @@ export class UserInfoService {
   }
 
   getUserCurrency() {
-    return this.http.get(this.apiUrl+"currency/" + this.getUserId(),{responseType:"text"}).toPromise();
+    return this.http.get(this.apiSerive.getUsersUrl()+"currency/" + this.getUserId(),{responseType:"text"}).toPromise();
   }
 
   getUserTheme() {
-    return this.http.get(this.apiUrl+"theme/" + this.getUserId(),{responseType:"text"})
+    return this.http.get(this.apiSerive.getUsersUrl()+"theme/" + this.getUserId(),{responseType:"text"})
       .toPromise();
   }
 
   getUserLanguage() {
-    return this.http.get(this.apiUrl+"language/" + this.getUserId(),{responseType:"text"}).toPromise();
+    return this.http.get(this.apiSerive.getUsersUrl()+"language/" + this.getUserId(),{responseType:"text"}).toPromise();
   }
 
   changeUserCurrency(currency: string) {
-    return this.http.post(this.apiUrl+"currency/"+this.getUserId()+"/"+currency,null,{headers:this.headers,responseType: 'text' })
+    return this.http.post(this.apiSerive.getUsersUrl()+"currency/"+this.getUserId()+"/"+currency,null,{headers:this.headers,responseType: 'text' })
       .toPromise();
   }
 
   changeUserTheme(theme: string) {
-    return this.http.post(this.apiUrl+"theme/"+this.getUserId()+"/"+theme,null,{headers:this.headers,responseType: 'text' })
+    return this.http.post(this.apiSerive.getUsersUrl()+"theme/"+this.getUserId()+"/"+theme,null,{headers:this.headers,responseType: 'text' })
       .toPromise().then(()=>{
         this.themeAnnouncedSource.next(theme);
       });
   }
 
   changeUserLanguage(language: string) {
-    return this.http.post(this.apiUrl+"language/"+this.getUserId()+"/"+language,null,{headers:this.headers,responseType: 'text' })
+    return this.http.post(this.apiSerive.getUsersUrl()+"language/"+this.getUserId()+"/"+language,null,{headers:this.headers,responseType: 'text' })
       .toPromise().then(()=>{
         localStorage.setItem('lang',language);
         this.langAnnouncedSource.next(language);

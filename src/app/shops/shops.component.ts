@@ -56,7 +56,7 @@ export class ShopsComponent implements OnInit {
   private getShops() {
     this.shopService.getShops().then((result)=>{
       this.getShopsArray(result);
-      this.checkTableArray();
+      this.dataSource.data = this.shops;
     })
     .catch(reason => this.isDataLoaded=false);;
   }
@@ -82,23 +82,13 @@ export class ShopsComponent implements OnInit {
   }
 
   private getShopsArray(result: any) {
+    this.shops = [];
     for(let shop of result)
     {
       let newShop = new Shop();
       newShop.ID = shop.id;
       newShop.Name = shop.name;
       this.shops.push(newShop);
-    }
-  }
-
-  private checkTableArray() {
-
-    for(let shop of this.shops)
-    {
-      if(!this.dataSource.data.some(s=>s.ID===shop.ID))
-      {
-        this.dataSource.data.push(shop);
-      }
     }
   }
 }

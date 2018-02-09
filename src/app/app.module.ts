@@ -71,6 +71,7 @@ import {
 import { WarningDialogComponent } from './dialogs/warning-dialog/warning-dialog.component';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import { DateSummaryComponent } from './date-summary/date-summary.component';
+import {ApiService} from "./Services/api.service";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -183,7 +184,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       SummaryService,
       PasswordService,
       CurrenciesService,
-      AccountService
+      AccountService,
+      ApiService
     ],
   bootstrap: [AppComponent]
 })

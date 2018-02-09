@@ -62,6 +62,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   getCategoriesArray(response:any){
+    this.categories = [];
     for(let category of response)
     {
       let newCategory = new Category();

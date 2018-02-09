@@ -8,17 +8,16 @@ import {ReceiptCyclicalCreate} from "../Models/receipt-cyclical-create";
 import {ReceiptProductEdit} from "../Models/receipt-product-edit";
 import {ReceiptEdit} from "../Models/receipt-edit";
 import {UserInfoService} from "./user-id.service";
+import {ApiService} from "./api.service";
 
 @Injectable()
 export class ReceiptService {
 
-  private apiUrl = 'https://homewalletapi.azurewebsites.net/api/receipts/';  // URL to web api
-  private apiCyclicalUrl = 'https://homewalletapi.azurewebsites.net/api/receipts/cyclical/';  // URL to web api
-
   private headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient,
-              private userService: UserInfoService) { }
+              private userService: UserInfoService,
+              private apiSerive: ApiService) { }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
@@ -26,19 +25,19 @@ export class ReceiptService {
   }
 
   getReceipts() {
-    return this.http.get(this.apiUrl+this.userService.getUserId())
+    return this.http.get(this.apiSerive.getReceiptsUrl()+this.userService.getUserId())
       .toPromise()
       .catch(this.handleError);
   }
 
   getReceiptTotalValue(id:number) {
-    return this.http.get(this.apiUrl+this.userService.getUserId()+ "/totalValue/"+id)
+    return this.http.get(this.apiSerive.getReceiptsUrl()+this.userService.getUserId()+ "/totalValue/"+id)
       .toPromise()
       .catch(this.handleError);
   }
 
   getReceipt(id:number) {
-    return this.http.get(this.apiUrl+this.userService.getUserId()+ "/"+id)
+    return this.http.get(this.apiSerive.getReceiptsUrl()+this.userService.getUserId()+ "/"+id)
       .toPromise()
       .catch(this.handleError);
   }
@@ -47,7 +46,7 @@ export class ReceiptService {
   {
     let body = JSON.stringify(receipt);
     log(body);
-    return this.http.post(this.apiUrl+this.userService.getUserId(),body,{headers:this.headers,responseType: 'text' })
+    return this.http.post(this.apiSerive.getReceiptsUrl()+this.userService.getUserId(),body,{headers:this.headers,responseType: 'text' })
       .subscribe();
   }
 
@@ -55,20 +54,20 @@ export class ReceiptService {
   {
     let body = JSON.stringify(receipt);
     log(body);
-    return this.http.post(this.apiCyclicalUrl+this.userService.getUserId(),body,{headers:this.headers,responseType: 'text' })
+    return this.http.post(this.apiSerive.getReceiptsCyclicalUrl()+this.userService.getUserId(),body,{headers:this.headers,responseType: 'text' })
       .toPromise();
   }
 
   removeReceipt(id: number)
   {
-    return this.http.delete(this.apiUrl+this.userService.getUserId()+ "/"+id)
+    return this.http.delete(this.apiSerive.getReceiptsUrl()+this.userService.getUserId()+ "/"+id)
       .subscribe();
   }
 
   updateReceipt(receipt: any, receiptProducts: ReceiptProductEdit[])
   {
     let body = this.getReceiptJSON(receipt,receiptProducts);
-    return this.http.put(this.apiUrl+this.userService.getUserId()+ "/"+receipt.id,body,{headers:this.headers,responseType: 'text' })
+    return this.http.put(this.apiSerive.getReceiptsUrl()+this.userService.getUserId()+ "/"+receipt.id,body,{headers:this.headers,responseType: 'text' })
       .subscribe();
   }
 
