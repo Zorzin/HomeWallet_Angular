@@ -97,7 +97,7 @@ export class ShopsComponent implements OnInit {
     {
       if(!this.dataSource.data.some(s=>s.ID===shop.ID))
       {
-        this.dataSource.data = [shop];
+        this.dataSource.data.push(shop);
       }
     }
   }
